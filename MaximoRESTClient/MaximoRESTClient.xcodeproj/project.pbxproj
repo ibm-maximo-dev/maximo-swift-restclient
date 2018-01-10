@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A63DF332006BBC700BC9855 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A63DF342006BBC700BC9855 /* Nimble.framework */; };
+		9A63DF352006BC4900BC9855 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AFFFB2D2006ABF600583663 /* Quick.framework */; };
+		9A63DF362006BC4D00BC9855 /* Curry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AFFFB292006AB2A00583663 /* Curry.framework */; };
 		9AFFFB172006A7C600583663 /* MaximoRESTClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AFFFB0D2006A7C600583663 /* MaximoRESTClient.framework */; };
 		9AFFFB1C2006A7C600583663 /* MaximoRESTClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AFFFB1B2006A7C600583663 /* MaximoRESTClientTests.swift */; };
 		9AFFFB1E2006A7C600583663 /* MaximoRESTClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AFFFB102006A7C600583663 /* MaximoRESTClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9AFFFB282006AB2A00583663 /* Curry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AFFFB292006AB2A00583663 /* Curry.framework */; };
-		9AFFFB2A2006ABF600583663 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AFFFB2C2006ABF600583663 /* Nimble.framework */; };
 		9AFFFB2B2006ABF600583663 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AFFFB2D2006ABF600583663 /* Quick.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9A63DF342006BBC700BC9855 /* Nimble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Nimble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AFFFB0D2006A7C600583663 /* MaximoRESTClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MaximoRESTClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AFFFB102006A7C600583663 /* MaximoRESTClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MaximoRESTClient.h; sourceTree = "<group>"; };
 		9AFFFB112006A7C600583663 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -33,7 +36,6 @@
 		9AFFFB1B2006A7C600583663 /* MaximoRESTClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaximoRESTClientTests.swift; sourceTree = "<group>"; };
 		9AFFFB1D2006A7C600583663 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9AFFFB292006AB2A00583663 /* Curry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Curry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9AFFFB2C2006ABF600583663 /* Nimble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Nimble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AFFFB2D2006ABF600583663 /* Quick.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Quick.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -42,7 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9AFFFB2A2006ABF600583663 /* Nimble.framework in Frameworks */,
+				9A63DF332006BBC700BC9855 /* Nimble.framework in Frameworks */,
 				9AFFFB2B2006ABF600583663 /* Quick.framework in Frameworks */,
 				9AFFFB282006AB2A00583663 /* Curry.framework in Frameworks */,
 			);
@@ -52,7 +54,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A63DF352006BC4900BC9855 /* Quick.framework in Frameworks */,
 				9AFFFB172006A7C600583663 /* MaximoRESTClient.framework in Frameworks */,
+				9A63DF362006BC4D00BC9855 /* Curry.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,7 +103,7 @@
 		9AFFFB272006AB2A00583663 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9AFFFB2C2006ABF600583663 /* Nimble.framework */,
+				9A63DF342006BBC700BC9855 /* Nimble.framework */,
 				9AFFFB2D2006ABF600583663 /* Quick.framework */,
 				9AFFFB292006AB2A00583663 /* Curry.framework */,
 			);
