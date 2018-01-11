@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A56B5AD20079D94008BE1CC /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A56B5AC20079D94008BE1CC /* Options.swift */; };
+		9A56B5AF2007B890008BE1CC /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A56B5AE2007B890008BE1CC /* Attachment.swift */; };
+		9A56B5B12007B972008BE1CC /* MaximoConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A56B5B02007B972008BE1CC /* MaximoConnector.swift */; };
+		9A56B5B32007DE2A008BE1CC /* OslcError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A56B5B22007DE2A008BE1CC /* OslcError.swift */; };
 		9A63DF332006BBC700BC9855 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A63DF342006BBC700BC9855 /* Nimble.framework */; };
 		9A63DF352006BC4900BC9855 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AFFFB2D2006ABF600583663 /* Quick.framework */; };
 		9A63DF362006BC4D00BC9855 /* Curry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AFFFB292006AB2A00583663 /* Curry.framework */; };
@@ -28,6 +32,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9A56B5AC20079D94008BE1CC /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
+		9A56B5AE2007B890008BE1CC /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
+		9A56B5B02007B972008BE1CC /* MaximoConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaximoConnector.swift; sourceTree = "<group>"; };
+		9A56B5B22007DE2A008BE1CC /* OslcError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OslcError.swift; sourceTree = "<group>"; };
 		9A63DF342006BBC700BC9855 /* Nimble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Nimble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AFFFB0D2006A7C600583663 /* MaximoRESTClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MaximoRESTClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AFFFB102006A7C600583663 /* MaximoRESTClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MaximoRESTClient.h; sourceTree = "<group>"; };
@@ -87,6 +95,10 @@
 			children = (
 				9AFFFB102006A7C600583663 /* MaximoRESTClient.h */,
 				9AFFFB112006A7C600583663 /* Info.plist */,
+				9A56B5AC20079D94008BE1CC /* Options.swift */,
+				9A56B5AE2007B890008BE1CC /* Attachment.swift */,
+				9A56B5B02007B972008BE1CC /* MaximoConnector.swift */,
+				9A56B5B22007DE2A008BE1CC /* OslcError.swift */,
 			);
 			path = MaximoRESTClient;
 			sourceTree = "<group>";
@@ -172,6 +184,7 @@
 				TargetAttributes = {
 					9AFFFB0C2006A7C600583663 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 					9AFFFB152006A7C600583663 = {
@@ -220,6 +233,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A56B5AF2007B890008BE1CC /* Attachment.swift in Sources */,
+				9A56B5B32007DE2A008BE1CC /* OslcError.swift in Sources */,
+				9A56B5AD20079D94008BE1CC /* Options.swift in Sources */,
+				9A56B5B12007B972008BE1CC /* MaximoConnector.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +375,7 @@
 		9AFFFB222006A7C600583663 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -370,6 +388,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.maximo.MaximoRESTClient;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -378,6 +397,7 @@
 		9AFFFB232006A7C600583663 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -398,6 +418,7 @@
 		9AFFFB252006A7C600583663 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = MaximoRESTClientTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -411,6 +432,7 @@
 		9AFFFB262006A7C600583663 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = MaximoRESTClientTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

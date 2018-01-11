@@ -14,6 +14,6 @@ FOUNDATION_EXPORT double MaximoRESTClientVersionNumber;
 //! Project version string for MaximoRESTClient.
 FOUNDATION_EXPORT const unsigned char MaximoRESTClientVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <MaximoRESTClient/PublicHeader.h>
+// In self header, you should import all the public headers of your framework using statements like #import <MaximoRESTClient/PublicHeader.h>
 
 
