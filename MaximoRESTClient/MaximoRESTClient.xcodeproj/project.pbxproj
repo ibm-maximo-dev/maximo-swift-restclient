@@ -14,6 +14,15 @@
 		9A63DF332006BBC700BC9855 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A63DF342006BBC700BC9855 /* Nimble.framework */; };
 		9A63DF352006BC4900BC9855 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AFFFB2D2006ABF600583663 /* Quick.framework */; };
 		9A63DF362006BC4D00BC9855 /* Curry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AFFFB292006AB2A00583663 /* Curry.framework */; };
+		9A913849200A701000F02B46 /* Aggregation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A913848200A701000F02B46 /* Aggregation.swift */; };
+		9A91384B200A71C100F02B46 /* BulkProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A91384A200A71C100F02B46 /* BulkProcessor.swift */; };
+		9AC4122320090C51006C1863 /* SavedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC4122220090C51006C1863 /* SavedQuery.swift */; };
+		9AC4122520091D1E006C1863 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC4122420091D1E006C1863 /* Util.swift */; };
+		9AC4122720093B60006C1863 /* QuerySelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC4122620093B60006C1863 /* QuerySelect.swift */; };
+		9AC4122920094689006C1863 /* QueryWhere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC4122820094689006C1863 /* QueryWhere.swift */; };
+		9AC4122B20095825006C1863 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC4122A20095825006C1863 /* Resource.swift */; };
+		9AC4122D2009856E006C1863 /* ResourceSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC4122C2009856E006C1863 /* ResourceSet.swift */; };
+		9AC4122F20098699006C1863 /* AttachmentSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC4122E20098699006C1863 /* AttachmentSet.swift */; };
 		9AFFFB172006A7C600583663 /* MaximoRESTClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AFFFB0D2006A7C600583663 /* MaximoRESTClient.framework */; };
 		9AFFFB1C2006A7C600583663 /* MaximoRESTClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AFFFB1B2006A7C600583663 /* MaximoRESTClientTests.swift */; };
 		9AFFFB1E2006A7C600583663 /* MaximoRESTClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AFFFB102006A7C600583663 /* MaximoRESTClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -37,6 +46,15 @@
 		9A56B5B02007B972008BE1CC /* MaximoConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaximoConnector.swift; sourceTree = "<group>"; };
 		9A56B5B22007DE2A008BE1CC /* OslcError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OslcError.swift; sourceTree = "<group>"; };
 		9A63DF342006BBC700BC9855 /* Nimble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Nimble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A913848200A701000F02B46 /* Aggregation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aggregation.swift; sourceTree = "<group>"; };
+		9A91384A200A71C100F02B46 /* BulkProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulkProcessor.swift; sourceTree = "<group>"; };
+		9AC4122220090C51006C1863 /* SavedQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedQuery.swift; sourceTree = "<group>"; };
+		9AC4122420091D1E006C1863 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		9AC4122620093B60006C1863 /* QuerySelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuerySelect.swift; sourceTree = "<group>"; };
+		9AC4122820094689006C1863 /* QueryWhere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryWhere.swift; sourceTree = "<group>"; };
+		9AC4122A20095825006C1863 /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
+		9AC4122C2009856E006C1863 /* ResourceSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceSet.swift; sourceTree = "<group>"; };
+		9AC4122E20098699006C1863 /* AttachmentSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentSet.swift; sourceTree = "<group>"; };
 		9AFFFB0D2006A7C600583663 /* MaximoRESTClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MaximoRESTClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AFFFB102006A7C600583663 /* MaximoRESTClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MaximoRESTClient.h; sourceTree = "<group>"; };
 		9AFFFB112006A7C600583663 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -99,6 +117,15 @@
 				9A56B5AE2007B890008BE1CC /* Attachment.swift */,
 				9A56B5B02007B972008BE1CC /* MaximoConnector.swift */,
 				9A56B5B22007DE2A008BE1CC /* OslcError.swift */,
+				9AC4122220090C51006C1863 /* SavedQuery.swift */,
+				9AC4122420091D1E006C1863 /* Util.swift */,
+				9AC4122620093B60006C1863 /* QuerySelect.swift */,
+				9AC4122820094689006C1863 /* QueryWhere.swift */,
+				9AC4122A20095825006C1863 /* Resource.swift */,
+				9AC4122C2009856E006C1863 /* ResourceSet.swift */,
+				9AC4122E20098699006C1863 /* AttachmentSet.swift */,
+				9A913848200A701000F02B46 /* Aggregation.swift */,
+				9A91384A200A71C100F02B46 /* BulkProcessor.swift */,
 			);
 			path = MaximoRESTClient;
 			sourceTree = "<group>";
@@ -233,10 +260,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AC4122B20095825006C1863 /* Resource.swift in Sources */,
+				9AC4122320090C51006C1863 /* SavedQuery.swift in Sources */,
+				9AC4122D2009856E006C1863 /* ResourceSet.swift in Sources */,
+				9AC4122720093B60006C1863 /* QuerySelect.swift in Sources */,
+				9A913849200A701000F02B46 /* Aggregation.swift in Sources */,
+				9AC4122520091D1E006C1863 /* Util.swift in Sources */,
+				9AC4122F20098699006C1863 /* AttachmentSet.swift in Sources */,
 				9A56B5AF2007B890008BE1CC /* Attachment.swift in Sources */,
+				9AC4122920094689006C1863 /* QueryWhere.swift in Sources */,
 				9A56B5B32007DE2A008BE1CC /* OslcError.swift in Sources */,
 				9A56B5AD20079D94008BE1CC /* Options.swift in Sources */,
 				9A56B5B12007B972008BE1CC /* MaximoConnector.swift in Sources */,
+				9A91384B200A71C100F02B46 /* BulkProcessor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

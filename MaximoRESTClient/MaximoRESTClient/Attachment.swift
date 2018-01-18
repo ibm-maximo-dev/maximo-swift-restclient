@@ -23,7 +23,7 @@ class Attachment {
 
     init() {
         jo = [:]
-        self.uri = ""
+        self.uri = String()
         self.mc = MaximoConnector()
     }
     

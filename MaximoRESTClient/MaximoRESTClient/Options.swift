@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Options {
+public class Options {
 
     let AUTH_BASIC = "basic"
     let AUTH_MAXAUTH = "maxauth"
@@ -28,10 +28,10 @@ class Options {
     var appURI: String?
     var tenantcode: String = "00"
     
-    init() {
+    public init() {
     }
 
-    func host(host: String) -> Options
+    public func host(host: String) -> Options
     {
         self.host = host
         return self
@@ -67,13 +67,13 @@ class Options {
         return self
     }
     
-    func port(port: Int) -> Options
+    public func port(port: Int) -> Options
     {
         self.port = port
         return self
     }
     
-    func auth(authMode: String) -> Options
+    public func auth(authMode: String) -> Options
     {
         self.authMode = authMode
         return self
@@ -85,13 +85,13 @@ class Options {
         return self
     }
     
-    func user(user: String) -> Options
+    public func user(user: String) -> Options
     {
         self.user = user
         return self
     }
     
-    func password(password: String) -> Options
+    public func password(password: String) -> Options
     {
         self.password = password
         return self
@@ -103,7 +103,7 @@ class Options {
         return self
     }
     
-    func lean(lean: Bool) -> Options
+    public func lean(lean: Bool) -> Options
     {
         self.lean = lean
         return self
@@ -115,14 +115,14 @@ class Options {
         return self
     }
     
-    func getPassword() -> String
+    func getPassword() -> String?
     {
-        return self.password!
+        return self.password
     }
     
-    func getUser() -> String
+    func getUser() -> String?
     {
-        return self.user!
+        return self.user
     }
     
     func isBasicAuth() -> Bool
@@ -157,6 +157,9 @@ class Options {
     
     func getPort() -> Int
     {
+        if self.port == nil {
+            self.port = -1
+        }
         return self.port!
     }
     
@@ -223,7 +226,7 @@ class Options {
         }
         else if appURI != nil {
             var strs = appURI!.split(separator: "/")
-            strs = strs[2].split(separator: ":")
+            strs = strs[1].split(separator: ":")
             self.host = String(strs[0]);
             if strs.count > 1 {
                 self.port = Int(String(strs[1]))

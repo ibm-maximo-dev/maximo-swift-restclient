@@ -8,6 +8,13 @@
 
 import Foundation
 
-enum OslcError : Error {
+public enum OslcError : Error {
     case attachmentAlreadyLoaded
+    case resourceAlreadyLoaded
+    case invalidResource
+    case invalidRelation
+    case invalidURL
+    case invalidRequest
+    case connectionAlreadyEstablished
+    case invalidConnectorInstance
 }
