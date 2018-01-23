@@ -8,7 +8,7 @@
 
 import Foundation
 
-class AttachmentSet {
+public class AttachmentSet {
     
     var href : String = String()
     var jo: [String: Any] = [:]
@@ -47,7 +47,7 @@ class AttachmentSet {
      * Get current URI
      *
      */
-    func getURI() -> String {
+    public func getURI() -> String {
         return self.href
     }
 
@@ -57,7 +57,7 @@ class AttachmentSet {
      * @throws IOException
      * @throws OslcException
      */
-    func toJSON() throws -> [String: Any] {
+    public func toJSON() throws -> [String: Any] {
         _ = try self.load()
         return self.jo
     }
@@ -68,18 +68,18 @@ class AttachmentSet {
      * @throws IOException
      * @throws OslcException
      */
-    func toJSONBytes() throws -> Data {
+    public func toJSONBytes() throws -> Data {
         _ = try self.load()
         let data = try JSONEncoder().encode(self.jo)
         return data
     }
     
-    func href(href: String) -> AttachmentSet {
+    public func href(href: String) -> AttachmentSet {
         self.href = href
         return self
     }
     
-    func JsonObject(jo: [String: Any]) -> AttachmentSet {
+    public func JsonObject(jo: [String: Any]) -> AttachmentSet {
         self.jo = jo
         if self.jo["rdfs:member"] != nil {
             self.ja = self.jo["rdfs:member"] as! [Any]
@@ -100,11 +100,11 @@ class AttachmentSet {
      * @throws IOException
      * @throws OslcException
      */
-    func load() throws -> AttachmentSet {
+    public func load() throws -> AttachmentSet {
         return try self.load(headers: nil)
     }
     
-    func load(headers: [String: Any]?) throws -> AttachmentSet {
+    public func load(headers: [String: Any]?) throws -> AttachmentSet {
         if isLoaded {
             return self
         }
@@ -123,7 +123,7 @@ class AttachmentSet {
         return self
     }
     
-    func reload() throws -> AttachmentSet {
+    public func reload() throws -> AttachmentSet {
         isLoaded = false
         return try load()
     }
@@ -135,13 +135,13 @@ class AttachmentSet {
      * @throws IOException
      * @throws OslcException
      */
-    func create(att: Attachment) throws -> Attachment {
+    public func create(att: Attachment) throws -> Attachment {
         let obj = try self.mc.createAttachment(uri: self.href, data: att.toDoc(), name: att.getName(), description: att.getDescription(), meta: att.getMeta())
         _ = try self.reload()
         return Attachment(jo: obj, mc: self.mc)
     }
 
-    func create(relation: String, att: Attachment) throws -> Attachment {
+    public func create(relation: String, att: Attachment) throws -> Attachment {
         if !self.href.contains(relation.lowercased()) || !self.href.contains(relation.uppercased()) {
             self.href += "/" + relation
         }
@@ -151,7 +151,7 @@ class AttachmentSet {
         return Attachment(jo: obj, mc: self.mc)
     }
 
-    func create(relation: String, att: Attachment, headers: [String: Any]?) throws -> Attachment {
+    public func create(relation: String, att: Attachment, headers: [String: Any]?) throws -> Attachment {
         if !self.href.contains(relation.lowercased()) || !self.href.contains(relation.uppercased()) {
             self.href += "/" + relation
         }
@@ -174,7 +174,7 @@ class AttachmentSet {
      * @throws IOException
      * @throws OslcException
      */
-    func member(index: Int) throws -> Attachment? {
+    public func member(index: Int) throws -> Attachment? {
         if !isLoaded {
             _ = try load()
         }
@@ -185,7 +185,7 @@ class AttachmentSet {
         return Attachment(jo: obj, mc: self.mc);
     }
     
-    func member(id: String) throws -> Attachment? {
+    public func member(id: String) throws -> Attachment? {
         if !isLoaded {
             _ = try load()
         }
@@ -213,12 +213,12 @@ class AttachmentSet {
      * @throws IOException
      * @throws OslcException
      */
-    func delete(index: Int) throws -> AttachmentSet {
+    public func delete(index: Int) throws -> AttachmentSet {
         try self.member(index: index)?.delete()
         return try reload()
     }
 
-    func delete(id: String) throws -> AttachmentSet {
+    public func delete(id: String) throws -> AttachmentSet {
         try self.member(id: id)?.delete()
         return try reload()
     }
@@ -237,11 +237,11 @@ class AttachmentSet {
         return size
     }
 
-    func fetchMember(uri: String, properties: [String]?) throws -> Attachment {
+    public func fetchMember(uri: String, properties: [String]?) throws -> Attachment {
         return try self.fetchMember(uri: uri, headers: nil, properties: properties)
     }
 
-    func fetchMember(uri: String, headers: [String: Any]?, properties: [String]?) throws -> Attachment {
+    public func fetchMember(uri: String, headers: [String: Any]?, properties: [String]?) throws -> Attachment {
         var strb = String(uri)
         if properties != nil && properties!.count > 0 {
             strb.append(uri.contains("?") ? "" : "?")

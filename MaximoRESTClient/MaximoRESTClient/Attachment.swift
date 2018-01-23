@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Attachment {
+public class Attachment {
 
     var name: String?
     var description: String?

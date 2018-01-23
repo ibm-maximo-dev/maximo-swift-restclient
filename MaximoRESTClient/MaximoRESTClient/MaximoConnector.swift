@@ -35,16 +35,16 @@ public class MaximoConnector {
         self.options = options
     }
 
-    func getCurrentURI() -> String {
+    public func getCurrentURI() -> String {
         return self.options.getPublicURI()
     }
     
-    func options(op: Options) -> MaximoConnector {
+    public func options(op: Options) -> MaximoConnector {
         self.options = op
         return self
     }
     
-    func getOptions() -> Options {
+    public func getOptions() -> Options {
         return self.options
     }
 
@@ -56,7 +56,7 @@ public class MaximoConnector {
         return ResourceSet(osName: osName, mc: self)
     }
 
-    func resourceSet(url: String) -> ResourceSet {
+    public func resourceSet(url: String) -> ResourceSet {
         var strs = url.split(separator: "/")
         var osName : String?
         var index : Int = 0
@@ -71,55 +71,55 @@ public class MaximoConnector {
         return ResourceSet(osName: osName, mc: self)
     }
 
-    func resource(uri: String, properties: [String]) throws -> Resource {
+    public func resource(uri: String, properties: [String]) throws -> Resource {
         return try ResourceSet(mc: self).fetchMember(uri: uri, properties: properties)
     }
     
-    func attachment(uri: String, properties: [String]) throws -> Attachment {
+    public func attachment(uri: String, properties: [String]) throws -> Attachment {
         return try AttachmentSet(mc: self).fetchMember(uri: uri, properties: properties)
     }
     
-    func attachmentDocMeta(uri: String) throws -> [String: Any] {
+    public func attachmentDocMeta(uri: String) throws -> [String: Any] {
         return try AttachmentSet(mc: self).fetchMember(uri: uri, properties: nil).fetchDocMeta()
     }
     
-    func isGET() -> Bool {
+    public func isGET() -> Bool {
         return self.httpMethod == HTTP_METHOD_GET
     }
 
-    func isPOST() -> Bool {
+    public func isPOST() -> Bool {
         return self.httpMethod == HTTP_METHOD_POST
     }
     
-    func isPATCH() -> Bool {
+    public func isPATCH() -> Bool {
         return self.httpMethod == HTTP_METHOD_PATCH
     }
 
-    func isMERGE() -> Bool {
+    public func isMERGE() -> Bool {
         return self.httpMethod == HTTP_METHOD_MERGE
     }
 
-    func isDELETE() -> Bool {
+    public func isDELETE() -> Bool {
         return self.httpMethod == HTTP_METHOD_DELETE
     }
 
-    func isBULK() -> Bool {
+    public func isBULK() -> Bool {
         return self.httpMethod == HTTP_METHOD_BULK
     }
 
-    func isSYNC() -> Bool {
+    public func isSYNC() -> Bool {
         return self.httpMethod == HTTP_METHOD_SYNC
     }
 
-    func isMERGESYNC() -> Bool {
+    public func isMERGESYNC() -> Bool {
         return self.httpMethod == HTTP_METHOD_MERGESYNC
     }
 
-    func isValid() -> Bool {
+    public func isValid() -> Bool {
         return self.valid
     }
 
-    func isLean() -> Bool {
+    public func isLean() -> Bool {
         return self.options.isLean()
     }
 
@@ -139,7 +139,7 @@ public class MaximoConnector {
      * @throws IOException
      * @throws OslcException
      */
-    func connect(proxyConfiguration : [String: String]?) throws {
+    public func connect(proxyConfiguration : [String: String]?) throws {
         if isValid() {
             throw OslcError.connectionAlreadyEstablished
         }
@@ -305,20 +305,77 @@ public class MaximoConnector {
         }
     }
     
-    func getAttachmentData(uri: String) throws -> Data {
+    public func getAttachmentData(uri: String) throws -> Data {
         return try self.getAttachmentData(uri: uri, headers: nil)
     }
 
-    func getAttachmentData(uri: String, headers: [String: Any]?) throws -> Data {
-        // TODO: Implement this method
-        return Data()
+    public func getAttachmentData(uri: String, headers: [String: Any]?) throws -> Data {
+        if !isValid() {
+            throw OslcError.invalidConnectorInstance
+        }
+        
+        var publicHost = self.options.getHost()
+        if self.options.getPort() != -1 {
+            publicHost += ":" + String(self.options.getPort())
+        }
+        var requestURI = uri
+        if !uri.contains(publicHost) {
+            let tempURL = URL(string: uri)
+            var currentHost : String = (tempURL?.host)!
+            if tempURL?.port != -1 {
+                currentHost += ":" + String(describing: tempURL?.port)
+            }
+            requestURI = uri.replacingOccurrences(of: currentHost, with: publicHost)
+        }
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        let httpURL = URL(string: requestURI)
+        if cookies.isEmpty {
+            try self.connect()
+        }
+        self.setCookiesForSession(url: httpURL!)
+        var request = URLRequest(url : httpURL!)
+        self.setMethod(request: &request, method: "GET", properties: nil)
+        
+        if headers != nil && !(headers!.isEmpty) {
+            self.setHeaders(request: &request, headers: headers!)
+        }
+        
+        var dataReceived : Data?
+        var responseError : Error?
+        let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
+            dataReceived = data
+            
+            if dataReceived != nil {
+                let dataAsString : String? = String(data: dataReceived!, encoding: String.Encoding.utf8)
+                print(dataAsString!)
+            }
+            
+            responseError = error
+            semaphore.signal()
+        })
+        task.resume()
+        _ = semaphore.wait(timeout: DispatchTime.distantFuture)
+        
+        var resCode : Int = -1
+        if (task.response as? HTTPURLResponse) != nil {
+            resCode = (task.response as! HTTPURLResponse).statusCode
+        }
+        lastResponseCode = resCode;
+        if (resCode >= 400) {
+            if responseError != nil {
+                throw responseError!
+            }
+        }
+
+        return dataReceived!
     }
 
     public func get(uri: String) throws -> [String: Any] {
         return try self.get(uri: uri, headers: nil)
     }
 
-    func get(uri: String, headers: [String: Any]?) throws -> [String: Any] {
+    public func get(uri: String, headers: [String: Any]?) throws -> [String: Any] {
         if !isValid() {
             throw OslcError.invalidConnectorInstance
         }
@@ -344,7 +401,7 @@ public class MaximoConnector {
         }
         self.setCookiesForSession(url: httpURL!)
         var request = URLRequest(url : httpURL!)
-        request.httpMethod = "GET"
+        self.setMethod(request: &request, method: "GET", properties: nil)
         
         if headers != nil && !(headers!.isEmpty) {
             self.setHeaders(request: &request, headers: headers!)
@@ -394,40 +451,315 @@ public class MaximoConnector {
      * @throws IOException
      * @throws OslcException
      */
-    func groupBy(uri: String) throws -> [Any] {
+    public func groupBy(uri: String) throws -> [Any] {
         return try self.groupBy(uri: uri, headers: nil)
     }
 
-    func groupBy(uri: String, headers: [String: Any]?) throws -> [Any] {
-        // TODO: Implement this method
-        return []
+    public func groupBy(uri: String, headers: [String: Any]?) throws -> [Any] {
+        if !isValid() {
+            throw OslcError.invalidConnectorInstance
+        }
+        
+        var publicHost = self.options.getHost()
+        if self.options.getPort() != -1 {
+            publicHost += ":" + String(self.options.getPort())
+        }
+        var requestURI = uri
+        if !uri.contains(publicHost) {
+            let tempURL = URL(string: uri)
+            var currentHost : String = (tempURL?.host)!
+            if tempURL?.port != -1 {
+                currentHost += ":" + String(describing: tempURL?.port)
+            }
+            requestURI = uri.replacingOccurrences(of: currentHost, with: publicHost)
+        }
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        let httpURL = URL(string: requestURI)
+        if cookies.isEmpty {
+            try self.connect()
+        }
+        self.setCookiesForSession(url: httpURL!)
+        var request = URLRequest(url : httpURL!)
+        self.setMethod(request: &request, method: "GET", properties: nil)
+        
+        if headers != nil && !(headers!.isEmpty) {
+            self.setHeaders(request: &request, headers: headers!)
+        }
+        
+        var dataReceived : Data?
+        var responseError : Error?
+        let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
+            dataReceived = data
+            
+            if dataReceived != nil {
+                let dataAsString : String? = String(data: dataReceived!, encoding: String.Encoding.utf8)
+                print(dataAsString!)
+            }
+            
+            responseError = error
+            semaphore.signal()
+        })
+        task.resume()
+        _ = semaphore.wait(timeout: DispatchTime.distantFuture)
+        
+        var resCode : Int = -1
+        if (task.response as? HTTPURLResponse) != nil {
+            resCode = (task.response as! HTTPURLResponse).statusCode
+        }
+        lastResponseCode = resCode;
+        if (resCode >= 400) {
+            if responseError != nil {
+                throw responseError!
+            }
+        }
+
+        var json : [Any] = []
+        if dataReceived != nil {
+            json = try! JSONSerialization.jsonObject(with: dataReceived!, options: []) as! [Any]
+        }
+        
+        return json
     }
 
-    func create(uri: String, jo: [String: Any], properties: [String]?) throws -> [String: Any] {
+    public func create(uri: String, jo: [String: Any], properties: [String]?) throws -> [String: Any] {
         return try self.create(uri: uri, jo: jo, headers: nil, properties: properties);
     }
     
-    func create(uri: String, jo: [String: Any], headers: [String: Any]?, properties: [String]?) throws -> [String: Any] {
-        // TODO: Implement this method
-        return [:]
+    public func create(uri: String, jo: [String: Any], headers: [String: Any]?, properties: [String]?) throws -> [String: Any] {
+        if !isValid() {
+            throw OslcError.invalidConnectorInstance
+        }
+        
+        var publicHost = self.options.getHost()
+        if self.options.getPort() != -1 {
+            publicHost += ":" + String(self.options.getPort())
+        }
+        var requestURI = uri
+        if !uri.contains(publicHost) {
+            let tempURL = URL(string: uri)
+            var currentHost : String = (tempURL?.host)!
+            if tempURL?.port != -1 {
+                currentHost += ":" + String(describing: tempURL?.port)
+            }
+            requestURI = uri.replacingOccurrences(of: currentHost, with: publicHost)
+        }
+
+        // Converting JSON object to Data
+        let postData : Data = try JSONSerialization.data(withJSONObject: jo, options: [])
+        let semaphore = DispatchSemaphore(value: 0)
+        let httpURL = URL(string: requestURI)
+        if cookies.isEmpty {
+            try self.connect()
+        }
+        self.setCookiesForSession(url: httpURL!)
+        var request = URLRequest(url : httpURL!)
+        self.setMethod(request: &request, method: "POST", properties: properties)
+        request.httpBody = postData
+
+        if headers != nil && !(headers!.isEmpty) {
+            self.setHeaders(request: &request, headers: headers!)
+        }
+        
+        var dataReceived : Data?
+        var responseError : Error?
+        let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
+            dataReceived = data
+            
+            if dataReceived != nil {
+                let dataAsString : String? = String(data: dataReceived!, encoding: String.Encoding.utf8)
+                print(dataAsString!)
+            }
+            
+            responseError = error
+            semaphore.signal()
+        })
+        task.resume()
+        _ = semaphore.wait(timeout: DispatchTime.distantFuture)
+        
+        var resCode : Int = -1
+        if (task.response as? HTTPURLResponse) != nil {
+            resCode = (task.response as! HTTPURLResponse).statusCode
+        }
+        lastResponseCode = resCode;
+        if (resCode >= 400) {
+            if responseError != nil {
+                throw responseError!
+            }
+        }
+
+        var json : [String: Any] = [:]
+        if properties != nil && properties!.count > 0 {
+            let href : String = (task.response as! HTTPURLResponse).allHeaderFields["Location"] as! String
+            if self.options.isLean() {
+                json["rdf:resource"] = href
+            } else {
+                json["href"] = href
+            }
+        } else {
+            if dataReceived != nil {
+                json = try! JSONSerialization.jsonObject(with: dataReceived!, options: []) as! [String : Any]
+            }
+        }
+
+        return json
     }
 
-    func createAttachment(uri: String, data: Data, name: String, description: String, meta: String) throws -> [String: Any] {
+    public func createAttachment(uri: String, data: Data, name: String, description: String, meta: String) throws -> [String: Any] {
         return try self.createAttachment(uri: uri, data: data, name: name, description: description, meta: meta, headers: nil)
     }
 
-    func createAttachment(uri: String, data: Data, name: String, description: String, meta: String, headers: [String: Any]?) throws -> [String: Any] {
-        // TODO: Implement this method
-        return [:]
+    public func createAttachment(uri: String, data: Data, name: String, description: String, meta: String, headers: [String: Any]?) throws -> [String: Any]
+    {
+        if !isValid() {
+            throw OslcError.invalidConnectorInstance
+        }
+        
+        var publicHost = self.options.getHost()
+        if self.options.getPort() != -1 {
+            publicHost += ":" + String(self.options.getPort())
+        }
+        var requestURI = uri
+        if !uri.contains(publicHost) {
+            let tempURL = URL(string: uri)
+            var currentHost : String = (tempURL?.host)!
+            if tempURL?.port != -1 {
+                currentHost += ":" + String(describing: tempURL?.port)
+            }
+            requestURI = uri.replacingOccurrences(of: currentHost, with: publicHost)
+        }
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        let httpURL = URL(string: requestURI)
+        if cookies.isEmpty {
+            try self.connect()
+        }
+        self.setCookiesForSession(url: httpURL!)
+        var request = URLRequest(url : httpURL!)
+        self.setMethod(request: &request, method: "POST", properties: nil)
+        request.httpBody = data
+        request.addValue(name, forHTTPHeaderField: "slug")
+        request.addValue(description, forHTTPHeaderField: "x-document-description")
+        request.addValue(meta, forHTTPHeaderField: "x-document-meta")
+
+        if headers != nil && !(headers!.isEmpty) {
+            self.setHeaders(request: &request, headers: headers!)
+        }
+        
+        var dataReceived : Data?
+        var responseError : Error?
+        let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
+            dataReceived = data
+            
+            if dataReceived != nil {
+                let dataAsString : String? = String(data: dataReceived!, encoding: String.Encoding.utf8)
+                print(dataAsString!)
+            }
+            
+            responseError = error
+            semaphore.signal()
+        })
+        task.resume()
+        _ = semaphore.wait(timeout: DispatchTime.distantFuture)
+        
+        var resCode : Int = -1
+        if (task.response as? HTTPURLResponse) != nil {
+            resCode = (task.response as! HTTPURLResponse).statusCode
+        }
+        lastResponseCode = resCode;
+        if (resCode >= 400) {
+            if responseError != nil {
+                throw responseError!
+            }
+        }
+
+        var json : [String: Any] = [:]
+        let href : String = (task.response as! HTTPURLResponse).allHeaderFields["Location"] as! String
+        if self.options.isLean() {
+            json["rdf:resource"] = href
+        } else {
+            json["href"] = href
+        }
+
+        return json
     }
 
-    func bulk(uri: String, ja: [Any]) throws -> [Any] {
+    public func bulk(uri: String, ja: [Any]) throws -> [Any] {
         return try bulk(uri: uri, ja: ja, headers: nil)
     }
 
-    func bulk(uri: String, ja: [Any], headers: [String: Any]?) throws -> [Any] {
-        // TODO: Implement this method
-        return []
+    public func bulk(uri: String, ja: [Any], headers: [String: Any]?) throws -> [Any] {
+        if !isValid() {
+            throw OslcError.invalidConnectorInstance
+        }
+        
+        var publicHost = self.options.getHost()
+        if self.options.getPort() != -1 {
+            publicHost += ":" + String(self.options.getPort())
+        }
+        var requestURI = uri
+        if !uri.contains(publicHost) {
+            let tempURL = URL(string: uri)
+            var currentHost : String = (tempURL?.host)!
+            if tempURL?.port != -1 {
+                currentHost += ":" + String(describing: tempURL?.port)
+            }
+            requestURI = uri.replacingOccurrences(of: currentHost, with: publicHost)
+        }
+        
+        // Converting JSON object to Data
+        let postData : Data = try JSONSerialization.data(withJSONObject: ja, options: [])
+        let semaphore = DispatchSemaphore(value: 0)
+        let httpURL = URL(string: requestURI)
+        if cookies.isEmpty {
+            try self.connect()
+        }
+        self.setCookiesForSession(url: httpURL!)
+        var request = URLRequest(url : httpURL!)
+        self.setMethod(request: &request, method: "BULK", properties: nil)
+        request.httpBody = postData
+        
+        if headers != nil && !(headers!.isEmpty) {
+            self.setHeaders(request: &request, headers: headers!)
+        }
+        
+        var dataReceived : Data?
+        var responseError : Error?
+        let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
+            dataReceived = data
+            
+            if dataReceived != nil {
+                let dataAsString : String? = String(data: dataReceived!, encoding: String.Encoding.utf8)
+                print(dataAsString!)
+            }
+            
+            responseError = error
+            semaphore.signal()
+        })
+        task.resume()
+        _ = semaphore.wait(timeout: DispatchTime.distantFuture)
+        
+        var resCode : Int = -1
+        if (task.response as? HTTPURLResponse) != nil {
+            resCode = (task.response as! HTTPURLResponse).statusCode
+        }
+        lastResponseCode = resCode;
+        if (resCode >= 400) {
+            if responseError != nil {
+                throw responseError!
+            }
+        }
+        
+        var jarray : [Any] = []
+        if (resCode == 204) {
+            return jarray
+        }
+        
+        if dataReceived != nil {
+            jarray = try! JSONSerialization.jsonObject(with: dataReceived!, options: []) as! [Any]
+        }
+
+        return jarray
     }
 
     /**
@@ -436,40 +768,325 @@ public class MaximoConnector {
      * @throws IOException
      * @throws OslcException
      */
-    func update(uri: String, jo: [String: Any], properties: [String]?) throws -> [String: Any] {
+    public func update(uri: String, jo: [String: Any], properties: [String]?) throws -> [String: Any] {
         return try self.update(uri: uri, jo: jo, headers: nil, properties: properties);
     }
 
-    func update(uri: String, jo: [String: Any], headers: [String: Any]?, properties: [String]?) throws -> [String: Any] {
-        // TODO: Implement self method
-        return [:]
+    public func update(uri: String, jo: [String: Any], headers: [String: Any]?, properties: [String]?) throws -> [String: Any] {
+        if !isValid() {
+            throw OslcError.invalidConnectorInstance
+        }
+        
+        var publicHost = self.options.getHost()
+        if self.options.getPort() != -1 {
+            publicHost += ":" + String(self.options.getPort())
+        }
+        var requestURI = uri
+        if !uri.contains(publicHost) {
+            let tempURL = URL(string: uri)
+            var currentHost : String = (tempURL?.host)!
+            if tempURL?.port != -1 {
+                currentHost += ":" + String(describing: tempURL?.port)
+            }
+            requestURI = uri.replacingOccurrences(of: currentHost, with: publicHost)
+        }
+        
+        // Converting JSON object to Data
+        let postData : Data = try JSONSerialization.data(withJSONObject: jo, options: [])
+        let semaphore = DispatchSemaphore(value: 0)
+        let httpURL = URL(string: requestURI)
+        if cookies.isEmpty {
+            try self.connect()
+        }
+        self.setCookiesForSession(url: httpURL!)
+        var request = URLRequest(url : httpURL!)
+        self.setMethod(request: &request, method: "PATCH", properties: properties)
+        request.httpBody = postData
+        
+        if headers != nil && !(headers!.isEmpty) {
+            self.setHeaders(request: &request, headers: headers!)
+        }
+        
+        var dataReceived : Data?
+        var responseError : Error?
+        let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
+            dataReceived = data
+            
+            if dataReceived != nil {
+                let dataAsString : String? = String(data: dataReceived!, encoding: String.Encoding.utf8)
+                print(dataAsString!)
+            }
+            
+            responseError = error
+            semaphore.signal()
+        })
+        task.resume()
+        _ = semaphore.wait(timeout: DispatchTime.distantFuture)
+        
+        var resCode : Int = -1
+        if (task.response as? HTTPURLResponse) != nil {
+            resCode = (task.response as! HTTPURLResponse).statusCode
+        }
+        lastResponseCode = resCode;
+        if (resCode >= 400) {
+            if responseError != nil {
+                throw responseError!
+            }
+        }
+
+        var json : [String: Any] = [:]
+        if (resCode == 204) {
+            return json
+        }
+
+        if dataReceived != nil {
+            json = try! JSONSerialization.jsonObject(with: dataReceived!, options: []) as! [String : Any]
+        }
+
+        return json
     }
     
-    func merge(uri: String, jo: [String: Any], properties: [String]?) throws -> [String: Any] {
+    public func merge(uri: String, jo: [String: Any], properties: [String]?) throws -> [String: Any] {
         return try self.merge(uri: uri, jo: jo, headers: nil, properties: properties);
     }
     
-    func merge(uri: String, jo: [String: Any], headers: [String: Any]?, properties: [String]?) throws -> [String: Any] {
-        // TODO: Implement self method
-        return [:]
+    public func merge(uri: String, jo: [String: Any], headers: [String: Any]?, properties: [String]?) throws -> [String: Any] {
+        if !isValid() {
+            throw OslcError.invalidConnectorInstance
+        }
+        
+        var publicHost = self.options.getHost()
+        if self.options.getPort() != -1 {
+            publicHost += ":" + String(self.options.getPort())
+        }
+        var requestURI = uri
+        if !uri.contains(publicHost) {
+            let tempURL = URL(string: uri)
+            var currentHost : String = (tempURL?.host)!
+            if tempURL?.port != -1 {
+                currentHost += ":" + String(describing: tempURL?.port)
+            }
+            requestURI = uri.replacingOccurrences(of: currentHost, with: publicHost)
+        }
+        
+        // Converting JSON object to Data
+        let postData : Data = try JSONSerialization.data(withJSONObject: jo, options: [])
+        let semaphore = DispatchSemaphore(value: 0)
+        let httpURL = URL(string: requestURI)
+        if cookies.isEmpty {
+            try self.connect()
+        }
+        self.setCookiesForSession(url: httpURL!)
+        var request = URLRequest(url : httpURL!)
+        self.setMethod(request: &request, method: "MERGE", properties: properties)
+        request.httpBody = postData
+        
+        if headers != nil && !(headers!.isEmpty) {
+            self.setHeaders(request: &request, headers: headers!)
+        }
+        
+        var dataReceived : Data?
+        var responseError : Error?
+        let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
+            dataReceived = data
+            
+            if dataReceived != nil {
+                let dataAsString : String? = String(data: dataReceived!, encoding: String.Encoding.utf8)
+                print(dataAsString!)
+            }
+            
+            responseError = error
+            semaphore.signal()
+        })
+        task.resume()
+        _ = semaphore.wait(timeout: DispatchTime.distantFuture)
+        
+        var resCode : Int = -1
+        if (task.response as? HTTPURLResponse) != nil {
+            resCode = (task.response as! HTTPURLResponse).statusCode
+        }
+        lastResponseCode = resCode;
+        if (resCode >= 400) {
+            if responseError != nil {
+                throw responseError!
+            }
+        }
+        
+        var json : [String: Any] = [:]
+        if (resCode == 204) {
+            return json
+        }
+        
+        if dataReceived != nil {
+            json = try! JSONSerialization.jsonObject(with: dataReceived!, options: []) as! [String : Any]
+        }
+        
+        return json
     }
     
-    func mergeSync(uri: String, jo: [String: Any], properties: [String]?) throws -> [String: Any] {
+    public func mergeSync(uri: String, jo: [String: Any], properties: [String]?) throws -> [String: Any] {
         return try self.merge(uri: uri, jo: jo, headers: nil, properties: properties);
     }
 
-    func mergeSync(uri: String, jo: [String: Any], headers: [String: Any]?, properties: [String]?) throws -> [String: Any] {
-        // TODO: Implement self method
-        return [:]
+    public func mergeSync(uri: String, jo: [String: Any], headers: [String: Any]?, properties: [String]?) throws -> [String: Any] {
+        if !isValid() {
+            throw OslcError.invalidConnectorInstance
+        }
+        
+        var publicHost = self.options.getHost()
+        if self.options.getPort() != -1 {
+            publicHost += ":" + String(self.options.getPort())
+        }
+        var requestURI = uri
+        if !uri.contains(publicHost) {
+            let tempURL = URL(string: uri)
+            var currentHost : String = (tempURL?.host)!
+            if tempURL?.port != -1 {
+                currentHost += ":" + String(describing: tempURL?.port)
+            }
+            requestURI = uri.replacingOccurrences(of: currentHost, with: publicHost)
+        }
+        
+        // Converting JSON object to Data
+        let postData : Data = try JSONSerialization.data(withJSONObject: jo, options: [])
+        let semaphore = DispatchSemaphore(value: 0)
+        let httpURL = URL(string: requestURI)
+        if cookies.isEmpty {
+            try self.connect()
+        }
+        self.setCookiesForSession(url: httpURL!)
+        var request = URLRequest(url : httpURL!)
+        self.setMethod(request: &request, method: "MERGESYNC", properties: properties)
+        request.httpBody = postData
+
+        if headers != nil && !(headers!.isEmpty) {
+            self.setHeaders(request: &request, headers: headers!)
+        }
+        
+        var dataReceived : Data?
+        var responseError : Error?
+        let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
+            dataReceived = data
+            
+            if dataReceived != nil {
+                let dataAsString : String? = String(data: dataReceived!, encoding: String.Encoding.utf8)
+                print(dataAsString!)
+            }
+            
+            responseError = error
+            semaphore.signal()
+        })
+        task.resume()
+        _ = semaphore.wait(timeout: DispatchTime.distantFuture)
+        
+        var resCode : Int = -1
+        if (task.response as? HTTPURLResponse) != nil {
+            resCode = (task.response as! HTTPURLResponse).statusCode
+        }
+        lastResponseCode = resCode;
+        if (resCode >= 400) {
+            if responseError != nil {
+                throw responseError!
+            }
+        }
+
+        var json : [String: Any] = [:]
+        if (resCode == 204) {
+            return json
+        }
+        
+        if dataReceived != nil {
+            json = try! JSONSerialization.jsonObject(with: dataReceived!, options: []) as! [String : Any]
+        }
+        
+        return json
     }
 
-    func sync(uri: String, jo: [String: Any], properties: [String]?) throws -> [String: Any] {
+    public func sync(uri: String, jo: [String: Any], properties: [String]?) throws -> [String: Any] {
         return try self.merge(uri: uri, jo: jo, headers: nil, properties: properties);
     }
     
-    func sync(uri: String, jo: [String: Any], headers: [String: Any]?, properties: [String]?) throws -> [String: Any] {
-        // TODO: Implement self method
-        return [:]
+    public func sync(uri: String, jo: [String: Any], headers: [String: Any]?, properties: [String]?) throws -> [String: Any] {
+        if !isValid() {
+            throw OslcError.invalidConnectorInstance
+        }
+        
+        var publicHost = self.options.getHost()
+        if self.options.getPort() != -1 {
+            publicHost += ":" + String(self.options.getPort())
+        }
+        var requestURI = uri
+        if !uri.contains(publicHost) {
+            let tempURL = URL(string: uri)
+            var currentHost : String = (tempURL?.host)!
+            if tempURL?.port != -1 {
+                currentHost += ":" + String(describing: tempURL?.port)
+            }
+            requestURI = uri.replacingOccurrences(of: currentHost, with: publicHost)
+        }
+        
+        // Converting JSON object to Data
+        let postData : Data = try JSONSerialization.data(withJSONObject: jo, options: [])
+        let semaphore = DispatchSemaphore(value: 0)
+        let httpURL = URL(string: requestURI)
+        if cookies.isEmpty {
+            try self.connect()
+        }
+        self.setCookiesForSession(url: httpURL!)
+        var request = URLRequest(url : httpURL!)
+        self.setMethod(request: &request, method: "SYNC", properties: properties)
+        request.httpBody = postData
+        
+        if headers != nil && !(headers!.isEmpty) {
+            self.setHeaders(request: &request, headers: headers!)
+        }
+        
+        var dataReceived : Data?
+        var responseError : Error?
+        let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
+            dataReceived = data
+            
+            if dataReceived != nil {
+                let dataAsString : String? = String(data: dataReceived!, encoding: String.Encoding.utf8)
+                print(dataAsString!)
+            }
+            
+            responseError = error
+            semaphore.signal()
+        })
+        task.resume()
+        _ = semaphore.wait(timeout: DispatchTime.distantFuture)
+        
+        var resCode : Int = -1
+        if (task.response as? HTTPURLResponse) != nil {
+            resCode = (task.response as! HTTPURLResponse).statusCode
+        }
+        lastResponseCode = resCode;
+        if (resCode >= 400) {
+            if responseError != nil {
+                throw responseError!
+            }
+        }
+
+        var json : [String: Any] = [:]
+        if resCode == 204 {
+            return json;
+        }
+
+        if properties != nil && properties!.count > 0 {
+            let href : String = (task.response as! HTTPURLResponse).allHeaderFields["Location"] as! String
+            if self.options.isLean() {
+                json["rdf:resource"] = href
+            } else {
+                json["href"] = href
+            }
+        } else {
+            if dataReceived != nil {
+                json = try! JSONSerialization.jsonObject(with: dataReceived!, options: []) as! [String : Any]
+            }
+        }
+        
+        return json
     }
 
     /**
@@ -477,19 +1094,75 @@ public class MaximoConnector {
      * @throws IOException
      * @throws OslcException
      */
-    func delete(uri: String) throws {
+    public func delete(uri: String) throws {
         try delete(uri: uri, headers: nil)
     }
 
-    func delete(uri: String, headers: [String: Any]?) throws {
-        //TODO: Implement this method
+    public func delete(uri: String, headers: [String: Any]?) throws {
+        if !isValid() {
+            throw OslcError.invalidConnectorInstance
+        }
+        
+        var publicHost = self.options.getHost()
+        if self.options.getPort() != -1 {
+            publicHost += ":" + String(self.options.getPort())
+        }
+        var requestURI = uri
+        if !uri.contains(publicHost) {
+            let tempURL = URL(string: uri)
+            var currentHost : String = (tempURL?.host)!
+            if tempURL?.port != -1 {
+                currentHost += ":" + String(describing: tempURL?.port)
+            }
+            requestURI = uri.replacingOccurrences(of: currentHost, with: publicHost)
+        }
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        let httpURL = URL(string: requestURI)
+        if cookies.isEmpty {
+            try self.connect()
+        }
+        self.setCookiesForSession(url: httpURL!)
+        var request = URLRequest(url : httpURL!)
+        self.setMethod(request: &request, method: "DELETE", properties: nil)
+        
+        if headers != nil && !(headers!.isEmpty) {
+            self.setHeaders(request: &request, headers: headers!)
+        }
+        
+        var dataReceived : Data?
+        var responseError : Error?
+        let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
+            dataReceived = data
+            
+            if dataReceived != nil {
+                let dataAsString : String? = String(data: dataReceived!, encoding: String.Encoding.utf8)
+                print(dataAsString!)
+            }
+            
+            responseError = error
+            semaphore.signal()
+        })
+        task.resume()
+        _ = semaphore.wait(timeout: DispatchTime.distantFuture)
+
+        var resCode : Int = -1
+        if (task.response as? HTTPURLResponse) != nil {
+            resCode = (task.response as! HTTPURLResponse).statusCode
+        }
+        lastResponseCode = resCode;
+        if (resCode >= 400) {
+            if responseError != nil {
+                throw responseError!
+            }
+        }
     }
 
-    func deleteResource(uri: String) throws {
+    public func deleteResource(uri: String) throws {
         try self.delete(uri: uri)
     }
     
-    func deleteAttachment(uri: String) throws {
+    public func deleteAttachment(uri: String) throws {
         try self.delete(uri: uri)
     }
 
@@ -515,7 +1188,7 @@ public class MaximoConnector {
      * Disconnect from Maximo Server
      * @throws IOException
      */
-    func disconnect() throws {
+    public func disconnect() throws {
         var logout = self.options.getPublicURI() + "/logout"
         if self.getOptions().isMultiTenancy() {
             logout += "?&_tenantcode=" + self.getOptions().getTenantCode()
@@ -524,7 +1197,7 @@ public class MaximoConnector {
         let semaphore = DispatchSemaphore(value: 0)
         let httpURL = URL(string: logout)
         var request = URLRequest(url : httpURL!)
-        request.httpMethod = "GET"
+        self.setMethod(request: &request, method: "GET", properties: nil)
         self.setCookiesForSession(url: httpURL!)
         let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
             semaphore.signal()

@@ -16,7 +16,7 @@ class MaximoRESTClientTests: QuickSpec {
         describe("MaximoRESTClient") {
             it("is a framework to communicate with Maximo") {
                 var options = Options().user(user: "wilson").password(password: "wilson").auth(authMode: "maxauth")
-                options = options.host(host: "9.80.209.185").port(port: 7001).lean(lean: true)
+                options = options.host(host: "9.85.149.40").port(port: 7001).lean(lean: true)
                 let connector = MaximoConnector(options: options)
                 do {
                     try connector.connect()
@@ -28,10 +28,20 @@ class MaximoRESTClientTests: QuickSpec {
                     _ = workOrderSet.paging(type: true)
                     _ = try workOrderSet.fetch()
                     let resource = try workOrderSet.member(index: 0)
-                    let workOrder = try resource!.toJSON()
+                    var workOrder = try resource!.toJSON()
 
                     print("Fetching a Work Order Success!")
+                    print("Work Order JSON: ")
                     print(workOrder)
+
+                    print("Updating a Work Order")
+                    let uri = connector.getCurrentURI() + "/os/mxwo/" + Util.stringValue(value: workOrder["workorderid"]!)
+                    workOrder["wopriority"] = 2
+                    workOrder["estdur"] = 10.0
+                    _ = try connector.update(uri: uri, jo: workOrder, properties: nil)
+
+                    print("Logging out!")
+                    try connector.disconnect()
                 } catch {
                     print("Maximo connection failure.")
                 }

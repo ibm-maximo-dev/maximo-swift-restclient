@@ -16,9 +16,9 @@ extension Collection where Element: Equatable {
     }
 }
 
-class Util {
+public class Util {
     
-    class func stringValue(value: Any) -> String {
+    public class func stringValue(value: Any) -> String {
         let date = value as? Date
         let intNumber = value as? Int
         let doubleNumber = value as? Double
@@ -47,12 +47,12 @@ class Util {
         }
     }
 
-    class func urlEncode(value: String) -> String {
+    public class func urlEncode(value: String) -> String {
         let escapedString = value.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
         return escapedString!
     }
     
-    class func encodeBase64(value: String) -> String {
+    public class func encodeBase64(value: String) -> String {
         let utf8String = value.data(using: String.Encoding.utf8)
         let base64Encoded = utf8String?.base64EncodedString()
         return base64Encoded!
