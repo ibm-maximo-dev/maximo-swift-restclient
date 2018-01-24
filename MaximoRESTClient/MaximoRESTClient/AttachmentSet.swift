@@ -8,6 +8,80 @@
 
 import Foundation
 
+/**
+ *
+ * {@code AttachmenSet} implement the operations on attachmentset from Resource.
+ * It provides the set of Attachment.
+ *
+ * <p>This object can be created by {@code AttachmentSet}.
+ * The following code shows how to create {@code AttachmentSet} using {@code AttachmentSet} Constructor
+ * </p>
+ * <pre>
+ * <code>
+ * var res = Resource()
+ * var ats = res.attachmentSet(doclinkAttrName: doclinAttrName, relName: relName)
+ * </code>
+ * </pre>
+ *
+ * <p>
+ * The following examples demonstrate how to build a new {@code AttachmentSet}</p>
+ * <pre>
+ * <code>
+ * var ats = AttachmentSet()
+ * var ats = AttachmentSet(jo: jsonobject, mc: maximoconnector)
+ * var ats = AttachmentSet(uri: uri, mc: maximoconnector)
+ * </code>
+ * </pre>
+ *
+ * <p>
+ * The following examples demonstrate how to set uri and jsonobject to {@code Attachment}</p>
+ * <pre>
+ * <code>
+ * ats.href(href: uri)
+ * ats.JsonObject(jo: jo)
+ * </code>
+ * </pre>
+ *
+ * <p>
+ * The following examples show how to load and reload data</p>
+ * <pre>
+ * <code>
+ * att.load()
+ * att.reload()
+ * </code>
+ * </pre>
+ *
+ * <p>
+ * The following examples show how to get AttachmentSet data from {@code AttachmentSet}</p>
+ * <pre>
+ * <code>
+ * var jo : [String: Any] = att.toJSON()
+ * var jodata : Data = att.toJSONBytes()
+ * var uri : String = att.getURI()
+ * </code>
+ * </pre>
+ *
+ * <p>
+ * The following examples show how to create, get and delete {@code Attachment} from{@code AttachmentSet}</p>
+ * <pre>
+ * <code>
+ * var att = ats.create(att: Attachment())
+ * var att = ats.create(relation: relation, att: Attachment())
+ * var att = ats.member(index: index)
+ * var att = ats.member(id: id)
+ * ats.delete(index: index)
+ * ats.delete(id: id)
+ * </code>
+ * </pre>
+ *
+ * <p>The following example shows how to get the this page size from {@code AttachmentSet}</p>
+ * <pre>
+ * <code>
+ * var currentPageSize : Int = ats.thisPageSize()
+ * </code>
+ * </pre>
+ *
+ */
 public class AttachmentSet {
     
     var href : String = String()
@@ -54,8 +128,7 @@ public class AttachmentSet {
     /**
      * Get AttahcmentSet data in JSON
      *
-     * @throws IOException
-     * @throws OslcException
+     * @throws
      */
     public func toJSON() throws -> [String: Any] {
         _ = try self.load()
@@ -65,8 +138,7 @@ public class AttachmentSet {
     /**
      * Get AttahcmentSet data in JSONBytes
      *
-     * @throws IOException
-     * @throws OslcException
+     * @throws
      */
     public func toJSONBytes() throws -> Data {
         _ = try self.load()
@@ -97,8 +169,7 @@ public class AttachmentSet {
     /**
      * Load the data for attachmentset
      *
-     * @throws IOException
-     * @throws OslcException
+     * @throws
      */
     public func load() throws -> AttachmentSet {
         return try self.load(headers: nil)
@@ -132,8 +203,7 @@ public class AttachmentSet {
      * Create a new attachment
      * @param att
      *
-     * @throws IOException
-     * @throws OslcException
+     * @throws
      */
     public func create(att: Attachment) throws -> Attachment {
         let obj = try self.mc.createAttachment(uri: self.href, data: att.toDoc(), name: att.getName(), description: att.getDescription(), meta: att.getMeta())
@@ -171,8 +241,7 @@ public class AttachmentSet {
      * Get the member of attachmentset
      * @param index
      *
-     * @throws IOException
-     * @throws OslcException
+     * @throws
      */
     public func member(index: Int) throws -> Attachment? {
         if !isLoaded {
@@ -210,8 +279,7 @@ public class AttachmentSet {
      * Delete the Attachment
      * @param index
      *
-     * @throws IOException
-     * @throws OslcException
+     * @throws
      */
     public func delete(index: Int) throws -> AttachmentSet {
         try self.member(index: index)?.delete()
@@ -265,6 +333,5 @@ public class AttachmentSet {
             jo = try self.mc.get(uri: metaUri)
         }
         return Attachment(jo: jo, mc: self.mc)
-
     }
 }

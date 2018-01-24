@@ -8,6 +8,20 @@
 
 import Foundation
 
+/**
+ *
+ * {@code Options} is served for {@code MaximoConnector}.
+ *
+ * <p>
+ * The following code shows how to initial {@code MaximoConnector} using {@code MaximoConnector} and {@code Options}Constructor</p>
+ * <pre>
+ * <code>
+ * var mc : MaximoConnector = MaximoConnector(options: Options().user(user: userName)
+ *  .password(password: password).mt(mtMode: true).lean(lean: false).auth(authMode: authMethod)
+ *  .host(host: hostAddress).port(port: portNum))
+ * </code>
+ * </pre>
+ */
 public class Options {
 
     let AUTH_BASIC = "basic"

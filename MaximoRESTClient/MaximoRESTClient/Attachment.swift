@@ -8,6 +8,79 @@
 
 import Foundation
 
+/**
+ *
+ * {@code Attachment} implement the operations on attachment from Resource.
+ * It provides the data, meta data, uri and so on.
+ *
+ * <p>This object can be created by {@code AttachmentSet}.
+ * The following code shows how to create {@code Attachment} using {@code AttachmentSet} Constructor
+ * </p>
+ * <pre>
+ * <code>
+ * var att = Attachment()
+ * var att = AttachmentSet().create(relation: "DOCLINKS", att: att)
+ * </code>
+ * </pre>
+ *
+ * <p>
+ * The following examples demonstrate how to build a new {@code Attachment}</p>
+ * <pre>
+ * <code>
+ * var att = Attachment()
+ * var att = Attachment(uri: attachmenturi, mc: maximoconnector)
+ * var att = Attachment(jo: attachmentJsonObject, mc: maximoconnector)
+ * </code>
+ * </pre>
+ *
+ * <p>
+ * The following examples demonstrate how to set maximoconnector, name, description, data, metadata, wwwURI to {@code Attachment}</p>
+ * <pre>
+ * <code>
+ * att.maximoConnector(mc: maximoconnector).name(name: filename).description(description: description)
+ * att.data(data: data).meta(type: type, storeas: storeas).wwwURI(uri: wwwURI)
+ * </code>
+ * </pre>
+ *
+ * <p>
+ * The following examples show how to load and reload data</p>
+ * <pre>
+ * <code>
+ * att.load()
+ * att.reload()
+ * </code>
+ * </pre>
+ *
+ * <p>
+ * The following examples show how to get information from {@code Attachment}
+ * For file data:</p>
+ * <pre>
+ * <code>
+ * var data : Data = att.toDoc()
+ * var uri : String = att.getURI()
+ * var name : String = att.getName()
+ * var description : String = att.getDescription()
+ * var meta : String = att.getMeta()
+ * </code>
+ * </pre>
+ *
+ * <p>
+ * For file metadata:</p>
+ * <pre>
+ * <code>
+ * var jo : [String: Any] = att.toDocMeta()
+ * var jodata : Data = att.toDocMetaBytes()
+ * </code>
+ * </pre>
+ *
+ * <p>The following example shows how to delete the {@code Attachment}
+ * <pre>
+ * <code>
+ * att.delete() //if the attachment is deleted as ats.att.detele(), please reload attachmentset after.
+ * </code>
+ * </pre>
+ *
+ */
 public class Attachment {
 
     var name: String?
@@ -57,7 +130,7 @@ public class Attachment {
     }
 
     /**
-     * Attachment att = new Attachment().mc(params)
+     * var att = Attachment().maximoConnector(mc: params)
      * @param mc
      */
     func maximoConnector(mc: MaximoConnector) -> Attachment {
@@ -120,7 +193,6 @@ public class Attachment {
 
     /**
      * Get current URI
-     *
      */
     func getURI() -> String {
         return self.uri;
@@ -129,8 +201,7 @@ public class Attachment {
     /**
      * Get Attachment data in JSON
      *
-     * @throws IOException
-     * @throws OslcException
+     * @throws
      */
     func toDocMeta() throws -> [String: Any] {
         if !isMetaLoaded {
@@ -142,8 +213,7 @@ public class Attachment {
     /**
      * Get Attachment data in JSONBytes
      *
-     * @throws IOException
-     * @throws OslcException
+     * @throws
      */
     func toDocMetaBytes() throws -> Data {
         if !isMetaLoaded {
@@ -155,8 +225,7 @@ public class Attachment {
 
     /**
      * load attachment data
-     * @throws OslcException
-     * @throws IOException
+     * @throws
      */
     func load() throws {
         try self.load(headers: nil)
@@ -165,8 +234,7 @@ public class Attachment {
     /**
      * load attachment data with headers
      * @param headers
-     * @throws IOException
-     * @throws OslcException
+     * @throws OslcError.attachmentAlreadyLoaded
      */
     func load(headers: [String: Any]?) throws {
         if isLoaded {
@@ -190,8 +258,7 @@ public class Attachment {
     /**
      * load attachment meta data
      *
-     * @throws IOException
-     * @throws OslcException
+     * @throws OslcError.attachmentAlreadyLoaded
      */
     func loadMeta() throws {
         try self.loadMeta(headers: nil);
@@ -252,8 +319,7 @@ public class Attachment {
 
     /**
      * Delete the attachment
-     * @throws IOException
-     * @throws OslcException
+     * @throws
      */
     func delete() throws {
         try self.mc.delete(uri: self.uri);

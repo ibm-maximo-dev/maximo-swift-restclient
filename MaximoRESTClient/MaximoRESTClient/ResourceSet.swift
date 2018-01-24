@@ -8,6 +8,104 @@
 
 import Foundation
 
+/**
+ *
+ * {@code ResourceSet} implement the operations on {@code ResourceSet}. It
+ * provides the set of Resource.
+ *
+ * <p>
+ * This object can be created by {@code MaximoConnector}. The following code
+ * shows how to create {@code MaximoConnector}
+ * </p>
+ *
+ * <pre>
+ * <code>
+ * var rs = mc.resourceSet(osName: osName)
+ * var rs = mc.resourceSet(url: URL)
+ * </code>
+ * </pre>
+ *
+ * <p>
+ * The following examples demonstrate how to build a new {@code ResourceSet}
+ * </p>
+ *
+ * <pre>
+ * <code>
+ * var rs = ResourceSet(osName: osName)
+ * var rs = ResourceSet(mc: maximoConnector)
+ * var rs = ResourceSet(osName: osName, mc: maximoConnector)
+ * var rs = ResourceSet(url: URL, mc: maximoConnector)
+ * </code>
+ * </pre>
+ *
+ * <p>
+ * The following examples show how to set {@code ResourceSet} data from
+ * {@code ResourceSet}
+ * </p>
+ *
+ * <pre>
+ * <code>
+ * rs._where(whereClause: queryWhere).select(selectClause: querySelect).hasTerms(terms: terms).pageSize(pageSize: pageSize)
+ * rs.paging(type: true)
+ * rs.stablePaging(type: true)
+ * </code>
+ * </pre>
+ *
+ * <p>
+ * The following examples show how to fetch, load, reload, go to next page, go
+ * back to previous page, get savedQuery for {@code ResourceSet} data
+ * </p>
+ *
+ * <pre>
+ * <code>
+ * rs.fetch(options: mapOptions)
+ * rs.load()
+ * rs.reload()
+ * rs.nextPage()
+ * rs.previousPage()
+ * rs.savedQuery(qsaved: savedQuery)
+ * rs.savedQuery(name: name, paramValues: paramValues)
+ * </code>
+ * </pre>
+ *
+ * <p>
+ * The following examples show how to get {@code ResourceSet} data from
+ * {@code ResourceSet}
+ * </p>
+ *
+ * <pre>
+ * <code>
+ * var jo : [String: Any] = rs.toJSON()
+ * var jodata : Data = rs.toJSONBytes()
+ * </code>
+ * </pre>
+ *
+ * <p>
+ * The following examples show how to create, get and delete {@code Resource}
+ * from {@code ResourceSet}
+ * </p>
+ *
+ * <pre>
+ * <code>
+ * var rs = fetchMember(uri: uri, properties: properties)
+ * var rs = member(index: index)
+ * var rs = create(jo: jsonObject, properties: properties)
+ * </code>
+ * </pre>
+ *
+ * <p>
+ * The following example shows how to get the this page size from
+ * {@code ResourceSet}
+ * </p>
+ *
+ * <pre>
+ * <code>
+ * var count : Int = rs.count()
+ * var totalCount : Int = rs.totalCount()
+ * var totalCount : Int = rs.totalCount(fromServer: true)
+ * </code>
+ * </pre>
+ */
 public class ResourceSet {
     
     var pageSize : Int = -1
@@ -50,8 +148,6 @@ public class ResourceSet {
 
     /**
      * Get current URI
-     *
-     *
      */
     func getAppURI() -> String? {
         return self.appURI
@@ -68,9 +164,7 @@ public class ResourceSet {
     /**
      * Get ResourceSet data in JSON
      *
-     *
-     * @throws IOException
-     * @throws OslcException
+     * @throws
      */
     func toJSON() -> [String: Any]? {
         return self.jsonObject
@@ -79,9 +173,7 @@ public class ResourceSet {
     /**
      * Get ResourceSet data in JSONBytes
      *
-     *
-     * @throws IOException
-     * @throws OslcException
+     * @throws
      */
     func toJSONBytes() throws -> Data {
         let data = try JSONEncoder().encode(self.jsonObject)
@@ -147,9 +239,7 @@ public class ResourceSet {
     /**
      * Fetching the data for ResourceSet
      *
-     *
-     * @throws OslcException
-     * @throws IOException
+     * @throws
      */
     public func fetch() throws -> ResourceSet {
         _ = try self.fetch(options: nil)
@@ -159,11 +249,8 @@ public class ResourceSet {
     /**
      * Fetching the data for ResourceSet with arbitrary parameters
      *
-     *
      * @param additionalParams
-     *
-     * @throws OslcException
-     * @throws IOException
+     * @throws
      */
     func fetchWithAddtionalParams(additionalParams: [String: Any]) throws -> ResourceSet {
         return try self.fetchWithAddtionalHeadersAndParams(additionalParams: additionalParams, additionalHeaders: nil);
@@ -172,11 +259,8 @@ public class ResourceSet {
     /**
      * Fetching the data for ResourceSet with arbitrary headers
      *
-     *
      * @param additionalHeaders
-     *
-     * @throws OslcException
-     * @throws IOException
+     * @throws
      */
     func fetchWithAddtionalHeaders(additionalHeaders: [String: Any]) throws -> ResourceSet {
         return try self.fetchWithAddtionalHeadersAndParams(additionalParams: nil, additionalHeaders: additionalHeaders);
@@ -185,12 +269,9 @@ public class ResourceSet {
     /**
      * Fetching the data for ResourceSet with arbitrary parameters and headers
      *
-     *
      * @param additionalParams
      * @param additionalHeaders
-     *
-     * @throws OslcException
-     * @throws IOException
+     * @throws
      */
     func fetchWithAddtionalHeadersAndParams(additionalParams: [String: Any]?, additionalHeaders: [String: Any]?) throws -> ResourceSet {
         _ = try self.buildURI()
@@ -238,12 +319,8 @@ public class ResourceSet {
 
     /**
      * Go to nextPage
-     *
-     *
-     * @throws IOException
-     * @throws OslcException
+     * @throws
      */
-    
     func nextPage() throws -> ResourceSet {
         if self.hasNextPage()
         {
@@ -299,10 +376,7 @@ public class ResourceSet {
 
     /**
      * Go back to previous page
-     *
-     *
-     * @throws IOException
-     * @throws OslcException
+     * @throws
      */
     func previousPage() throws -> ResourceSet {
         if self.jsonObject!["responseInfo"] != nil
@@ -351,10 +425,7 @@ public class ResourceSet {
     
     /**
      * Load the current data
-     *
-     *
-     * @throws OslcException
-     * @throws IOException
+     * @throws
      */
     func load() throws -> ResourceSet {
         if (isLoaded) {
@@ -377,10 +448,7 @@ public class ResourceSet {
     }
 
     /**
-     *
-     *
-     * @throws DatatypeConfigurationException
-     * @throws UnsupportedEncodingException
+     * Obtains a Saved Query.
      */
     func savedQuery(name: String, paramValues: [String: Any]) -> ResourceSet {
         self.savedQuery = SavedQuery(name: name, map: paramValues).savedQueryClause()
@@ -395,7 +463,7 @@ public class ResourceSet {
     /**
      * URI Builder
      *
-     * @throws OslcException
+     * @throws OslcException.invalidURL
      */
     func buildURI() throws -> ResourceSet {
         var strb = String()
@@ -480,8 +548,7 @@ public class ResourceSet {
      *
      * @param index
      *
-     * @throws IOException
-     * @throws OslcException
+     * @throws
      */
     public func member(index: Int) throws -> Resource? {
         if !isLoaded {
@@ -500,8 +567,7 @@ public class ResourceSet {
      * @param jo
      * @param properties
      *
-     * @throws IOException
-     * @throws OslcException
+     * @throws
      */
     func create(jo: [String: Any], properties: [String]) throws -> Resource {
         if self.osURI == nil {
@@ -576,9 +642,7 @@ public class ResourceSet {
     /**
      * Count the total number of Resources by calling RESTful API
      *
-     *
-     * @throws IOException
-     * @throws OslcException
+     * @throws
      */
     func totalCount() throws -> Int {
         if !isLoaded {
@@ -610,10 +674,8 @@ public class ResourceSet {
      * When fromServer=true, it calls the totalCount API.
      * When fromServer=false, it calls the RESTful API.
      *
-     * @throws IOException
-     * @throws OslcException
+     * @throws
      */
-    
     func totalCount(fromServer: Bool) throws -> Int {
         if !fromServer {
             return try self.totalCount()
@@ -643,10 +705,7 @@ public class ResourceSet {
     
     /**
      * Get current number of Resource by calling RESTful API
-     *
-     *
-     * @throws OslcException
-     * @throws IOException
+     * @throws
      */
     func count() throws -> Int {
         if !isLoaded {

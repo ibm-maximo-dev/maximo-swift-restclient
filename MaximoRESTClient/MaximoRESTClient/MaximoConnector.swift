@@ -8,6 +8,71 @@
 
 import Foundation
 
+/**
+ * {@code MaximoConnector} is a Connector between Oslc Client and Maximo Server.
+ * It provides the authentication setting, connect, basic requests and disconnect for Server.
+ *
+ * <p>This object can be created by {@code MaximoConnector} with {@code Options}.
+ * The following code shows how to initial {@code MaximoConnector} using {@code MaximoConnector} and {@code Options}Constructor</p>
+ * <pre>
+ * <code>
+ * var mc = MaximoConnector(options: new Options().user(user: userName)
+ *  .password(password: password).mt(mtMode: true).lean(lean: false).auth(authMode: authMethod)
+ *  .host(host: hostAddress).port(port: portNum))
+ * </code>
+ * </pre>
+ *
+ * <p>
+ * The following examples demonstrate how to build a new {@code MaximoConnector}</p>
+ * <pre>
+ * <code>
+ * var op = new Options()
+ * var mc = new MaximoConnector();
+ * mc.options(options: op)
+ * var mc = MaximoConnector(options: Options())
+ * </code>
+ * </pre>
+ *
+ * <p>
+ * The following examples demonstrate how to set authentication, method, cookie for session to {@code MaximoConnector}</p>
+ * <pre>
+ * <code>
+ * mc.setAuth(uri: uri)
+ * mc.setMethod(request: request, method: "POST", properties: nil)
+ * mc.setCookiesForSession(url: URL)
+ * </code>
+ * </pre>
+ *
+ * <p>
+ * The following examples show how to connect, get, create, update, merge, delete and disconnect to Maximo Server by {@code MaximoConnector}.
+ * The properties can be empty</p>
+ * <pre>
+ * <code>
+ * mc.connect()
+ * var jo : [String: Any] = mc.get(uri: uri)
+ * var docBytes : Data = mc.getAttachmentData(uri: uri)
+ * var docBytes : Data = mc.attachedDoc(uri: uri)
+ * var jp : [String: Any] = mc.getAttachmentMeta(uri: uri)
+ * var jo : [String: Any] = mc.create(uri: uri, jo: jsonObject, properties: properties)
+ * var jo : [String: Any] = mc.createAttachment(uri: uri, data: data, name: name, decription: decription, meta: meta)
+ * var jo : [String: Any] = mc.update(uri: uri, jo: jsonObject, properties: properties)
+ * var jo : [String: Any] = mc.merge(uri: uri, jo: jsonObject, properties: properties)
+ * mc.delete(uri: uri)
+ * mc.deleteResource(uri: uri)
+ * mc.deleteAttachment(uri: uri)
+ * mc.disconnect()
+ * </code>
+ * </pre>
+ *
+ * <p>
+ * The following examples  show how to get {@code ResourceSet} or {@code Resource} or {@code Attachment} by {@code MaximoConnector}</p>
+ * <pre><code>
+ * var rs = mc.resourceSet(osName: osName)
+ * var rs = mc.resourceSet(url: url)
+ * var re = mc.resource(uri: uri)
+ * var att = mc.attachment(uri: uri)
+ * </code></pre>
+ */
 public class MaximoConnector {
 
     var options : Options
@@ -126,8 +191,7 @@ public class MaximoConnector {
     /**
      * Connect to Maximo Server
      *
-     * @throws IOException
-     * @throws OslcException
+     * @throws
      */
     public func connect() throws {
         try self.connect(proxyConfiguration: nil)
@@ -136,8 +200,7 @@ public class MaximoConnector {
     /**
      * Connect to Maximo Server with Proxy
      *
-     * @throws IOException
-     * @throws OslcException
+     * @throws
      */
     public func connect(proxyConfiguration : [String: String]?) throws {
         if isValid() {
@@ -304,7 +367,12 @@ public class MaximoConnector {
             }
         }
     }
-    
+
+    /**
+     * Load DocumentData
+     *
+     * @throws
+     */
     public func getAttachmentData(uri: String) throws -> Data {
         return try self.getAttachmentData(uri: uri, headers: nil)
     }
@@ -443,13 +511,10 @@ public class MaximoConnector {
     }
 
     /**
-     *
      * Fetch Group By data
      *
      * @param uri
-     * @return JsonArray
-     * @throws IOException
-     * @throws OslcException
+     * @return
      */
     public func groupBy(uri: String) throws -> [Any] {
         return try self.groupBy(uri: uri, headers: nil)
@@ -522,6 +587,12 @@ public class MaximoConnector {
         return json
     }
 
+    /**
+     * Create new Resource
+     * @param jo
+     *
+     * @throws
+     */
     public func create(uri: String, jo: [String: Any], properties: [String]?) throws -> [String: Any] {
         return try self.create(uri: uri, jo: jo, headers: nil, properties: properties);
     }
@@ -605,6 +676,15 @@ public class MaximoConnector {
         return json
     }
 
+    /**
+     * Create new attachment
+     * @param data
+     * @param name
+     * @param description
+     * @param meta
+     *
+     * @throws
+     */
     public func createAttachment(uri: String, data: Data, name: String, description: String, meta: String) throws -> [String: Any] {
         return try self.createAttachment(uri: uri, data: data, name: name, description: description, meta: meta, headers: nil)
     }
@@ -765,8 +845,7 @@ public class MaximoConnector {
     /**
      * Update the Resource
      * @param jo
-     * @throws IOException
-     * @throws OslcException
+     * @throws
      */
     public func update(uri: String, jo: [String: Any], properties: [String]?) throws -> [String: Any] {
         return try self.update(uri: uri, jo: jo, headers: nil, properties: properties);
@@ -1091,8 +1170,7 @@ public class MaximoConnector {
 
     /**
      * Delete the resource/attachment
-     * @throws IOException
-     * @throws OslcException
+     * @throws
      */
     public func delete(uri: String) throws {
         try delete(uri: uri, headers: nil)
@@ -1186,7 +1264,7 @@ public class MaximoConnector {
 
     /**
      * Disconnect from Maximo Server
-     * @throws IOException
+     * @throws
      */
     public func disconnect() throws {
         var logout = self.options.getPublicURI() + "/logout"

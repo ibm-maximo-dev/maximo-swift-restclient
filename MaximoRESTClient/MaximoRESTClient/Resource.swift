@@ -8,6 +8,78 @@
 
 import Foundation
 
+/**
+ *
+ * {@code Resource} implement the operations on Resource.
+ * It provides the data, uri, attachment and so on.
+ *
+ * <p>This object can be created by {@code ResourceSet} or {@code MaximoConnector}.
+ * The following code shows how to create {@code Resource} using {@code ResourceSet}
+ * or using the {@code MaximoConnector}
+ * </p>
+ * <pre>
+ * <code>
+ * var re = re.member(index: index)
+ * var re = re.fetchMember(uri: uri, properties: properties)
+ * var re = mc.resource(uri: uri, properties: properties)
+ * </code>
+ * </pre>
+ *
+ * <p>
+ * The following examples demonstrate how to build a new {@code Resource}</p>
+ * <pre>
+ * <code>
+ * var re = Resource()
+ * var re = Resource(uri: uri)
+ * var re = Resource(jo: jsonObject)
+ * var re = Resource(uri: uri, mc: maximoConnector)
+ * var re = Resource(jo: jsonObject, mc: maximoConnector)
+ * </code>
+ * </pre>
+ *
+ * <p>
+ * The following examples demonstrate how to set uri and maximoConnector to {@code Resource}</p>
+ * <pre>
+ * <code>
+ * re.uri(href: URI).maximoConnector(mc: maximoConnector)
+ * </code>
+ * </pre>
+ *
+ * <p>
+ * The following examples show how to load and reload data</p>
+ * <pre>
+ * <code>
+ * re.load()
+ * re.reload()
+ * </code>
+ * </pre>
+ *
+ * <p>
+ * The following examples show how to get information from {@code Resource}</p>
+ * <pre>
+ * <code>
+ * var jo : [String: Any] = re.toJSON()
+ * var joBytes : Data = re.toJSONBytes()
+ * </code>
+ * </pre>
+ *
+ * <p>The following examples show how to update, merge and delete the {&code Resource}</p>
+ * <pre>
+ * <code>
+ * re.update(jo: jsonObject, properties: properties)
+ * re.merge(jo: jsonObject, properties: properties)
+ * re.delete(index: index)
+ * rs.re.delete() //if the attachment is deleted as rs.re.detele(), please reload {@code ResourceSet} after.
+ * </code>
+ * </pre>
+ *
+ * <p>The following example show how to get attachmentSet, relatedResource and how to invoke action by {@code Resource}</p>
+ * <pre><code>
+ * var ats = re.attachmentSet(doclinkAttrName: doclinkAttrName, relName: relName)
+ * var relationRe = re.relatedResource(attrName: attrName)
+ * re.invokeAction(actionName: actionName, jo: jsonObeject)
+ * </code></pre>
+ */
 public class Resource {
 
     var href : String
@@ -59,17 +131,15 @@ public class Resource {
 
     /**
      * Get current URI
-     *
      */
     func getURI() -> String{
-        return self.href;
+        return self.href
     }
 
     /**
      * Get Resource data in JSON
      *
-     * @throws IOException
-     * @throws OslcException
+     * @throws
      */
     public func toJSON() throws -> [String: Any] {
         if !isLoaded {
@@ -81,8 +151,7 @@ public class Resource {
     /**
      * Get Resource data in JSONBytes
      *
-     * @throws IOException
-     * @throws OslcException
+     * @throws
      */
     func toJSONBytes() throws -> Data {
         if !isLoaded {
@@ -95,8 +164,7 @@ public class Resource {
     /**
      * Load current data with properties in header
      *
-     * @throws IOException
-     * @throws OslcException
+     * @throws
      */
     func load() throws -> Resource {
         return try self.loadWithAdditionalParamsAndHeaders(params: nil, headers: nil, properties: nil)
@@ -175,8 +243,7 @@ public class Resource {
      * Update the Resource
      * @param jo
      *
-     * @throws OslcException
-     * @throws IOException
+     * @throws
      */
     func update(jo: [String: Any], properties: [String]) throws -> Resource
     {
@@ -229,7 +296,6 @@ public class Resource {
     /**
      * Load the attachmentset for resource
      * Note: there has to be a relation between them
-     *
      */
     func attachmentSet(doclinkAttrName: inout String?, relName: String?) -> AttachmentSet {
         var str : String = String()
@@ -305,8 +371,7 @@ public class Resource {
      * @param actionName
      * @param jo
      *
-     * @throws IOException
-     * @throws OslcException
+     * @throws
      */
     func invokeAction(actionName: String, jo: [String: Any]) throws -> Resource {
         _ = try self.mc.update(uri: self.href + (self.href.contains("?") ? "" : "?") + "&action=" + actionName, jo: jo, properties: nil)
