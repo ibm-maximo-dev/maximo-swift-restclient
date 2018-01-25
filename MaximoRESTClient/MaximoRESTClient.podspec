@@ -8,7 +8,7 @@ Pod::Spec.new do |spec|
 
   spec.platform = :ios, "9.1"
   spec.requires_arc = true
-  spec.source = { git: "https://github.ibm.com/maximo-ohio/maximo-swift-restclient", tag: "v#{spec.version}", submodules: true }
+  spec.source = { git: "https://github.ibm.com/maximo-ohio/maximo-swift-restclient", tag: "#{spec.version}", submodules: true }
   spec.source_files = "MaximoRESTClient/**/*.{h,swift}"
 
   spec.dependency "Curry", "~> 4.0.0"
