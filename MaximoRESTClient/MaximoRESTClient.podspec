@@ -6,7 +6,7 @@ Pod::Spec.new do |spec|
   spec.license = { type: 'MIT', file: 'LICENSE' }
   spec.authors = { "Silvino Neto" => 'silvv@br.ibm.com' }
 
-  spec.platform = :ios, "9.1"
+  spec.platform = :ios, "9.0"
   spec.requires_arc = true
   spec.source = { git: "git@github.ibm.com:maximo-ohio/maximo-swift-restclient.git", tag: "#{spec.version}" }
   spec.source_files = "MaximoRESTClient/**/*.{h,swift}"
