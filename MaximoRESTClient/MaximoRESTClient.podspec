@@ -12,4 +12,6 @@ Pod::Spec.new do |spec|
   spec.source_files = "MaximoRESTClient/**/*.{h,swift}"
 
   spec.dependency "Curry", "~> 4.0.0"
+  spec.dependency "Quick", "1.2.0"
+  spec.dependency "Nimble", "7.0.3"
 end
