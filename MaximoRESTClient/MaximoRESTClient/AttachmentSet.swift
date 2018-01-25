@@ -310,7 +310,7 @@ public class AttachmentSet {
     }
 
     public func fetchMember(uri: String, headers: [String: Any]?, properties: [String]?) throws -> Attachment {
-        var strb = String(uri)
+        var strb : String = String(uri)
         if properties != nil && properties!.count > 0 {
             strb.append(uri.contains("?") ? "" : "?")
             strb.append("&oslc.properties=")
