@@ -255,18 +255,20 @@ for index in 0...count {
 * Navigate through all of the Work Order records available in the ResourceSet.
 
 ```swift
-var i = 0
-while i == 0 || rs.hasNextPage() {
-	i += 1
-
-	let count = rs.count()
-	for index in 0... count
+let pageSize = rs.configuredPageSize()
+let totalRecordCount = rs.totalCount()
+let pageCount = (totalRecordCount + pageSize - 1) / pageSize
+while pageCount > 0 {
+	let recordCountInPage = rs.count()
+	for index in 0...recordCountInPage
 	{
 		var re : Resource = rs.member(index)
 	}
-	if rs.hasNextPage() {
-		rs.nextPage()
+	if !rs.hasNextPage() {
+		break
 	}
+	pageCount -= 1
+	rs.nextPage()
 }
 ```
 
