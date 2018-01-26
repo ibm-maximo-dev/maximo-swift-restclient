@@ -126,3 +126,155 @@ var mc : MaximoConnector =
 mc.connect()
 ```
 
+#### Querying Work Orders
+
+* Create a ResourceSet which holds the results for an "Approved" Work Order set. The selected records are composed by the WONUM and STATUS properties.
+
+By object structure name:
+  
+```swift
+var rs : ResourceSet = mc.resourceSet("mxwodetail").select(
+   {"wonum", "status"})._where(QueryWhere()._where("status").equalTo("APPR")).fetch()
+```
+
+By RESTful URI :
+  
+```swift
+var rs : ResourceSet = mc.resourceSet("http://127.0.0.1:7001/maximo/oslc/os/mxwodetail").select(
+   {"wonum", "status"})._where(QueryWhere()._where("status").equalTo("APPR")).fetch()
+```
+
+* There is a paging API for available in this framework, that allows forward and backward paging of data by the client.
+  * For the page size = 10: 
+  
+```swift
+var rs : ResourceSet = mc.resourceSet("mxwodetail").select(
+   {"wonum", "status"})._where(QueryWhere()._where("status").equalTo("APPR")).pageSize(10).fetch()
+```
+
+* For the default paging strategy (this framework assumes a default page size is configured on the Resource's Object Structure.
+If no page size is configured, this directive is ignored and all records matching the query filter are returned): 
+
+```swift
+var rs : ResourceSet = mc.resourceSet("mxwodetail").select(
+   {"wonum", "status"})._where(QueryWhere()._where("status").equalTo("APPR")).paging(true).fetch()
+```
+
+* For the stable paging:
+
+```swift
+var rs : ResourceSet = mc.resourceSet("mxwodetail").select(
+   {"wonum", "status"})._where(QueryWhere()._where("status").equalTo("APPR")).stablePaging(true).fetch()
+```
+
+* Move to the next or to the previous page.
+
+```swift 
+rs.nextPage()
+rs.previousPage()
+```
+
+For stable paging, this framework currently supports only forward scrolling, a call to previousPage() would result in an API error.
+
+* Get the ResourceSet in JSON:
+
+```swift
+var jo : [String: Any] = rs.toJSON()
+```
+
+> **Note**: We support JSON output as Data objects. This can be accomplished by the following code snippet,
+
+```swift
+var jodata : Data = rs.toJSONBytes()
+```
+
+* Each Resource object is associated with a unique URI. It is fairly simple to get the specific Work Order record by using it's URI. In the following example, we try to fetch a Work Order (_QkVERk9SRC8xMDAw) directly.
+
+By specific URI:
+  
+```swift
+var woUri : String = "http://host:port/maximo/oslc/os/mxwodetail/_QkVERk9SRC8xMDAw"
+```
+
+Using ResourceSet
+  
+```swift
+var re : Resource = rs.fetchMember(uri: woUri)
+```
+
+Or using a MaximoConnector object
+  
+```swift
+var re : Resource = mc.resource(woUri)
+```
+
+By index (this method searches for a member Resource into the ResourceSet collection. This is an in-memory operation, no round trip to the server is required):
+  
+```swift
+var re : Resource = rs.member(index: 0)
+```
+
+* In order to fetch additional information from the server for this Resource, consider using the load() and reload() methods available on the Resource object.
+
+```swift
+re.reload({"wonum", "status", "assetnum", "location", "wplabor.craft"})
+```
+
+Or simply
+  
+```swift
+re.reload("*")
+```
+
+* Get the Work Order as JSON (Dictionary) or Data objects:
+
+```swift
+var jo : [String: Any] = re.toJSON()
+var joBytes : Data = re.toJSONBytes()
+```
+
+#### Traversing Work Orders 
+In some cases, you may be required to traverse the Work Order hierarchy. In this section, we introduce some helpful methods available in this framework, that can be used for this purpose.
+
+* Get a Work Order set from the Maximo Server.
+
+```swift
+var rs : ResourceSet = mc.resourceSet("mxwodetail").pageSize(10)
+```
+ 
+* Navigate through the Work Order records that are kept in current page.
+
+```swift
+let count = rs.count()
+for index in 0...count {
+	var re : Resource = rs.member(index)
+	// Perform operations with the Resource object.
+}
+```
+
+* Navigate through all of the Work Order records available in the ResourceSet.
+
+```swift
+var i = 0
+while i == 0 || rs.hasNextPage() {
+	i += 1
+
+	let count = rs.count()
+	for index in 0... count
+	{
+		var re : Resource = rs.member(index)
+	}
+	if !rs.hasNextPage() {
+		break
+	}
+	rs.nextPage()
+}
+```
+
+#### Disconnect from Maximo
+
+* End the user session with Maximo after you are done.
+
+```swift
+mc.disconnect()
+```
