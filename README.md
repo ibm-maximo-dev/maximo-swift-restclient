@@ -264,10 +264,9 @@ while i == 0 || rs.hasNextPage() {
 	{
 		var re : Resource = rs.member(index)
 	}
-	if !rs.hasNextPage() {
-		break
+	if rs.hasNextPage() {
+		rs.nextPage()
 	}
-	rs.nextPage()
 }
 ```
 
