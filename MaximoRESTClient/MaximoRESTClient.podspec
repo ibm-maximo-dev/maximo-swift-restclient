@@ -9,6 +9,7 @@ Pod::Spec.new do |spec|
   spec.platform = :ios, "11.2"
   spec.ios.deployment_target = '11.2'
   spec.user_target_xcconfig = { 'FRAMEWORK_SEARCH_PATHS' => '$(PLATFORM_DIR)/Developer/Library/Frameworks' }
+  spec.frameworks = 'XCTest'
   spec.requires_arc = true
   spec.source = { git: "git@github.ibm.com:maximo-ohio/maximo-swift-restclient.git", tag: "#{spec.version}" }
   spec.source_files = "MaximoRESTClient/**/*.{h,swift}"
