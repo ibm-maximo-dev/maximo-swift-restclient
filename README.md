@@ -23,9 +23,8 @@ Currently the only supported data format is JSON and we have 2 flavors of JSON â
 ## Getting Started
 
 1. Open Terminal and navigate to the directory that contains your Xcode project.
-```
-Now at this point, if your project is already configured to use Cocoapods, you can skip the next step.
-```
+
+> **Now at this point, if your project is already configured to use Cocoapods, you can skip the next step.**
 
 2. Next, enter the following command:
 ```
