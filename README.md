@@ -4,13 +4,13 @@ The Maximo REST client library provides a set of driver API's which can be consu
 
 The main components of this client library include:
 
-    [MaximoConnector] - The driver API that establishes the authenticated HTTP session with the Maximo server. It is used by the other API's to create, update, delete and query Maximo data. The authentication and the other basic information can be configured using an [Options] object.
+- [MaximoConnector]: The driver API that establishes the authenticated HTTP session with the Maximo server. It is used by the other API's to create, update, delete and query Maximo data. The authentication and the other basic information can be configured using an [Options] object.
 
-    [ResourceSet] - This API represents a collection of Maximo resources of a given type. The type is determined by the Object Structure definition it refers to. In effect this API is equivalent to the concept of Maximo's MboSet.
+- [ResourceSet]: This API represents a collection of Maximo resources of a given type. The type is determined by the Object Structure definition it refers to. In effect this API is equivalent to the concept of Maximo's MboSet.
 
-    [Resource] - Each member of a ResourceSet is represented by an instance of this class. This is equivalent to to the concept of Mbo in Maximo.
+- [Resource]: Each member of a ResourceSet is represented by an instance of this class. This is equivalent to to the concept of Mbo in Maximo.
 
-    [Attachment] and [AttachmentSet] - These API's represent the attached docs (doclinks) in Maximo. These are always associated with some Resource.
+- [Attachment and AttachmentSet]: These API's represent the attached docs (doclinks) in Maximo. These are always associated with some Resource.
 
 Currently the only supported data format is JSON and we have 2 flavors of JSON – the lean and the namespaced. The lean format is supported starting with the Maximo 7.6 version and is the recommended format to use (as it uses less bandwidth).
 
