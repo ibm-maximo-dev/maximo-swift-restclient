@@ -8,37 +8,37 @@
 
 import Foundation
 
-class SavedQuery {
+public class SavedQuery {
     
     var name : String?
     var map : [String: Any]
 
-    init() {
+    public init() {
         name = String()
         map = [:]
     }
 
-    init(name: String, map: [String: Any]) {
+    public init(name: String, map: [String: Any]) {
         self.name = name
         self.map = map
     }
     
-    func name(name: String) -> SavedQuery{
+    public func name(name: String) -> SavedQuery{
         self.name = name;
         return self;
     }
 
-    func params(params: [String: Any]) -> SavedQuery {
+    public func params(params: [String: Any]) -> SavedQuery {
         self.map = params
         return self
     }
 
-    func addParam(key: String, value: Any) -> SavedQuery {
+    public func addParam(key: String, value: Any) -> SavedQuery {
         map[key] = value
         return self
     }
     
-    func savedQueryClause() -> String {
+    public func savedQueryClause() -> String {
         var strBuilder = String()
         strBuilder.append(self.name!)
 

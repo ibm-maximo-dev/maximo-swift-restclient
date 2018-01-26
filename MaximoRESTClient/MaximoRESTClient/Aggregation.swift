@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Aggregation {
+public class Aggregation {
     
     var mc: MaximoConnector
     var uri: String
@@ -17,23 +17,23 @@ class Aggregation {
     var gbFiltersMap : [String: String] = [:]
     var gbSortByList : [String] = []
     
-    init(mc: MaximoConnector, uri: String) {
+    public init(mc: MaximoConnector, uri: String) {
         self.mc = mc
         self.uri = uri
     }
 
-    func groupByOn(attributes: [String]) -> Aggregation {
+    public func groupByOn(attributes: [String]) -> Aggregation {
         for attribute in attributes {
             self.gbColsList.append(attribute)
         }
         return self
     }
 
-    func count() -> Aggregation {
+    public func count() -> Aggregation {
         return self.count(alias: nil)
     }
     
-    func count(alias: String?) -> Aggregation {
+    public func count(alias: String?) -> Aggregation {
         if alias == nil {
             self.aliasMap["count.*"] = "count.*"
         } else {
@@ -43,39 +43,39 @@ class Aggregation {
         return self
     }
 
-    func avgOn(attribute: String) -> Aggregation {
+    public func avgOn(attribute: String) -> Aggregation {
         return self.avgOn(attribute: attribute, alias: nil)
     }
 
-    func avgOn(attribute: String, alias: String?) -> Aggregation {
+    public func avgOn(attribute: String, alias: String?) -> Aggregation {
         return self.aggregateOn(function: "avg", attribute: attribute, alias: alias)
     }
     
-    func sumOn(attribute: String) -> Aggregation {
+    public func sumOn(attribute: String) -> Aggregation {
         return self.sumOn(attribute: attribute, alias: nil)
     }
     
-    func sumOn(attribute: String, alias: String?) -> Aggregation {
+    public func sumOn(attribute: String, alias: String?) -> Aggregation {
         return self.aggregateOn(function: "sum", attribute: attribute, alias: alias);
     }
 
-    func minOn(attribute: String) -> Aggregation {
+    public func minOn(attribute: String) -> Aggregation {
         return self.avgOn(attribute: attribute, alias: nil)
     }
     
-    func minOn(attribute: String, alias: String?) -> Aggregation {
+    public func minOn(attribute: String, alias: String?) -> Aggregation {
         return self.aggregateOn(function: "min", attribute: attribute, alias: alias)
     }
     
-    func maxOn(attribute: String) -> Aggregation {
+    public func maxOn(attribute: String) -> Aggregation {
         return self.avgOn(attribute: attribute, alias: nil)
     }
     
-    func maxOn(attribute: String, alias: String?) -> Aggregation {
+    public func maxOn(attribute: String, alias: String?) -> Aggregation {
         return self.aggregateOn(function: "max", attribute: attribute, alias: alias)
     }
     
-    func aggregateOn(function: String, attribute: String, alias: String?) -> Aggregation {
+    public func aggregateOn(function: String, attribute: String, alias: String?) -> Aggregation {
         if alias == nil {
             self.aliasMap[function + "." + attribute] = "sum." + attribute
         } else {
@@ -85,7 +85,7 @@ class Aggregation {
         return self
     }
 
-    func having(conditions: [String]) -> Aggregation {
+    public func having(conditions: [String]) -> Aggregation {
         for condition in conditions {
             var cond = condition
             cond = cond.replacingOccurrences(of: ">=", with: "@") // Changing >= to a single character @ to use split method.
@@ -110,14 +110,14 @@ class Aggregation {
         return self
     }
 
-    func sortBy(attributes: [String]) -> Aggregation {
+    public func sortBy(attributes: [String]) -> Aggregation {
         for attribute in attributes {
             self.gbSortByList.append(attribute);
         }
         return self
     }
 
-    func processGroupBy() throws -> [Any] {
+    public func processGroupBy() throws -> [Any] {
         if !self.uri.contains("?") {
             self.uri.append("?")
         }

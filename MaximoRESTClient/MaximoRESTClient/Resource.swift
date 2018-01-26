@@ -87,7 +87,7 @@ public class Resource {
     var mc : MaximoConnector
     var isLoaded : Bool = false
 
-    init(jo : [String: Any]) {
+    public init(jo : [String: Any]) {
         self.jsonObject = jo
         self.mc = MaximoConnector()
         if jo["rdf:about"] != nil {
@@ -119,12 +119,12 @@ public class Resource {
         self.mc = mc
     }
 
-    func uri(href: String) -> Resource {
+    public func uri(href: String) -> Resource {
         self.href = href
         return self
     }
     
-    func maximoConnector(mc: MaximoConnector) -> Resource {
+    public func maximoConnector(mc: MaximoConnector) -> Resource {
         self.mc = mc
         return self
     }
@@ -132,7 +132,7 @@ public class Resource {
     /**
      * Get current URI
      */
-    func getURI() -> String{
+    public func getURI() -> String {
         return self.href
     }
 
@@ -153,7 +153,7 @@ public class Resource {
      *
      * @throws
      */
-    func toJSONBytes() throws -> Data {
+    public func toJSONBytes() throws -> Data {
         if !isLoaded {
             _ = try load()
         }
@@ -166,23 +166,23 @@ public class Resource {
      *
      * @throws
      */
-    func load() throws -> Resource {
+    public func load() throws -> Resource {
         return try self.loadWithAdditionalParamsAndHeaders(params: nil, headers: nil, properties: nil)
     }
     
-    func load(properties: [String]) throws -> Resource {
+    public func load(properties: [String]) throws -> Resource {
         return try self.loadWithAdditionalParamsAndHeaders(params: nil, headers: nil, properties: properties)
     }
     
-    func loadWithAdditionalParams(params: [String: Any]?, properties: [String]?) throws -> Resource {
+    public func loadWithAdditionalParams(params: [String: Any]?, properties: [String]?) throws -> Resource {
         return try self.loadWithAdditionalParamsAndHeaders(params: params, headers: nil, properties: properties)
     }
     
-    func loadWithAdditionalHeaders(headers: [String: Any]?, properties: [String]?) throws -> Resource {
+    public func loadWithAdditionalHeaders(headers: [String: Any]?, properties: [String]?) throws -> Resource {
         return try self.loadWithAdditionalParamsAndHeaders(params: nil, headers: headers, properties: properties)
     }
 
-    func loadWithAdditionalParamsAndHeaders(params: [String: Any]?, headers: [String: Any]?, properties: [String]?) throws -> Resource {
+    public func loadWithAdditionalParamsAndHeaders(params: [String: Any]?, headers: [String: Any]?, properties: [String]?) throws -> Resource {
         if isLoaded {
             // The resource has been loaded, please call reload for refreshing");
             throw OslcError.resourceAlreadyLoaded
@@ -227,13 +227,13 @@ public class Resource {
         return self
     }
     
-    func reload() throws -> Resource {
+    public func reload() throws -> Resource {
         self.isLoaded = false
         _ = try load()
         return self
     }
     
-    func reload(properties: [String]) throws -> Resource {
+    public func reload(properties: [String]) throws -> Resource {
         self.isLoaded = false
         _ = try load(properties: properties)
         return self
@@ -245,12 +245,12 @@ public class Resource {
      *
      * @throws
      */
-    func update(jo: [String: Any], properties: [String]) throws -> Resource
+    public func update(jo: [String: Any], properties: [String]) throws -> Resource
     {
         return try self.update(jo: jo, headers: nil, properties: properties)
     }
 
-    func update(jo: [String: Any], headers: [String: Any]?, properties: [String]?) throws -> Resource
+    public func update(jo: [String: Any], headers: [String: Any]?, properties: [String]?) throws -> Resource
     {
         if self.href.isEmpty {
             throw OslcError.invalidResource
@@ -269,12 +269,12 @@ public class Resource {
         return self
     }
     
-    func merge(jo: [String: Any], properties: [String]) throws -> Resource
+    public func merge(jo: [String: Any], properties: [String]) throws -> Resource
     {
         return try self.merge(jo: jo, headers: nil, properties: properties);
     }
     
-    func merge(jo: [String: Any], headers: [String: Any]?, properties: [String]?) throws -> Resource
+    public func merge(jo: [String: Any], headers: [String: Any]?, properties: [String]?) throws -> Resource
     {
         if self.href.isEmpty {
             throw OslcError.invalidResource
@@ -297,7 +297,7 @@ public class Resource {
      * Load the attachmentset for resource
      * Note: there has to be a relation between them
      */
-    func attachmentSet(doclinkAttrName: inout String?, relName: String?) -> AttachmentSet {
+    public func attachmentSet(doclinkAttrName: inout String?, relName: String?) -> AttachmentSet {
         var str : String = String()
         if doclinkAttrName == nil {
             doclinkAttrName = "doclinks"
@@ -323,7 +323,7 @@ public class Resource {
         return AttachmentSet(href: str, mc: self.mc);
     }
     
-    func attachmentSet() throws -> AttachmentSet {
+    public func attachmentSet() throws -> AttachmentSet {
         var str : String = String()
         if self.jsonObject["doclinks"] != nil {
             var obj : [String: Any] = jsonObject["doclinks"] as! [String : Any]
@@ -341,7 +341,7 @@ public class Resource {
         return AttachmentSet(href: str, mc: self.mc)
     }
     
-    func relatedResource(attrName: String) throws -> Resource?
+    public func relatedResource(attrName: String) throws -> Resource?
     {
         var url : String = String()
         var jo : [String: Any] = [:]
@@ -373,18 +373,18 @@ public class Resource {
      *
      * @throws
      */
-    func invokeAction(actionName: String, jo: [String: Any]) throws -> Resource {
+    public func invokeAction(actionName: String, jo: [String: Any]) throws -> Resource {
         _ = try self.mc.update(uri: self.href + (self.href.contains("?") ? "" : "?") + "&action=" + actionName, jo: jo, properties: nil)
         _ = try self.reload();
         return self;
     }
     
-    func invokeAction(actionName: String, jo: [String: Any], properties: [String]) throws -> Resource {
+    public func invokeAction(actionName: String, jo: [String: Any], properties: [String]) throws -> Resource {
         self.jsonObject = try self.mc.update(uri: self.href + (self.href.contains("?") ? "" : "?") + "&action=" + actionName, jo: jo, properties: properties)
         return self;
     }
     
-    func delete() throws {
+    public func delete() throws {
         try self.mc.delete(uri: self.href);
     }
 
@@ -392,7 +392,7 @@ public class Resource {
      * Support pre-load resource.
      * @param isLoaded
      */
-    func setLoaded(isLoaded: Bool) {
+    public func setLoaded(isLoaded: Bool) {
         self.isLoaded = isLoaded;
     }
 }

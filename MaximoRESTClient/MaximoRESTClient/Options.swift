@@ -51,31 +51,31 @@ public class Options {
         return self
     }
 
-    func maxrest() -> Options
+    public func maxrest() -> Options
     {
         appContext = "maxrest"
         return self
     }
 
-    func appContext(context: String) -> Options
+    public func appContext(context: String) -> Options
     {
         appContext = context
         return self
     }
     
-    func apiContext(apiContext: String) -> Options
+    public func apiContext(apiContext: String) -> Options
     {
         self.apiContext = apiContext
         return self
     }
     
-    func https() -> Options
+    public func https() -> Options
     {
         self.ssl = true
         return self
     }
     
-    func http() -> Options
+    public func http() -> Options
     {
         self.ssl = false
         return self
@@ -93,7 +93,7 @@ public class Options {
         return self
     }
     
-    func mt(mtMode: Bool) -> Options
+    public func mt(mtMode: Bool) -> Options
     {
         self.mt = mtMode
         return self
@@ -111,7 +111,7 @@ public class Options {
         return self
     }
     
-    func AppURI(appURI: String) -> Options
+    public func AppURI(appURI: String) -> Options
     {
         self.appURI = appURI
         return self
@@ -123,53 +123,53 @@ public class Options {
         return self
     }
     
-    func tenantCode(tenantCode: String) -> Options
+    public func tenantCode(tenantCode: String) -> Options
     {
         self.tenantcode = tenantCode
         return self
     }
     
-    func getPassword() -> String?
+    public func getPassword() -> String?
     {
         return self.password
     }
     
-    func getUser() -> String?
+    public func getUser() -> String?
     {
         return self.user
     }
     
-    func isBasicAuth() -> Bool
+    public func isBasicAuth() -> Bool
     {
         return self.authMode == AUTH_BASIC
     }
     
-    func isFormAuth() -> Bool
+    public func isFormAuth() -> Bool
     {
         return self.authMode == AUTH_FORM
     }
     
-    func isMaxAuth() -> Bool
+    public func isMaxAuth() -> Bool
     {
         return self.authMode == AUTH_MAXAUTH
     }
     
-    func isMultiTenancy() -> Bool
+    public func isMultiTenancy() -> Bool
     {
         return self.mt
     }
     
-    func isLean() -> Bool
+    public func isLean() -> Bool
     {
         return self.lean
     }
     
-    func getHost() -> String
+    public func getHost() -> String
     {
         return self.host!
     }
     
-    func getPort() -> Int
+    public func getPort() -> Int
     {
         if self.port == nil {
             self.port = -1
@@ -177,13 +177,13 @@ public class Options {
         return self.port!
     }
     
-    func getTenantCode() -> String
+    public func getTenantCode() -> String
     {
         return self.tenantcode
     }
 
     //Get app URI
-    func getAppURI() -> String
+    public func getAppURI() -> String
     {
         if appURI != nil {
             if mt == true && appURI!.contains("tenantcode") == false {
@@ -233,7 +233,7 @@ public class Options {
     }
 
     //Get public URI
-    func getPublicURI() -> String
+    public func getPublicURI() -> String
     {
         if publicURI != nil {
             return self.publicURI!

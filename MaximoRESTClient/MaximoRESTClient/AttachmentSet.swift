@@ -90,19 +90,19 @@ public class AttachmentSet {
     var mc : MaximoConnector = MaximoConnector()
     var isLoaded : Bool = false
 
-    init() {
+    public init() {
     }
     
-    init(mc: MaximoConnector) {
+    public init(mc: MaximoConnector) {
         self.mc = mc
     }
     
-    init(href: String, mc: MaximoConnector) {
+    public init(href: String, mc: MaximoConnector) {
         self.href = href
         self.mc = mc
     }
 
-    init(jo: [String: Any], mc: MaximoConnector) {
+    public init(jo: [String: Any], mc: MaximoConnector) {
         self.jo = jo
         if self.jo["rdfs:member"] != nil {
             self.ja = self.jo["rdfs:member"] as! [Any]
@@ -291,7 +291,7 @@ public class AttachmentSet {
         return try reload()
     }
 
-    func thisPageSize() throws -> Int
+    public func thisPageSize() throws -> Int
     {
         if !isLoaded {
             _ = try load()
