@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1786C985F061F17A78C29884 /* Pods_MaximoRESTClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625F7B7A8611405B2AABEC4A /* Pods_MaximoRESTClient.framework */; };
 		9A56B5AD20079D94008BE1CC /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A56B5AC20079D94008BE1CC /* Options.swift */; };
 		9A56B5AF2007B890008BE1CC /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A56B5AE2007B890008BE1CC /* Attachment.swift */; };
 		9A56B5B12007B972008BE1CC /* MaximoConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A56B5B02007B972008BE1CC /* MaximoConnector.swift */; };
@@ -41,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		625F7B7A8611405B2AABEC4A /* Pods_MaximoRESTClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaximoRESTClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		820871AEF55E4CA859CA6768 /* Pods-MaximoRESTClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaximoRESTClient.release.xcconfig"; path = "Pods/Target Support Files/Pods-MaximoRESTClient/Pods-MaximoRESTClient.release.xcconfig"; sourceTree = "<group>"; };
 		9A56B5AC20079D94008BE1CC /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		9A56B5AE2007B890008BE1CC /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
 		9A56B5B02007B972008BE1CC /* MaximoConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaximoConnector.swift; sourceTree = "<group>"; };
@@ -63,6 +66,7 @@
 		9AFFFB1D2006A7C600583663 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9AFFFB292006AB2A00583663 /* Curry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Curry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AFFFB2D2006ABF600583663 /* Quick.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Quick.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F97B335B60547B3299D12FC6 /* Pods-MaximoRESTClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaximoRESTClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MaximoRESTClient/Pods-MaximoRESTClient.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,7 @@
 				9A63DF332006BBC700BC9855 /* Nimble.framework in Frameworks */,
 				9AFFFB2B2006ABF600583663 /* Quick.framework in Frameworks */,
 				9AFFFB282006AB2A00583663 /* Curry.framework in Frameworks */,
+				1786C985F061F17A78C29884 /* Pods_MaximoRESTClient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,6 +101,7 @@
 				9AFFFB1A2006A7C600583663 /* MaximoRESTClientTests */,
 				9AFFFB0E2006A7C600583663 /* Products */,
 				9AFFFB272006AB2A00583663 /* Frameworks */,
+				D766CC8F4FAD9AA910735384 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -145,8 +151,18 @@
 				9A63DF342006BBC700BC9855 /* Nimble.framework */,
 				9AFFFB2D2006ABF600583663 /* Quick.framework */,
 				9AFFFB292006AB2A00583663 /* Curry.framework */,
+				625F7B7A8611405B2AABEC4A /* Pods_MaximoRESTClient.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D766CC8F4FAD9AA910735384 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F97B335B60547B3299D12FC6 /* Pods-MaximoRESTClient.debug.xcconfig */,
+				820871AEF55E4CA859CA6768 /* Pods-MaximoRESTClient.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,10 +183,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9AFFFB212006A7C600583663 /* Build configuration list for PBXNativeTarget "MaximoRESTClient" */;
 			buildPhases = (
+				9673463FBB07B3DE1564659D /* [CP] Check Pods Manifest.lock */,
 				9AFFFB082006A7C600583663 /* Sources */,
 				9AFFFB092006A7C600583663 /* Frameworks */,
 				9AFFFB0A2006A7C600583663 /* Headers */,
 				9AFFFB0B2006A7C600583663 /* Resources */,
+				000FB0B3C3FA67F90FA88481 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -254,6 +272,42 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		000FB0B3C3FA67F90FA88481 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MaximoRESTClient/Pods-MaximoRESTClient-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9673463FBB07B3DE1564659D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MaximoRESTClient-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9AFFFB082006A7C600583663 /* Sources */ = {
@@ -410,6 +464,7 @@
 		};
 		9AFFFB222006A7C600583663 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F97B335B60547B3299D12FC6 /* Pods-MaximoRESTClient.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -434,6 +489,7 @@
 		};
 		9AFFFB232006A7C600583663 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 820871AEF55E4CA859CA6768 /* Pods-MaximoRESTClient.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";

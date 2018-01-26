@@ -13,4 +13,10 @@
    <FileRef
       location = "container:MaximoRESTClient.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:MaximoRESTClient.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
 </Workspace>
