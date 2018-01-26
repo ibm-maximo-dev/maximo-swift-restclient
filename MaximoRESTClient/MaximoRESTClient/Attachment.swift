@@ -94,20 +94,20 @@ public class Attachment {
     var isMetaLoaded: Bool = false
     var jo: [String: Any]
 
-    init() {
+    public init() {
         jo = [:]
         self.uri = String()
         self.mc = MaximoConnector()
     }
     
-    init (uri: String, mc: MaximoConnector) {
+    public init (uri: String, mc: MaximoConnector) {
         self.uri = uri
         self.mc = mc
         isUploaded = true
         jo = [:]
     }
 
-    init (jo: [String: Any], mc: MaximoConnector) {
+    public init (jo: [String: Any], mc: MaximoConnector) {
         self.jo = jo
         self.mc = mc
 
@@ -133,22 +133,22 @@ public class Attachment {
      * var att = Attachment().maximoConnector(mc: params)
      * @param mc
      */
-    func maximoConnector(mc: MaximoConnector) -> Attachment {
+    public func maximoConnector(mc: MaximoConnector) -> Attachment {
         self.mc = mc;
         return self;
     }
     
-    func name(name: String) -> Attachment {
+    public func name(name: String) -> Attachment {
         self.name = name;
         return self;
     }
     
-    func description(description: String) -> Attachment {
+    public func description(description: String) -> Attachment {
         self.description = description;
         return self;
     }
     
-    func meta(type: String?, storeas: String) -> Attachment {
+    public func meta(type: String?, storeas: String) -> Attachment {
         var headerValue: String;
         if type != nil {
             headerValue = type! + "/" + storeas;
@@ -159,29 +159,29 @@ public class Attachment {
         return self;
     }
 
-    func wwwURI(uri: String) ->Attachment {
+    public func wwwURI(uri: String) ->Attachment {
         self.uri = uri;
         return self;
     }
     
-    func data(data: Data) -> Attachment {
+    public func data(data: Data) -> Attachment {
         self.data = data;
         return self;
     }
     
-    func getName() -> String {
+    public func getName() -> String {
         return self.name!;
     }
     
-    func getDescription() -> String {
+    public func getDescription() -> String {
         return self.description!;
     }
     
-    func getMeta() -> String{
+    public func getMeta() -> String{
         return self.meta!;
     }
 
-    func toDoc() throws -> Data {
+    public func toDoc() throws -> Data {
         if !isUploaded {
             return self.data!;
         }
@@ -194,7 +194,7 @@ public class Attachment {
     /**
      * Get current URI
      */
-    func getURI() -> String {
+    public func getURI() -> String {
         return self.uri;
     }
 
@@ -203,7 +203,7 @@ public class Attachment {
      *
      * @throws
      */
-    func toDocMeta() throws -> [String: Any] {
+    public func toDocMeta() throws -> [String: Any] {
         if !isMetaLoaded {
             try loadMeta();
         }
@@ -215,7 +215,7 @@ public class Attachment {
      *
      * @throws
      */
-    func toDocMetaBytes() throws -> Data {
+    public func toDocMetaBytes() throws -> Data {
         if !isMetaLoaded {
             try loadMeta()
         }
@@ -227,7 +227,7 @@ public class Attachment {
      * load attachment data
      * @throws
      */
-    func load() throws {
+    public func load() throws {
         try self.load(headers: nil)
     }
     
@@ -236,7 +236,7 @@ public class Attachment {
      * @param headers
      * @throws OslcError.attachmentAlreadyLoaded
      */
-    func load(headers: [String: Any]?) throws {
+    public func load(headers: [String: Any]?) throws {
         if isLoaded {
             // The attachment has been loaded, please call reload for refreshing
             throw OslcError.attachmentAlreadyLoaded
@@ -249,7 +249,7 @@ public class Attachment {
         isLoaded = true;
     }
     
-    func reload() throws -> Attachment {
+    public func reload() throws -> Attachment {
         isLoaded = false;
         try load();
         return self;
@@ -260,11 +260,11 @@ public class Attachment {
      *
      * @throws OslcError.attachmentAlreadyLoaded
      */
-    func loadMeta() throws {
+    public func loadMeta() throws {
         try self.loadMeta(headers: nil);
     }
 
-    func loadMeta(headers: [String: Any]?) throws {
+    public func loadMeta(headers: [String: Any]?) throws {
         if isMetaLoaded {
             // The attachment has been loaded, please call reloadMeta for refreshing
             throw OslcError.attachmentAlreadyLoaded
@@ -305,13 +305,13 @@ public class Attachment {
         isMetaLoaded = true;
     }
 
-    func reloadMeta() throws -> Attachment {
+    public func reloadMeta() throws -> Attachment {
         isMetaLoaded = false;
         try loadMeta();
         return self;
     }
     
-    func fetchDocMeta() throws -> [String: Any] {
+    public func fetchDocMeta() throws -> [String: Any] {
         isMetaLoaded = false;
         try loadMeta();
         return self.jo;
@@ -321,7 +321,7 @@ public class Attachment {
      * Delete the attachment
      * @throws
      */
-    func delete() throws {
+    public func delete() throws {
         try self.mc.delete(uri: self.uri);
     }
 }

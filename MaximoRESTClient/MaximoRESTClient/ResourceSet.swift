@@ -149,15 +149,15 @@ public class ResourceSet {
     /**
      * Get current URI
      */
-    func getAppURI() -> String? {
+    public func getAppURI() -> String? {
         return self.appURI
     }
     
-    func getPublicURI() -> String? {
+    public func getPublicURI() -> String? {
         return self.publicURI
     }
     
-    func getOsURI() -> String? {
+    public func getOsURI() -> String? {
         return self.osURI
     }
 
@@ -166,7 +166,7 @@ public class ResourceSet {
      *
      * @throws
      */
-    func toJSON() -> [String: Any]? {
+    public func toJSON() -> [String: Any]? {
         return self.jsonObject
     }
 
@@ -175,7 +175,7 @@ public class ResourceSet {
      *
      * @throws
      */
-    func toJSONBytes() throws -> Data {
+    public func toJSONBytes() throws -> Data {
         let data = try JSONEncoder().encode(self.jsonObject)
         return data
     }
@@ -191,7 +191,7 @@ public class ResourceSet {
         return self
     }
     
-    func searchAttributes(attributes: [String]) -> ResourceSet {
+    public func searchAttributes(attributes: [String]) -> ResourceSet {
         self.searchAttributes = String()
         for attribute in attributes {
             self.searchAttributes?.append("" + attribute + ",")
@@ -199,7 +199,7 @@ public class ResourceSet {
         return self
     }
 
-    func hasTerms(terms: [String]) -> ResourceSet {
+    public func hasTerms(terms: [String]) -> ResourceSet {
         self.searchTerms = String()
         for term in terms {
             self.searchTerms?.append("\"" + term + "\",")
@@ -208,7 +208,7 @@ public class ResourceSet {
     }
     
     // Set selectClause
-    func select(selectClause: [String]) -> ResourceSet {
+    public func select(selectClause: [String]) -> ResourceSet {
         self.selectClause = QuerySelect().select(selectClause: selectClause)
         return self
     }
@@ -224,12 +224,12 @@ public class ResourceSet {
         return self
     }
 
-    func stablePaging(type: Bool) -> ResourceSet {
+    public func stablePaging(type: Bool) -> ResourceSet {
         self.stablePaging = type
         return self
     }
     
-    func orderBy(orderByProperties: [String]) -> ResourceSet {
+    public func orderBy(orderByProperties: [String]) -> ResourceSet {
         for property in orderByProperties {
             self.orderBy.append(property)
         }
@@ -252,7 +252,7 @@ public class ResourceSet {
      * @param additionalParams
      * @throws
      */
-    func fetchWithAddtionalParams(additionalParams: [String: Any]) throws -> ResourceSet {
+    public func fetchWithAddtionalParams(additionalParams: [String: Any]) throws -> ResourceSet {
         return try self.fetchWithAddtionalHeadersAndParams(additionalParams: additionalParams, additionalHeaders: nil);
     }
     
@@ -262,7 +262,7 @@ public class ResourceSet {
      * @param additionalHeaders
      * @throws
      */
-    func fetchWithAddtionalHeaders(additionalHeaders: [String: Any]) throws -> ResourceSet {
+    public func fetchWithAddtionalHeaders(additionalHeaders: [String: Any]) throws -> ResourceSet {
         return try self.fetchWithAddtionalHeadersAndParams(additionalParams: nil, additionalHeaders: additionalHeaders);
     }
     
@@ -273,7 +273,7 @@ public class ResourceSet {
      * @param additionalHeaders
      * @throws
      */
-    func fetchWithAddtionalHeadersAndParams(additionalParams: [String: Any]?, additionalHeaders: [String: Any]?) throws -> ResourceSet {
+    public func fetchWithAddtionalHeadersAndParams(additionalParams: [String: Any]?, additionalHeaders: [String: Any]?) throws -> ResourceSet {
         _ = try self.buildURI()
         var strb = String()
         strb.append(self.appURI!)
@@ -293,7 +293,7 @@ public class ResourceSet {
         self.appURI = strb
         if additionalHeaders != nil && !additionalHeaders!.isEmpty {
             self.jsonObject = try self.mc?.get(uri: self.appURI!, headers: additionalHeaders)
-        }else{
+        } else {
             self.jsonObject = try self.mc?.get(uri: self.appURI!);
         }
         if self.jsonObject!["rdfs:member"] != nil {
@@ -305,7 +305,7 @@ public class ResourceSet {
         return self;
     }
 
-    func fetch(options: [String: Any]?) throws -> ResourceSet {
+    public func fetch(options: [String: Any]?) throws -> ResourceSet {
         _ = try self.buildURI();
         self.jsonObject = try self.mc?.get(uri: self.appURI!)
         if self.jsonObject!["rdfs:member"] != nil {
@@ -321,7 +321,7 @@ public class ResourceSet {
      * Go to nextPage
      * @throws
      */
-    func nextPage() throws -> ResourceSet {
+    public func nextPage() throws -> ResourceSet {
         if self.hasNextPage()
         {
             if self.jsonObject!["responseInfo"] != nil
@@ -360,7 +360,7 @@ public class ResourceSet {
         return self;
     }
 
-    func hasNextPage() -> Bool {
+    public func hasNextPage() -> Bool {
         if self.jsonObject!["responseInfo"] != nil
         {
             var responseInfoObj : [String: Any] = self.jsonObject!["responseInfo"] as! [String : Any]
@@ -378,7 +378,7 @@ public class ResourceSet {
      * Go back to previous page
      * @throws
      */
-    func previousPage() throws -> ResourceSet {
+    public func previousPage() throws -> ResourceSet {
         if self.jsonObject!["responseInfo"] != nil
         {
             var responseInfoObj : [String: Any] = self.jsonObject!["responseInfo"] as! [String : Any]
@@ -427,7 +427,7 @@ public class ResourceSet {
      * Load the current data
      * @throws
      */
-    func load() throws -> ResourceSet {
+    public func load() throws -> ResourceSet {
         if (isLoaded) {
             return self
         }
@@ -441,7 +441,7 @@ public class ResourceSet {
         return self
     }
 
-    func reload() throws -> ResourceSet {
+    public func reload() throws -> ResourceSet {
         isLoaded = false
         _ = try load()
         return self
@@ -450,12 +450,12 @@ public class ResourceSet {
     /**
      * Obtains a Saved Query.
      */
-    func savedQuery(name: String, paramValues: [String: Any]) -> ResourceSet {
+    public func savedQuery(name: String, paramValues: [String: Any]) -> ResourceSet {
         self.savedQuery = SavedQuery(name: name, map: paramValues).savedQueryClause()
         return self
     }
 
-    func savedQuery(qsaved: SavedQuery) -> ResourceSet {
+    public func savedQuery(qsaved: SavedQuery) -> ResourceSet {
         self.savedQuery = qsaved.savedQueryClause()
         return self
     }
@@ -524,7 +524,7 @@ public class ResourceSet {
         return self
     }
 
-    func fetchMember(uri: String, properties: [String]?) throws -> Resource {
+    public func fetchMember(uri: String, properties: [String]?) throws -> Resource {
         var strb : String = String(uri)
         if properties != nil && properties!.count > 0 {
             strb.append(uri.contains("?") ? "" : "?")
@@ -569,7 +569,7 @@ public class ResourceSet {
      *
      * @throws
      */
-    func create(jo: [String: Any], properties: [String]) throws -> Resource {
+    public func create(jo: [String: Any], properties: [String]) throws -> Resource {
         if self.osURI == nil {
             _ = try self.buildURI()
         }
@@ -580,7 +580,7 @@ public class ResourceSet {
         // use the maximo connector to connect to oslc server and then load data from it
     }
     
-    func create(jo: [String: Any], headers: [String: Any], properties: [String]) throws -> Resource {
+    public func create(jo: [String: Any], headers: [String: Any], properties: [String]) throws -> Resource {
         if self.osURI == nil {
             _ = try self.buildURI()
         }
@@ -591,7 +591,7 @@ public class ResourceSet {
         // use the maximo connector to connect to oslc server and then load data from it
     }
 
-    func sync(jo: [String: Any], properties: [String]) throws -> Resource {
+    public func sync(jo: [String: Any], properties: [String]) throws -> Resource {
         if self.osURI == nil {
             _ = try self.buildURI()
         }
@@ -602,7 +602,7 @@ public class ResourceSet {
         // use the maximo connector to connect to oslc server and then load data from it
     }
 
-    func sync(jo: [String: Any], headers: [String: Any], properties: [String]) throws -> Resource {
+    public func sync(jo: [String: Any], headers: [String: Any], properties: [String]) throws -> Resource {
         if self.osURI == nil {
             _ = try self.buildURI()
         }
@@ -613,7 +613,7 @@ public class ResourceSet {
         // use the maximo connector to connect to oslc server and then load data from it
     }
     
-    func mergeSync(jo: [String: Any], properties: [String]) throws -> Resource {
+    public func mergeSync(jo: [String: Any], properties: [String]) throws -> Resource {
         if self.osURI == nil {
             _ = try self.buildURI()
         }
@@ -624,7 +624,7 @@ public class ResourceSet {
         // use the maximo connector to connect to oslc server and then load data from it
     }
 
-    func mergeSync(jo: [String: Any], headers: [String: Any], properties: [String]) throws -> Resource {
+    public func mergeSync(jo: [String: Any], headers: [String: Any], properties: [String]) throws -> Resource {
         if self.osURI == nil {
             _ = try self.buildURI()
         }
@@ -635,7 +635,7 @@ public class ResourceSet {
         // use the maximo connector to connect to oslc server and then load data from it
     }
     
-    func configuredPageSize() -> Int {
+    public func configuredPageSize() -> Int {
         return self.pageSize
     }
 
@@ -644,7 +644,7 @@ public class ResourceSet {
      *
      * @throws
      */
-    func totalCount() throws -> Int {
+    public func totalCount() throws -> Int {
         if !isLoaded {
             _ = try load()
         }
@@ -676,7 +676,7 @@ public class ResourceSet {
      *
      * @throws
      */
-    func totalCount(fromServer: Bool) throws -> Int {
+    public func totalCount(fromServer: Bool) throws -> Int {
         if !fromServer {
             return try self.totalCount()
         }
@@ -707,7 +707,7 @@ public class ResourceSet {
      * Get current number of Resource by calling RESTful API
      * @throws
      */
-    func count() throws -> Int {
+    public func count() throws -> Int {
         if !isLoaded {
             _ = try load()
         }
@@ -722,11 +722,11 @@ public class ResourceSet {
         return size
     }
 
-    func bulk() -> BulkProcessor {
+    public func bulk() -> BulkProcessor {
         return BulkProcessor(mc: self.mc!, uri: self.osURI!)
     }
 
-    func groupBy() throws -> Aggregation {
+    public func groupBy() throws -> Aggregation {
         return Aggregation(mc: self.mc!, uri: try self.buildURI().appURI!)
     }
 }

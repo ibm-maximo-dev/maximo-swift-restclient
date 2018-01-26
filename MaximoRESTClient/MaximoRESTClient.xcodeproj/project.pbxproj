@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1786C985F061F17A78C29884 /* Pods_MaximoRESTClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625F7B7A8611405B2AABEC4A /* Pods_MaximoRESTClient.framework */; };
+		2CC110447254AB383CFA8708 /* Pods_MaximoRESTClientTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 174CD41B61F3AAB95570D563 /* Pods_MaximoRESTClientTests.framework */; };
 		9A56B5AD20079D94008BE1CC /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A56B5AC20079D94008BE1CC /* Options.swift */; };
 		9A56B5AF2007B890008BE1CC /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A56B5AE2007B890008BE1CC /* Attachment.swift */; };
 		9A56B5B12007B972008BE1CC /* MaximoConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A56B5B02007B972008BE1CC /* MaximoConnector.swift */; };
@@ -42,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		174CD41B61F3AAB95570D563 /* Pods_MaximoRESTClientTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaximoRESTClientTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		537830299CD6255528B3CF06 /* Pods-MaximoRESTClientTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaximoRESTClientTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MaximoRESTClientTests/Pods-MaximoRESTClientTests.debug.xcconfig"; sourceTree = "<group>"; };
 		625F7B7A8611405B2AABEC4A /* Pods_MaximoRESTClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaximoRESTClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		820871AEF55E4CA859CA6768 /* Pods-MaximoRESTClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaximoRESTClient.release.xcconfig"; path = "Pods/Target Support Files/Pods-MaximoRESTClient/Pods-MaximoRESTClient.release.xcconfig"; sourceTree = "<group>"; };
 		9A56B5AC20079D94008BE1CC /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
@@ -66,6 +69,7 @@
 		9AFFFB1D2006A7C600583663 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9AFFFB292006AB2A00583663 /* Curry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Curry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AFFFB2D2006ABF600583663 /* Quick.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Quick.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9BC343DDA8264944BAEFF2D /* Pods-MaximoRESTClientTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaximoRESTClientTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MaximoRESTClientTests/Pods-MaximoRESTClientTests.release.xcconfig"; sourceTree = "<group>"; };
 		F97B335B60547B3299D12FC6 /* Pods-MaximoRESTClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaximoRESTClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MaximoRESTClient/Pods-MaximoRESTClient.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,6 +92,7 @@
 				9A63DF352006BC4900BC9855 /* Quick.framework in Frameworks */,
 				9AFFFB172006A7C600583663 /* MaximoRESTClient.framework in Frameworks */,
 				9A63DF362006BC4D00BC9855 /* Curry.framework in Frameworks */,
+				2CC110447254AB383CFA8708 /* Pods_MaximoRESTClientTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,6 +157,7 @@
 				9AFFFB2D2006ABF600583663 /* Quick.framework */,
 				9AFFFB292006AB2A00583663 /* Curry.framework */,
 				625F7B7A8611405B2AABEC4A /* Pods_MaximoRESTClient.framework */,
+				174CD41B61F3AAB95570D563 /* Pods_MaximoRESTClientTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -161,6 +167,8 @@
 			children = (
 				F97B335B60547B3299D12FC6 /* Pods-MaximoRESTClient.debug.xcconfig */,
 				820871AEF55E4CA859CA6768 /* Pods-MaximoRESTClient.release.xcconfig */,
+				537830299CD6255528B3CF06 /* Pods-MaximoRESTClientTests.debug.xcconfig */,
+				D9BC343DDA8264944BAEFF2D /* Pods-MaximoRESTClientTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -203,9 +211,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9AFFFB242006A7C600583663 /* Build configuration list for PBXNativeTarget "MaximoRESTClientTests" */;
 			buildPhases = (
+				50C9ACDC313DC047EA996030 /* [CP] Check Pods Manifest.lock */,
 				9AFFFB122006A7C600583663 /* Sources */,
 				9AFFFB132006A7C600583663 /* Frameworks */,
 				9AFFFB142006A7C600583663 /* Resources */,
+				F1FA4C21C75FA7A46D624257 /* [CP] Embed Pods Frameworks */,
+				5D293127BAEB364E5D659587 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -289,6 +300,39 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MaximoRESTClient/Pods-MaximoRESTClient-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		50C9ACDC313DC047EA996030 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MaximoRESTClientTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5D293127BAEB364E5D659587 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MaximoRESTClientTests/Pods-MaximoRESTClientTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		9673463FBB07B3DE1564659D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -305,6 +349,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F1FA4C21C75FA7A46D624257 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-MaximoRESTClientTests/Pods-MaximoRESTClientTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Curry/Curry.framework",
+				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
+				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Curry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MaximoRESTClientTests/Pods-MaximoRESTClientTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -513,6 +579,7 @@
 		};
 		9AFFFB252006A7C600583663 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 537830299CD6255528B3CF06 /* Pods-MaximoRESTClientTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -527,6 +594,7 @@
 		};
 		9AFFFB262006A7C600583663 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D9BC343DDA8264944BAEFF2D /* Pods-MaximoRESTClientTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

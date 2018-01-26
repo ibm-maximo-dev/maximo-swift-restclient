@@ -14,13 +14,13 @@ public class QueryWhere {
     var map : [String: Any] = [:]
     var currentKey : String = String()
     
-    func _where (name: String) -> QueryWhere
+    public func _where (name: String) -> QueryWhere
     {
         currentKey = name
         return self
     }
     
-    func and(name: String) -> QueryWhere
+    public func and(name: String) -> QueryWhere
     {
         if name.contains(".")
         {
@@ -37,7 +37,7 @@ public class QueryWhere {
         return self
     }
     
-    func getCurrentMap() -> [String: Any]
+    public func getCurrentMap() -> [String: Any]
     {
         if currentKey.contains(".")
         {
@@ -48,7 +48,7 @@ public class QueryWhere {
         return map
     }
     
-    func getCurrentKey() -> String
+    public func getCurrentKey() -> String
     {
         if currentKey.contains(".")
         {
@@ -58,7 +58,7 @@ public class QueryWhere {
         return currentKey
     }
     
-    func setQueryToken(s: String)
+    public func setQueryToken(s: String)
     {
         var currMap = self.getCurrentMap()
         var currKey = self.getCurrentKey()
@@ -69,63 +69,63 @@ public class QueryWhere {
         currMap[currKey] = s
     }
 
-    func equalTo(value: Any) -> QueryWhere
+    public func equalTo(value: Any) -> QueryWhere
     {
         let s = Util.stringValue(value: value)
         self.setQueryToken(s: "=" + s)
         return self
     }
     
-    func startsWith(value: String) -> QueryWhere
+    public func startsWith(value: String) -> QueryWhere
     {
         let  s = Util.stringValue(value: value + "%")
         self.setQueryToken(s: "=" + s)
         return self
     }
     
-    func endsWith(value: String) -> QueryWhere
+    public func endsWith(value: String) -> QueryWhere
     {
         let s = Util.stringValue(value: "%" + value)
         self.setQueryToken(s: "=" + s)
         return self
     }
 
-    func like(value: String) -> QueryWhere
+    public func like(value: String) -> QueryWhere
     {
         let s = Util.stringValue(value: "%" + value + "%")
         self.setQueryToken(s: "=" + s)
         return self
     }
     
-    func gt(value: Any) -> QueryWhere
+    public func gt(value: Any) -> QueryWhere
     {
         let s = Util.stringValue(value: value)
         self.setQueryToken(s: ">" + s)
         return self
     }
     
-    func gte(value: Any) -> QueryWhere
+    public func gte(value: Any) -> QueryWhere
     {
         let s = Util.stringValue(value: value)
         self.setQueryToken(s: ">=" + s)
         return self
     }
     
-    func lt(value: Any) -> QueryWhere
+    public func lt(value: Any) -> QueryWhere
     {
         let s = Util.stringValue(value: value)
         self.setQueryToken(s: "<" + s)
         return self
     }
     
-    func lte(value: Any) -> QueryWhere
+    public func lte(value: Any) -> QueryWhere
     {
         let s = Util.stringValue(value: value)
         self.setQueryToken(s: "<=" + s)
         return self
     }
 
-    func _in(values: [Any]) -> QueryWhere
+    public func _in(values: [Any]) -> QueryWhere
     {
         var strb = String()
         for obj in values
@@ -140,7 +140,7 @@ public class QueryWhere {
         return self
     }
     
-    func whereClause() -> String
+    public func whereClause() -> String
     {
         var cnt : Int = 0
         for (key, value) in map

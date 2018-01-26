@@ -8,11 +8,11 @@
 
 import Foundation
 
-class QuerySelect {
+public class QuerySelect {
     //a.b.*,a.c,x.y.z,x.f.g,x.y.e == a{b{*},c},x{y{z,e},f{g}}
     var map : [String: Any] = [:]
 
-    func select(selectClause: [String]) -> String
+    public func select(selectClause: [String]) -> String
     {
         var strb = String();
         for s in selectClause {

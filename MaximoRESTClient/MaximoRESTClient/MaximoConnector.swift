@@ -92,7 +92,7 @@ public class MaximoConnector {
     
     var httpMethod : String = "GET";// by default it is get
     
-    init() {
+    public init() {
         self.options = Options()
     }
 
@@ -1258,7 +1258,7 @@ public class MaximoConnector {
     /**
      * Get the last response code
      */
-    func getLastResponseCode() -> Int {
+    public func getLastResponseCode() -> Int {
         return lastResponseCode
     }
 

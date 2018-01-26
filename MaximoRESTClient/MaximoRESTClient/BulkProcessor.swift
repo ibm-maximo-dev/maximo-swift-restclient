@@ -8,36 +8,36 @@
 
 import Foundation
 
-class BulkProcessor {
+public class BulkProcessor {
   
     var bulkArray : [Any] = []
     var mc: MaximoConnector
     var uri: String
     
-    init(mc: MaximoConnector, uri: String) {
+    public init(mc: MaximoConnector, uri: String) {
         self.mc = mc
         self.uri = uri
     }
 
-    func create(jo: [String: Any]) -> BulkProcessor {
+    public func create(jo: [String: Any]) -> BulkProcessor {
         let obj : [String: Any] = ["_data": jo]
         bulkArray.append(obj)
         return self
     }
 
-    func update(jo: [String: Any], uri: String, properties: [String]) -> BulkProcessor {
+    public func update(jo: [String: Any], uri: String, properties: [String]) -> BulkProcessor {
         var objb : [String: Any] = ["_data": jo]
         self.addMeta(objb: &objb, method: "PATCH", uri: uri, properties: properties)
         return self
     }
     
-    func merge(jo: [String: Any], uri: String, properties: [String]) -> BulkProcessor {
+    public func merge(jo: [String: Any], uri: String, properties: [String]) -> BulkProcessor {
         var objb : [String: Any] = ["_data": jo]
         self.addMeta(objb: &objb, method: "MERGE", uri: uri, properties: properties)
         return self
     }
 
-    func delete(uri: String) -> BulkProcessor {
+    public func delete(uri: String) -> BulkProcessor {
         var objb : [String: Any] = [:]
         self.addMeta(objb: &objb, method: "DELETE", uri: uri, properties: nil)
         return self
@@ -61,7 +61,7 @@ class BulkProcessor {
         self.bulkArray.append(objb)
     }
     
-    func processBulk() throws -> [Any] {
+    public func processBulk() throws -> [Any] {
         return try self.mc.bulk(uri: self.uri, ja: self.bulkArray)
     }
     
