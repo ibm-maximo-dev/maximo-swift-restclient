@@ -1,8 +1,8 @@
-# MaximoRESTClient
+# MaximoRESTSDK
 
-The Maximo REST client framework provides a set of driver API's which can be consumed by an iOS based application that would like to interface with a Maximo instance. The client API's use the Maximo NextGen REST/JSON API's which were originally inspired by Linked Data principles. Using this API you would be able to create, update, delete and query Maximo business objects (Using Maximo Integration Framework Object Structures).
+The Maximo REST SDK framework provides a set of driver API's which can be consumed by an iOS based application that would like to interface with a Maximo instance. The SDK API's use the Maximo NextGen REST/JSON API's which were originally inspired by Linked Data principles. Using this API you would be able to create, update, delete and query Maximo business objects (Using Maximo Integration Framework Object Structures).
 
-The main components of this client framework include:
+The main components of this SDK framework include:
 
 - [MaximoConnector]: The driver API that establishes the authenticated HTTP session with the Maximo server. It is used by the other API's to create, update, delete and query Maximo data. The authentication and the other basic information can be configured using an [Options] object.
 
@@ -83,7 +83,7 @@ end
 ```
 4. Add the following line to your Podfile, right after use_frameworks!:
 ```
-pod 'MaximoRESTClient', '1.0.0'
+pod 'MaximoRESTSDK', '1.0.0'
 ```
 
 5. You now need to tell CocoaPods to install the dependencies for your project.
@@ -98,13 +98,13 @@ Now just open the .xcworkspace file with Xcode and you are all set!
 ## Usage
 
 Maximo Resources (Object Structures) represent a graph of related Maximo objects (Mbo's) that provides an atomic view/object to create/update/delete/query the releated set of Mbos. 
-We will use Work Order, Purchase Order and Companies Resource as examples to show you how to use the Maximo Rest Client.
+We will use Work Order, Purchase Order and Companies Resource as examples to show you how to use the Maximo Rest SDK.
 
->**Note**: The use cases can be found at MaximoRESTClientTests.swift
+>**Note**: The use cases can be found at MaximoRESTSDKTests.swift
 
 ### Query a Work Order for Work Order Set (MXWODETAIL)
 
-The following instructions shows how to query a work order from Maximo by using Maximo REST Client framework.
+The following instructions shows how to query a work order from Maximo by using Maximo REST SDK framework.
 
 #### Connect to Maximo
 
