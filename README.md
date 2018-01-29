@@ -22,7 +22,26 @@ Currently the only supported data format is JSON and we have 2 flavors of JSON â
 
 ## Getting Started
 
-1. Open Terminal and navigate to the directory that contains your Xcode project.
+### Cocoapods Installation
+
+1. Open Terminal and enter the following command:
+```
+sudo gem install cocoapods
+```
+
+### Add SSH Key to your GitHub Account
+
+1. Generate RSA key for your GitHub user account:
+```
+ssh-keygen -t rsa -b 4096 -C git@github.ibm.com
+```
+
+2. Paste the contents of the <i>id_rsa.pub</i> file as mentioned here: https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/
+
+
+### Project Setup
+
+1. In a Terminal session, navigate to the directory that contains your Xcode project.
 
 > **Note**: If your project is already configured to use Cocoapods, you can skip the next step.
 
