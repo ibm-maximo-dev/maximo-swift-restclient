@@ -14,7 +14,7 @@ The main components of this SDK framework include:
 
 Currently the only supported data format is JSON and we have 2 flavors of JSON – the lean and the namespaced. The lean format is supported starting with the Maximo 7.6 version and is the recommended format to use (as it uses less bandwidth).
 
-## Pre-requisites
+## Prerequisites
 
 - Xcode
 - Cocoapods
