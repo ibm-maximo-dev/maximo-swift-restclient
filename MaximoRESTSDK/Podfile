@@ -1,0 +1,14 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '11.2'
+
+target 'MaximoRESTSDK' do
+  use_frameworks!
+  pod 'Curry', '~> 4.0.0'
+  pod 'Quick', '1.2.0'
+  pod 'Nimble', '7.0.3'
+
+  target 'MaximoRESTSDKTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+end

@@ -1,0 +1,18 @@
+PODS:
+  - Curry (4.0.0)
+  - Nimble (7.0.3)
+  - Quick (1.2.0)
+
+DEPENDENCIES:
+  - Curry (~> 4.0.0)
+  - Nimble (= 7.0.3)
+  - Quick (= 1.2.0)
+
+SPEC CHECKSUMS:
+  Curry: 887c0b9de9a9947820a59557459c7895e76d7b90
+  Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
+  Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
+
+PODFILE CHECKSUM: 08faa92da913c80eb392b9014ac3ada678deb17f
+
+COCOAPODS: 1.4.0
