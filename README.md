@@ -406,8 +406,8 @@ We would need to:
 
 We will create a new PO Line to a purchase order, and then update this purchase order using the update() method to update the existing PO Line or replace the existing one by the a new PO Line.
 
-If the polinenum(s) is matched, Maximo will update the existing <i>poline</i> with the new array.
-If the polinenum(s) is not matched, Maximo will delete the existing <i>poline</i> array and create a new one with the new array.
+If the POLINE(s) is matched, Maximo will update the existing <i>poline</i> with the new array.</br>
+If the POLINE(s) is not matched, Maximo will delete the existing <i>poline</i> array and create a new one with the new array.
 
 * Get a Resource from ResourceSet
 
@@ -449,3 +449,52 @@ The server side framework will attempt to locate a POLINE with the polinenum 2 a
 
 - It will add a new POLINE with polinenum 2.
 - It will delete all the remaining POLINE's that are not present in the JSON object, that will result in PO Line 1 being deleted.
+
+#### Merge the POLINE in Purchase Order
+
+We create a new POLINE to a purchase order, and then merge this purchase order using another POLINE object. 
+We will create a new PO Line to a purchase order, and then merge this purchase order using the merge() API method to update the existing line or add an additional line.
+
+If the POLINE(s) is matched, Maximo will update the existing POLINE set with the updated elements in the array, as it is done by the update() method.
+If the POLINE(s) is not matched, Maximo will add the new elements from in the <i>poline</i> array to the existing POLINE set.
+
+* Get a Resource from ResourceSet
+
+```swift
+var reSet : ResourceSet = mc.resourceSet(osName: "MXPO").fetch()
+var poRes : Resource = reSet.member(index: 1)
+```
+
+* Build a valid JsonObject for adding a new Child Object for Resource
+
+```swift
+var polineObjIn : [String: Any] = ["polinenum": 1, "itemnum": "560-00", "storeloc": "CENTRAL"]
+var polineArray : [Any] = [polineObjIn]
+var poObj : [String: Any] = ["poline": polineArray]
+```
+
+* Update the Resource	
+
+```swift
+poRes.update(jo: poObj, properties: nil) //This creates a POLINE with polinenum 1.
+```
+
+* Build a valid JsonObject for merging the Child Object in Resource
+
+```swift
+var polineObjIn3 : [String: Any] = ["polinenum": 2, "itemnum": "0-0031", "storeloc": "CENTRAL"]
+var polineArray3 : [Any] = [polineObjIn3]
+var polineObj3 : [String: Any] = ["poline": polineArray3]
+```
+
+* Merge the Resource
+
+```swift
+poRes.merge(jo: polineObj3, properties: nil) //This will create a POLINE with polinenum 2.
+```
+
+At the end of it, we will have a PO with 2 POLINEs. The steps below explains how it happens:
+The server side framework will attempt to locate a POLINE with the polinenum 2 and will not find any (as there is only a POLINE with polinenum 1). 
+
+- It will add a new POLINE with polinenum 2.
+- It will keep the remaining lines (e.g. in this case POLINE with polinenum 1) as is.
