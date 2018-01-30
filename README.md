@@ -345,9 +345,9 @@ jo["wplabor"] = wpLaborArray
 > **Note**: The sample uses the lean format.
 
 #### Returning attribute values when creating a new Work Order
-By default, the create operation does not return any content for the new created work order. Since many attribute values are auto-generated or automatically assigned at the server side based on Maximo business logic, it often makes sense to get the final representation of the newly created resource.
+By default, the create operation does not return any content for the new created work order. Since many attribute values are auto-generated or automatically assigned at the server side based on the Maximo business logic, it often makes sense to get the final representation of the newly created resource.
 
-Instead of re-selecting the work order again (which makes another round-trip to the server), it is simpler and faster just to get the resource content as part of the response for the work order creation.
+Instead of re-selecting the work order again (which makes another round-trip to the server), it is simpler and faster just to get the resource content as part of the response for the work order creation process. You can do that by using one of the following statements:
 
 For non-lean,
 
