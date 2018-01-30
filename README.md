@@ -373,3 +373,79 @@ Or simply
 ```swift
 var re : Resource = rs.create(jo: jo, properties: {"*"})
 ```
+
+### Update a Purchase Order (MXPO)
+
+To update a resource, we can use either the update() or the merge() API method. The difference between them is about how they handle the related child objects in the Resource. An example using the PO Resource (MXPO) will best illustrate which method you should use for each scenario. This example will reference two of the Maximo Business Object contained in the Resource, the PO (Parent) and POLINE (Child).
+
+Say you have an existing purchase order with 1 PO Line child object. If you want to update the PO to add a new PO Line entry, you should use the merge() API method. The merge process goes through the request "poline" objects array and matches them up with the existing set of POLINE's (which is currently 1) and it determines which ones are new by comparing the value of the <i>rdf:about</i> tag for each entry. If it finds a new entry on the request "poline" array, it will proceed with the creation of this new POLINE and as result the PO object will now contain 2 POLINE's. If it finds a match on the existing POLINE set, it will update the matched one with the requested POLINE content. If there are other POLINE's on the existing set that have no matches, they will be kept as is and won't be updated by this process.
+
+Considering the same scenario described above, if we use the update() API method instead, only a single PO Line will be kept as result. If there are other PO Lines, they will be deleted. This happens because the update process treats the request "poline" array as an atomic object and will update it as a complete replacement. Hence, it would insert the new PO Line or update the matching PO Line and delete all the other existing ones for that PO.
+
+It is important to mention that this behavior applies exclusively for child objects. Root objects may be updated using either API methods.
+
+In another scenario, suppose we have an existing PO with 3 POLINE's (1, 2, 3) and we want to:
+
+```
+1. Delete POLINE#1
+2. Update POLINE#3 
+3. Create a new POLINE#N
+```
+
+We would need to:
+
+- Use the update() API method and send 3 POLINE's (2, 3, 4). 
+
+- The update API would check that the request does not contain PO Line 1 and hence it will delete it, it will skip the update of PO Line 2 (as there are no attributes that have been changed), update PO Line 3 and add a new one PO Line 4. 
+
+- As result, the PO would have PO Lines 2, 3 and 4.
+
+- So if we used the merge() method instead - the only difference would be that PO Line 1 would not be deleted. The PO would now contain PO lines 1, 2, 3 and 4.
+
+#### Update the POLINE in Purchase Order
+
+We will create a new PO Line to a purchase order, and then update this purchase order using the update() method to update the existing PO Line or replace the existing one by the a new PO Line.
+
+If the polinenum(s) is matched, Maximo will update the existing <i>poline</i> with the new array.
+If the polinenum(s) is not matched, Maximo will delete the existing <i>poline</i> array and create a new one with the new array.
+
+* Get a Resource from ResourceSet
+
+```swift
+var reSet : ResourceSet = mc.resourceSet(osName: "MXPO").fetch()
+var poRes : Resource = reSet.member(index: 0)
+```
+
+* Build PO object hierarchy for adding a new Child Object
+
+```swift
+var polineObjIn : [String: Any] = ["polinenum": 1, "itemnum": "560-00", "storeloc": "CENTRAL"]
+var polineArray : [Any] = [polineObjIn]
+var poObj : [String: Any] = ["poline": polineArray]
+```
+* Create a new POLINE
+
+```swift
+poRes.update(jo: poObj, properties: nil)
+```
+
+* Build PO object hierarchy for updating a Child Object
+
+```swift
+var polineObjIn2 : [String: Any] = ["polinenum": 2, "itemnum": "0-0031", "storeloc": "CENTRAL"]
+var polineArray2 : [Any] = [polineObjIn2]
+var poObj : [String: Any] = ["poline": polineArray2]
+```
+
+* Update the Resource
+
+```swift
+poRes.update(jo: polineObj2, properties: nil)
+```
+
+At the end of it, we will have a PO with 1 POLINE. The steps below explains how it happens:
+
+The server side framework will attempt to locate a POLINE with the polinenum 2 and will not find any (as there is only a single POLINE with polinenum 1). 
+
+- It will add a new POLINE with polinenum 2.
+- It will delete all the remaining POLINE's that are not present in the JSON object, that will result in PO Line 1 being deleted.
