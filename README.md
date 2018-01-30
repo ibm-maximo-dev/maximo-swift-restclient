@@ -102,7 +102,7 @@ We will use Work Order, Purchase Order and Companies Resource as examples to sho
 
 >**Note**: The use cases can be found at MaximoRESTSDKTests.swift
 
-### Query a work order for work order set (MXWODETAIL)
+### Querying Work Orders from a Resource Set (MXWODETAIL)
 
 The following instructions shows how to query a work order from Maximo by using Maximo REST SDK framework.
 
@@ -145,7 +145,7 @@ var mc : MaximoConnector =
 mc.connect()
 ```
 
-#### Querying work orders
+#### Querying Work Orders
 
 * Create a ResourceSet which holds the results for an "Approved" Work Order set. The selected records are composed by the WONUM and STATUS properties.
 
@@ -252,7 +252,7 @@ var jo : [String: Any] = re.toJSON()
 var joBytes : Data = re.toJSONBytes()
 ```
 
-#### Traversing work orders 
+#### Traversing Work Orders 
 In some cases, you may be required to traverse the Work Order hierarchy. In this section, we introduce some helpful methods available in this framework, that can be used for this purpose.
 
 * Get a Work Order set from the Maximo Server.
@@ -299,10 +299,10 @@ while pageCount > 0 {
 mc.disconnect()
 ```
 
-### Create a new work order (MXWODETAIL)
+### Create a new Work Order (MXWODETAIL)
 The following instructions show how to create a new work order by using the Maximo REST SDK.
 
-#### Get the work order set
+#### Get a Work Order set
 Using a previously obtained instance of the MaximoConnector object, perform the following operations:
 
 * Get the ResourceSet for the MXWODETAIL object structure.
@@ -311,7 +311,7 @@ Using a previously obtained instance of the MaximoConnector object, perform the 
 var rs : ResourceSet = mc.resourceSet(osName: "mxwodetail")
 ```
 
-#### Creating a new work order
+#### Creating a new Work Order
 * Create a valid JSON object with the essential information like SITEID, ORGID, STATUS, etc.
 
 For non-lean format, add the prefix before the attribute:
@@ -344,7 +344,7 @@ jo["wplabor"] = wpLaborArray
 
 > **Note**: The sample uses the lean format.
 
-#### Returning attribute values when creating a new work order
+#### Returning attribute values when creating a new Work Order
 By default, the create operation does not return any content for the new created work order. Since many attribute values are auto-generated or automatically assigned at the server side based on Maximo business logic, it often makes sense to get the final representation of the newly created resource.
 
 Instead of re-selecting the work order again (which makes another round-trip to the server), it is simpler and faster just to get the resource content as part of the response for the work order creation.
@@ -402,7 +402,7 @@ We would need to:
 
 - So if we used the merge() method instead - the only difference would be that PO Line 1 would not be deleted. The PO would now contain PO lines 1, 2, 3 and 4.
 
-#### Update the POLINE in Purchase Order
+#### Update the POLINE in the Purchase Order
 
 We will create a new PO Line to a purchase order, and then update this purchase order using the update() method to update the existing PO Line or replace the existing one by the a new PO Line.
 
@@ -450,7 +450,7 @@ The server side framework will attempt to locate a POLINE with the polinenum 2 a
 - It will add a new POLINE with polinenum 2.
 - It will delete all the remaining POLINE's that are not present in the JSON object, that will result in PO Line 1 being deleted.
 
-#### Merge the POLINE in Purchase Order
+#### Merge the POLINE in the Purchase Order
 
 We create a new POLINE to a purchase order, and then merge this purchase order using another POLINE object. 
 We will create a new PO Line to a purchase order, and then merge this purchase order using the merge() API method to update the existing line or add an additional line.
