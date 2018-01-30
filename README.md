@@ -102,7 +102,7 @@ We will use Work Order, Purchase Order and Companies Resource as examples to sho
 
 >**Note**: The use cases can be found at MaximoRESTSDKTests.swift
 
-### Query a Work Order for Work Order Set (MXWODETAIL)
+### Query a work order for work order set (MXWODETAIL)
 
 The following instructions shows how to query a work order from Maximo by using Maximo REST SDK framework.
 
@@ -145,21 +145,21 @@ var mc : MaximoConnector =
 mc.connect()
 ```
 
-#### Querying Work Orders
+#### Querying work orders
 
 * Create a ResourceSet which holds the results for an "Approved" Work Order set. The selected records are composed by the WONUM and STATUS properties.
 
 By object structure name:
   
 ```swift
-var rs : ResourceSet = mc.resourceSet("mxwodetail").select(
+var rs : ResourceSet = mc.resourceSet(osName: "mxwodetail").select(
    {"wonum", "status"})._where(QueryWhere()._where("status").equalTo("APPR")).fetch()
 ```
 
 By RESTful URI :
   
 ```swift
-var rs : ResourceSet = mc.resourceSet("http://127.0.0.1:7001/maximo/oslc/os/mxwodetail").select(
+var rs : ResourceSet = mc.resourceSet(url: "http://127.0.0.1:7001/maximo/oslc/os/mxwodetail").select(
    {"wonum", "status"})._where(QueryWhere()._where("status").equalTo("APPR")).fetch()
 ```
 
@@ -167,7 +167,7 @@ var rs : ResourceSet = mc.resourceSet("http://127.0.0.1:7001/maximo/oslc/os/mxwo
   * For the page size = 10: 
   
 ```swift
-var rs : ResourceSet = mc.resourceSet("mxwodetail").select(
+var rs : ResourceSet = mc.resourceSet(osName: "mxwodetail").select(
    {"wonum", "status"})._where(QueryWhere()._where("status").equalTo("APPR")).pageSize(10).fetch()
 ```
 
@@ -175,14 +175,14 @@ var rs : ResourceSet = mc.resourceSet("mxwodetail").select(
 If no page size is configured, this directive is ignored and all records matching the query filter are returned): 
 
 ```swift
-var rs : ResourceSet = mc.resourceSet("mxwodetail").select(
+var rs : ResourceSet = mc.resourceSet(osName: "mxwodetail").select(
    {"wonum", "status"})._where(QueryWhere()._where("status").equalTo("APPR")).paging(true).fetch()
 ```
 
 * For the stable paging:
 
 ```swift
-var rs : ResourceSet = mc.resourceSet("mxwodetail").select(
+var rs : ResourceSet = mc.resourceSet(osName: "mxwodetail").select(
    {"wonum", "status"})._where(QueryWhere()._where("status").equalTo("APPR")).stablePaging(true).fetch()
 ```
 
@@ -218,13 +218,13 @@ var woUri : String = "http://host:port/maximo/oslc/os/mxwodetail/_QkVERk9SRC8xMD
 Using ResourceSet
   
 ```swift
-var re : Resource = rs.fetchMember(uri: woUri)
+var re : Resource = rs.fetchMember(uri: woUri, properties: nil)
 ```
 
 Or using a MaximoConnector object
   
 ```swift
-var re : Resource = mc.resource(woUri)
+var re : Resource = mc.resource(uri: woUri, properties: nil)
 ```
 
 By index (this method searches for a member Resource into the ResourceSet collection. This is an in-memory operation, no round trip to the server is required):
@@ -236,13 +236,13 @@ var re : Resource = rs.member(index: 0)
 * In order to fetch additional information from the server for this Resource, consider using the load() and reload() methods available on the Resource object.
 
 ```swift
-re.reload({"wonum", "status", "assetnum", "location", "wplabor.craft"})
+re.reload(properties: {"wonum", "status", "assetnum", "location", "wplabor.craft"})
 ```
 
 Or simply
   
 ```swift
-re.reload("*")
+re.reload(properties: {"*"})
 ```
 
 * Get the Work Order as JSON (Dictionary) or Data objects:
@@ -252,13 +252,13 @@ var jo : [String: Any] = re.toJSON()
 var joBytes : Data = re.toJSONBytes()
 ```
 
-#### Traversing Work Orders 
+#### Traversing work orders 
 In some cases, you may be required to traverse the Work Order hierarchy. In this section, we introduce some helpful methods available in this framework, that can be used for this purpose.
 
 * Get a Work Order set from the Maximo Server.
 
 ```swift
-var rs : ResourceSet = mc.resourceSet("mxwodetail").pageSize(10)
+var rs : ResourceSet = mc.resourceSet(osName: "mxwodetail").pageSize(10)
 ```
  
 * Navigate through the Work Order records that are kept in current page.
@@ -266,7 +266,7 @@ var rs : ResourceSet = mc.resourceSet("mxwodetail").pageSize(10)
 ```swift
 let count = rs.count()
 for index in 0...count {
-	var re : Resource = rs.member(index)
+	var re : Resource = rs.member(index: index)
 	// Perform operations with the Resource object.
 }
 ```
@@ -281,7 +281,7 @@ while pageCount > 0 {
 	let recordCountInPage = rs.count()
 	for index in 0...recordCountInPage
 	{
-		var re : Resource = rs.member(index)
+		var re : Resource = rs.member(index: index)
 	}
 	if !rs.hasNextPage() {
 		break
@@ -297,4 +297,79 @@ while pageCount > 0 {
 
 ```swift
 mc.disconnect()
+```
+
+### Create a new work order (MXWODETAIL)
+The following instructions show how to create a new work order by using the Maximo REST SDK.
+
+#### Get the work order set
+Using a previously obtained instance of the MaximoConnector object, perform the following operations:
+
+* Get the ResourceSet for the MXWODETAIL object structure.
+
+```swift
+var rs : ResourceSet = mc.resourceSet(osName: "mxwodetail")
+```
+
+#### Creating a new work order
+* Create a valid JSON object with the essential information like SITEID, ORGID, STATUS, etc.
+
+For non-lean format, add the prefix before the attribute:
+  
+```swift
+var jo : [String: Any] = [:]
+jo["spi:siteid"] = "BEDFORD"
+jo["spi:orgid"] = "EAGLENA"
+jo["spi:status"] = "WAPPR"
+var re : Resource = rs.create(jo: jo, properties: nil)
+```
+
+For lean, skip the prefix, using the attribute directly:
+  
+```swift
+var jo : [String: Any] = [:]
+jo["siteid"] = "BEDFORD"
+jo["orgid"] = "EAGLENA"
+jo["status"] = "WAPPR"
+var re : Resource = rs.create(jo: jo, properties: nil)
+```
+
+* Working with children objects is just as simple. They can just make be part of the workorder JSON. The following example illustrates the creation of a Plaaned Labor record/object that is a child of the work order.
+
+```swift
+var wplJo : [String: Any] = ["skilllevel": "FIRSTCLASS", "craft": "ELECT"]
+var wpLaborArray : [Any] = [wplJo]
+jo["wplabor"] = wpLaborArray
+```
+
+> **Note**: The sample uses the lean format.
+
+#### Returning attribute values when creating a new work order
+By default, the create operation does not return any content for the new created work order. Since many attribute values are auto-generated or automatically assigned at the server side based on Maximo business logic, it often makes sense to get the final representation of the newly created resource.
+
+Instead of re-selecting the work order again (which makes another round-trip to the server), it is simpler and faster just to get the resource content as part of the response for the work order creation.
+
+For non-lean,
+
+```swift
+var re : Resource = rs.create(jo: jo, 
+   properties: {"spi:wonum", "spi:status","spi:statusdate","spi:description"})
+```
+
+Or simply
+		
+```swift
+var re : Resource = rs.create(jo: jo, properties: {"*"})
+```
+
+For lean,
+
+```swift
+var re : Resource = rs.create(jo: jo, properties: {"wonum", "status","statusdate", "description"})
+```
+ 
+Or simply
+  
+```swift
+var re : Resource = rs.create(jo: jo, properties: {"*"})
 ```
