@@ -512,3 +512,54 @@ does not find any (as there is only a POLINE with polinenum 1).
 
 3. At last, it keeps the remaining PO Lines (e.g. in this case POLINE with polinenum 1) as is.
 ```
+
+### Delete a Service Request (MXSR)
+In this section, we briefly demonstrate how to delete an existing Service Request by using the Maximo REST SDK.
+
+#### Get an existing Service Request
+* Get a ResourceSet for the Service Request object.
+
+```swift
+var rs : ResourceSet = mc.resourceSet("mxsr")
+```
+
+* Get an existing Service Request object.
+
+By specific URI:
+  
+```swift
+var venUri : String = "http://localhost:7001/maximo/oslc/os/mxsr/_U1IvMTE3Mw--"
+```
+
+Using ResourceSet
+  
+```swift
+var re : Resource = rs.fetchMember(uri: srUri)
+```
+
+Or using a MaximoConnector
+  
+```swift
+var re : Resource = mc.resource(uri: srUri)
+```
+
+By index:
+  
+```swift
+var re : Resource = rs.member(index: 0)
+```
+
+#### Delete the Service Request
+This can be done by:
+
+* Calling the deleteResource method of MaximoConnector
+
+```swift
+mc.deleteResource(uri: srUri)
+```
+
+* Calling the delete method of Resource object
+
+```swift
+re.delete()
+```
