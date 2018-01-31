@@ -259,26 +259,26 @@ var jo : [String: Any] = re.toJSON()
 var joBytes : Data = re.toJSONBytes()
 ```
 
-#### Traversing Work Orders 
-In some cases, you may be required to traverse the Work Order hierarchy. In this section, we introduce some helpful methods available in this framework, that can be used for this purpose.
+#### Traversing work orders 
+In some cases, you may be required to traverse a work order collection. This section introduces some helpful methods available in this framework that can be used for iterating over a ResourceSet.
 
-* Get a Work Order set from the Maximo Server.
+* Get a work order set from the Maximo Server.
 
 ```swift
-var rs : ResourceSet = mc.resourceSet(osName: "mxwodetail").pageSize(10)
+var rs : ResourceSet = mc.resourceSet(osName: "mxwodetail").pageSize(pageSize: 10)
 ```
  
-* Navigate through the Work Order records that are kept in current page.
+* Navigate through the work order records that are kept in the current page.
 
 ```swift
 let count = rs.count()
 for index in 0...count {
 	var re : Resource = rs.member(index: index)
-	// Perform operations with the Resource object.
+	// Perform operations with the obtained Resource object.
 }
 ```
 
-* Navigate through all of the Work Order records available in the ResourceSet.
+* Navigate through all of the work order records available in the ResourceSet.
 
 ```swift
 let pageSize = rs.configuredPageSize()
@@ -298,19 +298,19 @@ while pageCount > 0 {
 }
 ```
 
-#### Disconnect from Maximo
+#### Disconnect from Maximo Asset Management
 
-* End the user session with Maximo after you are done.
+* End the Maximo Asset Management user session, when you are done.
 
 ```swift
 mc.disconnect()
 ```
 
-### Create a new Work Order (MXWODETAIL)
-The following instructions show how to create a new work order by using the Maximo REST SDK.
+### Create a new work order (MXWODETAIL)
+The instructions contained in this section show how to create a new work order record by using the Maximo REST SDK.
 
-#### Get a Work Order set
-Using a previously obtained instance of the MaximoConnector object, perform the following operations:
+#### Get a work order ResourceSet
+Using a previously obtained instance of the MaximoConnector object, you can use the following statement:
 
 * Get the ResourceSet for the MXWODETAIL object structure.
 
@@ -318,62 +318,58 @@ Using a previously obtained instance of the MaximoConnector object, perform the 
 var rs : ResourceSet = mc.resourceSet(osName: "mxwodetail")
 ```
 
-#### Creating a new Work Order
-* Create a valid JSON object with the essential work order information such as: SITEID, ORGID, STATUS, etc.
+#### Creating a new work order
+* Create a valid JSON object with the essential work order information such as: SITEID, ORGID, STATUS, ESTDUR, etc.
 
-For non-lean format, add the prefix before the attribute:
+For the namespaced format, add the prefix before the attribute name:
   
 ```swift
 var jo : [String: Any] = [:]
 jo["spi:siteid"] = "BEDFORD"
 jo["spi:orgid"] = "EAGLENA"
 jo["spi:status"] = "WAPPR"
+jo["spi:estdur"] = 5.0
 var re : Resource = rs.create(jo: jo, properties: nil)
 ```
 
-For lean, skip the prefix, using the attribute directly:
+For the lean format, skip the prefix, using the attribute name directly:
   
 ```swift
 var jo : [String: Any] = [:]
 jo["siteid"] = "BEDFORD"
 jo["orgid"] = "EAGLENA"
 jo["status"] = "WAPPR"
+jo["estdur"] = 5.0
 var re : Resource = rs.create(jo: jo, properties: nil)
 ```
 
-* Working with children objects is just as simple. They may be part of the work order JSON as nested objects. The following example illustrates the creation of a Planned Labor record/object that is a child of the work order JSON object.
+* Working with child objects is just as simple. They may be part of the work order JSON object as nested objects. The following example illustrates the creation of a Planned Labor record/object that is a child of the work order object.
 
 ```swift
-var wplJo : [String: Any] = ["skilllevel": "FIRSTCLASS", "craft": "ELECT"]
-var wpLaborArray : [Any] = [wplJo]
-jo["wplabor"] = wpLaborArray
+var wplJo : [String: Any] = ["skilllevel": "FIRSTCLASS", "craft": "ELECT"] // Planned Labor object
+var wpLaborArray : [Any] = [wplJo] // Planned Labor array
+woJo["wplabor"] = wpLaborArray // Assigning Planned Labor array to Work Order object
 ```
 
-#### Returning attribute values when creating a new Work Order
+#### Returning attribute values when creating a new work order
 By default, the create operation does not return any content for the new created work order. Since many attribute values are auto-generated or automatically assigned at the server side based on the Maximo business logic, it often makes sense to get the final representation of the newly created resource.
 
-Instead of re-selecting the work order again (which makes another round-trip to the server), it is simpler and faster just to get the resource content as part of the response for the work order creation process. You can do that by using one of the following statements:
+Instead of re-selecting the work order again (which makes another round-trip to the server), it is usually faster just to get the resource content as part of the response for the work order creation process. You can do that by using one of the following statements:
 
-For non-lean,
+For the namespaced format, use:
 
 ```swift
 var re : Resource = rs.create(jo: jo, 
    properties: {"spi:wonum", "spi:status","spi:statusdate","spi:description"})
 ```
 
-Or simply
-		
-```swift
-var re : Resource = rs.create(jo: jo, properties: {"*"})
-```
-
-For lean,
+For the lean format, use:
 
 ```swift
 var re : Resource = rs.create(jo: jo, properties: {"wonum", "status","statusdate", "description"})
 ```
  
-Or simply
+Or simply user * to fetch all attributes:
   
 ```swift
 var re : Resource = rs.create(jo: jo, properties: {"*"})
