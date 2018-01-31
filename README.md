@@ -375,17 +375,21 @@ Or simply user * to fetch all attributes:
 var re : Resource = rs.create(jo: jo, properties: {"*"})
 ```
 
-### Update a Purchase Order (MXPO)
+### Update a purchase order (MXPO)
 
-To update a resource, we can use either the update() or the merge() API methods. The difference between them is about how they handle the related child objects contained in the Resource. In this section, we discuss an example using the PO Resource (MXPO) to best illustrate which method you should use for each scenario. This example refers to two of the Maximo Business Object contained in the Resource, the PO (Parent) and the POLINE (Child).
+To update a resource, you can use either the update() or the merge() API methods. The difference between them is about how they handle the related child objects contained in the Resource. This section discusses an example using the PO Resource (MXPO) to best illustrate which method you should use for each scenario. This example refers to two of the Maximo Business Object contained in the Resource, the PO (Parent) and the POLINE (Child).
 
-Say you have an existing purchase order with 1 PO Line child object. If you need to update the PO to add a new PO Line entry, you should use the merge() API method. The merge process goes through the request <i>poline</i> object array and matches them up with the existing set of POLINE's (which is currently 1) and it determines which ones are new by comparing the value of the <i>rdf:about</i> property for each entry. If it finds a new entry on the request <i>poline</i> array, it creates a new POLINE and as result the PO object now contains 2 POLINE's. If it finds a match on the existing POLINE set, it updates the matched one with the request's POLINE content. If there are other POLINE's on the existing set that have no matches, they will be kept as is and won't be updated by this process.
+Say you have an existing purchase order with 1 PO Line child object.
 
-Considering the same scenario described above, if we use the update() API method instead, only a single PO Line is kept as result. If there are other PO Lines, they are deleted during the method's execution. This occurs because the update process treats the request <i>poline</i> array as an atomic object. Therefore, it updates the whole POLINE set as a complete replacement. Thus, the update() method inserts the new PO Line or updates the matching PO Line and deletes all the other existing ones for that PO.
+If you need to update the PO to add a new PO Line entry, you must use the merge() API method. The merge process goes through the request <i>poline</i> object array and matches them up with the existing set of POLINE's (which is currently 1) and it determines which ones are new by comparing the value of the <i>rdf:about</i> property for each entry. If it finds a new entry on the request <i>poline</i> array, it creates a new POLINE and as result the PO object now contains 2 POLINE's. If it finds a match on the existing POLINE set, it updates the matched one with the request's POLINE content. If there are other POLINE's on the existing set that have no matches, they will be kept as is and won't be updated by this process.
+
+Now consider you have the same purchase order with 1 PO Line entry, and you're assigning a new <i>poline</i> array (containing a new PO Line) to the PO object, but this time you are using the update() API method instead. What is the expected result for this operation?
+
+The update() method behaves differently about the way it handles existing child objects. Thus, any existing PO Lines are deleted during this method's execution. This occurs because the update process treats the request <i>poline</i> array as an atomic object. Therefore, it updates the whole POLINE set as a complete replacement. Therefore, the update() method inserts the new PO Line or updates the matching PO Line and deletes all the other existing ones for that PO.
 
 It is important to mention that this behavior applies exclusively for child objects. Root objects may be updated using either API methods.
 
-In another scenario, suppose we have an existing PO with 3 POLINE's (1, 2, 3) and we would like to:
+In another scenario, suppose you have an existing PO with 3 POLINE's (1, 2, 3) and we would like to:
 
 ```
 1. Delete POLINE #1
@@ -393,7 +397,7 @@ In another scenario, suppose we have an existing PO with 3 POLINE's (1, 2, 3) an
 3. Create a new POLINE #4
 ```
 
-To accomplish that, we could:
+To do that, you must:
 
 - Use the update() API method and send 3 POLINE's (2, 3, 4).
   - PO Line 2 is unchanged, PO Line 3 is modified and PO Line 4 is new.
@@ -402,13 +406,13 @@ The update() API method would verify that the request does not contain PO Line 1
 
 The resulting set now contains PO Lines 2, 3 and 4.
 
-- So if we use the merge() API method instead - the only difference is that PO Line 1 is not be deleted and remains on the POLINE set.
+- So if you use the merge() API method instead - the only difference is that PO Line 1 is not be deleted and remains on the POLINE set.
 
 Hence, the PO object now contains PO lines 1, 2, 3 and 4.
 
-#### Update the POLINE in the Purchase Order
+#### Update the POLINE in the purchase order
 
-In this section, we create and add a new PO Line to the Purchase Order, and then call the update() API method for the PO object to either: update the existing PO Line or replace the existing PO Line by the a new one.
+In this section, you create and add a new PO Line to the purchase order, and then call the update() API method for the PO object to either: update the existing PO Line or replace the existing PO Line by the a new one.
 
 If the POLINE is matched, Maximo updates the existing <i>poline</i> with the new array.</br>
 If the POLINE is not matched, Maximo deletes the existing <i>poline</i> array and creates a new one with the new array.
@@ -420,7 +424,7 @@ var reSet : ResourceSet = mc.resourceSet(osName: "MXPO").fetch()
 var poRes : Resource = reSet.member(index: 0)
 ```
 
-* Build PO object hierarchy for adding a new child object
+* Build the PO object hierarchy for adding a new child object
 
 ```swift
 var polineObjIn : [String: Any] = ["polinenum": 1, "itemnum": "560-00", "storeloc": "CENTRAL"]
@@ -433,9 +437,9 @@ var poObj : [String: Any] = ["poline": polineArray]
 poRes.update(jo: poObj, properties: nil)
 ```
 
-> **Note**: At this point, we should now have a PO with a single POLINE with <i>polinenum</i> 1.
+> **Note**: At this point, you must have a PO object with a single POLINE with <i>polinenum</i> 1.
 
-* Build PO object hierarchy for updating a child object
+* Build the PO object hierarchy for updating a child object
 
 ```swift
 var polineObjIn2 : [String: Any] = ["polinenum": 2, "itemnum": "0-0031", "storeloc": "CENTRAL"]
@@ -449,7 +453,7 @@ var poObj : [String: Any] = ["poline": polineArray2]
 poRes.update(jo: polineObj2, properties: nil)
 ```
 
-After these statement's execution, we now have a PO with 1 POLINE. The execution flow is described as follows:
+After these statement's execution, you now have a PO object with 1 POLINE. The execution flow is described as follows:
 
 ```
 1. The server side framework attempts to locate a POLINE with the polinenum 2 and 
@@ -461,9 +465,9 @@ does not find any (as there is only a single POLINE with polinenum 1).
 that causes the removal of PO Line 1 from the POLINE set.
 ```
 
-#### Merge the POLINE in the Purchase Order
+#### Merge the POLINE in the purchase order
 
-In this section, we create and add a new PO Line to the Purchase Order, and then call the update() API method for the PO object to create a brand new POLINE set. Later, we create and add another PO Line to the same Purchase Order, and then call the merge() API method for the PO object to either: update the existing PO Line or add a new one.
+In this section, you create and add a new PO Line to the purchase order, and then call the update() API method for the PO object to create a brand new POLINE set. Later, you create and add another PO Line to the same purchase order, and then call the merge() API method for the PO object to either: update the existing PO Line or add a new one.
 
 If the POLINE is matched, Maximo updates the existing POLINE set with the updated elements in the array.
 If the POLINE is not matched, Maximo adds the new elements contained in the <i>poline</i> array to the existing POLINE set and keeps the existing ones on the set.
@@ -475,7 +479,7 @@ var reSet : ResourceSet = mc.resourceSet(osName: "MXPO").fetch()
 var poRes : Resource = reSet.member(index: 1)
 ```
 
-* Build PO object hierarchy for adding a new child object
+* Build the PO object hierarchy for adding a new child object
 
 ```swift
 var polineObjIn : [String: Any] = ["polinenum": 1, "itemnum": "560-00", "storeloc": "CENTRAL"]
@@ -489,9 +493,9 @@ var poObj : [String: Any] = ["poline": polineArray]
 poRes.update(jo: poObj, properties: nil) //This creates a POLINE with polinenum 1.
 ```
 
-> **Note**: At this point, we should now have a PO with a single POLINE with <i>polinenum</i> 1.
+> **Note**: At this point, you must have a PO object with a single POLINE with <i>polinenum</i> 1.
 
-* Build PO object hierarchy for adding a new child object
+* Build the PO object hierarchy for adding a new child object
 
 ```swift
 var polineObjIn3 : [String: Any] = ["polinenum": 2, "itemnum": "0-0031", "storeloc": "CENTRAL"]
@@ -505,7 +509,7 @@ var polineObj3 : [String: Any] = ["poline": polineArray3]
 poRes.merge(jo: polineObj3, properties: nil) //This creates a POLINE with polinenum 2.
 ```
 
-After these statement's execution, we now have a PO with 2 POLINE's. The execution flow is described as follows:
+After these statement's execution, you now have a PO object with 2 POLINE's. The execution flow is described as follows:
 
 ```
 1. The server side framework attempts to locate a POLINE with the polinenum 2 and 
