@@ -156,7 +156,7 @@ var rs : ResourceSet = mc.resourceSet(osName: "mxwodetail").select(
    {"wonum", "status"})._where(QueryWhere()._where("status").equalTo("APPR")).fetch()
 ```
 
-By RESTful URI :
+By RESTful URI:
   
 ```swift
 var rs : ResourceSet = mc.resourceSet(url: "http://127.0.0.1:7001/maximo/oslc/os/mxwodetail").select(
@@ -312,7 +312,7 @@ var rs : ResourceSet = mc.resourceSet(osName: "mxwodetail")
 ```
 
 #### Creating a new Work Order
-* Create a valid JSON object with the essential information like SITEID, ORGID, STATUS, etc.
+* Create a valid JSON object with the essential work order information such as: SITEID, ORGID, STATUS, etc.
 
 For non-lean format, add the prefix before the attribute:
   
@@ -334,15 +334,13 @@ jo["status"] = "WAPPR"
 var re : Resource = rs.create(jo: jo, properties: nil)
 ```
 
-* Working with children objects is just as simple. They can just make be part of the workorder JSON. The following example illustrates the creation of a Plaaned Labor record/object that is a child of the work order.
+* Working with children objects is just as simple. They may be part of the work order JSON as nested objects. The following example illustrates the creation of a Planned Labor record/object that is a child of the work order JSON object.
 
 ```swift
 var wplJo : [String: Any] = ["skilllevel": "FIRSTCLASS", "craft": "ELECT"]
 var wpLaborArray : [Any] = [wplJo]
 jo["wplabor"] = wpLaborArray
 ```
-
-> **Note**: The sample uses the lean format.
 
 #### Returning attribute values when creating a new Work Order
 By default, the create operation does not return any content for the new created work order. Since many attribute values are auto-generated or automatically assigned at the server side based on the Maximo business logic, it often makes sense to get the final representation of the newly created resource.
@@ -376,31 +374,32 @@ var re : Resource = rs.create(jo: jo, properties: {"*"})
 
 ### Update a Purchase Order (MXPO)
 
-To update a resource, we can use either the update() or the merge() API method. The difference between them is about how they handle the related child objects in the Resource. An example using the PO Resource (MXPO) will best illustrate which method you should use for each scenario. This example will reference two of the Maximo Business Object contained in the Resource, the PO (Parent) and POLINE (Child).
+To update a resource, we can use either the update() or the merge() API methods. The difference between them is about how they handle the related child objects contained in the Resource. In this section, we discuss an example using the PO Resource (MXPO) to best illustrate which method you should use for each scenario. This example refers to two of the Maximo Business Object contained in the Resource, the PO (Parent) and the POLINE (Child).
 
-Say you have an existing purchase order with 1 PO Line child object. If you want to update the PO to add a new PO Line entry, you should use the merge() API method. The merge process goes through the request "poline" objects array and matches them up with the existing set of POLINE's (which is currently 1) and it determines which ones are new by comparing the value of the <i>rdf:about</i> tag for each entry. If it finds a new entry on the request "poline" array, it will proceed with the creation of this new POLINE and as result the PO object will now contain 2 POLINE's. If it finds a match on the existing POLINE set, it will update the matched one with the requested POLINE content. If there are other POLINE's on the existing set that have no matches, they will be kept as is and won't be updated by this process.
+Say you have an existing purchase order with 1 PO Line child object. If you need to update the PO to add a new PO Line entry, you should use the merge() API method. The merge process goes through the request <i>poline</i> object array and matches them up with the existing set of POLINE's (which is currently 1) and it determines which ones are new by comparing the value of the <i>rdf:about</i> property for each entry. If it finds a new entry on the request <i>poline</i> array, it creates a new POLINE and as result the PO object now contains 2 POLINE's. If it finds a match on the existing POLINE set, it updates the matched one with the request's POLINE content. If there are other POLINE's on the existing set that have no matches, they will be kept as is and won't be updated by this process.
 
-Considering the same scenario described above, if we use the update() API method instead, only a single PO Line will be kept as result. If there are other PO Lines, they will be deleted. This happens because the update process treats the request "poline" array as an atomic object and will update it as a complete replacement. Hence, it would insert the new PO Line or update the matching PO Line and delete all the other existing ones for that PO.
+Considering the same scenario described above, if we use the update() API method instead, only a single PO Line is kept as result. If there are other PO Lines, they are deleted during the method's execution. This occurs because the update process treats the request <i>poline</i> array as an atomic object. Therefore, it updates the whole POLINE set as a complete replacement. Thus, the update() method inserts the new PO Line or updates the matching PO Line and deletes all the other existing ones for that PO.
 
 It is important to mention that this behavior applies exclusively for child objects. Root objects may be updated using either API methods.
 
-In another scenario, suppose we have an existing PO with 3 POLINE's (1, 2, 3) and we want to:
+In another scenario, suppose we have an existing PO with 3 POLINE's (1, 2, 3) and we would like to:
 
 ```
-1. Delete POLINE#1
-2. Update POLINE#3 
-3. Create a new POLINE#N
+1. Delete POLINE #1
+2. Update POLINE #3 
+3. Create a new POLINE #4
 ```
 
-We would need to:
+To accomplish that, we could:
 
-- Use the update() API method and send 3 POLINE's (2, 3, 4). 
+- Use the update() API method and send 3 POLINE's (2, 3, 4).
+  - PO Line 2 is unchanged, PO Line 3 is modified and PO Line 4 is new.
 
-- The update API would check that the request does not contain PO Line 1 and hence it will delete it, it will skip the update of PO Line 2 (as there are no attributes that have been changed), update PO Line 3 and add a new one PO Line 4. 
+The update() API method would verify that the request does not contain PO Line 1 and hence it deletes it, it skips the update of PO Line 2 (as there are no attributes that have been changed), updates PO Line 3 and adds the new one PO Line 4.
 
-- As result, the PO would have PO Lines 2, 3 and 4.
+The resulting set now contains PO Lines 2, 3 and 4.
 
-- So if we used the merge() method instead - the only difference would be that PO Line 1 would not be deleted. The PO would now contain PO lines 1, 2, 3 and 4.
+- So if we use the merge() API method instead - the only difference is that PO Line 1 is not be deleted and remains on the POLINE set. Hence, the PO object now contains PO lines 1, 2, 3 and 4.
 
 #### Update the POLINE in the Purchase Order
 
