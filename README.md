@@ -430,6 +430,8 @@ var poObj : [String: Any] = ["poline": polineArray]
 poRes.update(jo: poObj, properties: nil)
 ```
 
+At this point, we should now have a PO with a single POLINE with <i>polinenum</i> 1.
+
 * Build PO object hierarchy for updating a child object
 
 ```swift
@@ -447,9 +449,11 @@ poRes.update(jo: polineObj2, properties: nil)
 After these statement's execution, we now have a PO with 1 POLINE. The execution flow is described as follows:
 
 ```
-1. The server side framework attempts to locate a POLINE with the <i>polinenum</i> 2 and does not find any (as there is only a single POLINE with polinenum 1).
+1. The server side framework attempts to locate a POLINE with the <i>polinenum</i> 2 and 
+does not find any (as there is only a single POLINE with polinenum 1).
 2. Then it adds a new POLINE with <i>polinenum</i> 2.
-3. At last, it deletes all the remaining POLINE's that are missing from the <i>poline</i> array, that causes the removal of PO Line 1 from the POLINE set.
+3. At last, it deletes all the remaining POLINE's that are missing from the <i>poline</i> array, 
+that causes the removal of PO Line 1 from the POLINE set.
 ```
 
 #### Merge the POLINE in the Purchase Order
@@ -480,6 +484,8 @@ var poObj : [String: Any] = ["poline": polineArray]
 poRes.update(jo: poObj, properties: nil) //This creates a POLINE with <i>polinenum</i> 1.
 ```
 
+At this point, we should now have a PO with a single POLINE with <i>polinenum</i> 1.
+
 * Build PO object hierarchy for adding a new child object
 
 ```swift
@@ -497,7 +503,8 @@ poRes.merge(jo: polineObj3, properties: nil) //This creates a POLINE with <i>pol
 After these statement's execution, we now have a PO with 2 POLINE's. The execution flow is described as follows:
 
 ```
-1. The server side framework attempts to locate a POLINE with the <i>polinenum</i> 2 and does not find any (as there is only a POLINE with <i>polinenum</i> 1).
+1. The server side framework attempts to locate a POLINE with the <i>polinenum</i> 2 and 
+does not find any (as there is only a POLINE with <i>polinenum</i> 1).
 2. Then it adds a new POLINE with <i>polinenum</i> 2.
 3. At last, it keeps the remaining PO Lines (e.g. in this case POLINE with <i>polinenum</i> 1) as is.
 ```
