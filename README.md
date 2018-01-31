@@ -1,6 +1,6 @@
 # MaximoRESTSDK
 
-The Maximo REST SDK framework provides a set of driver API's which can be consumed by an iOS based application that would like to interface with a Maximo instance. The SDK API's use the Maximo NextGen REST/JSON API's which were originally inspired by Linked Data principles. Using this API you would be able to create, update, delete and query Maximo business objects (Using Maximo Integration Framework Object Structures).
+The Maximo REST SDK framework provides a set of driver API's which can be consumed by an iOS based application that interfaces with a IBM Maximo Asset Management instance. The SDK API's use the Maximo NextGen REST/JSON API's which were originally inspired by Linked Data principles. Using this API you would be able to create, update, delete and query Maximo business objects (Using Maximo Integration Framework Object Structures).
 
 The main components of this SDK framework include:
 
@@ -8,11 +8,11 @@ The main components of this SDK framework include:
 
 - [ResourceSet]: This API represents a collection of Maximo resources of a given type. The type is determined by the Object Structure definition it refers to. In effect this API is equivalent to the concept of Maximo's MboSet.
 
-- [Resource]: Each member of a ResourceSet is represented by an instance of this class. This is equivalent to to the concept of Mbo in Maximo.
+- [Resource]: Each member of a ResourceSet is represented by an instance of this class. This is equivalent to to the concept of a Maximo business object.
 
-- [Attachment and AttachmentSet]: These API's represent the attached docs (doclinks) in Maximo. These are always associated with some Resource.
+- [Attachment and AttachmentSet]: These API's represent the attached docs (doclinks) in the Maximo Asset Management. These are always associated with some Resource object.
 
-Currently the only supported data format is JSON and we have 2 flavors of JSON – the lean and the namespaced. The lean format is supported starting with the Maximo 7.6 version and is the recommended format to use (as it uses less bandwidth).
+Currently the only supported data format is JSON and there are 2 types available – the lean and the namespaced. Since Maximo Asset Management 7.6 release, lean is the recommended format given that it consumes less network resources.
 
 ## Prerequisites
 
@@ -20,16 +20,16 @@ Currently the only supported data format is JSON and we have 2 flavors of JSON �
 - Cocoapods
 - Maximo 7.6
 
-## Getting Started
+## Getting started
 
-### Cocoapods Installation
+### Cocoapods installation
 
 Open Terminal and enter the following command:
 ```
 sudo gem install cocoapods
 ```
 
-### Add SSH Key to your GitHub Account
+### Add SSH key to your GitHub account
 
 Generate RSA key for your GitHub user account:
 ```
@@ -39,7 +39,7 @@ ssh-keygen -t rsa -b 4096 -C git@github.ibm.com
 Paste the contents of the <i>id_rsa.pub</i> file as mentioned here: https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/
 
 
-### Project Setup
+### Project setup
 
 1. In a Terminal session, navigate to the directory that contains your Xcode project.
 
@@ -97,51 +97,53 @@ Now just open the .xcworkspace file with Xcode and you are all set!
 
 ## Usage
 
-Maximo Resources (Object Structures) represent a graph of related Maximo objects (Mbo's) that provides an atomic view/object to create/update/delete/query the releated set of Mbos. 
-We will use Work Order, Purchase Order and Companies Resource as examples to show you how to use the Maximo Rest SDK.
+The Maximo Resources (Object Structures) represent a graph of related Maximo objects (Mbo's) that provides an atomic view/object to create/update/delete/query the releated set of Mbo's.
+This documentation provides several examples that includes some of the most used Maximo business objects such as: work order, purchase order and service request, in order to demonstrate how to use the Maximo REST SDK.
 
->**Note**: The use cases can be found at MaximoRESTSDKTests.swift
+>**Note**: Some of the test cases described in this documentation may be found at the <i>MaximoRESTSDKTests.swift</i> file.
 
-### Querying Work Orders from a Resource Set (MXWODETAIL)
+### Querying work orders from a Resource Set (MXWODETAIL)
 
-The following instructions shows how to query a work order from Maximo by using Maximo REST SDK framework.
+The following instructions show how to query a work order from Maximo Asset Management by using the Maximo REST SDK framework.
 
-#### Connect to Maximo
+#### Connect to Maximo Asset Management
 
-In order to establish a connection with Maximo, it is required that we set up authentication and environment information in the Options object;
+In order to establish a connection with Maximo, it is required that you set up authentication and environment information in the Options object;
 
-* For authentication, we need to provide the user credentials and the authentication mechanism. The following authentication methods are supported: "maxauth", "basic" and "form". The sample code is as following,
+* For authentication, you need to provide the user credentials and the authentication mechanism. The following authentication methods are supported: "maxauth", "basic" and "form". The sample code is as following:
 
 ```swift
-var option : Options = Options().user("maxadmin").password("maxadmin").auth("maxauth")
+var option : 
+   Options = Options().user(user: "maxadmin").password(password: "maxadmin").auth(authMode: "maxauth")
 ```
 
-> **Note**: For Maximo Multi-Tenancy, take the tenant code = "00" as an example, using the following statement.
+> **Note**: For Maximo Multi-Tenancy, consider the tenant code = "00" as an example, by using the following statement:
 
 ```swift
 var option : Options = 
-  Options().user("maxadmin").password("maxadmin").auth("maxauth").mt(true).tenantCode("00")
+  Options().user(user: "maxadmin").password(password: "maxadmin").
+  auth(authMode: "maxauth").mt(mtMode: true).tenantCode(tenantCode: "00")
 ```
 
-* For environment, it needs the data mode setting, host, port and if it the debug is enabled. The sample code is as following,
+* For environment settings, you need to specify the JSON format type, host or IP, and port number to be used. The sample code is as following:
 
 ```swift
-option.host("127.0.0.1").port(7001).lean(true)
+option.host(host: "127.0.0.1").port(port: 7001).lean(lean: true)
 ```
 
-* Based on this configuration, connect to the Maximo using a MaximoConnector instance.
+* Using the Options object you created on the previous steps, connect to the Maximo Asset Management using a MaximoConnector instance. You may also enabled the debug mode, in order to increase the level of verbosity on the system logs.
 
 ```swift
-var mc : MaximoConnector = MaximoConnector(options: option).debug(true)
+var mc : MaximoConnector = MaximoConnector(options: option).debug(enabled: true)
 mc.connect()
 ```
 
-* Or directly use the following code,
+* Or you can directly use the following code statement:
 
 ```swift
 var mc : MaximoConnector = 
-  MaximoConnector(options: Options().user("maxadmin").password("maxadmin").
-    lean(true).auth("maxauth").host("127.0.0.1").port(7001))
+  MaximoConnector(options: Options().user(user: "maxadmin").password(password: "maxadmin").
+    lean(lean: true).auth(authMode: "maxauth").host(host: "127.0.0.1").port(port: 7001))
 mc.connect()
 ```
 
