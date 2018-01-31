@@ -246,7 +246,7 @@ var re : Resource = rs.member(index: 0)
 re.reload(properties: {"wonum", "status", "assetnum", "location", "wplabor.craft"})
 ```
 
-Or simply
+Or simply use * to fetch all properties:
   
 ```swift
 re.reload(properties: {"*"})
