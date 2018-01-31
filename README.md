@@ -102,7 +102,7 @@ This documentation provides several examples that includes some of the most used
 
 >**Note**: Some of the test cases described in this documentation may be found at the <i>MaximoRESTSDKTests.swift</i> file.
 
-### Querying work orders from a Resource Set (MXWODETAIL)
+### Querying work orders from a ResourceSet (MXWODETAIL)
 
 The following instructions show how to query a work order from Maximo Asset Management by using the Maximo REST SDK framework.
 
@@ -147,45 +147,50 @@ var mc : MaximoConnector =
 mc.connect()
 ```
 
-#### Querying Work Orders
+#### Querying work orders
 
-* Create a ResourceSet which holds the results for an "Approved" Work Order set. The selected records are composed by the WONUM and STATUS properties.
+* Create a ResourceSet object that holds a collection of work orders in the <i>Approved</i> state. The selected records are composed by the WONUM and STATUS properties. Please notice that there are a few strategies, you can use to do it.
 
 By object structure name:
   
 ```swift
-var rs : ResourceSet = mc.resourceSet(osName: "mxwodetail").select(
-   {"wonum", "status"})._where(QueryWhere()._where("status").equalTo("APPR")).fetch()
+var rs : ResourceSet = mc.resourceSet(osName: "mxwodetail").select(properties: {"wonum", "status"}).
+   _where(whereClause: QueryWhere()._where(name: "status").equalTo(value: "APPR")).fetch()
 ```
 
 By RESTful URI:
   
 ```swift
 var rs : ResourceSet = mc.resourceSet(url: "http://127.0.0.1:7001/maximo/oslc/os/mxwodetail").select(
-   {"wonum", "status"})._where(QueryWhere()._where("status").equalTo("APPR")).fetch()
+   properties: {"wonum", "status"})._where(whereClause: QueryWhere()._where(name: "status").
+   equalTo(value: "APPR")).fetch()
 ```
 
-* There is a paging API for available in this framework, that allows forward and backward paging of data by the client.
-  * For the page size = 10: 
+For handling large data sets, a set of pagination methods are available in this framework. That allows you to navigate back and forth through your data records.
+
+* You can define an arbitrary page size and the obtained results will be limited by this value.
   
 ```swift
-var rs : ResourceSet = mc.resourceSet(osName: "mxwodetail").select(
-   {"wonum", "status"})._where(QueryWhere()._where("status").equalTo("APPR")).pageSize(10).fetch()
+var rs : ResourceSet = mc.resourceSet(osName: "mxwodetail").select(properties: {"wonum", "status"}).
+   _where(whereClause: QueryWhere()._where(name: "status").equalTo(value: "APPR")).
+   pageSize(10).fetch()
 ```
 
-* For the default paging strategy (this framework assumes a default page size is configured on the Resource's Object Structure.
-If no page size is configured, this directive is ignored and all records matching the query filter are returned): 
+* You can also use the default paging strategy. This assumes that a default page size has been configured on the Resource's Object Structure. If no page size has been configured, this directive is ignored and all the records matching the query are immediately returned:
 
 ```swift
-var rs : ResourceSet = mc.resourceSet(osName: "mxwodetail").select(
-   {"wonum", "status"})._where(QueryWhere()._where("status").equalTo("APPR")).paging(true).fetch()
+var rs : ResourceSet = mc.resourceSet(osName: "mxwodetail").select(properties: {"wonum", "status"}).
+   _where(whereClause: QueryWhere()._where(name: "status").equalTo(value: "APPR")).
+   paging(type: true).fetch()
 ```
 
-* For the stable paging:
+* There is yet another paging strategy available in this framework which is named <i>stable paging</i>.
+The <i>stable paging</i> keeps a server side reference to a MboSet object, allowing you to navigate through the records in an isolated session:
 
 ```swift
-var rs : ResourceSet = mc.resourceSet(osName: "mxwodetail").select(
-   {"wonum", "status"})._where(QueryWhere()._where("status").equalTo("APPR")).stablePaging(true).fetch()
+var rs : ResourceSet = mc.resourceSet(osName: "mxwodetail").select(properties: {"wonum", "status"}).
+   _where(whereClause: QueryWhere()._where(name: "status").equalTo(value: "APPR")).
+   stablePaging(type: true).fetch()
 ```
 
 * Move to the next or to the previous page.
@@ -195,29 +200,29 @@ rs.nextPage()
 rs.previousPage()
 ```
 
-For stable paging, this framework currently supports only forward scrolling, a call to previousPage() would result in an API error.
+** For <i>stable paging</i>, this framework currently supports only forward scrolling, hence a call to the previousPage() method results in an API error.
 
-* Get the ResourceSet in JSON:
+* Get the full ResourceSet as JSON object:
 
 ```swift
 var jo : [String: Any] = rs.toJSON()
 ```
 
-> **Note**: We support JSON output as Data objects. This can be accomplished by the following code snippet,
+> **Note**: This API supports the conversion of JSON to Data objects. This can be accomplished by the following statement:
 
 ```swift
 var jodata : Data = rs.toJSONBytes()
 ```
 
-* Each Resource object is associated with a unique URI. It is fairly simple to get the specific Work Order record by using it's URI. In the following example, we try to fetch a Work Order (_QkVERk9SRC8xMDAw) directly.
+* Each Resource object is associated with a unique URI. You can get one specific work order record by using it's unique URI. Using the following example, you can fetch a work order object (_QkVERk9SRC8xMDAw) directly.
 
-By specific URI:
+This is an example of a unique URI:
   
 ```swift
-var woUri : String = "http://host:port/maximo/oslc/os/mxwodetail/_QkVERk9SRC8xMDAw"
+var woUri : String = "http://127.0.0.1:7001/maximo/oslc/os/mxwodetail/_QkVERk9SRC8xMDAw"
 ```
 
-Using ResourceSet
+Using the ResourceSet object
   
 ```swift
 var re : Resource = rs.fetchMember(uri: woUri, properties: nil)
@@ -229,7 +234,7 @@ Or using a MaximoConnector object
 var re : Resource = mc.resource(uri: woUri, properties: nil)
 ```
 
-By index (this method searches for a member Resource into the ResourceSet collection. This is an in-memory operation, no round trip to the server is required):
+By index (this method searches for a member Resource object into the ResourceSet collection. This is an in-memory operation, no round trip to the server is required):
   
 ```swift
 var re : Resource = rs.member(index: 0)
@@ -247,7 +252,7 @@ Or simply
 re.reload(properties: {"*"})
 ```
 
-* Get the Work Order as JSON (Dictionary) or Data objects:
+* Get the work order as a JSON (Dictionary) or as a Data object:
 
 ```swift
 var jo : [String: Any] = re.toJSON()
