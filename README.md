@@ -516,52 +516,52 @@ does not find any (as there is only a POLINE with polinenum 1).
 3. At last, it keeps the remaining PO Lines (e.g. in this case POLINE with polinenum 1) as is.
 ```
 
-### Delete a Service Request (MXSR)
-In this section, we briefly demonstrate how to delete an existing Service Request by using the Maximo REST SDK.
+### Delete a service request (MXSR)
+This section briefly demonstrates how to delete an existing service request by using the Maximo REST SDK.
 
-#### Get an existing Service Request
-* Get a ResourceSet for the Service Request object.
+#### Get an existing service request
+* Get a ResourceSet for the service request object.
 
 ```swift
-var rs : ResourceSet = mc.resourceSet("mxsr")
+var rs : ResourceSet = mc.resourceSet(osName: "mxsr")
 ```
 
-* Get an existing Service Request object.
+* Get an existing service request object.
 
-By specific URI:
+This is an example of a unique service request URI:
   
 ```swift
 var venUri : String = "http://localhost:7001/maximo/oslc/os/mxsr/_U1IvMTE3Mw--"
 ```
 
-Using ResourceSet
+Using the ResourceSet object:
   
 ```swift
 var re : Resource = rs.fetchMember(uri: srUri)
 ```
 
-Or using a MaximoConnector
+Or using a MaximoConnector object:
   
 ```swift
 var re : Resource = mc.resource(uri: srUri)
 ```
 
-By index:
+Fetch a Resource object by index:
   
 ```swift
 var re : Resource = rs.member(index: 0)
 ```
 
-#### Delete the Service Request
-This can be done by:
+#### Delete the service request
+A resource removal can be done by either:
 
-* Calling the deleteResource method of MaximoConnector
+* Calling the deleteResource() method of MaximoConnector object:
 
 ```swift
 mc.deleteResource(uri: srUri)
 ```
 
-* Calling the delete method of Resource object
+* Calling the delete() method of Resource object:
 
 ```swift
 re.delete()
