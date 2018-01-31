@@ -399,14 +399,16 @@ The update() API method would verify that the request does not contain PO Line 1
 
 The resulting set now contains PO Lines 2, 3 and 4.
 
-- So if we use the merge() API method instead - the only difference is that PO Line 1 is not be deleted and remains on the POLINE set. Hence, the PO object now contains PO lines 1, 2, 3 and 4.
+- So if we use the merge() API method instead - the only difference is that PO Line 1 is not be deleted and remains on the POLINE set.
+
+Hence, the PO object now contains PO lines 1, 2, 3 and 4.
 
 #### Update the POLINE in the Purchase Order
 
-We will create a new PO Line to a purchase order, and then update this purchase order using the update() method to update the existing PO Line or replace the existing one by the a new PO Line.
+In this section, we create and add a new PO Line to the Purchase Order, and then call the update() API method for the PO object to either: update the existing PO Line or replace the existing PO Line by the a new one.
 
-If the POLINE(s) is matched, Maximo will update the existing <i>poline</i> with the new array.</br>
-If the POLINE(s) is not matched, Maximo will delete the existing <i>poline</i> array and create a new one with the new array.
+If the POLINE is matched, Maximo updates the existing <i>poline</i> with the new array.</br>
+If the POLINE is not matched, Maximo deletes the existing <i>poline</i> array and creates a new one with the new array.
 
 * Get a Resource from ResourceSet
 
@@ -415,7 +417,7 @@ var reSet : ResourceSet = mc.resourceSet(osName: "MXPO").fetch()
 var poRes : Resource = reSet.member(index: 0)
 ```
 
-* Build PO object hierarchy for adding a new Child Object
+* Build PO object hierarchy for adding a new child object
 
 ```swift
 var polineObjIn : [String: Any] = ["polinenum": 1, "itemnum": "560-00", "storeloc": "CENTRAL"]
@@ -428,7 +430,7 @@ var poObj : [String: Any] = ["poline": polineArray]
 poRes.update(jo: poObj, properties: nil)
 ```
 
-* Build PO object hierarchy for updating a Child Object
+* Build PO object hierarchy for updating a child object
 
 ```swift
 var polineObjIn2 : [String: Any] = ["polinenum": 2, "itemnum": "0-0031", "storeloc": "CENTRAL"]
@@ -442,20 +444,20 @@ var poObj : [String: Any] = ["poline": polineArray2]
 poRes.update(jo: polineObj2, properties: nil)
 ```
 
-At the end of it, we will have a PO with 1 POLINE. The steps below explains how it happens:
+After these statement's execution, we now have a PO with 1 POLINE. The execution flow is described as follows:
 
-The server side framework will attempt to locate a POLINE with the polinenum 2 and will not find any (as there is only a single POLINE with polinenum 1). 
-
-- It will add a new POLINE with polinenum 2.
-- It will delete all the remaining POLINE's that are not present in the JSON object, that will result in PO Line 1 being deleted.
+```
+1. The server side framework attempts to locate a POLINE with the <i>polinenum</i> 2 and does not find any (as there is only a single POLINE with polinenum 1).
+2. Then it adds a new POLINE with <i>polinenum</i> 2.
+3. At last, it deletes all the remaining POLINE's that are missing from the <i>poline</i> array, that causes the removal of PO Line 1 from the POLINE set.
+```
 
 #### Merge the POLINE in the Purchase Order
 
-We create a new POLINE to a purchase order, and then merge this purchase order using another POLINE object. 
-We will create a new PO Line to a purchase order, and then merge this purchase order using the merge() API method to update the existing line or add an additional line.
+In this section, we create and add a new PO Line to the Purchase Order, and then call the update() API method for the PO object to create a brand new POLINE set. Later, we create and add another PO Line to the same Purchase Order, and then call the merge() API method for the PO object to either: update the existing PO Line or add a new one.
 
-If the POLINE(s) is matched, Maximo will update the existing POLINE set with the updated elements in the array, as it is done by the update() method.
-If the POLINE(s) is not matched, Maximo will add the new elements from in the <i>poline</i> array to the existing POLINE set.
+If the POLINE is matched, Maximo updates the existing POLINE set with the updated elements in the array.
+If the POLINE is not matched, Maximo adds the new elements contained in the <i>poline</i> array to the existing POLINE set and keeps the existing ones on the set.
 
 * Get a Resource from ResourceSet
 
@@ -464,7 +466,7 @@ var reSet : ResourceSet = mc.resourceSet(osName: "MXPO").fetch()
 var poRes : Resource = reSet.member(index: 1)
 ```
 
-* Build a valid JsonObject for adding a new Child Object for Resource
+* Build PO object hierarchy for adding a new child object
 
 ```swift
 var polineObjIn : [String: Any] = ["polinenum": 1, "itemnum": "560-00", "storeloc": "CENTRAL"]
@@ -475,10 +477,10 @@ var poObj : [String: Any] = ["poline": polineArray]
 * Update the Resource	
 
 ```swift
-poRes.update(jo: poObj, properties: nil) //This creates a POLINE with polinenum 1.
+poRes.update(jo: poObj, properties: nil) //This creates a POLINE with <i>polinenum</i> 1.
 ```
 
-* Build a valid JsonObject for merging the Child Object in Resource
+* Build PO object hierarchy for adding a new child object
 
 ```swift
 var polineObjIn3 : [String: Any] = ["polinenum": 2, "itemnum": "0-0031", "storeloc": "CENTRAL"]
@@ -489,11 +491,13 @@ var polineObj3 : [String: Any] = ["poline": polineArray3]
 * Merge the Resource
 
 ```swift
-poRes.merge(jo: polineObj3, properties: nil) //This will create a POLINE with polinenum 2.
+poRes.merge(jo: polineObj3, properties: nil) //This creates a POLINE with <i>polinenum</i> 2.
 ```
 
-At the end of it, we will have a PO with 2 POLINEs. The steps below explains how it happens:
-The server side framework will attempt to locate a POLINE with the polinenum 2 and will not find any (as there is only a POLINE with polinenum 1). 
+After these statement's execution, we now have a PO with 2 POLINE's. The execution flow is described as follows:
 
-- It will add a new POLINE with polinenum 2.
-- It will keep the remaining lines (e.g. in this case POLINE with polinenum 1) as is.
+```
+1. The server side framework attempts to locate a POLINE with the <i>polinenum</i> 2 and does not find any (as there is only a POLINE with <i>polinenum</i> 1).
+2. Then it adds a new POLINE with <i>polinenum</i> 2.
+3. At last, it keeps the remaining PO Lines (e.g. in this case POLINE with <i>polinenum</i> 1) as is.
+```
