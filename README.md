@@ -697,7 +697,7 @@ Using the Attachment object itself:
 att.delete()
 ```
 
-Using the MaximoConnector object:
+Using the MaximoConnector object (Deleting by Attachment URI):
   
 ```swift
 mc.deleteAttachment(uri: attUri)
