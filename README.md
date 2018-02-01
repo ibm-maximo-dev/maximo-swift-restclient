@@ -570,3 +570,135 @@ mc.deleteResource(uri: srUri)
 ```swift
 re.delete()
 ```
+### Attachments
+Attachments in the Maximo Asset Management are documents, files or images that are attached to a resource such as a work order or a service request.
+The following examples show how to add and delete an attachment from a work order.
+
+#### Create an attachment for an existing work order.
+* Get a work order ResourceSet:
+
+```swift
+var rs : ResultSet = mc.resourceSet(osName: "mxwodetail")
+```
+
+* Get an existing work order from a ResourceSet:
+
+This is an example of a work order unique URI:
+  
+```swift
+String woUri = "http://127.0.0.1:7001/maximo/oslc/os/mxwodetail/_QkVERk9SRC8xMDAw"
+```
+
+Using the ResourceSet object:
+  
+```swift 
+var re : Resource = rs.fetchMember(uri: woUri)
+```
+
+Using the MaximoConnector object:
+  
+```swift
+var re : Resource = mc.resource(uri: woUri)
+```
+
+Fetching a Resource object by index number:
+  
+```swift 	
+var re : Resource = rs.member(index: 0)
+```
+
+* Get the attachment set for the selected work order:
+
+```swift
+var ats : AttachmentSet = re.attachmentSet()
+```
+
+* Create a sample document data
+
+```swift
+var str : String = "This is a sample text file used to validate the Maximo REST SDK"
+let data : Data = str.data(using: .utf8)
+```
+
+* Create a new Attachment object
+
+```swift
+var att : Attachment = Attachment().name(name: "attachment.txt").description(description: "test")
+   .data(data: data).meta(type: "FILE", storeas: "Attachments")
+```
+
+* Attach the file to the work order
+
+By default, you can use the following statement:
+  
+```swift
+att = ats.create(att: att)
+```
+
+Or you can use it's variant that allows you to create attachments inside a given subfolder:
+  
+```swift
+att = ats.create(relation: "customdoclink", att: att)
+```
+
+#### Get the data from the attachment
+* Get attachment from AttachmentSet
+* Get an existing attachment from the Maximo Asset Management:
+
+```swift
+var att : Attachment = ats.member(index: 0)
+```
+
+* Get the attachment document data:
+
+```swift
+var data : Data = att.toDoc()
+```
+
+* Get the attachment meta data:
+
+```swift
+var attMeta : [String: Any] = att.toDocMeta()
+var attMeta : [String: Any] = att.fetchDocMeta()
+```
+
+* Get Attachment using the MaximoConnector object directly by calling the attachment URI.
+Attachments are also uniquely identified by a URI. In the following example, we will get attachment (28) which is attached to work order (_QkVERk9SRC8xMDAw):
+
+```swift
+var attUri : String = "http://host/maximo/oslc/os/mxwodetail/_QkVERk9SRC8xMDAw/DOCLINKS/28"
+var att : Attachment = mc.attachment(uri: attUri)
+var data : Data = mc.attachedDoc(uri: attUri)
+var attMeta : [String: Any] = mc.attachmentDocMeta(uri: attUri)
+```
+
+#### Delete an attachment
+
+* Get the Attachment object from the AttachmentSet
+
+Fetch Attachment object by index number:
+  
+```swift
+var att : Attachment = ats.member(index: 0)
+```
+
+Fetch Attachment object by attachment URI:
+  
+```swift  
+var att : Attachment = ats.fetchMember(uri: attUri)
+var att : Attachment = mc.attachment(uri: attUri)
+```
+
+* Delete the Attachment object
+
+Using the Attachment object itself:
+  
+```swift
+att.delete()
+```
+
+Using the MaximoConnector object:
+  
+```swift
+mc.deleteAttachment(uri: attUri)
+```
