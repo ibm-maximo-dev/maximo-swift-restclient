@@ -702,3 +702,68 @@ Using the MaximoConnector object (Deleting by Attachment URI):
 ```swift
 mc.deleteAttachment(uri: attUri)
 ```
+
+### Saved Query
+Maximo Asset Management supports a feature called a <i>Saved Query</i> where the user can define a pre-built query for an application, such as the Work Order Tracking, in order to retrieve a common set of data (e.g. A list of approved work orders). Assuming that public saved queries are available for Maximo applications (like the WOTRACK), you can use the savedQuery() API method to select records based on defined filter criteria.
+In order to use this feature, the user has to grant the applicable permissions between the <i>Object Structures</i> and the authorized Maximo applications.
+
+Now consider the "OWNER IS ME" query for the WOTRACK application as an example. Assuming that the MXWODETAIL object structure has been set up to grant permissions to the WOTRACK application.
+
+* Query the data
+
+```swift
+var rs : ResourceSet = mc.resourceSet(osName: "mxwodetail").savedQuery(qsaved: SavedQuery().
+   name(name: "WOTRACK:OWNER IS ME")).select(selectClause: "*").fetch()
+```
+
+The select(selectClause: "*") queries all attributes for the filtered set of the MXWODETAIL object structure. As mentioned earlier, we can do a partial resource selection like select(selectClause: ["wonum", "status"]).
+
+We can also do further filtering along with the saved query.
+
+* Query the data
+
+```swift
+var rs : ResourceSet = mc.resourceSet(osName: "mxwodetail").savedQuery(qsaved: SavedQuery().
+  name(name: "WOTRACK:OWNER IS ME"))._where(_where: QueryWhere()._where(name: "status").
+  _in(values: ["APPR","WAPPR"])).select(selectClause: ["wonum", "status", "statusdate"]).fetch()
+```
+
+### Terms Search
+This feature allows you to perform a record-wide text search. In order to use it, you need to define a list of <i>searchable</i> attributes for the <i>Object Structure</i>.
+In the following example, consider that the "description" field has been marked as a <i>searchable</i> attribute for the OSLCMXSR object structure.
+Now you can use the hasTerms() API method to define which terms you're searching for.
+
+* Fetch the ResourceSet
+```swift
+var res : ResourceSet = mc.resourceSet(osName: "oslcmxsr").hasTerms(terms: ["email", "finance"]).
+   select(selectClause: ["description", "ticketid"]).pageSize(pageSize: 5).fetch()
+```
+
+The code statement above selects all the OSLCMXSR records whose <i>description</i> contains either "email" or "finance".
+
+### Action
+
+Actions are functional components of a resource that perform specific such as changing the status of a resource or moving a resource from one location to another.
+These tasks usually contain a fair amount of business logic involved.
+The following example illustrates the use of the <i>changeStatus</i> action for the MXWODETAIL object structure.
+
+* Get the ResourceSet for the MXWODETAIL object structure where status is <i>Waiting for Approval</i>
+```swift
+var reSet : ResourceSet = mc.resourceSet(osName: "mxwodetail")._where(_where: QueryWhere().
+   _where(name: "status").equalTo(value: "WAPPR")).fetch()
+```
+
+* Get the first member of ResourceSet:
+```swift
+var re : Resource = reSet.member(index: 0)
+```
+
+* Build the request JSON object
+```swift
+var jo : [String: Any] = ["status" : "APPR", "memo" : "This work order is approved."]
+```
+
+* Invoke the Action
+```swift
+re.invokeAction(actionName: "wsmethod:changeStatus", jo: jo)
+```
