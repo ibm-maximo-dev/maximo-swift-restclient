@@ -16,7 +16,7 @@ class MaximoRESTSDKTests: QuickSpec {
         describe("MaximoRESTSDK") {
             it("is a framework to communicate with Maximo") {
                 var options = Options().user(user: "wilson").password(password: "wilson").auth(authMode: "maxauth")
-                options = options.host(host: "9.85.174.25").port(port: 7001).lean(lean: true)
+                options = options.host(host: "9.85.181.99").port(port: 7001).lean(lean: true)
                 let connector = MaximoConnector(options: options)
                 do {
                     try connector.connect()
