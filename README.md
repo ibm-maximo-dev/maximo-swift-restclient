@@ -1,6 +1,6 @@
 # MaximoRESTSDK
 
-The Maximo REST SDK framework provides a set of driver API's which can be consumed by an iOS based application that would like to interface with a Maximo instance. The SDK API's use the Maximo NextGen REST/JSON API's which were originally inspired by Linked Data principles. Using this API you would be able to create, update, delete and query Maximo business objects (Using Maximo Integration Framework Object Structures).
+The Maximo REST SDK framework provides a set of driver API's which can be consumed by an iOS based application that interfaces with a IBM Maximo Asset Management instance. The SDK API's use the Maximo NextGen REST/JSON API's which were originally inspired by Linked Data principles. Using this API you would be able to create, update, delete and query Maximo business objects (Using Maximo Integration Framework Object Structures).
 
 The main components of this SDK framework include:
 
@@ -8,38 +8,38 @@ The main components of this SDK framework include:
 
 - [ResourceSet]: This API represents a collection of Maximo resources of a given type. The type is determined by the Object Structure definition it refers to. In effect this API is equivalent to the concept of Maximo's MboSet.
 
-- [Resource]: Each member of a ResourceSet is represented by an instance of this class. This is equivalent to to the concept of Mbo in Maximo.
+- [Resource]: Each member of a ResourceSet is represented by an instance of this class. This is equivalent to to the concept of a Maximo business object.
 
-- [Attachment and AttachmentSet]: These API's represent the attached docs (doclinks) in Maximo. These are always associated with some Resource.
+- [Attachment and AttachmentSet]: These API's represent the attached docs (doclinks) in the Maximo Asset Management. These are always associated with some Resource object.
 
-Currently the only supported data format is JSON and we have 2 flavors of JSON – the lean and the namespaced. The lean format is supported starting with the Maximo 7.6 version and is the recommended format to use (as it uses less bandwidth).
+Currently the only supported data format is JSON and there are 2 types available – the lean and the namespaced. Since Maximo Asset Management 7.6 release, lean is the recommended format given that it consumes less network resources.
 
-## Pre-requisites
+## Prerequisites
 
 - Xcode
 - Cocoapods
 - Maximo 7.6
 
-## Getting Started
+## Getting started
 
-### Cocoapods Installation
+### Cocoapods installation
 
-1. Open Terminal and enter the following command:
+Open Terminal and enter the following command:
 ```
 sudo gem install cocoapods
 ```
 
-### Add SSH Key to your GitHub Account
+### Add SSH key to your GitHub account
 
-1. Generate RSA key for your GitHub user account:
+Generate RSA key for your GitHub user account:
 ```
 ssh-keygen -t rsa -b 4096 -C git@github.ibm.com
 ```
 
-2. Paste the contents of the <i>id_rsa.pub</i> file as mentioned here: https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/
+Paste the contents of the <i>id_rsa.pub</i> file as mentioned here: https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/
 
 
-### Project Setup
+### Project setup
 
 1. In a Terminal session, navigate to the directory that contains your Xcode project.
 
@@ -97,93 +97,100 @@ Now just open the .xcworkspace file with Xcode and you are all set!
 
 ## Usage
 
-Maximo Resources (Object Structures) represent a graph of related Maximo objects (Mbo's) that provides an atomic view/object to create/update/delete/query the releated set of Mbos. 
-We will use Work Order, Purchase Order and Companies Resource as examples to show you how to use the Maximo Rest SDK.
+The Maximo Resources (Object Structures) represent a graph of related Maximo objects (Mbo's) that provides an atomic view/object to create/update/delete/query the releated set of Mbo's.
+This documentation provides several examples that includes some of the most used Maximo business objects such as: work order, purchase order and service request, in order to demonstrate how to use the Maximo REST SDK.
 
->**Note**: The use cases can be found at MaximoRESTSDKTests.swift
+>**Note**: Some of the test cases described in this documentation may be found at the <i>MaximoRESTSDKTests.swift</i> file.
 
-### Query a Work Order for Work Order Set (MXWODETAIL)
+### Querying work orders from a ResourceSet (MXWODETAIL)
 
-The following instructions shows how to query a work order from Maximo by using Maximo REST SDK framework.
+The following instructions show how to query a work order from Maximo Asset Management by using the Maximo REST SDK framework.
 
-#### Connect to Maximo
+#### Connect to Maximo Asset Management
 
-In order to establish a connection with Maximo, it is required that we set up authentication and environment information in the Options object;
+In order to establish a connection with Maximo, it is required that you set up authentication and environment information in the Options object;
 
-* For authentication, we need to provide the user credentials and the authentication mechanism. The following authentication methods are supported: "maxauth", "basic" and "form". The sample code is as following,
+* For authentication, you need to provide the user credentials and the authentication mechanism. The following authentication methods are supported: "maxauth", "basic" and "form". The sample code is as following:
 
 ```swift
-var option : Options = Options().user("maxadmin").password("maxadmin").auth("maxauth")
+var option : 
+   Options = Options().user(user: "maxadmin").password(password: "maxadmin").auth(authMode: "maxauth")
 ```
 
-> **Note**: For Maximo Multi-Tenancy, take the tenant code = "00" as an example, using the following statement.
+> **Note**: For Maximo Multi-Tenancy, consider the tenant code = "00" as an example, by using the following statement:
 
 ```swift
 var option : Options = 
-  Options().user("maxadmin").password("maxadmin").auth("maxauth").mt(true).tenantCode("00")
+  Options().user(user: "maxadmin").password(password: "maxadmin").
+  auth(authMode: "maxauth").mt(mtMode: true).tenantCode(tenantCode: "00")
 ```
 
-* For environment, it needs the data mode setting, host, port and if it the debug is enabled. The sample code is as following,
+* For environment settings, you need to specify the JSON format type, host or IP, and port number to be used. The sample code is as following:
 
 ```swift
-option.host("127.0.0.1").port(7001).lean(true)
+option.host(host: "127.0.0.1").port(port: 7001).lean(lean: true)
 ```
 
-* Based on this configuration, connect to the Maximo using a MaximoConnector instance.
+* Using the Options object you created on the previous steps, connect to the Maximo Asset Management using a MaximoConnector instance. You may also enabled the debug mode, in order to increase the level of verbosity on the system logs.
 
 ```swift
-var mc : MaximoConnector = MaximoConnector(options: option).debug(true)
+var mc : MaximoConnector = MaximoConnector(options: option).debug(enabled: true)
 mc.connect()
 ```
 
-* Or directly use the following code,
+* Or you can directly use the following code statement:
 
 ```swift
 var mc : MaximoConnector = 
-  MaximoConnector(options: Options().user("maxadmin").password("maxadmin").
-    lean(true).auth("maxauth").host("127.0.0.1").port(7001))
+  MaximoConnector(options: Options().user(user: "maxadmin").password(password: "maxadmin").
+    lean(lean: true).auth(authMode: "maxauth").host(host: "127.0.0.1").port(port: 7001))
 mc.connect()
 ```
 
-#### Querying Work Orders
+#### Querying work orders
 
-* Create a ResourceSet which holds the results for an "Approved" Work Order set. The selected records are composed by the WONUM and STATUS properties.
+* Create a ResourceSet object that holds a collection of work orders in the <i>Approved</i> state. The selected records are composed by the WONUM and STATUS properties. Please notice that there are a few strategies, you can use to do it.
 
 By object structure name:
   
 ```swift
-var rs : ResourceSet = mc.resourceSet("mxwodetail").select(
-   {"wonum", "status"})._where(QueryWhere()._where("status").equalTo("APPR")).fetch()
+var rs : ResourceSet = mc.resourceSet(osName: "mxwodetail").select(properties: {"wonum", "status"}).
+   _where(whereClause: QueryWhere()._where(name: "status").equalTo(value: "APPR")).fetch()
 ```
 
-By RESTful URI :
+By RESTful URI:
   
 ```swift
-var rs : ResourceSet = mc.resourceSet("http://127.0.0.1:7001/maximo/oslc/os/mxwodetail").select(
-   {"wonum", "status"})._where(QueryWhere()._where("status").equalTo("APPR")).fetch()
+var rs : ResourceSet = mc.resourceSet(url: "http://127.0.0.1:7001/maximo/oslc/os/mxwodetail").select(
+   properties: {"wonum", "status"})._where(whereClause: QueryWhere()._where(name: "status").
+   equalTo(value: "APPR")).fetch()
 ```
 
-* There is a paging API for available in this framework, that allows forward and backward paging of data by the client.
-  * For the page size = 10: 
+For handling large data sets, a set of pagination methods are available in this framework. That allows you to navigate back and forth through your data records.
+
+* You can define an arbitrary page size and the obtained results will be limited by this value.
   
 ```swift
-var rs : ResourceSet = mc.resourceSet("mxwodetail").select(
-   {"wonum", "status"})._where(QueryWhere()._where("status").equalTo("APPR")).pageSize(10).fetch()
+var rs : ResourceSet = mc.resourceSet(osName: "mxwodetail").select(properties: {"wonum", "status"}).
+   _where(whereClause: QueryWhere()._where(name: "status").equalTo(value: "APPR")).
+   pageSize(10).fetch()
 ```
 
-* For the default paging strategy (this framework assumes a default page size is configured on the Resource's Object Structure.
-If no page size is configured, this directive is ignored and all records matching the query filter are returned): 
+* You can also use the default paging strategy. This assumes that a default page size has been configured on the Resource's Object Structure. If no page size has been configured, this directive is ignored and all the records matching the query are immediately returned:
 
 ```swift
-var rs : ResourceSet = mc.resourceSet("mxwodetail").select(
-   {"wonum", "status"})._where(QueryWhere()._where("status").equalTo("APPR")).paging(true).fetch()
+var rs : ResourceSet = mc.resourceSet(osName: "mxwodetail").select(properties: {"wonum", "status"}).
+   _where(whereClause: QueryWhere()._where(name: "status").equalTo(value: "APPR")).
+   paging(type: true).fetch()
 ```
 
-* For the stable paging:
+* There is yet another paging strategy available in this framework which is named <i>stable paging</i>.
+The <i>stable paging</i> keeps a server side reference to a MboSet object, allowing you to navigate through the records in an isolated session:
 
 ```swift
-var rs : ResourceSet = mc.resourceSet("mxwodetail").select(
-   {"wonum", "status"})._where(QueryWhere()._where("status").equalTo("APPR")).stablePaging(true).fetch()
+var rs : ResourceSet = mc.resourceSet(osName: "mxwodetail").select(properties: {"wonum", "status"}).
+   _where(whereClause: QueryWhere()._where(name: "status").equalTo(value: "APPR")).
+   stablePaging(type: true).fetch()
 ```
 
 * Move to the next or to the previous page.
@@ -193,41 +200,41 @@ rs.nextPage()
 rs.previousPage()
 ```
 
-For stable paging, this framework currently supports only forward scrolling, a call to previousPage() would result in an API error.
+** For <i>stable paging</i>, this framework currently supports only forward scrolling, hence a call to the previousPage() method results in an API error.
 
-* Get the ResourceSet in JSON:
+* Get the full ResourceSet as JSON object:
 
 ```swift
 var jo : [String: Any] = rs.toJSON()
 ```
 
-> **Note**: We support JSON output as Data objects. This can be accomplished by the following code snippet,
+> **Note**: This API supports the conversion of JSON to Data objects. This can be accomplished by the following statement:
 
 ```swift
 var jodata : Data = rs.toJSONBytes()
 ```
 
-* Each Resource object is associated with a unique URI. It is fairly simple to get the specific Work Order record by using it's URI. In the following example, we try to fetch a Work Order (_QkVERk9SRC8xMDAw) directly.
+* Each Resource object is associated with a unique URI. You can get one specific work order record by using it's unique URI. Using the following example, you can fetch a work order object (_QkVERk9SRC8xMDAw) directly.
 
-By specific URI:
+This is an example of a unique URI:
   
 ```swift
-var woUri : String = "http://host:port/maximo/oslc/os/mxwodetail/_QkVERk9SRC8xMDAw"
+var woUri : String = "http://127.0.0.1:7001/maximo/oslc/os/mxwodetail/_QkVERk9SRC8xMDAw"
 ```
 
-Using ResourceSet
+Using the ResourceSet object
   
 ```swift
-var re : Resource = rs.fetchMember(uri: woUri)
+var re : Resource = rs.fetchMember(uri: woUri, properties: nil)
 ```
 
 Or using a MaximoConnector object
   
 ```swift
-var re : Resource = mc.resource(woUri)
+var re : Resource = mc.resource(uri: woUri, properties: nil)
 ```
 
-By index (this method searches for a member Resource into the ResourceSet collection. This is an in-memory operation, no round trip to the server is required):
+By index (this method searches for a member Resource object into the ResourceSet collection. This is an in-memory operation, no round trip to the server is required):
   
 ```swift
 var re : Resource = rs.member(index: 0)
@@ -236,42 +243,42 @@ var re : Resource = rs.member(index: 0)
 * In order to fetch additional information from the server for this Resource, consider using the load() and reload() methods available on the Resource object.
 
 ```swift
-re.reload({"wonum", "status", "assetnum", "location", "wplabor.craft"})
+re.reload(properties: {"wonum", "status", "assetnum", "location", "wplabor.craft"})
 ```
 
-Or simply
+Or simply use * to fetch all properties:
   
 ```swift
-re.reload("*")
+re.reload(properties: {"*"})
 ```
 
-* Get the Work Order as JSON (Dictionary) or Data objects:
+* Get the work order as a JSON (Dictionary) or as a Data object:
 
 ```swift
 var jo : [String: Any] = re.toJSON()
 var joBytes : Data = re.toJSONBytes()
 ```
 
-#### Traversing Work Orders 
-In some cases, you may be required to traverse the Work Order hierarchy. In this section, we introduce some helpful methods available in this framework, that can be used for this purpose.
+#### Traversing work orders 
+In some cases, you may be required to traverse a work order collection. This section introduces some helpful methods available in this framework that can be used for iterating over a ResourceSet.
 
-* Get a Work Order set from the Maximo Server.
+* Get a work order set from the Maximo Server.
 
 ```swift
-var rs : ResourceSet = mc.resourceSet("mxwodetail").pageSize(10)
+var rs : ResourceSet = mc.resourceSet(osName: "mxwodetail").pageSize(pageSize: 10)
 ```
  
-* Navigate through the Work Order records that are kept in current page.
+* Navigate through the work order records that are kept in the current page.
 
 ```swift
 let count = rs.count()
 for index in 0...count {
-	var re : Resource = rs.member(index)
-	// Perform operations with the Resource object.
+	var re : Resource = rs.member(index: index)
+	// Perform operations with the obtained Resource object.
 }
 ```
 
-* Navigate through all of the Work Order records available in the ResourceSet.
+* Navigate through all of the work order records available in the ResourceSet.
 
 ```swift
 let pageSize = rs.configuredPageSize()
@@ -281,7 +288,7 @@ while pageCount > 0 {
 	let recordCountInPage = rs.count()
 	for index in 0...recordCountInPage
 	{
-		var re : Resource = rs.member(index)
+		var re : Resource = rs.member(index: index)
 	}
 	if !rs.hasNextPage() {
 		break
@@ -291,10 +298,472 @@ while pageCount > 0 {
 }
 ```
 
-#### Disconnect from Maximo
+#### Disconnect from Maximo Asset Management
 
-* End the user session with Maximo after you are done.
+* End the Maximo Asset Management user session, when you are done.
 
 ```swift
 mc.disconnect()
+```
+
+### Create a new work order (MXWODETAIL)
+The instructions contained in this section show how to create a new work order record by using the Maximo REST SDK.
+
+#### Get a work order ResourceSet
+Using a previously obtained instance of the MaximoConnector object, you can use the following statement:
+
+* Get the ResourceSet for the MXWODETAIL object structure.
+
+```swift
+var rs : ResourceSet = mc.resourceSet(osName: "mxwodetail")
+```
+
+#### Creating a new work order
+* Create a valid JSON object with the essential work order information such as: SITEID, ORGID, STATUS, ESTDUR, etc.
+
+For the namespaced format, add the prefix before the attribute name:
+  
+```swift
+var jo : [String: Any] = [:]
+jo["spi:siteid"] = "BEDFORD"
+jo["spi:orgid"] = "EAGLENA"
+jo["spi:status"] = "WAPPR"
+jo["spi:estdur"] = 5.0
+var re : Resource = rs.create(jo: jo, properties: nil)
+```
+
+For the lean format, skip the prefix, using the attribute name directly:
+  
+```swift
+var jo : [String: Any] = [:]
+jo["siteid"] = "BEDFORD"
+jo["orgid"] = "EAGLENA"
+jo["status"] = "WAPPR"
+jo["estdur"] = 5.0
+var re : Resource = rs.create(jo: jo, properties: nil)
+```
+
+* Working with child objects is just as simple. They may be part of the work order JSON object as nested objects. The following example illustrates the creation of a Planned Labor record/object that is a child of the work order object.
+
+```swift
+var wplJo : [String: Any] = ["skilllevel": "FIRSTCLASS", "craft": "ELECT"] // Planned Labor object
+var wpLaborArray : [Any] = [wplJo] // Planned Labor array
+woJo["wplabor"] = wpLaborArray // Assigning Planned Labor array to Work Order object
+```
+
+#### Returning attribute values when creating a new work order
+By default, the create operation does not return any content for the new created work order. Since many attribute values are auto-generated or automatically assigned at the server side based on the Maximo business logic, it often makes sense to get the final representation of the newly created resource.
+
+Instead of re-selecting the work order again (which makes another round-trip to the server), it is usually faster just to get the resource content as part of the response for the work order creation process. You can do that by using one of the following statements:
+
+For the namespaced format, use:
+
+```swift
+var re : Resource = rs.create(jo: jo, 
+   properties: {"spi:wonum", "spi:status","spi:statusdate","spi:description"})
+```
+
+For the lean format, use:
+
+```swift
+var re : Resource = rs.create(jo: jo, properties: {"wonum", "status","statusdate", "description"})
+```
+ 
+Or simply user * to fetch all attributes:
+  
+```swift
+var re : Resource = rs.create(jo: jo, properties: {"*"})
+```
+
+### Update a purchase order (MXPO)
+
+To update a resource, you can use either the update() or the merge() API methods. The difference between them is about how they handle the related child objects contained in the Resource. This section discusses an example using the PO Resource (MXPO) to best illustrate which method you should use for each scenario. This example refers to two of the Maximo Business Object contained in the Resource, the PO (Parent) and the POLINE (Child).
+
+Say you have an existing purchase order with 1 PO Line child object.
+
+If you need to update the PO to add a new PO Line entry, you must use the merge() API method. The merge process goes through the request <i>poline</i> object array and matches them up with the existing set of POLINE's (which is currently 1) and it determines which ones are new by comparing the value of the <i>rdf:about</i> property for each entry. If it finds a new entry on the request <i>poline</i> array, it creates a new POLINE and as result the PO object now contains 2 POLINE's. If it finds a match on the existing POLINE set, it updates the matched one with the request's POLINE content. If there are other POLINE's on the existing set that have no matches, they will be kept as is and won't be updated by this process.
+
+Now consider you have the same purchase order with 1 PO Line entry, and you're assigning a new <i>poline</i> array (containing a new PO Line) to the PO object, but this time you are using the update() API method instead. What is the expected result for this operation?
+
+The update() method behaves differently about the way it handles existing child objects. Thus, any existing PO Lines are deleted during this method's execution. This occurs because the update process treats the request <i>poline</i> array as an atomic object. Therefore, it updates the whole POLINE set as a complete replacement. Therefore, the update() method inserts the new PO Line or updates the matching PO Line and deletes all the other existing ones for that PO.
+
+It is important to mention that this behavior applies exclusively for child objects. Root objects may be updated using either API methods.
+
+In another scenario, suppose you have an existing PO with 3 POLINE's (1, 2, 3) and we would like to:
+
+```
+1. Delete POLINE #1
+2. Update POLINE #3 
+3. Create a new POLINE #4
+```
+
+To do that, you must:
+
+- Use the update() API method and send 3 POLINE's (2, 3, 4).
+  - PO Line 2 is unchanged, PO Line 3 is modified and PO Line 4 is new.
+
+The update() API method would verify that the request does not contain PO Line 1 and hence it deletes it, it skips the update of PO Line 2 (as there are no attributes that have been changed), updates PO Line 3 and adds the new one PO Line 4.
+
+The resulting set now contains PO Lines 2, 3 and 4.
+
+- So if you use the merge() API method instead - the only difference is that PO Line 1 is not be deleted and remains on the POLINE set.
+
+Hence, the PO object now contains PO lines 1, 2, 3 and 4.
+
+#### Update the POLINE in the purchase order
+
+In this section, you create and add a new PO Line to the purchase order, and then call the update() API method for the PO object to either: update the existing PO Line or replace the existing PO Line by the a new one.
+
+If the POLINE is matched, Maximo updates the existing <i>poline</i> with the new array.</br>
+If the POLINE is not matched, Maximo deletes the existing <i>poline</i> array and creates a new one with the new array.
+
+* Get a Resource from ResourceSet
+
+```swift
+var reSet : ResourceSet = mc.resourceSet(osName: "MXPO").fetch()
+var poRes : Resource = reSet.member(index: 0)
+```
+
+* Build the PO object hierarchy for adding a new child object
+
+```swift
+var polineObjIn : [String: Any] = ["polinenum": 1, "itemnum": "560-00", "storeloc": "CENTRAL"]
+var polineArray : [Any] = [polineObjIn]
+var poObj : [String: Any] = ["poline": polineArray]
+```
+* Create a new POLINE
+
+```swift
+poRes.update(jo: poObj, properties: nil)
+```
+
+> **Note**: At this point, you must have a PO object with a single POLINE with <i>polinenum</i> 1.
+
+* Build the PO object hierarchy for updating a child object
+
+```swift
+var polineObjIn2 : [String: Any] = ["polinenum": 2, "itemnum": "0-0031", "storeloc": "CENTRAL"]
+var polineArray2 : [Any] = [polineObjIn2]
+var poObj : [String: Any] = ["poline": polineArray2]
+```
+
+* Update the Resource
+
+```swift
+poRes.update(jo: polineObj2, properties: nil)
+```
+
+After these statement's execution, you now have a PO object with 1 POLINE. The execution flow is described as follows:
+
+```
+1. The server side framework attempts to locate a POLINE with the polinenum 2 and 
+does not find any (as there is only a single POLINE with polinenum 1).
+
+2. Then it adds a new POLINE with polinenum 2.
+
+3. At last, it deletes all the remaining POLINE's that are missing from the poline array, 
+that causes the removal of PO Line 1 from the POLINE set.
+```
+
+#### Merge the POLINE in the purchase order
+
+In this section, you create and add a new PO Line to the purchase order, and then call the update() API method for the PO object to create a brand new POLINE set. Later, you create and add another PO Line to the same purchase order, and then call the merge() API method for the PO object to either: update the existing PO Line or add a new one.
+
+If the POLINE is matched, Maximo updates the existing POLINE set with the updated elements in the array.
+If the POLINE is not matched, Maximo adds the new elements contained in the <i>poline</i> array to the existing POLINE set and keeps the existing ones on the set.
+
+* Get a Resource from ResourceSet
+
+```swift
+var reSet : ResourceSet = mc.resourceSet(osName: "MXPO").fetch()
+var poRes : Resource = reSet.member(index: 1)
+```
+
+* Build the PO object hierarchy for adding a new child object
+
+```swift
+var polineObjIn : [String: Any] = ["polinenum": 1, "itemnum": "560-00", "storeloc": "CENTRAL"]
+var polineArray : [Any] = [polineObjIn]
+var poObj : [String: Any] = ["poline": polineArray]
+```
+
+* Update the Resource	
+
+```swift
+poRes.update(jo: poObj, properties: nil) //This creates a POLINE with polinenum 1.
+```
+
+> **Note**: At this point, you must have a PO object with a single POLINE with <i>polinenum</i> 1.
+
+* Build the PO object hierarchy for adding a new child object
+
+```swift
+var polineObjIn3 : [String: Any] = ["polinenum": 2, "itemnum": "0-0031", "storeloc": "CENTRAL"]
+var polineArray3 : [Any] = [polineObjIn3]
+var polineObj3 : [String: Any] = ["poline": polineArray3]
+```
+
+* Merge the Resource
+
+```swift
+poRes.merge(jo: polineObj3, properties: nil) //This creates a POLINE with polinenum 2.
+```
+
+After these statement's execution, you now have a PO object with 2 POLINE's. The execution flow is described as follows:
+
+```
+1. The server side framework attempts to locate a POLINE with the polinenum 2 and 
+does not find any (as there is only a POLINE with polinenum 1).
+
+2. Then it adds a new POLINE with polinenum 2.
+
+3. At last, it keeps the remaining PO Lines (e.g. in this case POLINE with polinenum 1) as is.
+```
+
+### Delete a service request (MXSR)
+This section briefly demonstrates how to delete an existing service request by using the Maximo REST SDK.
+
+#### Get an existing service request
+* Get a ResourceSet for the service request object.
+
+```swift
+var rs : ResourceSet = mc.resourceSet(osName: "mxsr")
+```
+
+* Get an existing service request object.
+
+This is an example of a unique service request URI:
+  
+```swift
+var venUri : String = "http://localhost:7001/maximo/oslc/os/mxsr/_U1IvMTE3Mw--"
+```
+
+Using the ResourceSet object:
+  
+```swift
+var re : Resource = rs.fetchMember(uri: srUri)
+```
+
+Or using a MaximoConnector object:
+  
+```swift
+var re : Resource = mc.resource(uri: srUri)
+```
+
+Fetch a Resource object by index:
+  
+```swift
+var re : Resource = rs.member(index: 0)
+```
+
+#### Delete the service request
+A resource removal can be done by either:
+
+* Calling the deleteResource() method of MaximoConnector object:
+
+```swift
+mc.deleteResource(uri: srUri)
+```
+
+* Calling the delete() method of Resource object:
+
+```swift
+re.delete()
+```
+### Attachments
+Attachments in the Maximo Asset Management are documents, files or images that are attached to a resource such as a work order or a service request.
+The following examples show how to add and delete an attachment from a work order.
+
+#### Create an attachment for an existing work order.
+* Get a work order ResourceSet:
+
+```swift
+var rs : ResultSet = mc.resourceSet(osName: "mxwodetail")
+```
+
+* Get an existing work order from a ResourceSet:
+
+This is an example of a work order unique URI:
+  
+```swift
+String woUri = "http://127.0.0.1:7001/maximo/oslc/os/mxwodetail/_QkVERk9SRC8xMDAw"
+```
+
+Using the ResourceSet object:
+  
+```swift 
+var re : Resource = rs.fetchMember(uri: woUri)
+```
+
+Using the MaximoConnector object:
+  
+```swift
+var re : Resource = mc.resource(uri: woUri)
+```
+
+Fetching a Resource object by index number:
+  
+```swift 	
+var re : Resource = rs.member(index: 0)
+```
+
+* Get the attachment set for the selected work order:
+
+```swift
+var ats : AttachmentSet = re.attachmentSet()
+```
+
+* Create a sample document data
+
+```swift
+var str : String = "This is a sample text file used to validate the Maximo REST SDK"
+let data : Data = str.data(using: .utf8)
+```
+
+* Create a new Attachment object
+
+```swift
+var att : Attachment = Attachment().name(name: "attachment.txt").description(description: "test")
+   .data(data: data).meta(type: "FILE", storeas: "Attachments")
+```
+
+* Attach the file to the work order
+
+By default, you can use the following statement:
+  
+```swift
+att = ats.create(att: att)
+```
+
+Or you can use it's variant that allows you to create attachments inside a given subfolder:
+  
+```swift
+att = ats.create(relation: "customdoclink", att: att)
+```
+
+#### Get the data from the attachment
+* Get attachment from AttachmentSet
+* Get an existing attachment from the Maximo Asset Management:
+
+```swift
+var att : Attachment = ats.member(index: 0)
+```
+
+* Get the attachment document data:
+
+```swift
+var data : Data = att.toDoc()
+```
+
+* Get the attachment meta data:
+
+```swift
+var attMeta : [String: Any] = att.toDocMeta()
+var attMeta : [String: Any] = att.fetchDocMeta()
+```
+
+* Get Attachment using the MaximoConnector object directly by calling the attachment URI.
+Attachments are also uniquely identified by a URI. In the following example, we will get attachment (28) which is attached to work order (_QkVERk9SRC8xMDAw):
+
+```swift
+var attUri : String = "http://host/maximo/oslc/os/mxwodetail/_QkVERk9SRC8xMDAw/DOCLINKS/28"
+var att : Attachment = mc.attachment(uri: attUri)
+var data : Data = mc.attachedDoc(uri: attUri)
+var attMeta : [String: Any] = mc.attachmentDocMeta(uri: attUri)
+```
+
+#### Delete an attachment
+
+* Get the Attachment object from the AttachmentSet
+
+Fetch Attachment object by index number:
+  
+```swift
+var att : Attachment = ats.member(index: 0)
+```
+
+Fetch Attachment object by attachment URI:
+  
+```swift  
+var att : Attachment = ats.fetchMember(uri: attUri)
+var att : Attachment = mc.attachment(uri: attUri)
+```
+
+* Delete the Attachment object
+
+Using the Attachment object itself:
+  
+```swift
+att.delete()
+```
+
+Using the MaximoConnector object (Deleting by Attachment URI):
+  
+```swift
+mc.deleteAttachment(uri: attUri)
+```
+
+### Saved query
+Maximo Asset Management supports a feature called a <i>Saved Query</i> where the user can define a pre-built query for an application, such as the Work Order Tracking, in order to retrieve a common set of data (e.g. A list of approved work orders). Assuming that public saved queries are available for Maximo applications (like the WOTRACK), you can use the savedQuery() API method to select records based on defined filter criteria.
+In order to use this feature, the user has to grant the applicable permissions between the <i>Object Structures</i> and the authorized Maximo applications.
+
+Now consider the "OWNER IS ME" query for the WOTRACK application as an example. Assuming that the MXWODETAIL object structure has been set up to grant permissions to the WOTRACK application.
+
+* Query the data
+
+```swift
+var rs : ResourceSet = mc.resourceSet(osName: "mxwodetail").savedQuery(qsaved: SavedQuery().
+   name(name: "WOTRACK:OWNER IS ME")).select(selectClause: "*").fetch()
+```
+
+The select(selectClause: "*") queries all attributes for the filtered set of the MXWODETAIL object structure. As mentioned earlier, we can do a partial resource selection like select(selectClause: ["wonum", "status"]).
+
+We can also do further filtering along with the saved query.
+
+* Query the data
+
+```swift
+var rs : ResourceSet = mc.resourceSet(osName: "mxwodetail").savedQuery(qsaved: SavedQuery().
+  name(name: "WOTRACK:OWNER IS ME"))._where(_where: QueryWhere()._where(name: "status").
+  _in(values: ["APPR","WAPPR"])).select(selectClause: ["wonum", "status", "statusdate"]).fetch()
+```
+
+### Terms search
+This feature allows you to perform a record-wide text search. In order to use it, you need to define a list of <i>searchable</i> attributes for the <i>Object Structure</i>.
+In the following example, consider that the "description" field has been marked as a <i>searchable</i> attribute for the OSLCMXSR object structure.
+Now you can use the hasTerms() API method to define which terms you're searching for.
+
+* Fetch the ResourceSet
+```swift
+var res : ResourceSet = mc.resourceSet(osName: "oslcmxsr").hasTerms(terms: ["email", "finance"]).
+   select(selectClause: ["description", "ticketid"]).pageSize(pageSize: 5).fetch()
+```
+
+The code statement above selects all the OSLCMXSR records whose <i>description</i> contains either "email" or "finance".
+
+### Action
+
+Actions are functional components of a resource that perform specific such as changing the status of a resource or moving a resource from one location to another.
+These tasks usually contain a fair amount of business logic involved.
+The following example illustrates the use of the <i>changeStatus</i> action for the MXWODETAIL object structure.
+
+* Get the ResourceSet for the MXWODETAIL object structure where status is <i>Waiting for Approval</i>
+```swift
+var reSet : ResourceSet = mc.resourceSet(osName: "mxwodetail")._where(_where: QueryWhere().
+   _where(name: "status").equalTo(value: "WAPPR")).fetch()
+```
+
+* Get the first member of the ResourceSet:
+```swift
+var re : Resource = reSet.member(index: 0)
+```
+
+* Build the request JSON object
+```swift
+var jo : [String: Any] = ["status" : "APPR", "memo" : "This work order is approved."]
+```
+
+* Invoke the action
+```swift
+re.invokeAction(actionName: "wsmethod:changeStatus", jo: jo)
 ```
