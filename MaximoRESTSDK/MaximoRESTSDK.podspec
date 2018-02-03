@@ -12,8 +12,4 @@ Pod::Spec.new do |spec|
   spec.requires_arc = true
   spec.source = { git: "git@github.ibm.com:maximo-ohio/maximo-swift-restclient.git", tag: "#{spec.version}" }
   spec.source_files = "MaximoRESTSDK/MaximoRESTSDK/*.{h,swift}"
-
-  spec.dependency "Curry", "~> 4.0.0"
-  spec.dependency "Quick", "1.2.0"
-  spec.dependency "Nimble", "7.0.3"
 end
