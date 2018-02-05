@@ -13,8 +13,6 @@
 		9A56B5AF2007B890008BE1CC /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A56B5AE2007B890008BE1CC /* Attachment.swift */; };
 		9A56B5B12007B972008BE1CC /* MaximoConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A56B5B02007B972008BE1CC /* MaximoConnector.swift */; };
 		9A56B5B32007DE2A008BE1CC /* OslcError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A56B5B22007DE2A008BE1CC /* OslcError.swift */; };
-		9A63DF352006BC4900BC9855 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AFFFB2D2006ABF600583663 /* Quick.framework */; };
-		9A63DF362006BC4D00BC9855 /* Curry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AFFFB292006AB2A00583663 /* Curry.framework */; };
 		9A913849200A701000F02B46 /* Aggregation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A913848200A701000F02B46 /* Aggregation.swift */; };
 		9A91384B200A71C100F02B46 /* BulkProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A91384A200A71C100F02B46 /* BulkProcessor.swift */; };
 		9AC4122320090C51006C1863 /* SavedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC4122220090C51006C1863 /* SavedQuery.swift */; };
@@ -48,7 +46,6 @@
 		9A56B5AE2007B890008BE1CC /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
 		9A56B5B02007B972008BE1CC /* MaximoConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaximoConnector.swift; sourceTree = "<group>"; };
 		9A56B5B22007DE2A008BE1CC /* OslcError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OslcError.swift; sourceTree = "<group>"; };
-		9A63DF342006BBC700BC9855 /* Nimble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Nimble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A913848200A701000F02B46 /* Aggregation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aggregation.swift; sourceTree = "<group>"; };
 		9A91384A200A71C100F02B46 /* BulkProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulkProcessor.swift; sourceTree = "<group>"; };
 		9AC4122220090C51006C1863 /* SavedQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedQuery.swift; sourceTree = "<group>"; };
@@ -64,8 +61,6 @@
 		9AFFFB162006A7C600583663 /* MaximoRESTSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MaximoRESTSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AFFFB1B2006A7C600583663 /* MaximoRESTSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaximoRESTSDKTests.swift; sourceTree = "<group>"; };
 		9AFFFB1D2006A7C600583663 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9AFFFB292006AB2A00583663 /* Curry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Curry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9AFFFB2D2006ABF600583663 /* Quick.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Quick.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9BC343DDA8264944BAEFF2D /* Pods-MaximoRESTSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaximoRESTSDKTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MaximoRESTSDKTests/Pods-MaximoRESTSDKTests.release.xcconfig"; sourceTree = "<group>"; };
 		F97B335B60547B3299D12FC6 /* Pods-MaximoRESTSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaximoRESTSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MaximoRESTSDK/Pods-MaximoRESTSDK.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,9 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A63DF352006BC4900BC9855 /* Quick.framework in Frameworks */,
 				9AFFFB172006A7C600583663 /* MaximoRESTSDK.framework in Frameworks */,
-				9A63DF362006BC4D00BC9855 /* Curry.framework in Frameworks */,
 				2CC110447254AB383CFA8708 /* Pods_MaximoRESTSDKTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -147,9 +140,6 @@
 		9AFFFB272006AB2A00583663 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9A63DF342006BBC700BC9855 /* Nimble.framework */,
-				9AFFFB2D2006ABF600583663 /* Quick.framework */,
-				9AFFFB292006AB2A00583663 /* Curry.framework */,
 				625F7B7A8611405B2AABEC4A /* Pods_MaximoRESTSDK.framework */,
 				174CD41B61F3AAB95570D563 /* Pods_MaximoRESTSDKTests.framework */,
 			);

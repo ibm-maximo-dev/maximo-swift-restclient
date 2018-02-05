@@ -7,8 +7,5 @@ target 'MaximoRESTSDK' do
   target 'MaximoRESTSDKTests' do
     inherit! :search_paths
     # Pods for testing
-    pod 'Curry', '~> 4.0.0'
-    pod 'Quick', '1.2.0'
-    pod 'Nimble', '7.0.3'
   end
 end
