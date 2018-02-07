@@ -16,14 +16,23 @@ class MaximoRESTSDKTests: XCTestCase {
     
     override class func setUp() {
         super.setUp()
-        var options = Options().user(user: "wilson").password(password: "wilson").auth(authMode: "maxauth")
-        options = options.host(host: "9.85.129.75").port(port: 7001).lean(lean: true)
-        connector = MaximoConnector(options: options)
-        do {
-            try connector!.connect()
-            print("Login Success!")
-        } catch {
-            print("Error while logging in")
+        let testBundle = Bundle(for: MaximoRESTSDKTests.self)
+        if let url = testBundle.url(forResource: "Info", withExtension: "plist"),
+            let infoPlist = NSDictionary(contentsOf: url) as? [String:Any] {
+            guard let maximoConnectorDict = infoPlist["MaximoConnectorConfig"] as? [String:Any] else {
+                print("No MaximoConnectorConfig present in Info.plist. Please add relevant information")
+                return
+            }
+            print("MaximoRESTSDKTests setUp() called, Connecting to \(maximoConnectorDict["host"] as! String):\(maximoConnectorDict["port"] as! Int)")
+            var options = Options().user(user: maximoConnectorDict["user"] as! String).password(password: maximoConnectorDict["password"] as! String).auth(authMode: maximoConnectorDict["authMode"] as! String)
+            options = options.host(host: maximoConnectorDict["host"] as! String).port(port: maximoConnectorDict["port"] as! Int).lean(lean: true)
+            connector = MaximoConnector(options: options)
+            do {
+                try connector!.connect()
+                print("Login Success!")
+            } catch {
+                print("Error while logging in")
+            }
         }
     }
     
@@ -43,21 +52,24 @@ class MaximoRESTSDKTests: XCTestCase {
         _ = workOrderSet._where(whereClause: "spi:wonum=\"1002\" and spi:istask=0")
         _ = workOrderSet.paging(type: true)
         _ = try workOrderSet.fetch()
-        let resource = try workOrderSet.member(index: 0)
-        MaximoRESTSDKTests.workOrder = try resource!.toJSON()
         
-        print("Fetching a Work Order Success!")
-        print("Work Order JSON: ")
-        print(MaximoRESTSDKTests.workOrder!)
+        let resource = try workOrderSet.member(index: 0)
+        try print(resource!.toJSON())
+        MaximoRESTSDKTests.workOrder = try resource!.toJSON()
+        print("Fetching a Work Order JSON: \(String(describing: MaximoRESTSDKTests.workOrder))")
     }
 
     func testUpdateWorkOrder() throws {
         print("Updating a Work Order")
-        let uri = MaximoRESTSDKTests.connector!.getCurrentURI() + "/os/mxwo/" +
-            Util.stringValue(value: MaximoRESTSDKTests.workOrder!["workorderid"]!)
+        guard let woID = MaximoRESTSDKTests.workOrder?["workorderid"] else {
+            print("Unable to update work order. workorder Id not present")
+            return
+        }
+        let uri = MaximoRESTSDKTests.connector!.getCurrentURI() + "/os/mxwo/\(woID)"
         MaximoRESTSDKTests.workOrder!["description"] = "Maximo iOS Integration Test"
         MaximoRESTSDKTests.workOrder!["wopriority"] = 1
         MaximoRESTSDKTests.workOrder!["estdur"] = 25.0
         _ = try MaximoRESTSDKTests.connector!.update(uri: uri, jo: MaximoRESTSDKTests.workOrder!, properties: nil)
+        print("Updating a Work Order JSON: \(String(describing: MaximoRESTSDKTests.workOrder))")
     }
 }

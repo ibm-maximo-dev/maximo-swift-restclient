@@ -2,6 +2,21 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>MaximoConnectorConfig</key>
+	<dict>
+		<key>sampleWO</key>
+		<string>1002</string>
+		<key>host</key>
+		<string>172.16.84.101</string>
+		<key>port</key>
+		<integer>80</integer>
+		<key>user</key>
+		<string>wilson</string>
+		<key>password</key>
+		<string>wilson</string>
+		<key>authMode</key>
+		<string>maxAuth</string>
+	</dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
