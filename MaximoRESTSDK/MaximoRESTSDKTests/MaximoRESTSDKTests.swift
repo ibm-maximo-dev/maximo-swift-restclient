@@ -17,7 +17,7 @@ class MaximoRESTSDKTests: XCTestCase {
     override class func setUp() {
         super.setUp()
         var options = Options().user(user: "wilson").password(password: "wilson").auth(authMode: "maxauth")
-        options = options.host(host: "9.85.129.75").port(port: 7001).lean(lean: true)
+        options = options.host(host: "9.80.231.98").port(port: 7001).lean(lean: true)
         connector = MaximoConnector(options: options)
         do {
             try connector!.connect()
@@ -60,4 +60,12 @@ class MaximoRESTSDKTests: XCTestCase {
         MaximoRESTSDKTests.workOrder!["estdur"] = 25.0
         _ = try MaximoRESTSDKTests.connector!.update(uri: uri, jo: MaximoRESTSDKTests.workOrder!, properties: nil)
     }
+
+    func testCreateWorkOrder() throws {
+        print("Creating a Work Order")
+        let uri = MaximoRESTSDKTests.connector!.getCurrentURI() + "/os/mxwo/"
+        let newWorkOrder : [String: Any] = ["description": "Maximo iOS Create Test", "estdur": 2.0, "wonum": 1989, "siteid": "BEDFORD", "orgid": "EAGLENA"]
+        _ = try MaximoRESTSDKTests.connector!.create(uri: uri, jo: newWorkOrder, properties: nil)
+    }
+
 }

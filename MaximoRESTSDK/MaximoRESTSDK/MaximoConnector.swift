@@ -660,7 +660,7 @@ public class MaximoConnector {
         }
 
         var json : [String: Any] = [:]
-        if properties != nil && properties!.count > 0 {
+        if properties != nil && properties!.count == 0 {
             let href : String = (task.response as! HTTPURLResponse).allHeaderFields["Location"] as! String
             if self.options.isLean() {
                 json["rdf:resource"] = href
@@ -668,7 +668,7 @@ public class MaximoConnector {
                 json["href"] = href
             }
         } else {
-            if dataReceived != nil {
+            if dataReceived != nil && !dataReceived!.isEmpty {
                 json = try! JSONSerialization.jsonObject(with: dataReceived!, options: []) as! [String : Any]
             }
         }
