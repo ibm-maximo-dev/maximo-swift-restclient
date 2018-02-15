@@ -246,6 +246,7 @@ public class MaximoConnector {
                 
                 if self.cookies.isEmpty || error != nil {
                     print("HTTP connection failure: " + error.debugDescription)
+                    throw error
                 }
 
                 semaphore.signal()
