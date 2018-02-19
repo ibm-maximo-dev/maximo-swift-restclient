@@ -225,7 +225,7 @@ public class MaximoConnector {
             }
 
             let semaphore = DispatchSemaphore(value: 0)
-            let connectionHandler: (Data?, URLResponse?, Error?) -> Void = {
+            let connectionHandler: (Data?, URLResponse?, Error?) throws -> Void = {
                 (data, response, error) in
                 if let httpResponse = response as? HTTPURLResponse, let fields = httpResponse.allHeaderFields as? [String : String] {
                     let cookies = HTTPCookie.cookies(withResponseHeaderFields: fields, for: response!.url!)
@@ -246,13 +246,13 @@ public class MaximoConnector {
                 
                 if self.cookies.isEmpty || error != nil {
                     print("HTTP connection failure: " + error.debugDescription)
-                    throw error
+                    throw error!
                 }
 
                 semaphore.signal()
             }
 
-            let task = session.dataTask(with: request!, completionHandler: connectionHandler)
+            let task = session.dataTask(with: request!, completionHandler: connectionHandler as! (Data?, URLResponse?, Error?) -> Void)
             task.resume()
             _ = semaphore.wait(timeout: DispatchTime.distantFuture)
 
