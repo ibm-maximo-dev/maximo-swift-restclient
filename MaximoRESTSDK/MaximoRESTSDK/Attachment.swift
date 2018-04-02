@@ -219,8 +219,12 @@ public class Attachment {
         if !isMetaLoaded {
             try loadMeta()
         }
+        /*
         let data = try JSONEncoder().encode(self.jo)
         return data
+ */
+        let data = try? JSONSerialization.data(withJSONObject: self.jo, options: [])
+        return data!
     }
 
     /**
