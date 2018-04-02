@@ -157,8 +157,9 @@ public class Resource {
         if !isLoaded {
             _ = try load()
         }
-        let data = try JSONEncoder().encode(self.jsonObject)
-        return data
+//        let data: Data = try JSONEncoder().encode(self.jsonObject)
+        let data = try? JSONSerialization.data(withJSONObject: self.jsonObject, options: [])
+        return data!
     }
     
     /**
