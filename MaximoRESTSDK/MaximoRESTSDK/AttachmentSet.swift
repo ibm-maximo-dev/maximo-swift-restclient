@@ -142,8 +142,10 @@ public class AttachmentSet {
      */
     public func toJSONBytes() throws -> Data {
         _ = try self.load()
-        let data = try JSONEncoder().encode(self.jo)
-        return data
+        //let data = try JSONEncoder().encode(self.jo)
+        //return data
+        let data = try? JSONSerialization.data(withJSONObject: self.jo, options: [])
+        return data!
     }
     
     public func href(href: String) -> AttachmentSet {
