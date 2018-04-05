@@ -203,76 +203,93 @@ public class MaximoConnector {
      * @throws
      */
     public func connect(proxyConfiguration : [String: String]?) throws {
+/*
         if isValid() {
             throw OslcError.connectionAlreadyEstablished
         }
-        cookies.removeAll()
-    
-        let uri: String = self.options.getAppURI()
-        var request : URLRequest? = self.setAuth(uri: uri)
-        if request != nil {
-            if !self.options.isFormAuth() {
-                self.setMethod(request: &request!, method: "GET", properties: nil)
-            }
+*/
+        if !isValid() {
+            cookies.removeAll()
+        
+            let uri: String = self.options.getAppURI()
+            var request: URLRequest? = self.setAuth(uri: uri)
+            if request != nil {
+                if !self.options.isFormAuth() {
+                    self.setMethod(request: &request!, method: "GET", properties: nil)
+                }
 
-            let configuration = URLSessionConfiguration()
-            var session : URLSession
-            if proxyConfiguration != nil {
-                configuration.connectionProxyDictionary = proxyConfiguration
-                session = URLSession(configuration: configuration)
-            } else {
-                session = URLSession.shared
-            }
+                let configuration = URLSessionConfiguration()
+                var session : URLSession
+                if proxyConfiguration != nil {
+                    configuration.connectionProxyDictionary = proxyConfiguration
+                    session = URLSession(configuration: configuration)
+                } else {
+                    session = URLSession.shared
+                }
 
-            let semaphore = DispatchSemaphore(value: 0)
-            let connectionHandler: (Data?, URLResponse?, Error?) throws -> Void = {
-                (data, response, error) in
-                if let httpResponse = response as? HTTPURLResponse, let fields = httpResponse.allHeaderFields as? [String : String] {
-                    let cookies = HTTPCookie.cookies(withResponseHeaderFields: fields, for: response!.url!)
-                    HTTPCookieStorage.shared.setCookies(cookies, for: response!.url!, mainDocumentURL: nil)
-                    for cookie in cookies {
-                        var cookieProperties = [HTTPCookiePropertyKey: Any]()
-                        cookieProperties[HTTPCookiePropertyKey.name] = cookie.name
-                        cookieProperties[HTTPCookiePropertyKey.value] = cookie.value
-                        cookieProperties[HTTPCookiePropertyKey.domain] = cookie.domain
-                        cookieProperties[HTTPCookiePropertyKey.path] = cookie.path
-                        cookieProperties[HTTPCookiePropertyKey.version] = cookie.version
-                        cookieProperties[HTTPCookiePropertyKey.expires] = cookie.expiresDate
-                        
-                        let newCookie = HTTPCookie(properties: cookieProperties)
-                        self.cookies.append(newCookie!)
+                let semaphore = DispatchSemaphore(value: 0)
+                var errorString : String?
+                self.valid = false
+                let task = session.dataTask(with: request!, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
+                    if (error != nil) {
+                        errorString = "HTTP connection failure: " + (error?.localizedDescription)!
+                        print(errorString)
+                    }
+                    if let httpResponse = response as? HTTPURLResponse {
+                        if (200...299).contains(httpResponse.statusCode), let fields = httpResponse.allHeaderFields as? [String : String] {
+                            self.valid = true
+                            print("HTTP Request: \(request!)")
+                            print("HTTP Response: \(httpResponse)")
+                            print("MIME TYPE: \(String(describing: httpResponse.mimeType))")
+                            if let data = data, let str = String(data: data, encoding: .utf8) {
+                                print ("HTTP Data: \(str)")
+                            }
+                            let cookies = HTTPCookie.cookies(withResponseHeaderFields: fields, for: response!.url!)
+                            HTTPCookieStorage.shared.setCookies(cookies, for: response!.url!, mainDocumentURL: nil)
+                            for cookie in cookies {
+                                var cookieProperties = [HTTPCookiePropertyKey: Any]()
+                                cookieProperties[HTTPCookiePropertyKey.name] = cookie.name
+                                cookieProperties[HTTPCookiePropertyKey.value] = cookie.value
+                                cookieProperties[HTTPCookiePropertyKey.domain] = cookie.domain
+                                cookieProperties[HTTPCookiePropertyKey.path] = cookie.path
+                                cookieProperties[HTTPCookiePropertyKey.version] = cookie.version
+                                cookieProperties[HTTPCookiePropertyKey.expires] = cookie.expiresDate
+                                
+                                let newCookie = HTTPCookie(properties: cookieProperties)
+                                self.cookies.append(newCookie!)
+                            }
+                        }
+                        else {
+                            print("HTTP Response Headers: \(httpResponse.allHeaderFields)")
+                            print("HTTP Response Code: \(httpResponse.statusCode)")
+                            
+                        }
+                    }
+                    else {
+                        print("HTTP Response : Illegal Response: \(String(describing: response))")
+                    }
+                    semaphore.signal()
+                })
+                task.resume()
+                
+                _ = semaphore.wait(timeout: DispatchTime.distantFuture)
+                if  !self.valid {
+                    if errorString != nil {
+                        throw OslcError.loginFailure
+                    }
+                    else {
+                        throw OslcError.invalidRequest
                     }
                 }
-                
-                if self.cookies.isEmpty || error != nil {
-                    print("HTTP connection failure: " + error.debugDescription)
-                    throw error!
-                }
-
-                semaphore.signal()
             }
-
-            let task = session.dataTask(with: request!, completionHandler: connectionHandler as! (Data?, URLResponse?, Error?) -> Void)
-            task.resume()
-            _ = semaphore.wait(timeout: DispatchTime.distantFuture)
-
-            var i : Int = -1
-            if (task.response as? HTTPURLResponse) != nil {
-                i = (task.response as! HTTPURLResponse).statusCode
-            }
-            lastResponseCode = i
-            
-            if  i == -1 {
+            else {
                 throw OslcError.invalidRequest
-            }
-
-            if i < 400 {
-                self.valid = true
             }
         }
     }
 
     func setAuth(uri: String) -> URLRequest? {
+        
         if self.options.getUser() != nil && self.options.getPassword() != nil {
             if options.isBasicAuth() {
                 let httpURL = URL(string: uri)
@@ -293,9 +310,7 @@ public class MaximoConnector {
             } else if options.isFormAuth() {
                 var appURI : String = uri
                 appURI += "/j_security_check";
-                
                 let httpURL = URL(string: uri)
-
                 var request = URLRequest(url : httpURL!)
 
                 request.httpMethod = "POST"
@@ -310,7 +325,6 @@ public class MaximoConnector {
                 postContent.append("&j_password=")
                 postContent.append(self.options.getPassword()!)
                 request.httpBody = postContent.data(using: .utf8)
-
                 return request
             }
         }
