@@ -15,6 +15,8 @@ public enum OslcError : Error {
     case invalidRelation
     case invalidURL
     case invalidRequest
+    case invalidResponse
+    case loginFailure
     case connectionAlreadyEstablished
     case invalidConnectorInstance
 }
