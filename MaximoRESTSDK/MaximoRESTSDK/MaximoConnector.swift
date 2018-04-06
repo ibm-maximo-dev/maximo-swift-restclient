@@ -213,7 +213,10 @@ public class MaximoConnector {
         
             let uri: String = self.options.getAppURI()
             var request: URLRequest? = self.setAuth(uri: uri)
-            if request != nil {
+            if request == nil {
+                throw OslcError.invalidRequest
+            }
+            else {
                 if !self.options.isFormAuth() {
                     self.setMethod(request: &request!, method: "GET", properties: nil)
                 }
@@ -229,21 +232,23 @@ public class MaximoConnector {
 
                 let semaphore = DispatchSemaphore(value: 0)
                 var errorString : String?
+                var responseCode : Int? = 0
                 self.valid = false
                 let task = session.dataTask(with: request!, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
                     if (error != nil) {
+                        responseCode = 0
                         errorString = "HTTP connection failure: " + (error?.localizedDescription)!
                         print(errorString)
                     }
                     if let httpResponse = response as? HTTPURLResponse {
+                        responseCode = httpResponse.statusCode
                         if (200...299).contains(httpResponse.statusCode), let fields = httpResponse.allHeaderFields as? [String : String] {
                             self.valid = true
-                            print("HTTP Request: \(request!)")
-                            print("HTTP Response: \(httpResponse)")
-                            print("MIME TYPE: \(String(describing: httpResponse.mimeType))")
+                            /*
                             if let data = data, let str = String(data: data, encoding: .utf8) {
                                 print ("HTTP Data: \(str)")
                             }
+                            */
                             let cookies = HTTPCookie.cookies(withResponseHeaderFields: fields, for: response!.url!)
                             HTTPCookieStorage.shared.setCookies(cookies, for: response!.url!, mainDocumentURL: nil)
                             for cookie in cookies {
@@ -260,13 +265,12 @@ public class MaximoConnector {
                             }
                         }
                         else {
-                            print("HTTP Response Headers: \(httpResponse.allHeaderFields)")
-                            print("HTTP Response Code: \(httpResponse.statusCode)")
-                            
+                            errorString = "Server Error"
                         }
                     }
                     else {
-                        print("HTTP Response : Illegal Response: \(String(describing: response))")
+                        responseCode = 999
+                        errorString = "HTTP Response : Illegal Response: \(String(describing: response))"
                     }
                     semaphore.signal()
                 })
@@ -274,16 +278,13 @@ public class MaximoConnector {
                 
                 _ = semaphore.wait(timeout: DispatchTime.distantFuture)
                 if  !self.valid {
-                    if errorString != nil {
-                        throw OslcError.loginFailure
+                    if responseCode == 0, errorString != nil {
+                        throw OslcError.loginFailure(message: errorString!)
                     }
                     else {
-                        throw OslcError.invalidRequest
+                        throw OslcError.serverError(code: responseCode!, message: errorString!)
                     }
                 }
-            }
-            else {
-                throw OslcError.invalidRequest
             }
         }
     }
@@ -497,7 +498,7 @@ public class MaximoConnector {
 
             if dataReceived != nil {
                 let dataAsString : String? = String(data: dataReceived!, encoding: String.Encoding.utf8)
-                print(dataAsString!)
+//                print(dataAsString!)
             }
             
             responseError = error

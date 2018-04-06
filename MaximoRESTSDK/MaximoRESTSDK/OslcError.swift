@@ -16,7 +16,8 @@ public enum OslcError : Error {
     case invalidURL
     case invalidRequest
     case invalidResponse
-    case loginFailure
+    case loginFailure(message: String)
+    case serverError(code: Int, message: String)
     case connectionAlreadyEstablished
     case invalidConnectorInstance
 }
