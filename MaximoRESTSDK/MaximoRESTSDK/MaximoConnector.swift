@@ -650,45 +650,55 @@ public class MaximoConnector {
         
         var dataReceived : Data?
         var responseError : Error?
+        var errorString : String?
+        var responseCode : Int? = 0
+        self.valid = false
+        var json : [String: Any] = [:]
         let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
-            dataReceived = data
-            
-            if dataReceived != nil {
-                let dataAsString : String? = String(data: dataReceived!, encoding: String.Encoding.utf8)
-                print(dataAsString!)
+            if error != nil {
+                responseError = error
+                responseCode = 0
+                errorString = "HTTP connection failure: " + (error?.localizedDescription)!
+                print(errorString as Any)
+                json["error"] = errorString
+
             }
-            
-            responseError = error
+            else if let httpResponse = response as? HTTPURLResponse {
+                responseCode = httpResponse.statusCode
+                    if (200...299).contains(httpResponse.statusCode) {
+                        let href : String = httpResponse.allHeaderFields["Location"] as! String
+                        if self.options.isLean() {
+                            json["rdf:resource"] = href
+                        } else {
+                            json["href"] = href
+                        }
+                    }
+                    else  {
+                        if let dataReceived = data {
+                            json = try! JSONSerialization.jsonObject(with: dataReceived, options: []) as! [String : Any]
+                            let dataAsString : String? = String(data: dataReceived, encoding: String.Encoding.utf8)
+                            errorString = dataAsString
+                        }
+                    }
+                }
+            else {
+                responseCode = 999
+                errorString = "HTTP Response : Illegal Response: \(String(describing: response))"
+                json["error"] = errorString
+            }
             semaphore.signal()
         })
         task.resume()
         _ = semaphore.wait(timeout: DispatchTime.distantFuture)
-        
-        var resCode : Int = -1
-        if (task.response as? HTTPURLResponse) != nil {
-            resCode = (task.response as! HTTPURLResponse).statusCode
-        }
-        lastResponseCode = resCode;
-        if (resCode >= 400) {
+        if (responseCode! >= 400) {
             if responseError != nil {
                 throw responseError!
             }
-        }
-
-        var json : [String: Any] = [:]
-        if properties != nil && properties!.count == 0 {
-            let href : String = (task.response as! HTTPURLResponse).allHeaderFields["Location"] as! String
-            if self.options.isLean() {
-                json["rdf:resource"] = href
-            } else {
-                json["href"] = href
-            }
-        } else {
-            if dataReceived != nil && !dataReceived!.isEmpty {
-                json = try! JSONSerialization.jsonObject(with: dataReceived!, options: []) as! [String : Any]
+            else {
+                throw OslcError.serverError(code: responseCode!, message: errorString!)
             }
         }
-
+        
         return json
     }
 
