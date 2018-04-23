@@ -557,8 +557,8 @@ public class ResourceSet {
         if !isLoaded {
             _ = try load()
         }
-        if index >= (self.jsonArray?.count)! {
-            return nil;
+        if let size = self.jsonArray?.count, index > size {
+            return nil
         }
         let jo : [String: Any] = self.jsonArray![index] as! [String : Any]
         return Resource(jo: jo, mc: self.mc!);

@@ -1234,14 +1234,27 @@ public class MaximoConnector {
             self.setHeaders(request: &request, headers: headers!)
         }
         
-        var dataReceived : Data?
         var responseError : Error?
+        var responseCode : Int?
+        var errorString : String?
         let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
-            dataReceived = data
-            
-            if dataReceived != nil {
-                let dataAsString : String? = String(data: dataReceived!, encoding: String.Encoding.utf8)
-                print(dataAsString!)
+            if error != nil {
+                responseError = error
+                responseCode = 0
+                errorString = "HTTP connection failure: " + (error?.localizedDescription)!
+                print(errorString as Any)
+            }
+            else if let httpResponse = response as? HTTPURLResponse {
+                responseCode = httpResponse.statusCode
+                if  httpResponse.statusCode >= 400 {
+                    if let dataReceived = data {
+                        errorString = String(data: dataReceived, encoding: String.Encoding.utf8)
+                    }
+                }
+            }
+            else {
+                responseCode = 999
+                errorString = "HTTP Response : Illegal Response: \(String(describing: response))"
             }
             
             responseError = error
@@ -1250,14 +1263,12 @@ public class MaximoConnector {
         task.resume()
         _ = semaphore.wait(timeout: DispatchTime.distantFuture)
 
-        var resCode : Int = -1
-        if (task.response as? HTTPURLResponse) != nil {
-            resCode = (task.response as! HTTPURLResponse).statusCode
-        }
-        lastResponseCode = resCode;
-        if (resCode >= 400) {
+        if (responseCode! >= 400) || (responseCode == 0){
             if responseError != nil {
                 throw responseError!
+            }
+            else {
+                throw OslcError.serverError(code: responseCode!, message: errorString!)
             }
         }
     }
