@@ -912,42 +912,47 @@ public class MaximoConnector {
             self.setHeaders(request: &request, headers: headers!)
         }
         
-        var dataReceived : Data?
         var responseError : Error?
+        var responseCode : Int = -1
+        var errorString : String?
+        var json : [String: Any] = [:]
         let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
-            dataReceived = data
-            
-            if dataReceived != nil {
-                let dataAsString : String? = String(data: dataReceived!, encoding: String.Encoding.utf8)
-                print(dataAsString!)
+            if error != nil {
+                responseError = error
+                responseCode = 0
+                errorString = "HTTP connection failure: " + (error?.localizedDescription)!
+                print(errorString as Any)
             }
-            
-            responseError = error
+            else if let httpResponse = response as? HTTPURLResponse {
+                responseCode = httpResponse.statusCode
+                if let dataReceived = data {
+                    // Error from the calls are sent in the body of the response
+                    if  httpResponse.statusCode >= 400 {
+                        let json = try! JSONSerialization.jsonObject(with: dataReceived, options: []) as! [String : Any]
+                        let error = json["Error"] as! [String : Any]
+                        errorString = error["message"] as? String
+                    }
+                    else if httpResponse.statusCode != 204 {
+                        json = try! JSONSerialization.jsonObject(with: dataReceived, options: []) as! [String : Any]
+                    }
+                }
+            }
+            else {
+                responseCode = 999
+                errorString = "HTTP Response : Illegal Response: \(String(describing: response))"
+            }
             semaphore.signal()
         })
         task.resume()
         _ = semaphore.wait(timeout: DispatchTime.distantFuture)
-        
-        var resCode : Int = -1
-        if (task.response as? HTTPURLResponse) != nil {
-            resCode = (task.response as! HTTPURLResponse).statusCode
-        }
-        lastResponseCode = resCode;
-        if (resCode >= 400) {
+        if (responseCode >= 400) || (responseCode == 0){
             if responseError != nil {
                 throw responseError!
             }
+            else {
+                throw OslcError.serverError(code: responseCode, message: errorString!)
+            }
         }
-
-        var json : [String: Any] = [:]
-        if (resCode == 204) {
-            return json
-        }
-
-        if dataReceived != nil {
-            json = try! JSONSerialization.jsonObject(with: dataReceived!, options: []) as! [String : Any]
-        }
-
         return json
     }
     
@@ -1221,7 +1226,6 @@ public class MaximoConnector {
             requestURI = uri.replacingOccurrences(of: currentHost, with: publicHost)
         }
         
-        let semaphore = DispatchSemaphore(value: 0)
         let httpURL = URL(string: requestURI)
         if cookies.isEmpty {
             try self.connect()
@@ -1233,11 +1237,11 @@ public class MaximoConnector {
         if headers != nil && !(headers!.isEmpty) {
             self.setHeaders(request: &request, headers: headers!)
         }
-        
+        let semaphore = DispatchSemaphore(value: 0)
         var responseError : Error?
-        var responseCode : Int?
+        var responseCode : Int = -1
         var errorString : String?
-        let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
+        let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
             if error != nil {
                 responseError = error
                 responseCode = 0
@@ -1248,7 +1252,9 @@ public class MaximoConnector {
                 responseCode = httpResponse.statusCode
                 if  httpResponse.statusCode >= 400 {
                     if let dataReceived = data {
-                        errorString = String(data: dataReceived, encoding: String.Encoding.utf8)
+                        let json = try! JSONSerialization.jsonObject(with: dataReceived, options: []) as! [String : Any]
+                        let error = json["Error"] as! [String : Any]
+                        errorString = error["message"] as? String
                     }
                 }
             }
@@ -1259,16 +1265,15 @@ public class MaximoConnector {
             
             responseError = error
             semaphore.signal()
-        })
+        } )
         task.resume()
         _ = semaphore.wait(timeout: DispatchTime.distantFuture)
-
-        if (responseCode! >= 400) || (responseCode == 0){
+        if (responseCode >= 400) || (responseCode == 0){
             if responseError != nil {
                 throw responseError!
             }
             else {
-                throw OslcError.serverError(code: responseCode!, message: errorString!)
+                throw OslcError.serverError(code: responseCode, message: errorString!)
             }
         }
     }
