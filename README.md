@@ -88,8 +88,7 @@ end
 pod '<dependency name>', '1.0.0'
 ```
 
->**Note**: In this case, for this module, there are no dependencies on CocoaPods library, os is not necessary add anything else for 
-this example.
+>**Note**: In this case, for this module, there are no dependencies on CocoaPods library, is not necessary add anything else for  this example.
 
 
 5. Install the dependencies for your project by entering the following command in the terminal session:
