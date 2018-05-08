@@ -72,19 +72,25 @@ end
 
 Delete the # and space before "platform" and delete the other lines that start with "#".
 Your Podfile now looks like the following example:
+For this particular example, the application were built in ios version 11.2. 
 
 ```
-platform :ios, '9.0'
+platform :ios, '11.2'
 
 target '<YOUR PROJECT NAME>' do
   use_frameworks!
 
 end
 ```
-4. Add the following line to your Podfile, right after "use_frameworks!":
+4. If your project has some dependecies, add the dependency line to your Podfile, right after "use_frameworks!":
+
 ```
-pod 'MaximoRESTSDK', '1.0.0'
+pod '<dependency name>', '1.0.0'
 ```
+
+>**Note**: In this case, for this module, there are no dependencies on CocoaPods library, os is not necessary add anything else for 
+this example.
+
 
 5. Install the dependencies for your project by entering the following command in the terminal session:
 ```
