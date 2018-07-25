@@ -16,6 +16,7 @@ DerivedData
 !default.perspectivev3
 xcuserdata
 
+
 ## Other
 *.xccheckout
 *.moved-aside
@@ -31,4 +32,9 @@ xcuserdata
 
 # Carthage
 Carthage/Build
+
+# Project metadata and configuration files.
+MaximoRESTSDK.xcodeproj/**/*
+*.lock
+*.pbxproj
 
