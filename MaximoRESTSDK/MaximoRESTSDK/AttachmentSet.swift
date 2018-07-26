@@ -84,24 +84,43 @@ import Foundation
  */
 public class AttachmentSet {
     
+    /// URI Information
     var href : String = String()
+    /// JSON Array
     var jo: [String: Any] = [:]
+    /// JSON Any structure information.
     var ja: [Any] = []
+    /// Maximo Connector.
     var mc : MaximoConnector = MaximoConnector()
+    /// Boolean to represent attachment load.
     var isLoaded : Bool = false
 
+    /// Initialize object.
     public init() {
     }
     
+    /// Initialize object based on Maximo Connector.
+    ///
+    /// - Parameter mc: Maximo Connector object.
     public init(mc: MaximoConnector) {
         self.mc = mc
     }
     
+    /// Initialize object based on a URI's information and a Maximo connector.
+    ///
+    /// - Parameters:
+    ///   - href: URI's information.
+    ///   - mc: Maximo Connector.
     public init(href: String, mc: MaximoConnector) {
         self.href = href
         self.mc = mc
     }
 
+    /// Initialize the object based on a JSON Array and a Maximo Connector object.
+    ///
+    /// - Parameters:
+    ///   - jo: JSON information array.
+    ///   - mc: Maximo Connector object.
     public init(jo: [String: Any], mc: MaximoConnector) {
         self.jo = jo
         if self.jo["rdfs:member"] != nil {
@@ -117,29 +136,26 @@ public class AttachmentSet {
         self.mc = mc
     }
 
-    /**
-     * Get current URI
-     *
-     */
+    /// Get current URI
+    ///
+    /// - Returns: Reference to current URI value.
     public func getURI() -> String {
         return self.href
     }
-
-    /**
-     * Get AttahcmentSet data in JSON
-     *
-     * @throws
-     */
+    
+    /// Get AttachmentSet data in JSON
+    ///
+    /// - Returns: Reference to the current attached data in JSON.
+    /// - Throws:
     public func toJSON() throws -> [String: Any] {
         _ = try self.load()
         return self.jo
     }
     
-    /**
-     * Get AttahcmentSet data in JSONBytes
-     *
-     * @throws
-     */
+    /// Get AttachmentSet data in JSONBytes
+    ///
+    /// - Returns: Reference to the current attached data in JSON Bytes.
+    /// - Throws:
     public func toJSONBytes() throws -> Data {
         _ = try self.load()
         //let data = try JSONEncoder().encode(self.jo)
@@ -148,11 +164,19 @@ public class AttachmentSet {
         return data!
     }
     
+    /// Set the URI information.
+    ///
+    /// - Parameter href: URI information.
+    /// - Returns: <#return value description#>
     public func href(href: String) -> AttachmentSet {
         self.href = href
         return self
     }
     
+    /// Set a JSON Object.
+    ///
+    /// - Parameter jo: JSON Object.
+    /// - Returns: <#return value description#>
     public func JsonObject(jo: [String: Any]) -> AttachmentSet {
         self.jo = jo
         if self.jo["rdfs:member"] != nil {
@@ -168,15 +192,19 @@ public class AttachmentSet {
         return self
     }
 
-    /**
-     * Load the data for attachmentset
-     *
-     * @throws
-     */
+    /// Load the data for attachment set
+    ///
+    /// - Returns: Reference to the Attachment See
+    /// - Throws: <#throws value description#>
     public func load() throws -> AttachmentSet {
         return try self.load(headers: nil)
     }
     
+    /// Load the data for attachment set
+    ///
+    /// - Parameter headers: Header of Attachment.
+    /// - Returns: Reference to the data.
+    /// - Throws:
     public func load(headers: [String: Any]?) throws -> AttachmentSet {
         if isLoaded {
             return self
@@ -196,23 +224,33 @@ public class AttachmentSet {
         return self
     }
     
+    /// Reload attachments.
+    ///
+    /// - Returns: Attachment reloaded.
+    /// - Throws:
     public func reload() throws -> AttachmentSet {
         isLoaded = false
         return try load()
     }
     
-    /**
-     * Create a new attachment
-     * @param att
-     *
-     * @throws
-     */
+    /// Create a new attachment
+    ///
+    /// - Parameter att: Attachments.
+    /// - Returns: Attachment object.
+    /// - Throws:
     public func create(att: Attachment) throws -> Attachment {
         let obj = try self.mc.createAttachment(uri: self.href, data: att.toDoc(), name: att.getName(), description: att.getDescription(), meta: att.getMeta())
         _ = try self.reload()
         return Attachment(jo: obj, mc: self.mc)
     }
 
+    /// Create a new attachment
+    ///
+    /// - Parameters:
+    ///   - relation: Relationship information.
+    ///   - att: Attachment.
+    /// - Returns: URI of attachment related to a resource.
+    /// - Throws: <#throws value description#>
     public func create(relation: String, att: Attachment) throws -> Attachment {
         if !self.href.contains(relation.lowercased()) || !self.href.contains(relation.uppercased()) {
             self.href += "/" + relation
@@ -223,6 +261,14 @@ public class AttachmentSet {
         return Attachment(jo: obj, mc: self.mc)
     }
 
+    /// Create a new Attachment
+    ///
+    /// - Parameters:
+    ///   - relation: String with details of the attachment relationship.
+    ///   - att: Attachment object.
+    ///   - headers: Header's information.
+    /// - Returns: new Attachment object.
+    /// - Throws:
     public func create(relation: String, att: Attachment, headers: [String: Any]?) throws -> Attachment {
         if !self.href.contains(relation.lowercased()) || !self.href.contains(relation.uppercased()) {
             self.href += "/" + relation
@@ -239,12 +285,11 @@ public class AttachmentSet {
         return Attachment(jo: obj, mc: self.mc)
     }
 
-    /**
-     * Get the member of attachmentset
-     * @param index
-     *
-     * @throws
-     */
+    /// Get the member of attachment set
+    ///
+    /// - Parameter index: Int value representing the Index of an Attachment into the AttachmentSet.
+    /// - Returns: Attachment reference.
+    /// - Throws: <#throws value description#>
     public func member(index: Int) throws -> Attachment? {
         if !isLoaded {
             _ = try load()
@@ -256,6 +301,11 @@ public class AttachmentSet {
         return Attachment(jo: obj, mc: self.mc);
     }
     
+    /// Get the member of attachment set
+    ///
+    /// - Parameter id: ID value representing the Id of an Attachment into the AttachmentSet map.
+    /// - Returns: Attachment reference.
+    /// - Throws: <#throws value description#>
     public func member(id: String) throws -> Attachment? {
         if !isLoaded {
             _ = try load()
@@ -277,22 +327,30 @@ public class AttachmentSet {
         return Attachment(jo: obj!, mc: self.mc);
     }
 
-    /**
-     * Delete the Attachment
-     * @param index
-     *
-     * @throws
-     */
+    /// Delete an Attachment based on a object index.
+    ///
+    /// - Parameter index: Attachment's index.
+    /// - Returns: Attachment set reloaded without the deleted object.
+    /// - Throws:
     public func delete(index: Int) throws -> AttachmentSet {
         try self.member(index: index)?.delete()
         return try reload()
     }
-
+    
+    /// Delete an Attachment based on a object index.
+    ///
+    /// - Parameter ID: Attachment's ID.
+    /// - Returns: Attachment set reloaded without the deleted object.
+    /// - Throws: <#throws value description#>
     public func delete(id: String) throws -> AttachmentSet {
         try self.member(id: id)?.delete()
         return try reload()
     }
 
+    /// Return this page size.
+    ///
+    /// - Returns: Int value represent the page size
+    /// - Throws:
     public func thisPageSize() throws -> Int
     {
         if !isLoaded {
@@ -307,10 +365,25 @@ public class AttachmentSet {
         return size
     }
 
+    /// Fetch member through the URI information and arbitrary array of properties.
+    ///
+    /// - Parameters:
+    ///   - uri: URI Information.
+    ///   - properties: String array within arbitrary properties.
+    /// - Returns: Attachment object.
+    /// - Throws:
     public func fetchMember(uri: String, properties: [String]?) throws -> Attachment {
         return try self.fetchMember(uri: uri, headers: nil, properties: properties)
     }
 
+    /// Fetch member through the URI information and arbitrary array of properties and additional header information.
+    ///
+    /// - Parameters:
+    ///   - uri: uri: URI Information.
+    ///   - headers: Attachment header information.
+    ///   - properties: String array within arbitrary properties.
+    /// - Returns: Attachment object.
+    /// - Throws: <#throws value description#>
     public func fetchMember(uri: String, headers: [String: Any]?, properties: [String]?) throws -> Attachment {
         var strb : String = String(uri)
         if properties != nil && properties!.count > 0 {
