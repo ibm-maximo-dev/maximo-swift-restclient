@@ -108,73 +108,112 @@ import Foundation
  */
 public class ResourceSet {
     
+    /// Page Size.
     var pageSize : Int = -1
+    /// OS Name.
     var osName : String?
+    /// Where clause.
     var whereClause : String?
+    /// Select clause.
     var selectClause : String?
+    /// OS URI.
     var osURI : String?
+    /// Public URI.
     var publicURI : String?
+    /// App URI.
     var appURI : String?
+    /// Order by clause.
     var orderBy : [String] = []
+    /// Save query.
     var savedQuery : String?
+    /// String buffer where clause.
     var strbWhere : String?
+    /// Search terms.
     var searchTerms : String?
+    /// Search attributes.
     var searchAttributes : String?
+    /// JSON Object.
     var jsonObject : [String: Any]?
+    /// Maximo Connector.
     var mc : MaximoConnector?
+    /// Pagin enable/disable.
     var paging : Bool = false
+    /// Stable paging check.
     var stablePaging : Bool = false
+    /// Is resource loaded.
     var isLoaded : Bool = false
+    /// To JSON array.
     var jsonArray : [Any]?
 
+    /// Initialize object.
+    ///
+    /// - Parameter osName: Oslc Name.
     public init(osName: String) {
         self.osName = osName
     }
     
+    /// Initialize object
+    ///
+    /// - Parameter mc: Maximo Connector.
     public init(mc: MaximoConnector) {
         self.mc = mc
     }
 
+    /// Initialize object
+    ///
+    /// - Parameters:
+    ///   - osName: Oslc Name
+    ///   - mc: Maximo Connector.
     public init(osName: String?, mc: MaximoConnector) {
         self.osName = osName
         self.publicURI = mc.getCurrentURI()
         self.mc = mc
     }
 
+    /// Initialize object
+    ///
+    /// - Parameters:
+    ///   - publicURI: public URI's information.
+    ///   - mc: Maximo Connector object.
     public init(publicURI: String, mc: MaximoConnector) {
         self.mc = mc;
         self.publicURI = publicURI
     }
 
-    /**
-     * Get current URI
-     */
+    
+    /// Get current URI
+    ///
+    /// - Returns: Reference to the current application's URI.
     public func getAppURI() -> String? {
         return self.appURI
     }
     
+    /// Get public URI information.
+    ///
+    /// - Returns: Reference to the public URI information.
     public func getPublicURI() -> String? {
         return self.publicURI
     }
     
+    /// Get Oslc URI's information.
+    ///
+    /// - Returns: Reference to the Oslc URI's information.
     public func getOsURI() -> String? {
         return self.osURI
     }
 
-    /**
-     * Get ResourceSet data in JSON
-     *
-     * @throws
-     */
+    /// Get ResourceSet data in JSON
+    ///
+    /// - Returns: <#return value description#>
     public func toJSON() -> [String: Any]? {
         return self.jsonObject
     }
 
-    /**
-     * Get ResourceSet data in JSONBytes
-     *
-     * @throws
-     */
+
+    /// Get ResourceSet data in JSONBytes
+    ///
+    /// - Returns: <#return value description#>
+    /// - Throws: <#throws value description#>
     public func toJSONBytes() throws -> Data {
 /*        let data = try JSONEncoder().encode(self.jsonObject)
         return data
@@ -183,17 +222,28 @@ public class ResourceSet {
         return data!
     }
 
-    // Set whereClause
+    /// Set whereClause
+    ///
+    /// - Parameter whereClause: String carrying on the where clause.
+    /// - Returns: Reference to the updated where clause.
     public func _where(whereClause: String) -> ResourceSet {
         self.whereClause = whereClause
         return self
     }
 
+    /// Set where clause bases on an QueryWhere object..
+    ///
+    /// - Parameter _where: QueryWhere object.
+    /// - Returns: Reference to the QueryWhere object within the where clause.
     public func _where(_where: QueryWhere) -> ResourceSet {
         self.whereClause = _where.whereClause()
         return self
     }
     
+    /// Set attributes.
+    ///
+    /// - Parameter attributes: String array of attributes.
+    /// - Returns: Reference to updated array of attributes.
     public func searchAttributes(attributes: [String]) -> ResourceSet {
         self.searchAttributes = String()
         for attribute in attributes {
@@ -202,6 +252,10 @@ public class ResourceSet {
         return self
     }
 
+    /// Check if this Resource Set has such terms.
+    ///
+    /// - Parameter terms: String array of terms.
+    /// - Returns: Returns <b>TRUE</b> if such terms are present.
     public func hasTerms(terms: [String]) -> ResourceSet {
         self.searchTerms = String()
         for term in terms {
@@ -210,28 +264,46 @@ public class ResourceSet {
         return self
     }
     
-    // Set selectClause
+    /// Set selectc clause.
+    ///
+    /// - Parameter selectClause: String array carrying on select statements.
+    /// - Returns: Reference to the String array updated within select statements.
     public func select(selectClause: [String]) -> ResourceSet {
         self.selectClause = QuerySelect().select(selectClause: selectClause)
         return self
     }
     
+    /// Set page size.
+    ///
+    /// - Parameter pageSize: Page size in int.
+    /// - Returns: Reference to the page size.
     public func pageSize(pageSize: Int) -> ResourceSet {
         self.pageSize = pageSize
         return self
     }
     
-    // &oslc.paging=true - if paging is false - do not add the query parameter
+    /// Check paging.
+    /// <>bNote:</b> &oslc.paging=true - if paging is false - do not add the query parameter
+    /// - Parameter type: Query parameters.
+    /// - Returns: Return <b>TRUE</b> - When paging, If <b>FALSE</b> - Do not add the query parameter.
     public func paging(type: Bool) -> ResourceSet {
         self.paging = type
         return self
     }
 
+    /// Set stable paging.
+    ///
+    /// - Parameter type: Boolean value.<b>TRUE</b> - if yes, <b>FALSE</b> if not.
+    /// - Returns:<b>TRUE</b> - if yes, <b>FALSE</b> if not.
     public func stablePaging(type: Bool) -> ResourceSet {
         self.stablePaging = type
         return self
     }
     
+    /// Set order by clause.
+    ///
+    /// - Parameter orderByProperties: String array with order by properties.
+    /// - Returns: Reference to the order by properties array.
     public func orderBy(orderByProperties: [String]) -> ResourceSet {
         for property in orderByProperties {
             self.orderBy.append(property)
@@ -239,43 +311,42 @@ public class ResourceSet {
         return self
     }
 
-    /**
-     * Fetching the data for ResourceSet
-     *
-     * @throws
-     */
+   
+    /// Fetching the data for ResourceSet
+    ///
+    /// - Returns: Data of ResourceSet.
+    /// - Throws:
     public func fetch() throws -> ResourceSet {
         _ = try self.fetch(options: nil)
         return self
     }
 
-    /**
-     * Fetching the data for ResourceSet with arbitrary parameters
-     *
-     * @param additionalParams
-     * @throws
-     */
+    /// Fetching the data for ResourceSet with arbitrary parameters
+    ///
+    /// - Parameter additionalParams: Additional Parameters.
+    /// - Returns: Reference to the additional parameters.
+    /// - Throws:
     public func fetchWithAddtionalParams(additionalParams: [String: Any]) throws -> ResourceSet {
         return try self.fetchWithAddtionalHeadersAndParams(additionalParams: additionalParams, additionalHeaders: nil);
     }
     
-    /**
-     * Fetching the data for ResourceSet with arbitrary headers
-     *
-     * @param additionalHeaders
-     * @throws
-     */
+    /// Fetching the data for ResourceSet with arbitrary headers
+    ///
+    /// - Parameter additionalHeaders: Additional headers.
+    /// - Returns: Reference to the data fetch with additional parameters.
+    /// - Throws:
     public func fetchWithAddtionalHeaders(additionalHeaders: [String: Any]) throws -> ResourceSet {
         return try self.fetchWithAddtionalHeadersAndParams(additionalParams: nil, additionalHeaders: additionalHeaders);
     }
     
-    /**
-     * Fetching the data for ResourceSet with arbitrary parameters and headers
-     *
-     * @param additionalParams
-     * @param additionalHeaders
-     * @throws
-     */
+   
+    /// Fetching the data for ResourceSet with arbitrary parameters and headers
+    ///
+    /// - Parameters:
+    ///   - additionalParams: Additional params.
+    ///   - additionalHeaders: Additional headers.
+    /// - Returns: Reference to date fetch with Additional params and headers.
+    /// - Throws:
     public func fetchWithAddtionalHeadersAndParams(additionalParams: [String: Any]?, additionalHeaders: [String: Any]?) throws -> ResourceSet {
         _ = try self.buildURI()
         var strb = String()
@@ -308,6 +379,11 @@ public class ResourceSet {
         return self;
     }
 
+    /// Fetching the data for ResourceSet with arbitrary parameters.
+    ///
+    /// - Parameter options: Additional parameters.
+    /// - Returns: Reference to the data fetched.
+    /// - Throws:
     public func fetch(options: [String: Any]?) throws -> ResourceSet {
         _ = try self.buildURI();
         self.jsonObject = try self.mc?.get(uri: self.appURI!)
@@ -320,10 +396,10 @@ public class ResourceSet {
         return self
     }
 
-    /**
-     * Go to nextPage
-     * @throws
-     */
+    /// Go to nextPage
+    ///
+    /// - Returns: Reference to the next page.
+    /// - Throws:
     public func nextPage() throws -> ResourceSet {
         if self.hasNextPage()
         {
@@ -363,6 +439,9 @@ public class ResourceSet {
         return self;
     }
 
+    /// Has next page?
+    ///
+    /// - Returns: Reference to the next page.
     public func hasNextPage() -> Bool {
         if self.jsonObject!["responseInfo"] != nil
         {
@@ -377,10 +456,10 @@ public class ResourceSet {
         return false;
     }
 
-    /**
-     * Go back to previous page
-     * @throws
-     */
+    /// Go back to previous page
+    ///
+    /// - Returns: Reference to the previous page.
+    /// - Throws:
     public func previousPage() throws -> ResourceSet {
         if self.jsonObject!["responseInfo"] != nil
         {
@@ -426,10 +505,11 @@ public class ResourceSet {
         return self
     }
     
-    /**
-     * Load the current data
-     * @throws
-     */
+   
+    /// Load the current data
+    ///
+    /// - Returns: Reference to the current data.
+    /// - Throws:
     public func load() throws -> ResourceSet {
         if (isLoaded) {
             return self
@@ -444,30 +524,41 @@ public class ResourceSet {
         return self
     }
 
+    /// Reload ResourceSet.
+    ///
+    /// - Returns: Reference to reloaded resource set.
+    /// - Throws:
     public func reload() throws -> ResourceSet {
         isLoaded = false
         _ = try load()
         return self
     }
 
-    /**
-     * Obtains a Saved Query.
-     */
+    /// Obtains a Saved Query.
+    ///
+    /// - Parameters:
+    ///   - name: Saved query's name.
+    ///   - paramValues: Arbitrary param values.
+    /// - Returns:
     public func savedQuery(name: String, paramValues: [String: Any]) -> ResourceSet {
         self.savedQuery = SavedQuery(name: name, map: paramValues).savedQueryClause()
         return self
     }
 
+    /// Obtains a Saved Query.
+    ///
+    /// - Parameter qsaved: Saved query description
+    /// - Returns: Reference to the saved query.
     public func savedQuery(qsaved: SavedQuery) -> ResourceSet {
         self.savedQuery = qsaved.savedQueryClause()
         return self
     }
 
-    /**
-     * URI Builder
-     *
-     * @throws OslcException.invalidURL
-     */
+    
+    /// URI Builder
+    ///
+    /// - Returns: Built in URI.
+    /// - Throws: slcException.invalidURL Invalid URL.
     func buildURI() throws -> ResourceSet {
         var strb = String()
         if self.publicURI != nil {
@@ -527,6 +618,13 @@ public class ResourceSet {
         return self
     }
 
+    /// Fetch a Resource.
+    ///
+    /// - Parameters:
+    ///   - uri: Resource URI's information.
+    ///   - properties: Resource arbitrary properties.
+    /// - Returns: Reference to a fetched Resource object.
+    /// - Throws:
     public func fetchMember(uri: String, properties: [String]?) throws -> Resource {
         var strb : String = String(uri)
         if properties != nil && properties!.count > 0 {
@@ -546,13 +644,11 @@ public class ResourceSet {
         return Resource(jo: jo, mc: self.mc!);
     }
     
-    /**
-     * get the member in ResourceSet
-     *
-     * @param index
-     *
-     * @throws
-     */
+    /// Get the member (i.e. Resource object) in ResourceSet
+    ///
+    /// - Parameter index: Parameter index.
+    /// - Returns: Reference to the Resource object.
+    /// - Throws:
     public func member(index: Int) throws -> Resource? {
         if !isLoaded {
             _ = try load()
@@ -564,14 +660,14 @@ public class ResourceSet {
         return Resource(jo: jo, mc: self.mc!);
     }
 
-    /**
-     * Create a new Resource with the properties in hearder
-     *
-     * @param jo
-     * @param properties
-     *
-     * @throws
-     */
+    
+    /// Create a new Resource with the properties in header
+    ///
+    /// - Parameters:
+    ///   - jo: JSON Object format in a Any swift object.
+    ///   - properties: Arbitrary properties array.
+    /// - Returns: Reference to the Resource object.
+    /// - Throws: <#throws value description#>
     public func create(jo: [String: Any], properties: [String]) throws -> Resource {
         if self.osURI == nil {
             _ = try self.buildURI()
@@ -583,6 +679,14 @@ public class ResourceSet {
         // use the maximo connector to connect to oslc server and then load data from it
     }
     
+    /// Create a new Resource with the properties in header
+    ///
+    /// - Parameters:
+    ///   - jo: JSON Object format in a Any swift object.
+    ///   - properties: Arbitrary properties array.
+    ///   - headers: Resource's header information.
+    /// - Returns: Reference to the Resource object.
+    /// - Throws:
     public func create(jo: [String: Any], headers: [String: Any], properties: [String]) throws -> Resource {
         if self.osURI == nil {
             _ = try self.buildURI()
@@ -594,6 +698,13 @@ public class ResourceSet {
         // use the maximo connector to connect to oslc server and then load data from it
     }
 
+    /// Sync a Resource.
+    ///
+    /// - Parameters:
+    ///   - jo: JSON Object format in a Any swift object.
+    ///   - properties: Arbitrary properties array.
+    /// - Returns: Reference to the Resource object.
+    /// - Throws:
     public func sync(jo: [String: Any], properties: [String]) throws -> Resource {
         if self.osURI == nil {
             _ = try self.buildURI()
@@ -605,6 +716,14 @@ public class ResourceSet {
         // use the maximo connector to connect to oslc server and then load data from it
     }
 
+    /// Sync a Resource based on a header information.
+    ///
+    /// - Parameters:
+    ///   - jo: JSON Object format in a Any swift object.
+    ///   - properties: Arbitrary properties array.
+    ///   - headers: Resource's header information.
+    /// - Returns: Reference to the Resource object.
+    /// - Throws:
     public func sync(jo: [String: Any], headers: [String: Any], properties: [String]) throws -> Resource {
         if self.osURI == nil {
             _ = try self.buildURI()
@@ -616,6 +735,13 @@ public class ResourceSet {
         // use the maximo connector to connect to oslc server and then load data from it
     }
     
+    /// Merge and Sync a Resource
+    ///
+    /// - Parameters:
+    ///   - jo: JSON Object format in a Any swift object.
+    ///   - properties: Arbitrary properties array.
+    /// - Returns: Reference to the Resource object.
+    /// - Throws:
     public func mergeSync(jo: [String: Any], properties: [String]) throws -> Resource {
         if self.osURI == nil {
             _ = try self.buildURI()
@@ -627,6 +753,14 @@ public class ResourceSet {
         // use the maximo connector to connect to oslc server and then load data from it
     }
 
+    /// Merge and Sync a Resource object using a header information in additional.
+    ///
+    /// - Parameters:
+    ///   - jo: JSON Object format in a Any swift object.
+    ///   - properties: Arbitrary properties array.
+    ///   - headers: Resource's header information.
+    /// - Returns: Reference to the Resource object.
+    /// - Throws:
     public func mergeSync(jo: [String: Any], headers: [String: Any], properties: [String]) throws -> Resource {
         if self.osURI == nil {
             _ = try self.buildURI()
@@ -638,15 +772,17 @@ public class ResourceSet {
         // use the maximo connector to connect to oslc server and then load data from it
     }
     
+    /// Configure page siz.
+    ///
+    /// - Returns: Reference to the configured pagesize.
     public func configuredPageSize() -> Int {
         return self.pageSize
     }
 
-    /**
-     * Count the total number of Resources by calling RESTful API
-     *
-     * @throws
-     */
+    /// Count the total number of Resources by calling RESTful API
+    ///
+    /// - Returns: <#return value description#>
+    /// - Throws: <#throws value description#>
     public func totalCount() throws -> Int {
         if !isLoaded {
             _ = try load()
@@ -671,14 +807,15 @@ public class ResourceSet {
         total = try self.totalCount(fromServer: true)
         return total
     }
-
-    /**
-     * Count the total number of Resources.
-     * When fromServer=true, it calls the totalCount API.
-     * When fromServer=false, it calls the RESTful API.
-     *
-     * @throws
-     */
+  
+    /// Count the total number of Resources.
+    /// <ul>
+    ///     <li> When fromServer=true, it calls the totalCount API.</li>
+    ///     <li> When fromServer=false, it calls the RESTful API. </li>
+    /// </ul>
+    /// - Parameter fromServer: Boolean to setup the count process.
+    /// - Returns: Amount of objects based on the count process.
+    /// - Throws:
     public func totalCount(fromServer: Bool) throws -> Int {
         if !fromServer {
             return try self.totalCount()
@@ -706,10 +843,10 @@ public class ResourceSet {
         }
     }
     
-    /**
-     * Get current number of Resource by calling RESTful API
-     * @throws
-     */
+    /// Get current number of Resource by calling RESTful API
+    ///
+    /// - Returns: Size of Resource set.
+    /// - Throws:
     public func count() throws -> Int {
         if !isLoaded {
             _ = try load()
@@ -725,10 +862,17 @@ public class ResourceSet {
         return size
     }
 
+    /// Set Bulk Processor.
+    ///
+    /// - Returns: BulkProcessor object.
     public func bulk() -> BulkProcessor {
         return BulkProcessor(mc: self.mc!, uri: self.osURI!)
     }
 
+    /// Group by Aggregation
+    ///
+    /// - Returns: Aggregation Object.
+    /// - Throws:
     public func groupBy() throws -> Aggregation {
         return Aggregation(mc: self.mc!, uri: try self.buildURI().appURI!)
     }
