@@ -8,6 +8,24 @@
 
 import Foundation
 
+/// OslcError enumeration
+///
+/// - attachmentAlreadyLoaded: Attachment already loaded.
+/// - resourceAlreadyLoaded: Resource already loaded.
+/// - invalidAttachment: Invalid Attachment.
+/// - invalidResource: Invalid Resource.
+/// - invalidRelation: Invalid Relation.
+/// - invalidURL: Invalid URL.
+/// - invalidRequest: Invalid Request.
+/// - invalidResponse: Invalid Response.
+/// - loginFailure: Login failure.
+/// - serverError: Server error.
+/// - connectionAlreadyEstablished: The connection is already estabilished.
+/// - invalidConnectorInstance: Invalid connector instance.
+/// - noAttachmentFound: No attachment found.
+/// - noResourceFound: No Resource found.
+/// - noRelationFound: No Relation found.
+/// - noURLFound: No URL found.
 public enum OslcError : Error {
     case attachmentAlreadyLoaded
     case resourceAlreadyLoaded
