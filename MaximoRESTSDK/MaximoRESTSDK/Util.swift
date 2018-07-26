@@ -8,6 +8,7 @@
 
 import Foundation
 
+// MARK: - Equatable
 extension Collection where Element: Equatable {
     func split<S: Sequence>(separators: S) -> [SubSequence]
         where Element == S.Element
@@ -16,8 +17,13 @@ extension Collection where Element: Equatable {
     }
 }
 
+/// Util object.
 public class Util {
     
+    /// Return the type inside the string.
+    ///
+    /// - Parameter value: Any object to be handled.
+    /// - Returns: type of the information inside paramer.
     public class func stringValue(value: Any) -> String {
         let date = value as? Date
         let intNumber = value as? Int
@@ -47,11 +53,19 @@ public class Util {
         }
     }
 
+    /// URL encoder.
+    ///
+    /// - Parameter value: String  containing the URL's information.
+    /// - Returns: Escaped string within the URL's information.
     public class func urlEncode(value: String) -> String {
         let escapedString = value.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
         return escapedString!
     }
     
+    /// URL enconder Base64.
+    ///
+    /// - Parameter value: String containing the URL's information to be encoded into a Base64 enconding type.
+    /// - Returns: URL's string Base64 encoded.
     public class func encodeBase64(value: String) -> String {
         let utf8String = value.data(using: String.Encoding.utf8)
         let base64Encoded = utf8String?.base64EncodedString()
