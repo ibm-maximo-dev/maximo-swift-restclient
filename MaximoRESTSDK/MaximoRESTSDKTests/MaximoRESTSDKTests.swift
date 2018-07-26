@@ -9,11 +9,15 @@
 import XCTest
 import MaximoRESTSDK
 
+///REST SDK Test
 class MaximoRESTSDKTests: XCTestCase {
     
+    /// Maximo Connector
     static var connector : MaximoConnector?
+    //String array of work orders.
     static var workOrder : [String: Any]?
     
+    /// Setup this object to connect wiht Maximo REST service.
     override class func setUp() {
         super.setUp()
         let testBundle = Bundle(for: MaximoRESTSDKTests.self)
@@ -36,6 +40,7 @@ class MaximoRESTSDKTests: XCTestCase {
         }
     }
 
+    /// Disconnect from server.
     override class func tearDown() {
         do {
             print("Logging out!")
@@ -46,6 +51,9 @@ class MaximoRESTSDKTests: XCTestCase {
         super.tearDown()
     }
 
+    /// Test to load an Work Order into Maximo
+    ///
+    /// - Throws:
     func testLoadWorkOrder() throws {
         let workOrderSet = MaximoRESTSDKTests.connector!.resourceSet(osName: "mxwo")
         _ = workOrderSet.pageSize(pageSize: 1)
@@ -59,6 +67,9 @@ class MaximoRESTSDKTests: XCTestCase {
         print("Fetching a Work Order JSON: \(String(describing: MaximoRESTSDKTests.workOrder))")
     }
 
+    /// Test update an existent Work Order.
+    ///
+    /// - Throws:
     func testUpdateWorkOrder() throws {
         print("Updating a Work Order")
         guard let woID = MaximoRESTSDKTests.workOrder?["workorderid"] else {
@@ -73,6 +84,9 @@ class MaximoRESTSDKTests: XCTestCase {
         print("Updating a Work Order JSON: \(String(describing: MaximoRESTSDKTests.workOrder))")
     }
 
+    /// Test create a new Work Order into the Maximo instance.
+    ///
+    /// - Throws: <#throws value description#>
     func testCreateWorkOrder() throws {
         print("Creating a Work Order")
         let uri = MaximoRESTSDKTests.connector!.getCurrentURI() + "/os/mxwo/"
