@@ -110,7 +110,7 @@ public class Resource {
         }
     }
 
-    /// Convenience initializer considering an Any object carring on a JSON object and a Maximo Connector object.
+    /// Convenience initializer considering an Any object carrying on a JSON object and a Maximo Connector object.
     ///
     /// - Parameters:
     ///   - jo: JSON scheme to initialize this object.
@@ -292,9 +292,9 @@ public class Resource {
         return self
     }
     
-    /// Reload data feching with properties.
+    /// Reload data fetching with properties.
     ///
-    /// - Parameter properties: To be reloaded resrouce's properties.
+    /// - Parameter properties: To be reloaded resource's properties.
     /// - Returns: Reference to reloaded resource.
     /// - Throws:
     public func reload(properties: [String]) throws -> Resource {
@@ -308,7 +308,7 @@ public class Resource {
     ///
     /// - Parameters:
     ///   - jo: JSON data fetch to update the specific resource.
-    ///   - properties: Resource's proeperties.
+    ///   - properties: Resource's properties.
     /// - Returns: Reference to updated resource.
     /// - Throws:
     public func update(jo: [String: Any], properties: [String]) throws -> Resource
@@ -361,7 +361,7 @@ public class Resource {
     ///   - jo: JSON data to merged to a resource.
     ///   - headers: Additional headers.
     ///   - properties: Properties to be merged to a resource.
-    /// - Returns: Referece to a resource merged with additional headers.
+    /// - Returns: Reference to a resource merged with additional headers.
     /// - Throws:
     public func merge(jo: [String: Any], headers: [String: Any]?, properties: [String]?) throws -> Resource
     {
@@ -382,7 +382,7 @@ public class Resource {
         return self;
     }
 
-    /// Load the attachmentset for resource
+    /// Load the attachment set for resource
     /// <b>Note:</b> there has to be a relation between them
     ///
     /// - Parameters:
@@ -415,7 +415,7 @@ public class Resource {
         return AttachmentSet(href: str, mc: self.mc);
     }
     
-    /// Get an Attachment Set witj all attachments related to the resource.
+    /// Get an Attachment Set within all attachments related to the resource.
     ///
     /// - Returns: Reference to an AttachmentSet object.
     /// - Throws: OsclError: Invalid Relation..
@@ -441,7 +441,7 @@ public class Resource {
     ///
     /// - Parameter attrName: Attribute name.
     /// - Returns: Reference to the resource.
-    /// - Throws: nil: Not valida data.
+    /// - Throws: nil: Not valid data.
     public func relatedResource(attrName: String) throws -> Resource?
     {
         var url : String = String()
@@ -487,7 +487,7 @@ public class Resource {
     ///   - actionName: Action name.
     ///   - jo: JSON within action information.
     ///   - properties: Action's properties.
-    /// - Returns: Reference to the acction.
+    /// - Returns: Reference to the action.
     /// - Throws:
     public func invokeAction(actionName: String, jo: [String: Any], properties: [String]) throws -> Resource {
         self.jsonObject = try self.mc.update(uri: self.href + (self.href.contains("?") ? "" : "?") + "&action=" + actionName, jo: jo, properties: properties)
