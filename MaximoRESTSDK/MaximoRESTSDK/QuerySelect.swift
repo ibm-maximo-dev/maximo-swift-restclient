@@ -13,7 +13,7 @@ public class QuerySelect {
     //a.b.*,a.c,x.y.z,x.f.g,x.y.e == a{b{*},c},x{y{z,e},f{g}}
     var map : [String: Any] = [:]
 
-    /// Selects the query based on where clause.
+    /// Run the select clause.
     ///
     /// - Parameter selectClause: Clause to be fetch
     /// - Returns: <#return value description#>
