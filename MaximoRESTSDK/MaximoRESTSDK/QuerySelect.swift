@@ -8,10 +8,15 @@
 
 import Foundation
 
+/// Query select tool
 public class QuerySelect {
     //a.b.*,a.c,x.y.z,x.f.g,x.y.e == a{b{*},c},x{y{z,e},f{g}}
     var map : [String: Any] = [:]
 
+    /// Run the select clause.
+    ///
+    /// - Parameter selectClause: Clause to be fetch
+    /// - Returns: <#return value description#>
     public func select(selectClause: [String]) -> String
     {
         var strb = String();
@@ -40,6 +45,11 @@ public class QuerySelect {
         return strb
     }
     
+    /// Converte saved queries into the query's map to a string.
+    ///
+    /// - Parameters:
+    ///   - strb: String buffer to increment the query
+    ///   - map: Query's map.
     func map2String(strb: inout String, map: [String: Any])
     {
         for (key, value) in map
@@ -62,6 +72,12 @@ public class QuerySelect {
         }
     }
 
+    /// Tokenize ta query map.
+    ///
+    /// - Parameters:
+    ///   - tokens: Token's delimiters.
+    ///   - index: Map index.
+    ///   - selectMap: Map containing saved queries.
     func handleTokens(tokens : [Substring], index: Int, selectMap: inout [String: Any])
     {
         if tokens.count < index+1 {

@@ -34,7 +34,7 @@ import Foundation
  * </pre>
  *
  * <p>
- * The following examples demonstrate how to set maximoconnector, name, description, data, metadata, wwwURI to {@code Attachment}</p>
+ * The following examples demonstrate how to set maximoconnector, name, description, data, meta data, wwwURI to {@code Attachment}</p>
  * <pre>
  * <code>
  * att.maximoConnector(mc: maximoconnector).name(name: filename).description(description: description)
@@ -65,7 +65,7 @@ import Foundation
  * </pre>
  *
  * <p>
- * For file metadata:</p>
+ * For file meta data:</p>
  * <pre>
  * <code>
  * var jo : [String: Any] = att.toDocMeta()
@@ -94,12 +94,18 @@ public class Attachment {
     var isMetaLoaded: Bool = false
     var jo: [String: Any]
 
+    /// Ini this class
     public init() {
         jo = [:]
         self.uri = String()
         self.mc = MaximoConnector()
     }
     
+    /// Init this class based on a URI
+    ///
+    /// - Parameters:
+    ///   - uri: String containig Unified Resource Location for the application
+    ///   - mc: Maximo Connector object
     public init (uri: String, mc: MaximoConnector) {
         self.uri = uri
         self.mc = mc
@@ -107,6 +113,11 @@ public class Attachment {
         jo = [:]
     }
 
+    /// Init this class based on JSON object and a Maximo Connector Object
+    ///
+    /// - Parameters:
+    ///   - jo: JSON schema
+    ///   - mc: Maximo Connector object
     public init (jo: [String: Any], mc: MaximoConnector) {
         self.jo = jo
         self.mc = mc
@@ -138,16 +149,30 @@ public class Attachment {
         return self;
     }
     
+    /// Object name
+    ///
+    /// - Parameter name: String with object name
+    /// - Returns: updated name.
     public func name(name: String) -> Attachment {
         self.name = name;
         return self;
     }
     
+    /// Object description
+    ///
+    /// - Parameter description: String description
+    /// - Returns: description updated
     public func description(description: String) -> Attachment {
         self.description = description;
         return self;
     }
     
+    /// meta data structure.
+    ///
+    /// - Parameters:
+    ///   - type: Type
+    ///   - storeas: String containing the "store as" information
+    /// - Returns: Updated meta data.
     public func meta(type: String?, storeas: String) -> Attachment {
         var headerValue: String;
         if type != nil {
@@ -159,28 +184,49 @@ public class Attachment {
         return self;
     }
 
+    /// Set/Update www URI
+    ///
+    /// - Parameter uri: String informing the www URI
+    /// - Returns: www URI updated.
     public func wwwURI(uri: String) ->Attachment {
         self.uri = uri;
         return self;
     }
     
+    /// Data object
+    ///
+    /// - Parameter data: New Data object
+    /// - Returns: updated Data object.
     public func data(data: Data) -> Attachment {
         self.data = data;
         return self;
     }
     
+    /// Returns name
+    ///
+    /// - Returns: String containing name
     public func getName() -> String {
         return self.name!;
     }
     
+    /// Returns description.
+    ///
+    /// - Returns: String containing object's description.
     public func getDescription() -> String {
         return self.description!;
     }
     
+    /// Returns meta data.
+    ///
+    /// - Returns: meta data object.
     public func getMeta() -> String{
         return self.meta!;
     }
 
+    /// Convert data to doc
+    ///
+    /// - Returns: data loaded.
+    /// - Throws:
     public func toDoc() throws -> Data {
         if !isUploaded {
             return self.data!;
@@ -227,10 +273,10 @@ public class Attachment {
         return data!
     }
 
-    /**
-     * load attachment data
-     * @throws
-     */
+   
+    /// load attachment data
+    ///
+    /// - Throws: <#throws value description#>
     public func load() throws {
         try self.load(headers: nil)
     }
@@ -268,6 +314,10 @@ public class Attachment {
         try self.loadMeta(headers: nil);
     }
 
+    /// Load meta data
+    ///
+    /// - Parameter headers: meta data with headers parameters.
+    /// - Throws: <#throws value description#>
     public func loadMeta(headers: [String: Any]?) throws {
         if isMetaLoaded {
             // The attachment has been loaded, please call reloadMeta for refreshing
@@ -308,13 +358,20 @@ public class Attachment {
         }
         isMetaLoaded = true;
     }
-
+    /// Reload Meta data
+    ///
+    /// - Returns: updated meta data.
+    /// - Throws: <#throws value description#>
     public func reloadMeta() throws -> Attachment {
         isMetaLoaded = false;
         try loadMeta();
         return self;
     }
     
+    /// Fetch meta data to a JSON document.
+    ///
+    /// - Returns: <#return value description#>
+    /// - Throws: <#throws value description#>
     public func fetchDocMeta() throws -> [String: Any] {
         isMetaLoaded = false;
         try loadMeta();

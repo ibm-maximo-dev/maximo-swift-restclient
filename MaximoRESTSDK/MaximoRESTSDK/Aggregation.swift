@@ -8,20 +8,36 @@
 
 import Foundation
 
+/// Utility class to aggregate data.
 public class Aggregation {
     
+    /// Maximo Connector object
     var mc: MaximoConnector
+    /// URI information.
     var uri: String
+    /// Alias map.
     var aliasMap : [String: String] = [:]
+    /// List of columns.
     var gbColsList : [String] = []
+    /// Map of filters.
     var gbFiltersMap : [String: String] = [:]
+    /// Sort by list.
     var gbSortByList : [String] = []
     
+    /// Initialize object.
+    ///
+    /// - Parameters:
+    ///   - mc: Maximo Connector
+    ///   - uri: URI's information.
     public init(mc: MaximoConnector, uri: String) {
         self.mc = mc
         self.uri = uri
     }
 
+    /// Group by
+    ///
+    /// - Parameter attributes: Attribute descripttion.
+    /// - Returns: Updated string.
     public func groupByOn(attributes: [String]) -> Aggregation {
         for attribute in attributes {
             self.gbColsList.append(attribute)
@@ -29,10 +45,17 @@ public class Aggregation {
         return self
     }
 
+    /// Count statement.
+    ///
+    /// - Returns: Updated string.
     public func count() -> Aggregation {
         return self.count(alias: nil)
     }
     
+    /// Count statement.
+    ///
+    /// - Parameter alias: Element's aliases.
+    /// - Returns: Updated string.
     public func count(alias: String?) -> Aggregation {
         if alias == nil {
             self.aliasMap["count.*"] = "count.*"
@@ -43,38 +66,85 @@ public class Aggregation {
         return self
     }
 
+    /// Average statement.
+    ///
+    /// - Parameter attribute: Attribute's name.
+    /// - Returns: Updated string.
     public func avgOn(attribute: String) -> Aggregation {
         return self.avgOn(attribute: attribute, alias: nil)
     }
 
+    /// Average statement using alias.
+    ///
+    /// - Parameters:
+    ///   - attribute: Attribute name.
+    ///   - alias: Alias name.
+    /// - Returns: Updated string.
     public func avgOn(attribute: String, alias: String?) -> Aggregation {
         return self.aggregateOn(function: "avg", attribute: attribute, alias: alias)
     }
     
+    /// Sum statement.
+    ///
+    /// - Parameter attribute: Attribute name
+    /// - Returns: Attribute.
     public func sumOn(attribute: String) -> Aggregation {
         return self.sumOn(attribute: attribute, alias: nil)
     }
     
+    /// Sum statement using alias.
+    ///
+    /// - Parameters:
+    ///   - attribute: Attribute name.
+    ///   - alias: Alias name.
+    /// - Returns: Updated string.
     public func sumOn(attribute: String, alias: String?) -> Aggregation {
         return self.aggregateOn(function: "sum", attribute: attribute, alias: alias);
     }
 
+    /// Min value.
+    ///
+    /// - Parameter attribute: Attribute name.
+    /// - Returns: Updated string.
     public func minOn(attribute: String) -> Aggregation {
         return self.avgOn(attribute: attribute, alias: nil)
     }
     
+    /// Min statement using alias.
+    ///
+    /// - Parameters:
+    ///   - attribute: Attribute name.
+    ///   - alias: Alias
+    /// - Returns: Updated string.
     public func minOn(attribute: String, alias: String?) -> Aggregation {
         return self.aggregateOn(function: "min", attribute: attribute, alias: alias)
     }
     
+    /// Max statement.
+    ///
+    /// - Parameter attribute: Attribute name.
+    /// - Returns: Updated string.
     public func maxOn(attribute: String) -> Aggregation {
         return self.avgOn(attribute: attribute, alias: nil)
     }
     
+    /// Max statement using alias.
+    ///
+    /// - Parameters:
+    ///   - attribute: Attribute name.
+    ///   - alias: Alias.
+    /// - Returns: Updated string.
     public func maxOn(attribute: String, alias: String?) -> Aggregation {
         return self.aggregateOn(function: "max", attribute: attribute, alias: alias)
     }
     
+    /// Aggragete statements.
+    ///
+    /// - Parameters:
+    ///   - function: Function.
+    ///   - attribute: Attribute
+    ///   - alias: Alias
+    /// - Returns: <#return value description#>
     public func aggregateOn(function: String, attribute: String, alias: String?) -> Aggregation {
         if alias == nil {
             self.aliasMap[function + "." + attribute] = "sum." + attribute
@@ -85,6 +155,10 @@ public class Aggregation {
         return self
     }
 
+    /// Having statement.
+    ///
+    /// - Parameter conditions: conditions.
+    /// - Returns: Updated string.
     public func having(conditions: [String]) -> Aggregation {
         for condition in conditions {
             var cond = condition
@@ -110,6 +184,10 @@ public class Aggregation {
         return self
     }
 
+    /// Sort by statement.
+    ///
+    /// - Parameter attributes: Attribute's name.
+    /// - Returns: Updated string.
     public func sortBy(attributes: [String]) -> Aggregation {
         for attribute in attributes {
             self.gbSortByList.append(attribute);
@@ -117,6 +195,10 @@ public class Aggregation {
         return self
     }
 
+    /// Process group by
+    ///
+    /// - Returns: Group by result
+    /// - Throws: <#throws value description#>
     public func processGroupBy() throws -> [Any] {
         if !self.uri.contains("?") {
             self.uri.append("?")

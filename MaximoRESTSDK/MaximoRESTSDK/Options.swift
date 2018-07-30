@@ -44,131 +44,212 @@ public class Options {
     
     public init() {
     }
-
+    
+    /// Fuction to set the host address as an option.
+    ///
+    /// - Parameter host: IP or DNS address of Maximo's service
+    /// - Returns: void return
     public func host(host: String) -> Options
     {
         self.host = host
         return self
     }
 
+    
+    /// Fuction to set Maximo rest service id. (it is hardcoded to 'maxrest')
+    ///
+    /// - Returns: void return.
     public func maxrest() -> Options
     {
         appContext = "maxrest"
         return self
     }
 
+    ///  Function to set application context.
+    ///
+    /// - Parameter context: context of this application (i.e. maximo)
+    /// - Returns: void return
     public func appContext(context: String) -> Options
     {
         appContext = context
         return self
     }
     
+    /// Context operation for this API.
+    ///
+    /// - Parameter apiContext: api context (i.e. oslc)
+    /// - Returns: void return
     public func apiContext(apiContext: String) -> Options
     {
         self.apiContext = apiContext
         return self
     }
     
+    /// Enables secure HTTP.
+    ///
+    /// - Returns: void return.
     public func https() -> Options
     {
         self.ssl = true
         return self
     }
     
+    /// Disable secure HTTP.
+    ///
+    /// - Returns: void return.
     public func http() -> Options
     {
         self.ssl = false
         return self
     }
     
+    /// Define the service port
+    ///
+    /// - Parameter port: service destination port
+    /// - Returns: void return.
     public func port(port: Int) -> Options
     {
         self.port = port
         return self
     }
     
+    /// Define the authentication mode.
+    ///
+    /// - Parameter authMode: authentication mode (i.e. maxAuth)
+    /// - Returns: void return.
     public func auth(authMode: String) -> Options
     {
         self.authMode = authMode
         return self
     }
     
+    /// Enables/Disable Maximo Tenant mode.
+    ///
+    /// - Parameter mtMode: TRUE to enable and FALSE to disble.
+    /// - Returns: void return.
     public func mt(mtMode: Bool) -> Options
     {
         self.mt = mtMode
         return self
     }
     
+    /// Define the user credentials.
+    ///
+    /// - Parameter user: user name.
+    /// - Returns: void return.
     public func user(user: String) -> Options
     {
         self.user = user
         return self
     }
     
+    /// Define the password credentials.
+    ///
+    /// - Parameter password: password
+    /// - Returns: void return.
     public func password(password: String) -> Options
     {
         self.password = password
         return self
     }
     
+    /// Determine the app URI
+    ///
+    /// - Parameter appURI: URI of application
+    /// - Returns: void return.
     public func AppURI(appURI: String) -> Options
     {
         self.appURI = appURI
         return self
     }
     
+    /// Enables lean
+    ///
+    /// - Parameter lean: TRUE to enable and FALSE to disble.
+    /// - Returns: void return.
     public func lean(lean: Bool) -> Options
     {
         self.lean = lean
         return self
     }
     
+    /// Set the tenant code.
+    ///
+    /// - Parameter tenantCode: tenant code
+    /// - Returns: void return.
     public func tenantCode(tenantCode: String) -> Options
     {
         self.tenantcode = tenantCode
         return self
     }
     
+    /// Returns the passaword
+    ///
+    /// - Returns: String with the passworld
     public func getPassword() -> String?
     {
         return self.password
     }
     
+    /// Returns the user name
+    ///
+    /// - Returns: String with user name
     public func getUser() -> String?
     {
         return self.user
     }
     
+    /// Check if this app is using the basic authentication
+    ///
+    /// - Returns: boolean value <b>TRUE</b> for yes, <b>FALSE</b> to no
     public func isBasicAuth() -> Bool
     {
         return self.authMode == AUTH_BASIC
     }
     
+    /// Returns if this app is using a form authentication
+    ///
+    /// - Returns: boolean value <b>TRUE</b> for yes, <b>FALSE</b> to no
     public func isFormAuth() -> Bool
     {
         return self.authMode == AUTH_FORM
     }
     
+    /// Returns if this application is using a Maximo Authentication formula.
+    ///
+    /// - Returns: boolean value <b>TRUE</b> for yes, <b>FALSE</b> to no
     public func isMaxAuth() -> Bool
     {
         return self.authMode == AUTH_MAXAUTH
     }
     
+    /// Returns if this app is desgined to attend a MultiTenancy.
+    ///
+    /// - Returns: boolean value <b>TRUE</b> for yes, <b>FALSE</b> to no
     public func isMultiTenancy() -> Bool
     {
         return self.mt
     }
     
+    /// Returns if this application is a Lean application
+    ///
+    /// - Returns: boolean value <b>TRUE</b> for yes, <b>FALSE</b> to no
     public func isLean() -> Bool
     {
         return self.lean
     }
     
+    /// Returns a string conatining the IP/DNS of the application host.
+    ///
+    /// - Returns: String
     public func getHost() -> String
     {
         return self.host!
     }
     
+    /// Returns the logical port where the service was configured to operating
+    ///
+    /// - Returns: Integer value
     public func getPort() -> Int
     {
         if self.port == nil {
@@ -177,12 +258,17 @@ public class Options {
         return self.port!
     }
     
+    /// Return the Tenant code
+    ///
+    /// - Returns: String containing Tenant's code.
     public func getTenantCode() -> String
     {
         return self.tenantcode
     }
 
-    //Get app URI
+    /// Get app URI
+    ///
+    /// - Returns: String URL containing the app location.
     public func getAppURI() -> String
     {
         if appURI != nil {
@@ -232,7 +318,9 @@ public class Options {
         return self.appURI!
     }
 
-    //Get public URI
+    /// Get public URI
+    ///
+    /// - Returns: String containing the public URI
     public func getPublicURI() -> String
     {
         if publicURI != nil {
