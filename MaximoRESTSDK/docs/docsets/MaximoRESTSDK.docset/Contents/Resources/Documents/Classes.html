@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Classes  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Section/Classes" class="dashAnchor"></a>
+    <a title="Classes  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">MaximoRESTSDK Docs</a> (83% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">MaximoRESTSDK Reference</a>
+        <img id="carat" src="img/carat.png" />
+        Classes  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/Aggregation.html">Aggregation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/Attachment.html">Attachment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/AttachmentSet.html">AttachmentSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/BulkProcessor.html">BulkProcessor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/MaximoConnector.html">MaximoConnector</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/Options.html">Options</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/QuerySelect.html">QuerySelect</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/QueryWhere.html">QueryWhere</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/Resource.html">Resource</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/ResourceSet.html">ResourceSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/SavedQuery.html">SavedQuery</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/Util.html">Util</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/OslcError.html">OslcError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Extensions/Collection.html">Collection</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Classes</h1>
+            <p>The following classes are available globally.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11AggregationC"></a>
+                    <a name="//apple_ref/swift/Class/Aggregation" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11AggregationC">Aggregation</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Utility class to aggregate data.</p>
+
+                        <a href="Classes/Aggregation.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Aggregation</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK10AttachmentC"></a>
+                    <a name="//apple_ref/swift/Class/Attachment" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK10AttachmentC">Attachment</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>{@code Attachment} implement the operations on attachment from Resource.
+ It provides the data, meta data, uri and so on.</p>
+
+<p><p>This object can be created by {@code AttachmentSet}.
+ The following code shows how to create {@code Attachment} using {@code AttachmentSet} Constructor
+ </p>
+ <pre>
+ <code>
+ var att = Attachment()
+ var att = AttachmentSet().create(relation: <q>DOCLINKS</q>, att: att)
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples demonstrate how to build a new {@code Attachment}</p>
+ <pre>
+ <code>
+ var att = Attachment()
+ var att = Attachment(uri: attachmenturi, mc: maximoconnector)
+ var att = Attachment(jo: attachmentJsonObject, mc: maximoconnector)
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples demonstrate how to set maximoconnector, name, description, data, meta data, wwwURI to {@code Attachment}</p>
+ <pre>
+ <code>
+ att.maximoConnector(mc: maximoconnector).name(name: filename).description(description: description)
+ att.data(data: data).meta(type: type, storeas: storeas).wwwURI(uri: wwwURI)
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples show how to load and reload data</p>
+ <pre>
+ <code>
+ att.load()
+ att.reload()
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples show how to get information from {@code Attachment}
+ For file data:</p>
+ <pre>
+ <code>
+ var data : Data = att.toDoc()
+ var uri : String = att.getURI()
+ var name : String = att.getName()
+ var description : String = att.getDescription()
+ var meta : String = att.getMeta()
+ </code>
+ </pre></p>
+
+<p><p>
+ For file meta data:</p>
+ <pre>
+ <code>
+ var jo : [String: Any] = att.toDocMeta()
+ var jodata : Data = att.toDocMetaBytes()
+ </code>
+ </pre></p>
+
+<p><p>The following example shows how to delete the {@code Attachment}
+ <pre>
+ <code>
+ att.delete() //if the attachment is deleted as ats.att.detele(), please reload attachmentset after.
+ </code>
+ </pre></p>
+
+                        <a href="Classes/Attachment.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Attachment</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK13AttachmentSetC"></a>
+                    <a name="//apple_ref/swift/Class/AttachmentSet" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK13AttachmentSetC">AttachmentSet</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>{@code AttachmenSet} implement the operations on attachmentset from Resource.
+ It provides the set of Attachment.</p>
+
+<p><p>This object can be created by {@code AttachmentSet}.
+ The following code shows how to create {@code AttachmentSet} using {@code AttachmentSet} Constructor
+ </p>
+ <pre>
+ <code>
+ var res = Resource()
+ var ats = res.attachmentSet(doclinkAttrName: doclinAttrName, relName: relName)
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples demonstrate how to build a new {@code AttachmentSet}</p>
+ <pre>
+ <code>
+ var ats = AttachmentSet()
+ var ats = AttachmentSet(jo: jsonobject, mc: maximoconnector)
+ var ats = AttachmentSet(uri: uri, mc: maximoconnector)
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples demonstrate how to set uri and jsonobject to {@code Attachment}</p>
+ <pre>
+ <code>
+ ats.href(href: uri)
+ ats.JsonObject(jo: jo)
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples show how to load and reload data</p>
+ <pre>
+ <code>
+ att.load()
+ att.reload()
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples show how to get AttachmentSet data from {@code AttachmentSet}</p>
+ <pre>
+ <code>
+ var jo : [String: Any] = att.toJSON()
+ var jodata : Data = att.toJSONBytes()
+ var uri : String = att.getURI()
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples show how to create, get and delete {@code Attachment} from{@code AttachmentSet}</p>
+ <pre>
+ <code>
+ var att = ats.create(att: Attachment())
+ var att = ats.create(relation: relation, att: Attachment())
+ var att = ats.member(index: index)
+ var att = ats.member(id: id)
+ ats.delete(index: index)
+ ats.delete(id: id)
+ </code>
+ </pre></p>
+
+<p><p>The following example shows how to get the this page size from {@code AttachmentSet}</p>
+ <pre>
+ <code>
+ var currentPageSize : Int = ats.thisPageSize()
+ </code>
+ </pre></p>
+
+                        <a href="Classes/AttachmentSet.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">AttachmentSet</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK13BulkProcessorC"></a>
+                    <a name="//apple_ref/swift/Class/BulkProcessor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK13BulkProcessorC">BulkProcessor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Bulk processo</p>
+
+                        <a href="Classes/BulkProcessor.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">BulkProcessor</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC"></a>
+                    <a name="//apple_ref/swift/Class/MaximoConnector" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC">MaximoConnector</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>{@code MaximoConnector} is a Connector between Oslc Client and Maximo Server.
+ It provides the authentication setting, connect, basic requests and disconnect for Server.</p>
+
+<p><p>This object can be created by {@code MaximoConnector} with {@code Options}.
+ The following code shows how to initial {@code MaximoConnector} using {@code MaximoConnector} and {@code Options}Constructor</p>
+ <pre>
+ <code>
+ var mc = MaximoConnector(options: new Options().user(user: userName)
+  .password(password: password).mt(mtMode: true).lean(lean: false).auth(authMode: authMethod)
+  .host(host: hostAddress).port(port: portNum))
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples demonstrate how to build a new {@code MaximoConnector}</p>
+ <pre>
+ <code>
+ var op = new Options()
+ var mc = new MaximoConnector();
+ mc.options(options: op)
+ var mc = MaximoConnector(options: Options())
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples demonstrate how to set authentication, method, cookie for session to {@code MaximoConnector}</p>
+ <pre>
+ <code>
+ mc.setAuth(uri: uri)
+ mc.setMethod(request: request, method: <q>POST</q>, properties: nil)
+ mc.setCookiesForSession(url: URL)
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples show how to connect, get, create, update, merge, delete and disconnect to Maximo Server by {@code MaximoConnector}.
+ The properties can be empty</p>
+ <pre>
+ <code>
+ mc.connect()
+ var jo : [String: Any] = mc.get(uri: uri)
+ var docBytes : Data = mc.getAttachmentData(uri: uri)
+ var docBytes : Data = mc.attachedDoc(uri: uri)
+ var jp : [String: Any] = mc.getAttachmentMeta(uri: uri)
+ var jo : [String: Any] = mc.create(uri: uri, jo: jsonObject, properties: properties)
+ var jo : [String: Any] = mc.createAttachment(uri: uri, data: data, name: name, decription: decription, meta: meta)
+ var jo : [String: Any] = mc.update(uri: uri, jo: jsonObject, properties: properties)
+ var jo : [String: Any] = mc.merge(uri: uri, jo: jsonObject, properties: properties)
+ mc.delete(uri: uri)
+ mc.deleteResource(uri: uri)
+ mc.deleteAttachment(uri: uri)
+ mc.disconnect()
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples  show how to get {@code ResourceSet} or {@code Resource} or {@code Attachment} by {@code MaximoConnector}</p>
+ <pre><code>
+ var rs = mc.resourceSet(osName: osName)
+ var rs = mc.resourceSet(url: url)
+ var re = mc.resource(uri: uri)
+ var att = mc.attachment(uri: uri)
+ </code></pre></p>
+
+                        <a href="Classes/MaximoConnector.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">MaximoConnector</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK7OptionsC"></a>
+                    <a name="//apple_ref/swift/Class/Options" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK7OptionsC">Options</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>{@code Options} is served for {@code MaximoConnector}.</p>
+
+<p><p>
+ The following code shows how to initial {@code MaximoConnector} using {@code MaximoConnector} and {@code Options}Constructor</p>
+ <pre>
+ <code>
+ var mc : MaximoConnector = MaximoConnector(options: Options().user(user: userName)
+  .password(password: password).mt(mtMode: true).lean(lean: false).auth(authMode: authMethod)
+  .host(host: hostAddress).port(port: portNum))
+ </code>
+ </pre></p>
+
+                        <a href="Classes/Options.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Options</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11QuerySelectC"></a>
+                    <a name="//apple_ref/swift/Class/QuerySelect" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11QuerySelectC">QuerySelect</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Query select tool</p>
+
+                        <a href="Classes/QuerySelect.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">QuerySelect</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK10QueryWhereC"></a>
+                    <a name="//apple_ref/swift/Class/QueryWhere" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK10QueryWhereC">QueryWhere</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Operates the where clause.</p>
+
+                        <a href="Classes/QueryWhere.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">QueryWhere</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK8ResourceC"></a>
+                    <a name="//apple_ref/swift/Class/Resource" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK8ResourceC">Resource</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>{@code Resource} implement the operations on Resource.
+ It provides the data, uri, attachment and so on.</p>
+
+<p><p>This object can be created by {@code ResourceSet} or {@code MaximoConnector}.
+ The following code shows how to create {@code Resource} using {@code ResourceSet}
+ or using the {@code MaximoConnector}
+ </p>
+ <pre>
+ <code>
+ var re = re.member(index: index)
+ var re = re.fetchMember(uri: uri, properties: properties)
+ var re = mc.resource(uri: uri, properties: properties)
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples demonstrate how to build a new {@code Resource}</p>
+ <pre>
+ <code>
+ var re = Resource()
+ var re = Resource(uri: uri)
+ var re = Resource(jo: jsonObject)
+ var re = Resource(uri: uri, mc: maximoConnector)
+ var re = Resource(jo: jsonObject, mc: maximoConnector)
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples demonstrate how to set uri and maximoConnector to {@code Resource}</p>
+ <pre>
+ <code>
+ re.uri(href: URI).maximoConnector(mc: maximoConnector)
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples show how to load and reload data</p>
+ <pre>
+ <code>
+ re.load()
+ re.reload()
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples show how to get information from {@code Resource}</p>
+ <pre>
+ <code>
+ var jo : [String: Any] = re.toJSON()
+ var joBytes : Data = re.toJSONBytes()
+ </code>
+ </pre></p>
+
+<p><p>The following examples show how to update, merge and delete the {&amp;code Resource}</p>
+ <pre>
+ <code>
+ re.update(jo: jsonObject, properties: properties)
+ re.merge(jo: jsonObject, properties: properties)
+ re.delete(index: index)
+ rs.re.delete() //if the attachment is deleted as rs.re.detele(), please reload {@code ResourceSet} after.
+ </code>
+ </pre></p>
+
+<p><p>The following example show how to get attachmentSet, relatedResource and how to invoke action by {@code Resource}</p>
+ <pre><code>
+ var ats = re.attachmentSet(doclinkAttrName: doclinkAttrName, relName: relName)
+ var relationRe = re.relatedResource(attrName: attrName)
+ re.invokeAction(actionName: actionName, jo: jsonObeject)
+ </code></pre></p>
+
+                        <a href="Classes/Resource.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Resource</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC"></a>
+                    <a name="//apple_ref/swift/Class/ResourceSet" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC">ResourceSet</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>{@code ResourceSet} implement the operations on {@code ResourceSet}. It
+ provides the set of Resource.</p>
+
+<p><p>
+ This object can be created by {@code MaximoConnector}. The following code
+ shows how to create {@code MaximoConnector}
+ </p></p>
+
+<p><pre>
+ <code>
+ var rs = mc.resourceSet(osName: osName)
+ var rs = mc.resourceSet(url: URL)
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples demonstrate how to build a new {@code ResourceSet}
+ </p></p>
+
+<p><pre>
+ <code>
+ var rs = ResourceSet(osName: osName)
+ var rs = ResourceSet(mc: maximoConnector)
+ var rs = ResourceSet(osName: osName, mc: maximoConnector)
+ var rs = ResourceSet(url: URL, mc: maximoConnector)
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples show how to set {@code ResourceSet} data from
+ {@code ResourceSet}
+ </p></p>
+
+<p><pre>
+ <code>
+ rs._where(whereClause: queryWhere).select(selectClause: querySelect).hasTerms(terms: terms).pageSize(pageSize: pageSize)
+ rs.paging(type: true)
+ rs.stablePaging(type: true)
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples show how to fetch, load, reload, go to next page, go
+ back to previous page, get savedQuery for {@code ResourceSet} data
+ </p></p>
+
+<p><pre>
+ <code>
+ rs.fetch(options: mapOptions)
+ rs.load()
+ rs.reload()
+ rs.nextPage()
+ rs.previousPage()
+ rs.savedQuery(qsaved: savedQuery)
+ rs.savedQuery(name: name, paramValues: paramValues)
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples show how to get {@code ResourceSet} data from
+ {@code ResourceSet}
+ </p></p>
+
+<p><pre>
+ <code>
+ var jo : [String: Any] = rs.toJSON()
+ var jodata : Data = rs.toJSONBytes()
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples show how to create, get and delete {@code Resource}
+ from {@code ResourceSet}
+ </p></p>
+
+<p><pre>
+ <code>
+ var rs = fetchMember(uri: uri, properties: properties)
+ var rs = member(index: index)
+ var rs = create(jo: jsonObject, properties: properties)
+ </code>
+ </pre></p>
+
+<p><p>
+ The following example shows how to get the this page size from
+ {@code ResourceSet}
+ </p></p>
+
+<p><pre>
+ <code>
+ var count : Int = rs.count()
+ var totalCount : Int = rs.totalCount()
+ var totalCount : Int = rs.totalCount(fromServer: true)
+ </code>
+ </pre></p>
+
+                        <a href="Classes/ResourceSet.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">ResourceSet</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK10SavedQueryC"></a>
+                    <a name="//apple_ref/swift/Class/SavedQuery" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK10SavedQueryC">SavedQuery</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Object to represent the Saved query.</p>
+
+                        <a href="Classes/SavedQuery.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">SavedQuery</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Equatable"></a>
+                <a name="//apple_ref/swift/Section/Equatable" class="dashAnchor"></a>
+                <a href="#/Equatable">
+                  <h3 class="section-name">Equatable</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK4UtilC"></a>
+                    <a name="//apple_ref/swift/Class/Util" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK4UtilC">Util</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Util object.</p>
+
+                        <a href="Classes/Util.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Util</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="https://github.ibm.com/maximo-ohio/maximo-swift-restclient" target="_blank" rel="external">Silvino Neto</a>. All rights reserved. (Last updated: 2018-07-30)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

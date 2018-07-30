@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>AttachmentSet Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/AttachmentSet" class="dashAnchor"></a>
+    <a title="AttachmentSet Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">MaximoRESTSDK Docs</a> (83% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">MaximoRESTSDK Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        AttachmentSet Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/Aggregation.html">Aggregation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Attachment.html">Attachment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/AttachmentSet.html">AttachmentSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BulkProcessor.html">BulkProcessor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MaximoConnector.html">MaximoConnector</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Options.html">Options</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/QuerySelect.html">QuerySelect</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/QueryWhere.html">QueryWhere</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Resource.html">Resource</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ResourceSet.html">ResourceSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SavedQuery.html">SavedQuery</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Util.html">Util</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/OslcError.html">OslcError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/Collection.html">Collection</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>AttachmentSet</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">AttachmentSet</span></code></pre>
+
+                </div>
+              </div>
+            <p>{@code AttachmenSet} implement the operations on attachmentset from Resource.
+ It provides the set of Attachment.</p>
+
+<p><p>This object can be created by {@code AttachmentSet}.
+ The following code shows how to create {@code AttachmentSet} using {@code AttachmentSet} Constructor
+ </p>
+ <pre>
+ <code>
+ var res = Resource()
+ var ats = res.attachmentSet(doclinkAttrName: doclinAttrName, relName: relName)
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples demonstrate how to build a new {@code AttachmentSet}</p>
+ <pre>
+ <code>
+ var ats = AttachmentSet()
+ var ats = AttachmentSet(jo: jsonobject, mc: maximoconnector)
+ var ats = AttachmentSet(uri: uri, mc: maximoconnector)
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples demonstrate how to set uri and jsonobject to {@code Attachment}</p>
+ <pre>
+ <code>
+ ats.href(href: uri)
+ ats.JsonObject(jo: jo)
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples show how to load and reload data</p>
+ <pre>
+ <code>
+ att.load()
+ att.reload()
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples show how to get AttachmentSet data from {@code AttachmentSet}</p>
+ <pre>
+ <code>
+ var jo : [String: Any] = att.toJSON()
+ var jodata : Data = att.toJSONBytes()
+ var uri : String = att.getURI()
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples show how to create, get and delete {@code Attachment} from{@code AttachmentSet}</p>
+ <pre>
+ <code>
+ var att = ats.create(att: Attachment())
+ var att = ats.create(relation: relation, att: Attachment())
+ var att = ats.member(index: index)
+ var att = ats.member(id: id)
+ ats.delete(index: index)
+ ats.delete(id: id)
+ </code>
+ </pre></p>
+
+<p><p>The following example shows how to get the this page size from {@code AttachmentSet}</p>
+ <pre>
+ <code>
+ var currentPageSize : Int = ats.thisPageSize()
+ </code>
+ </pre></p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK13AttachmentSetC4hrefSSvp"></a>
+                    <a name="//apple_ref/swift/Property/href" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK13AttachmentSetC4hrefSSvp">href</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>URI Information</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">href</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK13AttachmentSetC2jos10DictionaryVySSypGvp"></a>
+                    <a name="//apple_ref/swift/Property/jo" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK13AttachmentSetC2jos10DictionaryVySSypGvp">jo</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>JSON Array</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">jo</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK13AttachmentSetC2jaSayypGvp"></a>
+                    <a name="//apple_ref/swift/Property/ja" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK13AttachmentSetC2jaSayypGvp">ja</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>JSON Any structure information.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">ja</span><span class="p">:</span> <span class="p">[</span><span class="kt">Any</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK13AttachmentSetC2mcAA0A9ConnectorCvp"></a>
+                    <a name="//apple_ref/swift/Property/mc" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK13AttachmentSetC2mcAA0A9ConnectorCvp">mc</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Maximo Connector.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">mc</span><span class="p">:</span> <span class="kt"><a href="../Classes/MaximoConnector.html">MaximoConnector</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK13AttachmentSetC8isLoadedSbvp"></a>
+                    <a name="//apple_ref/swift/Property/isLoaded" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK13AttachmentSetC8isLoadedSbvp">isLoaded</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Boolean to represent attachment load.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">isLoaded</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK13AttachmentSetCACycfc"></a>
+                    <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK13AttachmentSetCACycfc">init()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initialize object.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK13AttachmentSetCAcA0A9ConnectorC2mc_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(mc:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK13AttachmentSetCAcA0A9ConnectorC2mc_tcfc">init(mc:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initialize object based on Maximo Connector.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">mc</span><span class="p">:</span> <span class="kt"><a href="../Classes/MaximoConnector.html">MaximoConnector</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>mc</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Maximo Connector object.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK13AttachmentSetCACSS4href_AA0A9ConnectorC2mctcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(href:mc:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK13AttachmentSetCACSS4href_AA0A9ConnectorC2mctcfc">init(href:mc:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initialize object based on a URI&rsquo;s information and a Maximo connector.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">href</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">mc</span><span class="p">:</span> <span class="kt"><a href="../Classes/MaximoConnector.html">MaximoConnector</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>href</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>URI&rsquo;s information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>mc</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Maximo Connector.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK13AttachmentSetCACs10DictionaryVySSypG2jo_AA0A9ConnectorC2mctcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(jo:mc:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK13AttachmentSetCACs10DictionaryVySSypG2jo_AA0A9ConnectorC2mctcfc">init(jo:mc:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initialize the object based on a JSON Array and a Maximo Connector object.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">jo</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">mc</span><span class="p">:</span> <span class="kt"><a href="../Classes/MaximoConnector.html">MaximoConnector</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>jo</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>JSON information array.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>mc</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Maximo Connector object.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK13AttachmentSetC6getURISSyF"></a>
+                    <a name="//apple_ref/swift/Method/getURI()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK13AttachmentSetC6getURISSyF">getURI()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get current URI</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getURI</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Reference to current URI value.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK13AttachmentSetC6toJSONs10DictionaryVySSypGyKF"></a>
+                    <a name="//apple_ref/swift/Method/toJSON()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK13AttachmentSetC6toJSONs10DictionaryVySSypGyKF">toJSON()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get AttachmentSet data in JSON</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">toJSON</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Reference to the current attached data in JSON.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK13AttachmentSetC11toJSONBytes10Foundation4DataVyKF"></a>
+                    <a name="//apple_ref/swift/Method/toJSONBytes()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK13AttachmentSetC11toJSONBytes10Foundation4DataVyKF">toJSONBytes()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get AttachmentSet data in JSONBytes</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">toJSONBytes</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Data</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Reference to the current attached data in JSON Bytes.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK13AttachmentSetC4hrefACSSAD_tF"></a>
+                    <a name="//apple_ref/swift/Method/href(href:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK13AttachmentSetC4hrefACSSAD_tF">href(href:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set the URI information.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">href</span><span class="p">(</span><span class="nv">href</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AttachmentSet</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>href</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>URI information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>&lt;#return value description#&gt;</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK13AttachmentSetC10JsonObjectACs10DictionaryVySSypG2jo_tF"></a>
+                    <a name="//apple_ref/swift/Method/JsonObject(jo:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK13AttachmentSetC10JsonObjectACs10DictionaryVySSypG2jo_tF">JsonObject(jo:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set a JSON Object.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="kt">JsonObject</span><span class="p">(</span><span class="nv">jo</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">AttachmentSet</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>jo</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>JSON Object.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>&lt;#return value description#&gt;</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK13AttachmentSetC4loadACyKF"></a>
+                    <a name="//apple_ref/swift/Method/load()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK13AttachmentSetC4loadACyKF">load()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Load the data for attachment set</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    &lt;#throws value description#&gt;
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">load</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">AttachmentSet</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Reference to the Attachment See</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK13AttachmentSetC4loadACs10DictionaryVySSypGSg7headers_tKF"></a>
+                    <a name="//apple_ref/swift/Method/load(headers:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK13AttachmentSetC4loadACs10DictionaryVySSypGSg7headers_tKF">load(headers:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Load the data for attachment set</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">load</span><span class="p">(</span><span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]?)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">AttachmentSet</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Header of Attachment.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Reference to the data.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK13AttachmentSetC6reloadACyKF"></a>
+                    <a name="//apple_ref/swift/Method/reload()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK13AttachmentSetC6reloadACyKF">reload()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Reload attachments.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">reload</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">AttachmentSet</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Attachment reloaded.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK13AttachmentSetC6createAA0C0CAF3att_tKF"></a>
+                    <a name="//apple_ref/swift/Method/create(att:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK13AttachmentSetC6createAA0C0CAF3att_tKF">create(att:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a new attachment</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">create</span><span class="p">(</span><span class="nv">att</span><span class="p">:</span> <span class="kt"><a href="../Classes/Attachment.html">Attachment</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Attachment.html">Attachment</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>att</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Attachments.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Attachment object.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK13AttachmentSetC6createAA0C0CSS8relation_AF3atttKF"></a>
+                    <a name="//apple_ref/swift/Method/create(relation:att:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK13AttachmentSetC6createAA0C0CSS8relation_AF3atttKF">create(relation:att:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a new attachment</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    &lt;#throws value description#&gt;
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">create</span><span class="p">(</span><span class="nv">relation</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">att</span><span class="p">:</span> <span class="kt"><a href="../Classes/Attachment.html">Attachment</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Attachment.html">Attachment</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>relation</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Relationship information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>att</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Attachment.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>URI of attachment related to a resource.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK13AttachmentSetC6createAA0C0CSS8relation_AF3atts10DictionaryVySSypGSg7headerstKF"></a>
+                    <a name="//apple_ref/swift/Method/create(relation:att:headers:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK13AttachmentSetC6createAA0C0CSS8relation_AF3atts10DictionaryVySSypGSg7headerstKF">create(relation:att:headers:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a new Attachment</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">create</span><span class="p">(</span><span class="nv">relation</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">att</span><span class="p">:</span> <span class="kt"><a href="../Classes/Attachment.html">Attachment</a></span><span class="p">,</span> <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]?)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Attachment.html">Attachment</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>relation</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>String with details of the attachment relationship.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>att</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Attachment object.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Header&rsquo;s information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>new Attachment object.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK13AttachmentSetC6memberAA0C0CSgSi5index_tKF"></a>
+                    <a name="//apple_ref/swift/Method/member(index:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK13AttachmentSetC6memberAA0C0CSgSi5index_tKF">member(index:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get the member of attachment set</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    &lt;#throws value description#&gt;
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">member</span><span class="p">(</span><span class="nv">index</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Attachment.html">Attachment</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>index</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Int value representing the Index of an Attachment into the AttachmentSet.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Attachment reference.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK13AttachmentSetC6memberAA0C0CSgSS2id_tKF"></a>
+                    <a name="//apple_ref/swift/Method/member(id:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK13AttachmentSetC6memberAA0C0CSgSS2id_tKF">member(id:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get the member of attachment set</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    &lt;#throws value description#&gt;
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">member</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Attachment.html">Attachment</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>id</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID value representing the Id of an Attachment into the AttachmentSet map.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Attachment reference.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK13AttachmentSetC6deleteACSi5index_tKF"></a>
+                    <a name="//apple_ref/swift/Method/delete(index:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK13AttachmentSetC6deleteACSi5index_tKF">delete(index:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete an Attachment based on a object index.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">delete</span><span class="p">(</span><span class="nv">index</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">AttachmentSet</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>index</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Attachment&rsquo;s index.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Attachment set reloaded without the deleted object.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK13AttachmentSetC6deleteACSS2id_tKF"></a>
+                    <a name="//apple_ref/swift/Method/delete(id:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK13AttachmentSetC6deleteACSS2id_tKF">delete(id:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete an Attachment based on a object index.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    &lt;#throws value description#&gt;
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">delete</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">AttachmentSet</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Attachment&rsquo;s ID.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Attachment set reloaded without the deleted object.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK13AttachmentSetC12thisPageSizeSiyKF"></a>
+                    <a name="//apple_ref/swift/Method/thisPageSize()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK13AttachmentSetC12thisPageSizeSiyKF">thisPageSize()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Return this page size.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">thisPageSize</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Int value represent the page size</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK13AttachmentSetC11fetchMemberAA0C0CSS3uri_SaySSGSg10propertiestKF"></a>
+                    <a name="//apple_ref/swift/Method/fetchMember(uri:properties:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK13AttachmentSetC11fetchMemberAA0C0CSS3uri_SaySSGSg10propertiestKF">fetchMember(uri:properties:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Fetch member through the URI information and arbitrary array of properties.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">fetchMember</span><span class="p">(</span><span class="nv">uri</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Attachment.html">Attachment</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uri</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>URI Information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>properties</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>String array within arbitrary properties.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Attachment object.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK13AttachmentSetC11fetchMemberAA0C0CSS3uri_s10DictionaryVySSypGSg7headersSaySSGSg10propertiestKF"></a>
+                    <a name="//apple_ref/swift/Method/fetchMember(uri:headers:properties:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK13AttachmentSetC11fetchMemberAA0C0CSS3uri_s10DictionaryVySSypGSg7headersSaySSGSg10propertiestKF">fetchMember(uri:headers:properties:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Fetch member through the URI information and arbitrary array of properties and additional header information.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    &lt;#throws value description#&gt;
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">fetchMember</span><span class="p">(</span><span class="nv">uri</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]?,</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Attachment.html">Attachment</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uri</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>uri: URI Information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Attachment header information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>properties</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>String array within arbitrary properties.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Attachment object.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="https://github.ibm.com/maximo-ohio/maximo-swift-restclient" target="_blank" rel="external">Silvino Neto</a>. All rights reserved. (Last updated: 2018-07-30)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

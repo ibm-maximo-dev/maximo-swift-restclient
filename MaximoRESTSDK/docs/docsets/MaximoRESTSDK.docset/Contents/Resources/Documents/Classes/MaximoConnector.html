@@ -1,0 +1,3490 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>MaximoConnector Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/MaximoConnector" class="dashAnchor"></a>
+    <a title="MaximoConnector Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">MaximoRESTSDK Docs</a> (83% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">MaximoRESTSDK Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        MaximoConnector Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/Aggregation.html">Aggregation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Attachment.html">Attachment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/AttachmentSet.html">AttachmentSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BulkProcessor.html">BulkProcessor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MaximoConnector.html">MaximoConnector</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Options.html">Options</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/QuerySelect.html">QuerySelect</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/QueryWhere.html">QueryWhere</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Resource.html">Resource</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ResourceSet.html">ResourceSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SavedQuery.html">SavedQuery</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Util.html">Util</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/OslcError.html">OslcError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/Collection.html">Collection</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>MaximoConnector</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">MaximoConnector</span></code></pre>
+
+                </div>
+              </div>
+            <p>{@code MaximoConnector} is a Connector between Oslc Client and Maximo Server.
+ It provides the authentication setting, connect, basic requests and disconnect for Server.</p>
+
+<p><p>This object can be created by {@code MaximoConnector} with {@code Options}.
+ The following code shows how to initial {@code MaximoConnector} using {@code MaximoConnector} and {@code Options}Constructor</p>
+ <pre>
+ <code>
+ var mc = MaximoConnector(options: new Options().user(user: userName)
+  .password(password: password).mt(mtMode: true).lean(lean: false).auth(authMode: authMethod)
+  .host(host: hostAddress).port(port: portNum))
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples demonstrate how to build a new {@code MaximoConnector}</p>
+ <pre>
+ <code>
+ var op = new Options()
+ var mc = new MaximoConnector();
+ mc.options(options: op)
+ var mc = MaximoConnector(options: Options())
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples demonstrate how to set authentication, method, cookie for session to {@code MaximoConnector}</p>
+ <pre>
+ <code>
+ mc.setAuth(uri: uri)
+ mc.setMethod(request: request, method: <q>POST</q>, properties: nil)
+ mc.setCookiesForSession(url: URL)
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples show how to connect, get, create, update, merge, delete and disconnect to Maximo Server by {@code MaximoConnector}.
+ The properties can be empty</p>
+ <pre>
+ <code>
+ mc.connect()
+ var jo : [String: Any] = mc.get(uri: uri)
+ var docBytes : Data = mc.getAttachmentData(uri: uri)
+ var docBytes : Data = mc.attachedDoc(uri: uri)
+ var jp : [String: Any] = mc.getAttachmentMeta(uri: uri)
+ var jo : [String: Any] = mc.create(uri: uri, jo: jsonObject, properties: properties)
+ var jo : [String: Any] = mc.createAttachment(uri: uri, data: data, name: name, decription: decription, meta: meta)
+ var jo : [String: Any] = mc.update(uri: uri, jo: jsonObject, properties: properties)
+ var jo : [String: Any] = mc.merge(uri: uri, jo: jsonObject, properties: properties)
+ mc.delete(uri: uri)
+ mc.deleteResource(uri: uri)
+ mc.deleteAttachment(uri: uri)
+ mc.disconnect()
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples  show how to get {@code ResourceSet} or {@code Resource} or {@code Attachment} by {@code MaximoConnector}</p>
+ <pre><code>
+ var rs = mc.resourceSet(osName: osName)
+ var rs = mc.resourceSet(url: url)
+ var re = mc.resource(uri: uri)
+ var att = mc.attachment(uri: uri)
+ </code></pre></p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC7optionsAA7OptionsCvp"></a>
+                    <a name="//apple_ref/swift/Property/options" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC7optionsAA7OptionsCvp">options</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">options</span><span class="p">:</span> <span class="kt"><a href="../Classes/Options.html">Options</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC5validSbvp"></a>
+                    <a name="//apple_ref/swift/Property/valid" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC5validSbvp">valid</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">valid</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC5debugSbvp"></a>
+                    <a name="//apple_ref/swift/Property/debug" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC5debugSbvp">debug</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">debug</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC16lastResponseCodeSivp"></a>
+                    <a name="//apple_ref/swift/Property/lastResponseCode" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC16lastResponseCodeSivp">lastResponseCode</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">lastResponseCode</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC7cookiesSaySo10HTTPCookieCGvp"></a>
+                    <a name="//apple_ref/swift/Property/cookies" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC7cookiesSaySo10HTTPCookieCGvp">cookies</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">cookies</span><span class="p">:</span> <span class="p">[</span><span class="kt">HTTPCookie</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC16HTTP_METHOD_POSTSSvp"></a>
+                    <a name="//apple_ref/swift/Property/HTTP_METHOD_POST" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC16HTTP_METHOD_POSTSSvp">HTTP_METHOD_POST</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">HTTP_METHOD_POST</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC15HTTP_METHOD_GETSSvp"></a>
+                    <a name="//apple_ref/swift/Property/HTTP_METHOD_GET" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC15HTTP_METHOD_GETSSvp">HTTP_METHOD_GET</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">HTTP_METHOD_GET</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC17HTTP_METHOD_PATCHSSvp"></a>
+                    <a name="//apple_ref/swift/Property/HTTP_METHOD_PATCH" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC17HTTP_METHOD_PATCHSSvp">HTTP_METHOD_PATCH</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">HTTP_METHOD_PATCH</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC17HTTP_METHOD_MERGESSvp"></a>
+                    <a name="//apple_ref/swift/Property/HTTP_METHOD_MERGE" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC17HTTP_METHOD_MERGESSvp">HTTP_METHOD_MERGE</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">HTTP_METHOD_MERGE</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC18HTTP_METHOD_DELETESSvp"></a>
+                    <a name="//apple_ref/swift/Property/HTTP_METHOD_DELETE" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC18HTTP_METHOD_DELETESSvp">HTTP_METHOD_DELETE</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">HTTP_METHOD_DELETE</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC16HTTP_METHOD_BULKSSvp"></a>
+                    <a name="//apple_ref/swift/Property/HTTP_METHOD_BULK" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC16HTTP_METHOD_BULKSSvp">HTTP_METHOD_BULK</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">HTTP_METHOD_BULK</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC16HTTP_METHOD_SYNCSSvp"></a>
+                    <a name="//apple_ref/swift/Property/HTTP_METHOD_SYNC" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC16HTTP_METHOD_SYNCSSvp">HTTP_METHOD_SYNC</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">HTTP_METHOD_SYNC</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC21HTTP_METHOD_MERGESYNCSSvp"></a>
+                    <a name="//apple_ref/swift/Property/HTTP_METHOD_MERGESYNC" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC21HTTP_METHOD_MERGESYNCSSvp">HTTP_METHOD_MERGESYNC</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">HTTP_METHOD_MERGESYNC</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC10httpMethodSSvp"></a>
+                    <a name="//apple_ref/swift/Property/httpMethod" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC10httpMethodSSvp">httpMethod</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">httpMethod</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorCACycfc"></a>
+                    <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorCACycfc">init()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Init this object using a base configuration.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorCAcA7OptionsC7options_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(options:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorCAcA7OptionsC7options_tcfc">init(options:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Init this object with connector options.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">options</span><span class="p">:</span> <span class="kt"><a href="../Classes/Options.html">Options</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>options</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Maximo connector options.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC13getCurrentURISSyF"></a>
+                    <a name="//apple_ref/swift/Method/getCurrentURI()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC13getCurrentURISSyF">getCurrentURI()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the current URI.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getCurrentURI</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>curretn URI information.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC7optionsAcA7OptionsC2op_tF"></a>
+                    <a name="//apple_ref/swift/Method/options(op:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC7optionsAcA7OptionsC2op_tF">options(op:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set the options.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">options</span><span class="p">(</span><span class="nv">op</span><span class="p">:</span> <span class="kt"><a href="../Classes/Options.html">Options</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">MaximoConnector</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>op</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Options object.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>updated options object.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC10getOptionsAA0E0CyF"></a>
+                    <a name="//apple_ref/swift/Method/getOptions()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC10getOptionsAA0E0CyF">getOptions()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get options for Maximo Connector object.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getOptions</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Options.html">Options</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>options.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC11resourceSetAA08ResourceE0CyF"></a>
+                    <a name="//apple_ref/swift/Method/resourceSet()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC11resourceSetAA08ResourceE0CyF">resourceSet()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Rerturns a Resource set object.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">resourceSet</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/ResourceSet.html">ResourceSet</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>ResourceSet instance.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC11resourceSetAA08ResourceE0CSS6osName_tF"></a>
+                    <a name="//apple_ref/swift/Method/resourceSet(osName:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC11resourceSetAA08ResourceE0CSS6osName_tF">resourceSet(osName:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Return a ResourceSet based on it&rsquo;s name.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">resourceSet</span><span class="p">(</span><span class="nv">osName</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/ResourceSet.html">ResourceSet</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p></p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC11resourceSetAA08ResourceE0CSS3url_tF"></a>
+                    <a name="//apple_ref/swift/Method/resourceSet(url:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC11resourceSetAA08ResourceE0CSS3url_tF">resourceSet(url:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set the URL information to the ResourceSet object.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">resourceSet</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/ResourceSet.html">ResourceSet</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>url</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>String containing the URL.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>ResourceSet object.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC8resourceAA8ResourceCSS3uri_SaySSG10propertiestKF"></a>
+                    <a name="//apple_ref/swift/Method/resource(uri:properties:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC8resourceAA8ResourceCSS3uri_SaySSG10propertiestKF">resource(uri:properties:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Fetch a resource based on a URI and propertie&rsquo;s information.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">resource</span><span class="p">(</span><span class="nv">uri</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">])</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Resource.html">Resource</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uri</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource&rsquo;s URI information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>properties</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Properties containing a resource information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>ResourceSet object.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC10attachmentAA10AttachmentCSS3uri_SaySSG10propertiestKF"></a>
+                    <a name="//apple_ref/swift/Method/attachment(uri:properties:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC10attachmentAA10AttachmentCSS3uri_SaySSG10propertiestKF">attachment(uri:properties:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Rertuns a AttachmentSet object based on applicatino&rsquo;s URI and properties.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">attachment</span><span class="p">(</span><span class="nv">uri</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">])</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Attachment.html">Attachment</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uri</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Attachment&rsquo;s URI information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>properties</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Properties conatining a attachment&rsquo;s information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>AttachmentSet object.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC17attachmentDocMetas10DictionaryVySSypGSS3uri_tKF"></a>
+                    <a name="//apple_ref/swift/Method/attachmentDocMeta(uri:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC17attachmentDocMetas10DictionaryVySSypGSS3uri_tKF">attachmentDocMeta(uri:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Rertuns a AttachementSet object based on applicatino&rsquo;s URI and properties containing a meta data information.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">attachmentDocMeta</span><span class="p">(</span><span class="nv">uri</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uri</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Attachment&rsquo;s URI information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>AttachmentSet object.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC5isGETSbyF"></a>
+                    <a name="//apple_ref/swift/Method/isGET()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC5isGETSbyF">isGET()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Check if the HTTP method used is <b>GET</b>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">isGET</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC6isPOSTSbyF"></a>
+                    <a name="//apple_ref/swift/Method/isPOST()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC6isPOSTSbyF">isPOST()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Check if the HTTP method used is <b>POST</b>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">isPOST</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC7isPATCHSbyF"></a>
+                    <a name="//apple_ref/swift/Method/isPATCH()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC7isPATCHSbyF">isPATCH()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Check if the HTTP method used is <b>PATCH</b>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">isPATCH</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC7isMERGESbyF"></a>
+                    <a name="//apple_ref/swift/Method/isMERGE()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC7isMERGESbyF">isMERGE()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Check if the HTTP method used is <b>MERGE</b>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">isMERGE</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC8isDELETESbyF"></a>
+                    <a name="//apple_ref/swift/Method/isDELETE()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC8isDELETESbyF">isDELETE()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Check if the HTTP method used is <b>DELETE</b>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">isDELETE</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC6isBULKSbyF"></a>
+                    <a name="//apple_ref/swift/Method/isBULK()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC6isBULKSbyF">isBULK()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Check if the HTTP method used is <b>BULK</b>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">isBULK</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC6isSYNCSbyF"></a>
+                    <a name="//apple_ref/swift/Method/isSYNC()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC6isSYNCSbyF">isSYNC()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Check if the HTTP method used is <b>SYNC</b>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">isSYNC</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC11isMERGESYNCSbyF"></a>
+                    <a name="//apple_ref/swift/Method/isMERGESYNC()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC11isMERGESYNCSbyF">isMERGESYNC()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Check if the HTTP method used is <b>MERGESYNC</b>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">isMERGESYNC</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC7isValidSbyF"></a>
+                    <a name="//apple_ref/swift/Method/isValid()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC7isValidSbyF">isValid()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Check if the package is valid.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">isValid</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC6isLeanSbyF"></a>
+                    <a name="//apple_ref/swift/Method/isLean()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC6isLeanSbyF">isLean()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Check if the package is set to be Lean.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">isLean</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC7connectyyKF"></a>
+                    <a name="//apple_ref/swift/Method/connect()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC7connectyyKF">connect()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Connect to Maximo Server.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">connect</span><span class="p">()</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC7connectys10DictionaryVyS2SGSg18proxyConfiguration_tKF"></a>
+                    <a name="//apple_ref/swift/Method/connect(proxyConfiguration:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC7connectys10DictionaryVyS2SGSg18proxyConfiguration_tKF">connect(proxyConfiguration:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Connect to Maximo Server with a Proxy.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">connect</span><span class="p">(</span><span class="nv">proxyConfiguration</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">String</span><span class="p">]?)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>proxyConfiguration</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Proxy configuration description.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC7setAuth10Foundation10URLRequestVSgSS3uri_tF"></a>
+                    <a name="//apple_ref/swift/Method/setAuth(uri:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC7setAuth10Foundation10URLRequestVSgSS3uri_tF">setAuth(uri:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set the authentication process based on a resource URI.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setAuth</span><span class="p">(</span><span class="nv">uri</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">URLRequest</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uri</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>String containing the URI information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>URLRequest object or nil if something is incompatible.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC9setMethody10Foundation10URLRequestVz7request_SS6methodSaySSGSg10propertiestF"></a>
+                    <a name="//apple_ref/swift/Method/setMethod(request:method:properties:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC9setMethody10Foundation10URLRequestVz7request_SS6methodSaySSGSg10propertiestF">setMethod(request:method:properties:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Define the HTTP method to be used based.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setMethod</span><span class="p">(</span><span class="nv">request</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">URLRequest</span><span class="p">,</span> <span class="nv">method</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>request</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>URLRequest object.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>method</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>String containing the METHOD description (i.e.GET, POST, PATCH, MERGE, DELETE, BULK, SYNC or MERGESYNC).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>properties</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>properties containing the resource information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC17getAttachmentData10Foundation0F0VSS3uri_tKF"></a>
+                    <a name="//apple_ref/swift/Method/getAttachmentData(uri:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC17getAttachmentData10Foundation0F0VSS3uri_tKF">getAttachmentData(uri:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Load DocumentData.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getAttachmentData</span><span class="p">(</span><span class="nv">uri</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Data</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uri</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Attachment&rsquo;s URI information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Data information or HTTP response code.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC17getAttachmentData10Foundation0F0VSS3uri_s10DictionaryVySSypGSg7headerstKF"></a>
+                    <a name="//apple_ref/swift/Method/getAttachmentData(uri:headers:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC17getAttachmentData10Foundation0F0VSS3uri_s10DictionaryVySSypGSg7headerstKF">getAttachmentData(uri:headers:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Retrieve the attachment metada based on resource&rsquo;s URI and headers information.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getAttachmentData</span><span class="p">(</span><span class="nv">uri</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]?)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Data</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uri</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource&rsquo;s URI information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource&rsquo;s header information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Data information or HTTP response code.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC3gets10DictionaryVySSypGSS3uri_tKF"></a>
+                    <a name="//apple_ref/swift/Method/get(uri:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC3gets10DictionaryVySSypGSS3uri_tKF">get(uri:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Handle with the GET HTTP method.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">get</span><span class="p">(</span><span class="nv">uri</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uri</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource&rsquo;s URI.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>JSON containing the information or an HTTP response code.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC3gets10DictionaryVySSypGSS3uri_AGSg7headerstKF"></a>
+                    <a name="//apple_ref/swift/Method/get(uri:headers:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC3gets10DictionaryVySSypGSS3uri_AGSg7headerstKF">get(uri:headers:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Handle with the GET HTTP method.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">get</span><span class="p">(</span><span class="nv">uri</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]?)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uri</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource&rsquo;s URI information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource header information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>JSON containing the information or an HTTP response code.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC7groupBySayypGSS3uri_tKF"></a>
+                    <a name="//apple_ref/swift/Method/groupBy(uri:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC7groupBySayypGSS3uri_tKF">groupBy(uri:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Fetch Group By data.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">groupBy</span><span class="p">(</span><span class="nv">uri</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Any</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uri</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource/Attachment&rsquo;s URI information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>JSON containing the information grouped by URI or an HTTP response code.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC7groupBySayypGSS3uri_s10DictionaryVySSypGSg7headerstKF"></a>
+                    <a name="//apple_ref/swift/Method/groupBy(uri:headers:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC7groupBySayypGSS3uri_s10DictionaryVySSypGSg7headerstKF">groupBy(uri:headers:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Fetch Group By data.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">groupBy</span><span class="p">(</span><span class="nv">uri</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]?)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Any</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uri</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource&rsquo;s URI information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>headers information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>JSON containing the information grouped by URI or an HTTP response code.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC6creates10DictionaryVySSypGSS3uri_AG2joSaySSGSg10propertiestKF"></a>
+                    <a name="//apple_ref/swift/Method/create(uri:jo:properties:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC6creates10DictionaryVySSypGSS3uri_AG2joSaySSGSg10propertiestKF">create(uri:jo:properties:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create new Resource.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">create</span><span class="p">(</span><span class="nv">uri</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">jo</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uri</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource&rsquo;s URI information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>jo</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource&rsquo;s JSON data information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>properties</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource&rsquo;s properties information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>JSON containing the information or an HTTP response code.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC6creates10DictionaryVySSypGSS3uri_AG2joAGSg7headersSaySSGSg10propertiestKF"></a>
+                    <a name="//apple_ref/swift/Method/create(uri:jo:headers:properties:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC6creates10DictionaryVySSypGSS3uri_AG2joAGSg7headersSaySSGSg10propertiestKF">create(uri:jo:headers:properties:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a new Resource.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">create</span><span class="p">(</span><span class="nv">uri</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">jo</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]?,</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uri</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource&rsquo;s URI information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>jo</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource&rsquo;s JSON data information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Header&rsquo;s information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>properties</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource&rsquo;s properties information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>JSON containing the information or an HTTP response code</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC16createAttachments10DictionaryVySSypGSS3uri_10Foundation4DataV4dataSS4nameSS11descriptionSS4metatKF"></a>
+                    <a name="//apple_ref/swift/Method/createAttachment(uri:data:name:description:meta:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC16createAttachments10DictionaryVySSypGSS3uri_10Foundation4DataV4dataSS4nameSS11descriptionSS4metatKF">createAttachment(uri:data:name:description:meta:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create new attachment.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createAttachment</span><span class="p">(</span><span class="nv">uri</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">meta</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uri</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Attachement URI&rsquo;s information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>data</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Attachment data.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Attachment&rsquo;s name.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>description</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Attachement&rsquo;s description.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>meta</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Attachment&rsquo;s meta data information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>JSON containing the information or an HTTP response code.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC16createAttachments10DictionaryVySSypGSS3uri_10Foundation4DataV4dataSS4nameSS11descriptionSS4metaAGSg7headerstKF"></a>
+                    <a name="//apple_ref/swift/Method/createAttachment(uri:data:name:description:meta:headers:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC16createAttachments10DictionaryVySSypGSS3uri_10Foundation4DataV4dataSS4nameSS11descriptionSS4metaAGSg7headerstKF">createAttachment(uri:data:name:description:meta:headers:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create new attachment.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createAttachment</span><span class="p">(</span><span class="nv">uri</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">meta</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]?)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uri</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource&rsquo;s URI</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>data</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Attachment&rsquo;s data.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Attachment&rsquo;s name.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>description</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Attachment&rsquo;s description.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>meta</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Attachment&rsquo;s meta data.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Attachment&rsquo;s headers.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>JSON containing the information or an HTTP response code.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC4bulkSayypGSS3uri_AE2jatKF"></a>
+                    <a name="//apple_ref/swift/Method/bulk(uri:ja:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC4bulkSayypGSS3uri_AE2jatKF">bulk(uri:ja:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Handle with BULK HTTP&rsquo;s method.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">bulk</span><span class="p">(</span><span class="nv">uri</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">ja</span><span class="p">:</span> <span class="p">[</span><span class="kt">Any</span><span class="p">])</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Any</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uri</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource&rsquo;s URI information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ja</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>AnyObject containing the resource&rsquo;s information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>AnyObject containing the information or an HTTP response code.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC4bulkSayypGSS3uri_AE2jas10DictionaryVySSypGSg7headerstKF"></a>
+                    <a name="//apple_ref/swift/Method/bulk(uri:ja:headers:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC4bulkSayypGSS3uri_AE2jas10DictionaryVySSypGSg7headerstKF">bulk(uri:ja:headers:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Handle with BULK HTTP&rsquo;s method.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">bulk</span><span class="p">(</span><span class="nv">uri</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">ja</span><span class="p">:</span> <span class="p">[</span><span class="kt">Any</span><span class="p">],</span> <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]?)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Any</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uri</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource&rsquo;s URI information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ja</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>AnyObject containing the resource&rsquo;s information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource header&rsquo;s information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>AnyObject containing the information or an HTTP response code.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC6updates10DictionaryVySSypGSS3uri_AG2joSaySSGSg10propertiestKF"></a>
+                    <a name="//apple_ref/swift/Method/update(uri:jo:properties:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC6updates10DictionaryVySSypGSS3uri_AG2joSaySSGSg10propertiestKF">update(uri:jo:properties:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Update Resource.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">update</span><span class="p">(</span><span class="nv">uri</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">jo</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uri</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource&rsquo;s URI information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>jo</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>JSON schema containing resource&rsquo;s information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>properties</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource&rsquo;s properties information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>JSON containing the information or an HTTP response code.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC6updates10DictionaryVySSypGSS3uri_AG2joAGSg7headersSaySSGSg10propertiestKF"></a>
+                    <a name="//apple_ref/swift/Method/update(uri:jo:headers:properties:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC6updates10DictionaryVySSypGSS3uri_AG2joAGSg7headersSaySSGSg10propertiestKF">update(uri:jo:headers:properties:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Update the Resource.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">update</span><span class="p">(</span><span class="nv">uri</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">jo</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]?,</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uri</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource&rsquo;s URI information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>jo</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>JSON schema containing resource&rsquo;s information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource&rsquo;s header information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>properties</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource&rsquo;s properties information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>JSON containing the information or an HTTP response code.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC5merges10DictionaryVySSypGSS3uri_AG2joSaySSGSg10propertiestKF"></a>
+                    <a name="//apple_ref/swift/Method/merge(uri:jo:properties:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC5merges10DictionaryVySSypGSS3uri_AG2joSaySSGSg10propertiestKF">merge(uri:jo:properties:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Handle MERGE HTTP&rsquo;s method.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">merge</span><span class="p">(</span><span class="nv">uri</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">jo</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uri</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource&rsquo;s URI information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>jo</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>JSON schema containing resource&rsquo;s information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>properties</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>properties containing the resource&rsquo;s information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>JSON containing the information or an HTTP response code.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC5merges10DictionaryVySSypGSS3uri_AG2joAGSg7headersSaySSGSg10propertiestKF"></a>
+                    <a name="//apple_ref/swift/Method/merge(uri:jo:headers:properties:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC5merges10DictionaryVySSypGSS3uri_AG2joAGSg7headersSaySSGSg10propertiestKF">merge(uri:jo:headers:properties:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Handle MERGE HTTP&rsquo;s method.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">merge</span><span class="p">(</span><span class="nv">uri</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">jo</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]?,</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uri</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource&rsquo;s URI information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>jo</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>JSON schema containing resource&rsquo;s information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Header&rsquo;s information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>properties</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>properties containing the resource&rsquo;s information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>JSON containing the information or an HTTP response code.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC9mergeSyncs10DictionaryVySSypGSS3uri_AG2joSaySSGSg10propertiestKF"></a>
+                    <a name="//apple_ref/swift/Method/mergeSync(uri:jo:properties:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC9mergeSyncs10DictionaryVySSypGSS3uri_AG2joSaySSGSg10propertiestKF">mergeSync(uri:jo:properties:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Handle MERGESYNC HTTP&rsquo;s method.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">mergeSync</span><span class="p">(</span><span class="nv">uri</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">jo</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uri</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource&rsquo;s URI information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>jo</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>JSON schema containing resource&rsquo;s information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>properties</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>properties containing the resource&rsquo;s information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>JSON containing the information or an HTTP response code.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC9mergeSyncs10DictionaryVySSypGSS3uri_AG2joAGSg7headersSaySSGSg10propertiestKF"></a>
+                    <a name="//apple_ref/swift/Method/mergeSync(uri:jo:headers:properties:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC9mergeSyncs10DictionaryVySSypGSS3uri_AG2joAGSg7headersSaySSGSg10propertiestKF">mergeSync(uri:jo:headers:properties:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Handle MERGESYNC HTTP&rsquo;s method.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">mergeSync</span><span class="p">(</span><span class="nv">uri</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">jo</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]?,</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uri</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource&rsquo;s URI information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>jo</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>JSON schema containing resource&rsquo;s information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Header&rsquo;s information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>properties</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>properties containing the resource&rsquo;s information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>JSON containing the information or an HTTP response code.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC4syncs10DictionaryVySSypGSS3uri_AG2joSaySSGSg10propertiestKF"></a>
+                    <a name="//apple_ref/swift/Method/sync(uri:jo:properties:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC4syncs10DictionaryVySSypGSS3uri_AG2joSaySSGSg10propertiestKF">sync(uri:jo:properties:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Handle SYNC HTTP&rsquo;s method.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">sync</span><span class="p">(</span><span class="nv">uri</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">jo</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uri</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource&rsquo;s URI information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>jo</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>JSON schema containing resource&rsquo;s information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>properties</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>properties containing the resource&rsquo;s information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>JSON containing the information or an HTTP response code.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC4syncs10DictionaryVySSypGSS3uri_AG2joAGSg7headersSaySSGSg10propertiestKF"></a>
+                    <a name="//apple_ref/swift/Method/sync(uri:jo:headers:properties:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC4syncs10DictionaryVySSypGSS3uri_AG2joAGSg7headersSaySSGSg10propertiestKF">sync(uri:jo:headers:properties:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Handle MERGESYNC HTTP&rsquo;s method.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">sync</span><span class="p">(</span><span class="nv">uri</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">jo</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]?,</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uri</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource&rsquo;s URI information</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>jo</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>JSON schema containing resource&rsquo;s information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Header&rsquo;s information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>properties</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>properties containing the resource&rsquo;s information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>JSON containing the information or an HTTP response code.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC6deleteySS3uri_tKF"></a>
+                    <a name="//apple_ref/swift/Method/delete(uri:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC6deleteySS3uri_tKF">delete(uri:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete a Resource or an Attachment.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">delete</span><span class="p">(</span><span class="nv">uri</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uri</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource/Attachment&rsquo;s URI information to be deleted.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC6deleteySS3uri_s10DictionaryVySSypGSg7headerstKF"></a>
+                    <a name="//apple_ref/swift/Method/delete(uri:headers:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC6deleteySS3uri_s10DictionaryVySSypGSg7headerstKF">delete(uri:headers:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete a Resource or an Attachment.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">delete</span><span class="p">(</span><span class="nv">uri</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]?)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uri</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource/Attachment&rsquo;s URI information to be deleted.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource/Attachment&rsquo;s headers information to be deleted.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC14deleteResourceySS3uri_tKF"></a>
+                    <a name="//apple_ref/swift/Method/deleteResource(uri:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC14deleteResourceySS3uri_tKF">deleteResource(uri:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete a Resource.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteResource</span><span class="p">(</span><span class="nv">uri</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uri</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource&rsquo;s URI information to be deleted.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC16deleteAttachmentySS3uri_tKF"></a>
+                    <a name="//apple_ref/swift/Method/deleteAttachment(uri:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC16deleteAttachmentySS3uri_tKF">deleteAttachment(uri:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete an Attachment.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    &lt;#throws value description#&gt;
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteAttachment</span><span class="p">(</span><span class="nv">uri</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uri</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Attachment&rsquo;s URI information to be deleted.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC10setHeadersy10Foundation10URLRequestVz7request_s10DictionaryVySSypG7headerstF"></a>
+                    <a name="//apple_ref/swift/Method/setHeaders(request:headers:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC10setHeadersy10Foundation10URLRequestVz7request_s10DictionaryVySSypG7headerstF">setHeaders(request:headers:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set headers for a Resource ro an Attchament.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setHeaders</span><span class="p">(</span><span class="nv">request</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">URLRequest</span><span class="p">,</span> <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">])</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>request</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>URLRequest object.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>header&rsquo;s information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC20setCookiesForSessiony10Foundation3URLV3url_tF"></a>
+                    <a name="//apple_ref/swift/Method/setCookiesForSession(url:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC20setCookiesForSessiony10Foundation3URLV3url_tF">setCookiesForSession(url:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set Cookies for a Resource or an Attchament.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setCookiesForSession</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>url</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource/Attachment&rsquo;s URL information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC19getLastResponseCodeSiyF"></a>
+                    <a name="//apple_ref/swift/Method/getLastResponseCode()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC19getLastResponseCodeSiyF">getLastResponseCode()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get the last response code.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getLastResponseCode</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>HTTP response code.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK0A9ConnectorC10disconnectyyKF"></a>
+                    <a name="//apple_ref/swift/Method/disconnect()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK0A9ConnectorC10disconnectyyKF">disconnect()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Disconnect from Maximo Server.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">disconnect</span><span class="p">()</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="https://github.ibm.com/maximo-ohio/maximo-swift-restclient" target="_blank" rel="external">Silvino Neto</a>. All rights reserved. (Last updated: 2018-07-30)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
