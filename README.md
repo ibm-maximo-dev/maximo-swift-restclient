@@ -36,7 +36,7 @@ Generate the RSA key for your GitHub user account:
 ssh-keygen -t rsa -b 4096 -C git@github.ibm.com
 ```
 
-Paste the contents of the <i>id_rsa.pub</i> file, which is described here: https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/
+Paste the contents of the <i>id_rsa.pub</i> file, into your github user profile. [This link](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/) describes the steps.
 
 
 ### Project setup
@@ -101,7 +101,7 @@ Now, open the .xcworkspace file by using Xcode, and you are ready to go.
 
 ## Usage
 
-The Maximo resources, which are object structures, represent a graph of related Maximo objects, which are Maximo business objects (MBOs), that provides an atomic view/object to create, update, delete, and query the related set of MBOs. 
+The Maximo resources, which are object structures, represent a graph of related Maximo objects, which are Maximo business objects (MBOs), that provides an atomic object to create, update, delete, and query the related set of MBOs. 
 This documentation provides several examples that includes some of the most used Maximo business objects, such as work order, purchase order, and service request, to demonstrate how to use the Maximo REST SDK.
 
 >**Note**: Some of the test cases that are described in this documentation are included in the <i>MaximoRESTSDKTests.swift</i> file.
@@ -312,9 +312,7 @@ mc.disconnect()
 The instructions that are contained in this section show how to create a new work order record by using the Maximo REST SDK.
 
 #### Get a work order ResourceSet object
-By using a previously obtained instance of the MaximoConnector object, you can use the following statement:
-
-* Get the ResourceSet object for the MXWODETAIL object structure.
+By using a previously obtained instance of the MaximoConnector object, you can get a work order ResourceSet object
 
 ```swift
 var rs : ResourceSet = mc.resourceSet(osName: "mxwodetail")
@@ -345,7 +343,7 @@ jo["estdur"] = 5.0
 var re : Resource = rs.create(jo: jo, properties: nil)
 ```
 
-* Working with child objects is just as simple. They can be part of the work order JSON object as nested objects. The following example shows the creation of a Planned Labor object that is a child of the work order object:
+* Child objects are the part of the work order JSON object and are nested objects. The following example shows the creation of a Planned Labor object that is a child of the work order object:
 
 ```swift
 var wplJo : [String: Any] = ["skilllevel": "FIRSTCLASS", "craft": "ELECT"] // Planned Labor object
@@ -699,7 +697,7 @@ By using the Attachment object itself:
 att.delete()
 ```
 
-By using the MaximoConnector object to delete by using the Attachment URI:
+Use the MaximoConnector object to delete the attachment referenced by 'attUri':
   
 ```swift
 mc.deleteAttachment(uri: attUri)
