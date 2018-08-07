@@ -13,7 +13,7 @@ import Foundation
  * {@code Options} is served for {@code MaximoConnector}.
  *
  * <p>
- * The following code shows how to initial {@code MaximoConnector} using {@code MaximoConnector} and {@code Options}Constructor</p>
+ * The following code shows how to initialize the {@code MaximoConnector} by using the {@code MaximoConnector} and {@code Options} Constructor:</p>
  * <pre>
  * <code>
  * var mc : MaximoConnector = MaximoConnector(options: Options().user(user: userName)
@@ -47,7 +47,7 @@ public class Options {
     
     /// Fuction to set the host address as an option.
     ///
-    /// - Parameter host: IP or DNS address of Maximo's service
+    /// - Parameter host: IP or DNS address of the Maximo service
     /// - Returns: void return
     public func host(host: String) -> Options
     {
@@ -56,7 +56,7 @@ public class Options {
     }
 
     
-    /// Fuction to set Maximo rest service id. (it is hardcoded to 'maxrest')
+    /// Fuction to set Maximo REST service ID, which is hardcoded to 'maxrest'
     ///
     /// - Returns: void return.
     public func maxrest() -> Options
@@ -67,7 +67,7 @@ public class Options {
 
     ///  Function to set application context.
     ///
-    /// - Parameter context: context of this application (i.e. maximo)
+    /// - Parameter context: context of this application 
     /// - Returns: void return
     public func appContext(context: String) -> Options
     {
@@ -85,7 +85,7 @@ public class Options {
         return self
     }
     
-    /// Enables secure HTTP.
+    /// Enable secure HTTP.
     ///
     /// - Returns: void return.
     public func https() -> Options
@@ -123,7 +123,7 @@ public class Options {
         return self
     }
     
-    /// Enables/Disable Maximo Tenant mode.
+    /// Enable or disable Maximo tenant mode.
     ///
     /// - Parameter mtMode: TRUE to enable and FALSE to disble.
     /// - Returns: void return.
@@ -153,7 +153,7 @@ public class Options {
         return self
     }
     
-    /// Determine the app URI
+    /// Determine the application URI
     ///
     /// - Parameter appURI: URI of application
     /// - Returns: void return.
@@ -163,7 +163,7 @@ public class Options {
         return self
     }
     
-    /// Enables lean
+    /// Enable lean
     ///
     /// - Parameter lean: TRUE to enable and FALSE to disble.
     /// - Returns: void return.
@@ -183,9 +183,9 @@ public class Options {
         return self
     }
     
-    /// Returns the passaword
+    /// Returns the password
     ///
-    /// - Returns: String with the passworld
+    /// - Returns: String that contains the password
     public func getPassword() -> String?
     {
         return self.password
@@ -193,37 +193,37 @@ public class Options {
     
     /// Returns the user name
     ///
-    /// - Returns: String with user name
+    /// - Returns: String that contains the user name
     public func getUser() -> String?
     {
         return self.user
     }
     
-    /// Check if this app is using the basic authentication
+    /// Check whether this application is using the basic authentication
     ///
-    /// - Returns: boolean value <b>TRUE</b> for yes, <b>FALSE</b> to no
+    /// - Returns: boolean value <b>TRUE</b> for yes, <b>FALSE</b> for no
     public func isBasicAuth() -> Bool
     {
         return self.authMode == AUTH_BASIC
     }
     
-    /// Returns if this app is using a form authentication
+    /// Returns whether this application is using a form authentication
     ///
-    /// - Returns: boolean value <b>TRUE</b> for yes, <b>FALSE</b> to no
+    /// - Returns: boolean value <b>TRUE</b> for yes, <b>FALSE</b> for no
     public func isFormAuth() -> Bool
     {
         return self.authMode == AUTH_FORM
     }
     
-    /// Returns if this application is using a Maximo Authentication formula.
+    /// Returns whether this application is using a Maximo Authentication formula.
     ///
-    /// - Returns: boolean value <b>TRUE</b> for yes, <b>FALSE</b> to no
+    /// - Returns: boolean value <b>TRUE</b> for yes, <b>FALSE</b> for no
     public func isMaxAuth() -> Bool
     {
         return self.authMode == AUTH_MAXAUTH
     }
     
-    /// Returns if this app is desgined to attend a MultiTenancy.
+    /// Returns whether this application is desgined to support multitenancy.
     ///
     /// - Returns: boolean value <b>TRUE</b> for yes, <b>FALSE</b> to no
     public func isMultiTenancy() -> Bool
@@ -231,15 +231,15 @@ public class Options {
         return self.mt
     }
     
-    /// Returns if this application is a Lean application
+    /// Returns whether this application is a Lean application
     ///
-    /// - Returns: boolean value <b>TRUE</b> for yes, <b>FALSE</b> to no
+    /// - Returns: boolean value <b>TRUE</b> for yes, <b>FALSE</b> for no
     public func isLean() -> Bool
     {
         return self.lean
     }
     
-    /// Returns a string conatining the IP/DNS of the application host.
+    /// Returns a string that contains the IP or DNS of the application host.
     ///
     /// - Returns: String
     public func getHost() -> String
@@ -247,7 +247,7 @@ public class Options {
         return self.host!
     }
     
-    /// Returns the logical port where the service was configured to operating
+    /// Returns the logical port where the service was configured to operate
     ///
     /// - Returns: Integer value
     public func getPort() -> Int
@@ -258,17 +258,17 @@ public class Options {
         return self.port!
     }
     
-    /// Return the Tenant code
+    /// Return the tenant code
     ///
-    /// - Returns: String containing Tenant's code.
+    /// - Returns: String that contains the tenant code.
     public func getTenantCode() -> String
     {
         return self.tenantcode
     }
 
-    /// Get app URI
+    /// Get application URI
     ///
-    /// - Returns: String URL containing the app location.
+    /// - Returns: String URL that contains the application location.
     public func getAppURI() -> String
     {
         if appURI != nil {
@@ -320,7 +320,7 @@ public class Options {
 
     /// Get public URI
     ///
-    /// - Returns: String containing the public URI
+    /// - Returns: String that contains the public URI
     public func getPublicURI() -> String
     {
         if publicURI != nil {
