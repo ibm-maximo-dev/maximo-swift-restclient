@@ -10,11 +10,11 @@ import Foundation
 
 /**
  *
- * {@code Attachment} implement the operations on attachment from Resource.
- * It provides the data, meta data, uri and so on.
+ * {@code Attachment} implements the operations on the attachment from a Resource.
+ * It provides the data, metadata, URI and so on.
  *
  * <p>This object can be created by {@code AttachmentSet}.
- * The following code shows how to create {@code Attachment} using {@code AttachmentSet} Constructor
+ * The following code shows how to create {@code Attachment} by using the {@code AttachmentSet} Constructor:
  * </p>
  * <pre>
  * <code>
@@ -24,7 +24,7 @@ import Foundation
  * </pre>
  *
  * <p>
- * The following examples demonstrate how to build a new {@code Attachment}</p>
+ * The following examples demonstrate how to build a new {@code Attachment}:</p>
  * <pre>
  * <code>
  * var att = Attachment()
@@ -34,7 +34,7 @@ import Foundation
  * </pre>
  *
  * <p>
- * The following examples demonstrate how to set maximoconnector, name, description, data, meta data, wwwURI to {@code Attachment}</p>
+ * The following examples demonstrate how to set the maximoconnector, name, description, data, metadata, wwwURI for the {@code Attachment}:</p>
  * <pre>
  * <code>
  * att.maximoConnector(mc: maximoconnector).name(name: filename).description(description: description)
@@ -43,7 +43,7 @@ import Foundation
  * </pre>
  *
  * <p>
- * The following examples show how to load and reload data</p>
+ * The following examples show how to load and reload data:</p>
  * <pre>
  * <code>
  * att.load()
@@ -52,7 +52,7 @@ import Foundation
  * </pre>
  *
  * <p>
- * The following examples show how to get information from {@code Attachment}
+ * The following examples show how to get information from the {@code Attachment}:
  * For file data:</p>
  * <pre>
  * <code>
@@ -65,7 +65,7 @@ import Foundation
  * </pre>
  *
  * <p>
- * For file meta data:</p>
+ * For file metadata:</p>
  * <pre>
  * <code>
  * var jo : [String: Any] = att.toDocMeta()
@@ -73,7 +73,7 @@ import Foundation
  * </code>
  * </pre>
  *
- * <p>The following example shows how to delete the {@code Attachment}
+ * <p>The following example shows how to delete the {@code Attachment}:
  * <pre>
  * <code>
  * att.delete() //if the attachment is deleted as ats.att.detele(), please reload attachmentset after.
@@ -104,7 +104,7 @@ public class Attachment {
     /// Init this class based on a URI
     ///
     /// - Parameters:
-    ///   - uri: String containig Unified Resource Location for the application
+    ///   - uri: String that contains the Unified Resource Location for the application
     ///   - mc: Maximo Connector object
     public init (uri: String, mc: MaximoConnector) {
         self.uri = uri
@@ -151,7 +151,7 @@ public class Attachment {
     
     /// Object name
     ///
-    /// - Parameter name: String with object name
+    /// - Parameter name: String that contains the object name
     /// - Returns: updated name.
     public func name(name: String) -> Attachment {
         self.name = name;
@@ -167,12 +167,12 @@ public class Attachment {
         return self;
     }
     
-    /// meta data structure.
+    /// metadata structure.
     ///
     /// - Parameters:
     ///   - type: Type
-    ///   - storeas: String containing the "store as" information
-    /// - Returns: Updated meta data.
+    ///   - storeas: String that contains the "store as" information
+    /// - Returns: Updated metadata.
     public func meta(type: String?, storeas: String) -> Attachment {
         var headerValue: String;
         if type != nil {
@@ -204,21 +204,21 @@ public class Attachment {
     
     /// Returns name
     ///
-    /// - Returns: String containing name
+    /// - Returns: String that contains the name
     public func getName() -> String {
         return self.name!;
     }
     
     /// Returns description.
     ///
-    /// - Returns: String containing object's description.
+    /// - Returns: String that contains the object's description.
     public func getDescription() -> String {
         return self.description!;
     }
     
-    /// Returns meta data.
+    /// Returns metadata.
     ///
-    /// - Returns: meta data object.
+    /// - Returns: metadata object.
     public func getMeta() -> String{
         return self.meta!;
     }
@@ -245,7 +245,7 @@ public class Attachment {
     }
 
     /**
-     * Get Attachment data in JSON
+     * Get attachment data in JSON
      *
      * @throws
      */
@@ -257,7 +257,7 @@ public class Attachment {
     }
 
     /**
-     * Get Attachment data in JSONBytes
+     * Get attachment data in JSONBytes
      *
      * @throws
      */
@@ -274,7 +274,7 @@ public class Attachment {
     }
 
    
-    /// load attachment data
+    /// Load attachment data
     ///
     /// - Throws: <#throws value description#>
     public func load() throws {
@@ -306,7 +306,7 @@ public class Attachment {
     }
     
     /**
-     * load attachment meta data
+     * load attachment metadata
      *
      * @throws OslcError.attachmentAlreadyLoaded
      */
@@ -314,13 +314,13 @@ public class Attachment {
         try self.loadMeta(headers: nil);
     }
 
-    /// Load meta data
+    /// Load metadata
     ///
-    /// - Parameter headers: meta data with headers parameters.
+    /// - Parameter headers: metadata with headers parameters.
     /// - Throws: <#throws value description#>
     public func loadMeta(headers: [String: Any]?) throws {
         if isMetaLoaded {
-            // The attachment has been loaded, please call reloadMeta for refreshing
+            // The attachment was loaded. Call reloadMeta to refresh.
             throw OslcError.attachmentAlreadyLoaded
         }
         var metauri = String();
@@ -358,9 +358,9 @@ public class Attachment {
         }
         isMetaLoaded = true;
     }
-    /// Reload Meta data
+    /// Reload metadata
     ///
-    /// - Returns: updated meta data.
+    /// - Returns: updated metadata.
     /// - Throws: <#throws value description#>
     public func reloadMeta() throws -> Attachment {
         isMetaLoaded = false;
@@ -368,7 +368,7 @@ public class Attachment {
         return self;
     }
     
-    /// Fetch meta data to a JSON document.
+    /// Fetch metadata to a JSON document.
     ///
     /// - Returns: <#return value description#>
     /// - Throws: <#throws value description#>
