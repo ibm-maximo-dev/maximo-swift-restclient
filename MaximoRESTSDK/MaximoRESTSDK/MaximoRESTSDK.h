@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-//! Project version number for MaximoRESTSDK.
+//! Project version number for the Maximo REST SDK.
 FOUNDATION_EXPORT double MaximoRESTSDKVersionNumber;
 
-//! Project version string for MaximoRESTSDK.
+//! Project version string for the Maximo REST SDK.
 FOUNDATION_EXPORT const unsigned char MaximoRESTSDKVersionString[];
 
-// In self header, you should import all the public headers of your framework using statements like #import <MaximoRESTSDK/PublicHeader.h>
+// In the self header, import all the public headers of your framework by using #import statements, for example:
+// #import <MaximoRESTSDK/PublicHeader.h>
 
 
