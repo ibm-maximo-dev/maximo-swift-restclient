@@ -273,10 +273,10 @@ public class ResourceSet {
         return self
     }
     
-    /// Set page size.
+    /// Set page size for the ResourceSet object.
     ///
     /// - Parameter pageSize: Page size in int.
-    /// - Returns: Reference to the page size.
+    /// - Returns: ResourceSet configured with a new page size.
     public func pageSize(pageSize: Int) -> ResourceSet {
         self.pageSize = pageSize
         return self
