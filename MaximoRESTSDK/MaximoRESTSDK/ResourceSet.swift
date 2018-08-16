@@ -439,9 +439,9 @@ public class ResourceSet {
         return self;
     }
 
-    /// Has next page?
+    /// Check if the JSON response information has a next page
     ///
-    /// - Returns: Reference to the next page.
+    /// - Returns: boole <b>TRUE</b> if there is a next page or <b>FALSE<b/>, there is no other page info.
     public func hasNextPage() -> Bool {
         if self.jsonObject!["responseInfo"] != nil
         {
@@ -456,9 +456,9 @@ public class ResourceSet {
         return false;
     }
 
-    /// Go back to previous page
+    /// Get the ResourceSet object to the previews page.
     ///
-    /// - Returns: Reference to the previous page.
+    /// - Returns: Return a ResourceSet object within the previews page information inside.
     /// - Throws:
     public func previousPage() throws -> ResourceSet {
         if self.jsonObject!["responseInfo"] != nil
