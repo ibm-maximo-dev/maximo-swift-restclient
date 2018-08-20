@@ -1,0 +1,425 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/Attachment.swift",
+      "line": 86,
+      "symbol": "Attachment.name",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/Attachment.swift",
+      "line": 87,
+      "symbol": "Attachment.description",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/Attachment.swift",
+      "line": 88,
+      "symbol": "Attachment.meta",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/Attachment.swift",
+      "line": 89,
+      "symbol": "Attachment.uri",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/Attachment.swift",
+      "line": 90,
+      "symbol": "Attachment.data",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/Attachment.swift",
+      "line": 91,
+      "symbol": "Attachment.mc",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/Attachment.swift",
+      "line": 92,
+      "symbol": "Attachment.isUploaded",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/Attachment.swift",
+      "line": 93,
+      "symbol": "Attachment.isLoaded",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/Attachment.swift",
+      "line": 94,
+      "symbol": "Attachment.isMetaLoaded",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/Attachment.swift",
+      "line": 95,
+      "symbol": "Attachment.jo",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/Attachment.swift",
+      "line": 302,
+      "symbol": "Attachment.reload()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/MaximoConnector.swift",
+      "line": 78,
+      "symbol": "MaximoConnector.options",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/MaximoConnector.swift",
+      "line": 79,
+      "symbol": "MaximoConnector.valid",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/MaximoConnector.swift",
+      "line": 80,
+      "symbol": "MaximoConnector.debug",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/MaximoConnector.swift",
+      "line": 81,
+      "symbol": "MaximoConnector.lastResponseCode",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/MaximoConnector.swift",
+      "line": 82,
+      "symbol": "MaximoConnector.cookies",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/MaximoConnector.swift",
+      "line": 84,
+      "symbol": "MaximoConnector.HTTP_METHOD_POST",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/MaximoConnector.swift",
+      "line": 85,
+      "symbol": "MaximoConnector.HTTP_METHOD_GET",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/MaximoConnector.swift",
+      "line": 86,
+      "symbol": "MaximoConnector.HTTP_METHOD_PATCH",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/MaximoConnector.swift",
+      "line": 87,
+      "symbol": "MaximoConnector.HTTP_METHOD_MERGE",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/MaximoConnector.swift",
+      "line": 88,
+      "symbol": "MaximoConnector.HTTP_METHOD_DELETE",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/MaximoConnector.swift",
+      "line": 89,
+      "symbol": "MaximoConnector.HTTP_METHOD_BULK",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/MaximoConnector.swift",
+      "line": 90,
+      "symbol": "MaximoConnector.HTTP_METHOD_SYNC",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/MaximoConnector.swift",
+      "line": 91,
+      "symbol": "MaximoConnector.HTTP_METHOD_MERGESYNC",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/MaximoConnector.swift",
+      "line": 93,
+      "symbol": "MaximoConnector.httpMethod",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/Options.swift",
+      "line": 27,
+      "symbol": "Options.AUTH_BASIC",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/Options.swift",
+      "line": 28,
+      "symbol": "Options.AUTH_MAXAUTH",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/Options.swift",
+      "line": 29,
+      "symbol": "Options.AUTH_FORM",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/Options.swift",
+      "line": 31,
+      "symbol": "Options.host",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/Options.swift",
+      "line": 32,
+      "symbol": "Options.port",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/Options.swift",
+      "line": 33,
+      "symbol": "Options.authMode",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/Options.swift",
+      "line": 34,
+      "symbol": "Options.user",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/Options.swift",
+      "line": 35,
+      "symbol": "Options.password",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/Options.swift",
+      "line": 36,
+      "symbol": "Options.ssl",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/Options.swift",
+      "line": 37,
+      "symbol": "Options.mt",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/Options.swift",
+      "line": 38,
+      "symbol": "Options.lean",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/Options.swift",
+      "line": 39,
+      "symbol": "Options.publicURI",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/Options.swift",
+      "line": 40,
+      "symbol": "Options.appContext",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/Options.swift",
+      "line": 41,
+      "symbol": "Options.apiContext",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/Options.swift",
+      "line": 42,
+      "symbol": "Options.appURI",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/Options.swift",
+      "line": 43,
+      "symbol": "Options.tenantcode",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/Options.swift",
+      "line": 45,
+      "symbol": "Options.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/OslcError.swift",
+      "line": 30,
+      "symbol": "OslcError.attachmentAlreadyLoaded",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/OslcError.swift",
+      "line": 31,
+      "symbol": "OslcError.resourceAlreadyLoaded",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/OslcError.swift",
+      "line": 32,
+      "symbol": "OslcError.invalidAttachment",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/OslcError.swift",
+      "line": 33,
+      "symbol": "OslcError.invalidResource",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/OslcError.swift",
+      "line": 34,
+      "symbol": "OslcError.invalidRelation",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/OslcError.swift",
+      "line": 35,
+      "symbol": "OslcError.invalidURL",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/OslcError.swift",
+      "line": 36,
+      "symbol": "OslcError.invalidRequest",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/OslcError.swift",
+      "line": 37,
+      "symbol": "OslcError.invalidResponse",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/OslcError.swift",
+      "line": 38,
+      "symbol": "OslcError.loginFailure",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/OslcError.swift",
+      "line": 39,
+      "symbol": "OslcError.serverError",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/OslcError.swift",
+      "line": 40,
+      "symbol": "OslcError.connectionAlreadyEstablished",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/OslcError.swift",
+      "line": 41,
+      "symbol": "OslcError.invalidConnectorInstance",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/OslcError.swift",
+      "line": 42,
+      "symbol": "OslcError.noAttachmentFound",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/OslcError.swift",
+      "line": 43,
+      "symbol": "OslcError.noResourceFound",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/OslcError.swift",
+      "line": 44,
+      "symbol": "OslcError.noRelationFound",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/OslcError.swift",
+      "line": 45,
+      "symbol": "OslcError.noURLFound",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/QuerySelect.swift",
+      "line": 14,
+      "symbol": "QuerySelect.map",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/Util.swift",
+      "line": 13,
+      "symbol": "Collection.split(separators:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK"
+}

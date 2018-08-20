@@ -1,0 +1,131 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/Attachment.swift",
+      "line": 303,
+      "symbol": "Attachment.reload()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/Options.swift",
+      "line": 45,
+      "symbol": "Options.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/OslcError.swift",
+      "line": 30,
+      "symbol": "OslcError.attachmentAlreadyLoaded",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/OslcError.swift",
+      "line": 31,
+      "symbol": "OslcError.resourceAlreadyLoaded",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/OslcError.swift",
+      "line": 32,
+      "symbol": "OslcError.invalidAttachment",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/OslcError.swift",
+      "line": 33,
+      "symbol": "OslcError.invalidResource",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/OslcError.swift",
+      "line": 34,
+      "symbol": "OslcError.invalidRelation",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/OslcError.swift",
+      "line": 35,
+      "symbol": "OslcError.invalidURL",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/OslcError.swift",
+      "line": 36,
+      "symbol": "OslcError.invalidRequest",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/OslcError.swift",
+      "line": 37,
+      "symbol": "OslcError.invalidResponse",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/OslcError.swift",
+      "line": 38,
+      "symbol": "OslcError.loginFailure",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/OslcError.swift",
+      "line": 39,
+      "symbol": "OslcError.serverError",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/OslcError.swift",
+      "line": 40,
+      "symbol": "OslcError.connectionAlreadyEstablished",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/OslcError.swift",
+      "line": 41,
+      "symbol": "OslcError.invalidConnectorInstance",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/OslcError.swift",
+      "line": 42,
+      "symbol": "OslcError.noAttachmentFound",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/OslcError.swift",
+      "line": 43,
+      "symbol": "OslcError.noResourceFound",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/OslcError.swift",
+      "line": 44,
+      "symbol": "OslcError.noRelationFound",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK/MaximoRESTSDK/OslcError.swift",
+      "line": 45,
+      "symbol": "OslcError.noURLFound",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/rbrossi/Documents/GitHub/maximo-swift-restclient/MaximoRESTSDK"
+}

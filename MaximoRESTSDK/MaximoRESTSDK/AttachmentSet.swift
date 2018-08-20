@@ -10,11 +10,11 @@ import Foundation
 
 /**
  *
- * {@code AttachmenSet} implement the operations on attachmentset from Resource.
- * It provides the set of Attachment.
+ * {@code AttachmenSet} implement the operations on the AttachmentSet from a Resource.
+ * It provides the set for the attachment.
  *
  * <p>This object can be created by {@code AttachmentSet}.
- * The following code shows how to create {@code AttachmentSet} using {@code AttachmentSet} Constructor
+ * The following code shows how to create {@code AttachmentSet} by using the {@code AttachmentSet} constructor:
  * </p>
  * <pre>
  * <code>
@@ -24,7 +24,7 @@ import Foundation
  * </pre>
  *
  * <p>
- * The following examples demonstrate how to build a new {@code AttachmentSet}</p>
+ * The following examples demonstrate how to build a new {@code AttachmentSet}:</p>
  * <pre>
  * <code>
  * var ats = AttachmentSet()
@@ -34,7 +34,7 @@ import Foundation
  * </pre>
  *
  * <p>
- * The following examples demonstrate how to set uri and jsonobject to {@code Attachment}</p>
+ * The following examples demonstrate how to set the uri and jsonobject for the {@code Attachment}:</p>
  * <pre>
  * <code>
  * ats.href(href: uri)
@@ -43,7 +43,7 @@ import Foundation
  * </pre>
  *
  * <p>
- * The following examples show how to load and reload data</p>
+ * The following examples show how to load and reload data:</p>
  * <pre>
  * <code>
  * att.load()
@@ -52,7 +52,7 @@ import Foundation
  * </pre>
  *
  * <p>
- * The following examples show how to get AttachmentSet data from {@code AttachmentSet}</p>
+ * The following examples show how to get AttachmentSet data from the {@code AttachmentSet}:</p>
  * <pre>
  * <code>
  * var jo : [String: Any] = att.toJSON()
@@ -62,7 +62,7 @@ import Foundation
  * </pre>
  *
  * <p>
- * The following examples show how to create, get and delete {@code Attachment} from{@code AttachmentSet}</p>
+ * The following examples show how to create, get, and delete {@code Attachment} from the {@code AttachmentSet}:</p>
  * <pre>
  * <code>
  * var att = ats.create(att: Attachment())
@@ -74,7 +74,7 @@ import Foundation
  * </code>
  * </pre>
  *
- * <p>The following example shows how to get the this page size from {@code AttachmentSet}</p>
+ * <p>The following example shows how to get the this page size from the {@code AttachmentSet}:</p>
  * <pre>
  * <code>
  * var currentPageSize : Int = ats.thisPageSize()
@@ -92,7 +92,7 @@ public class AttachmentSet {
     var ja: [Any] = []
     /// Maximo Connector.
     var mc : MaximoConnector = MaximoConnector()
-    /// Boolean to represent attachment load.
+    /// Boolean that represents the attachment load.
     var isLoaded : Bool = false
 
     /// Initialize object.
@@ -106,7 +106,7 @@ public class AttachmentSet {
         self.mc = mc
     }
     
-    /// Initialize object based on a URI's information and a Maximo connector.
+    /// Initialize object based on a URI's information and a Maximo Connector.
     ///
     /// - Parameters:
     ///   - href: URI's information.
@@ -152,7 +152,7 @@ public class AttachmentSet {
         return self.jo
     }
     
-    /// Get AttachmentSet data in JSONBytes
+    /// Get AttachmentSet data in JSON Bytes
     ///
     /// - Returns: Reference to the current attached data in JSON Bytes.
     /// - Throws:
@@ -192,7 +192,7 @@ public class AttachmentSet {
         return self
     }
 
-    /// Load the data for attachment set
+    /// Load the data for the attachment set
     ///
     /// - Returns: Reference to the Attachment See
     /// - Throws: <#throws value description#>
@@ -200,9 +200,9 @@ public class AttachmentSet {
         return try self.load(headers: nil)
     }
     
-    /// Load the data for attachment set
+    /// Load the data for the attachment set
     ///
-    /// - Parameter headers: Header of Attachment.
+    /// - Parameter headers: Header of the attachment.
     /// - Returns: Reference to the data.
     /// - Throws:
     public func load(headers: [String: Any]?) throws -> AttachmentSet {
@@ -261,13 +261,13 @@ public class AttachmentSet {
         return Attachment(jo: obj, mc: self.mc)
     }
 
-    /// Create a new Attachment
+    /// Create a new attachment
     ///
     /// - Parameters:
     ///   - relation: String with details of the attachment relationship.
     ///   - att: Attachment object.
     ///   - headers: Header's information.
-    /// - Returns: new Attachment object.
+    /// - Returns: New attachment object.
     /// - Throws:
     public func create(relation: String, att: Attachment, headers: [String: Any]?) throws -> Attachment {
         if !self.href.contains(relation.lowercased()) || !self.href.contains(relation.uppercased()) {
@@ -285,9 +285,9 @@ public class AttachmentSet {
         return Attachment(jo: obj, mc: self.mc)
     }
 
-    /// Get the member of attachment set
+    /// Get the member of the attachment set
     ///
-    /// - Parameter index: Int value representing the Index of an Attachment into the AttachmentSet.
+    /// - Parameter index: Int value that represents the index of an attachment in the AttachmentSet.
     /// - Returns: Attachment reference.
     /// - Throws: <#throws value description#>
     public func member(index: Int) throws -> Attachment? {
@@ -303,7 +303,7 @@ public class AttachmentSet {
     
     /// Get the member of attachment set
     ///
-    /// - Parameter id: ID value representing the Id of an Attachment into the AttachmentSet map.
+    /// - Parameter id: ID value that represents the ID of an attachment in the AttachmentSet map.
     /// - Returns: Attachment reference.
     /// - Throws: <#throws value description#>
     public func member(id: String) throws -> Attachment? {
@@ -327,7 +327,7 @@ public class AttachmentSet {
         return Attachment(jo: obj!, mc: self.mc);
     }
 
-    /// Delete an Attachment based on a object index.
+    /// Delete an attachment based on a object index.
     ///
     /// - Parameter index: Attachment's index.
     /// - Returns: Attachment set reloaded without the deleted object.
@@ -337,7 +337,7 @@ public class AttachmentSet {
         return try reload()
     }
     
-    /// Delete an Attachment based on a object index.
+    /// Delete an attachment based on a object index.
     ///
     /// - Parameter ID: Attachment's ID.
     /// - Returns: Attachment set reloaded without the deleted object.
