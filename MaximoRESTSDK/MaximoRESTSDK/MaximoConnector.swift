@@ -9,11 +9,11 @@
 import Foundation
 
 /**
- * {@code MaximoConnector} is a Connector between Oslc Client and Maximo Server.
- * It provides the authentication setting, connect, basic requests and disconnect for Server.
+ * {@code MaximoConnector} is a Connector between the OSLC client and the Maximo server.
+ * It provides the authentication setting, connection, basic requests, and disconnection for the server.
  *
- * <p>This object can be created by {@code MaximoConnector} with {@code Options}.
- * The following code shows how to initial {@code MaximoConnector} using {@code MaximoConnector} and {@code Options}Constructor</p>
+ * <p>This object can be created by the {@code MaximoConnector} with {@code Options}.
+ * The following code shows how to initialize the {@code MaximoConnector} by using {@code MaximoConnector} and the {@code Options} Constructor:</p>
  * <pre>
  * <code>
  * var mc = MaximoConnector(options: new Options().user(user: userName)
@@ -23,7 +23,7 @@ import Foundation
  * </pre>
  *
  * <p>
- * The following examples demonstrate how to build a new {@code MaximoConnector}</p>
+ * The following examples demonstrate how to build a new {@code MaximoConnector}:</p>
  * <pre>
  * <code>
  * var op = new Options()
@@ -34,7 +34,7 @@ import Foundation
  * </pre>
  *
  * <p>
- * The following examples demonstrate how to set authentication, method, cookie for session to {@code MaximoConnector}</p>
+ * The following examples demonstrate how to set authentication, method, and cookie for the session to {@code MaximoConnector}:</p>
  * <pre>
  * <code>
  * mc.setAuth(uri: uri)
@@ -44,7 +44,7 @@ import Foundation
  * </pre>
  *
  * <p>
- * The following examples show how to connect, get, create, update, merge, delete and disconnect to Maximo Server by {@code MaximoConnector}.
+ * The following examples show how to connect, get, create, update, merge, delete, and disconnect from the Maximo server by {@code MaximoConnector}:
  * The properties can be empty</p>
  * <pre>
  * <code>
@@ -65,7 +65,7 @@ import Foundation
  * </pre>
  *
  * <p>
- * The following examples  show how to get {@code ResourceSet} or {@code Resource} or {@code Attachment} by {@code MaximoConnector}</p>
+ * The following examples show how to get a {@code ResourceSet} or {@code Resource} or {@code Attachment} by {@code MaximoConnector}:</p>
  * <pre><code>
  * var rs = mc.resourceSet(osName: osName)
  * var rs = mc.resourceSet(url: url)
@@ -92,7 +92,7 @@ public class MaximoConnector {
     
     var httpMethod : String = "GET";// by default it is get
     
-    /// Init this object using a base configuration.
+    /// Init this object by using a base configuration.
     public init() {
         self.options = Options()
     }
@@ -114,30 +114,30 @@ public class MaximoConnector {
     /// Set the options.
     ///
     /// - Parameter op: Options object.
-    /// - Returns: updated options object.
+    /// - Returns: updated MaximoCoonector object.
     public func options(op: Options) -> MaximoConnector {
         self.options = op
         return self
     }
     
-    /// Get options for Maximo Connector object.
+    /// Get options for the Maximo Connector object.
     ///
-    /// - Returns: options.
+    /// - Returns: Options object.
     public func getOptions() -> Options {
         return self.options
     }
 
-    /// Rerturns a Resource set object.
+    /// Return a ResourceSet object.
     ///
     /// - Returns: ResourceSet instance.
     public func resourceSet() -> ResourceSet {
         return ResourceSet(mc: self)
     }
 
-    /// Return a ResourceSet based on it's name.
+    /// Return a ResourceSet object based on its name.
     ///
     /// - Parameter String containing osName.
-    /// - Returns:
+    /// - Returns: a ResourceSet object.
     public func resourceSet(osName: String) -> ResourceSet {
         return ResourceSet(osName: osName, mc: self)
     }
@@ -161,119 +161,119 @@ public class MaximoConnector {
         return ResourceSet(osName: osName, mc: self)
     }
 
-    /// Fetch a resource based on a URI and propertie's information.
+    /// Fetch a resource based on a URI and property information.
     ///
     /// - Parameters:
-    ///   - uri: Resource's URI information.
-    ///   - properties: Properties containing a resource information.
+    ///   - uri: Resource URI information.
+    ///   - properties: Properties that contain resource information.
     /// - Returns: ResourceSet object.
-    /// - Throws:
+    /// - Throws: Exception.
     public func resource(uri: String, properties: [String]) throws -> Resource {
         return try ResourceSet(mc: self).fetchMember(uri: uri, properties: properties)
     }
     
-    /// Rertuns a AttachmentSet object based on applicatino's URI and properties.
+    /// Return an AttachmentSet object based on the application URI and properties.
     ///
     /// - Parameters:
-    ///   - uri: Attachment's URI information.
-    ///   - properties: Properties conatining a attachment's information.
+    ///   - uri: Attachment URI information.
+    ///   - properties: Properties that contains the attachment information.
     /// - Returns: AttachmentSet object.
-    /// - Throws:
+    /// - Throws: Exception.
     public func attachment(uri: String, properties: [String]) throws -> Attachment {
         return try AttachmentSet(mc: self).fetchMember(uri: uri, properties: properties)
     }
     
-    /// Rertuns a AttachementSet object based on applicatino's URI and properties containing a meta data information.
+    /// Return an AttachementSet object based on application URI and properties that contain metadata information.
     ///
-    /// - Parameter uri: Attachment's URI information.
+    /// - Parameter uri: Attachment URI information.
     /// - Returns: AttachmentSet object.
     /// - Throws:
     public func attachmentDocMeta(uri: String) throws -> [String: Any] {
         return try AttachmentSet(mc: self).fetchMember(uri: uri, properties: nil).fetchDocMeta()
     }
     
-    /// Check if the HTTP method used is <b>GET</b>.
+    /// Check if the HTTP method that is used is <b>GET</b>.
     ///
-    /// - Returns: boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.
+    /// - Returns: Boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.
     public func isGET() -> Bool {
         return self.httpMethod == HTTP_METHOD_GET
     }
 
-    ///  Check if the HTTP method used is <b>POST</b>.
+    ///  Check if the HTTP method that is used is <b>POST</b>.
     ///
-    /// - Returns: boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.
+    /// - Returns: Boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.
     public func isPOST() -> Bool {
         return self.httpMethod == HTTP_METHOD_POST
     }
     
-    ///  Check if the HTTP method used is <b>PATCH</b>.
+    ///  Check if the HTTP method that is used is <b>PATCH</b>.
     ///
-    /// - Returns: boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.
+    /// - Returns: Boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.
     public func isPATCH() -> Bool {
         return self.httpMethod == HTTP_METHOD_PATCH
     }
 
-    ///  Check if the HTTP method used is <b>MERGE</b>.
+    ///  Check if the HTTP method that is used is <b>MERGE</b>.
     ///
-    /// - Returns: boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.
+    /// - Returns: Boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.
     public func isMERGE() -> Bool {
         return self.httpMethod == HTTP_METHOD_MERGE
     }
 
-    ///  Check if the HTTP method used is <b>DELETE</b>.
+    ///  Check if the HTTP method that is used is <b>DELETE</b>.
     ///
-    /// - Returns: boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.
+    /// - Returns: Boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.
     public func isDELETE() -> Bool {
         return self.httpMethod == HTTP_METHOD_DELETE
     }
 
-    ///  Check if the HTTP method used is <b>BULK</b>.
+    ///  Check if the HTTP method that is used is <b>BULK</b>.
     ///
-    /// - Returns: boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.
+    /// - Returns: Boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.
     public func isBULK() -> Bool {
         return self.httpMethod == HTTP_METHOD_BULK
     }
 
-    ///  Check if the HTTP method used is <b>SYNC</b>.
+    ///  Check if the HTTP method that is used is <b>SYNC</b>.
     ///
-    /// - Returns: boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.
+    /// - Returns: Boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.
     public func isSYNC() -> Bool {
         return self.httpMethod == HTTP_METHOD_SYNC
     }
 
-    ///  Check if the HTTP method used is <b>MERGESYNC</b>.
+    ///  Check if the HTTP method that is used is <b>MERGESYNC</b>.
     ///
-    /// - Returns: boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.
+    /// - Returns: Boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.
     public func isMERGESYNC() -> Bool {
         return self.httpMethod == HTTP_METHOD_MERGESYNC
     }
 
     ///  Check if the package is valid.
     ///
-    /// - Returns: boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.
+    /// - Returns: Boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.
     public func isValid() -> Bool {
         return self.valid
     }
 
     ///  Check if the package is set to be Lean.
     ///
-    /// - Returns: boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.
+    /// - Returns: Boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.
     public func isLean() -> Bool {
         return self.options.isLean()
     }
 
     /// Connect to Maximo Server.
     ///
-    /// - Throws:
+    /// - Throws: Exception.
     public func connect() throws {
         try self.connect(proxyConfiguration: nil)
     }
     
     
-    /// Connect to Maximo Server with a Proxy.
+    /// Connect to the Maximo server with a proxy.
     ///
     /// - Parameter proxyConfiguration: Proxy configuration description.
-    /// - Throws:
+    /// - Throws: Exception.
     public func connect(proxyConfiguration : [String: String]?) throws {
 /*
         if isValid() {
@@ -363,7 +363,7 @@ public class MaximoConnector {
 
     /// Set the authentication process based on a resource URI.
     ///
-    /// - Parameter uri: String containing the URI information.
+    /// - Parameter uri: String that contains the URI information.
     /// - Returns: URLRequest object or nil if something is incompatible.
     func setAuth(uri: String) -> URLRequest? {
         
@@ -408,12 +408,12 @@ public class MaximoConnector {
         return nil
     }
     
-    /// Define the HTTP method to be used based.
+    /// Define the HTTP method to use based.
     ///
     /// - Parameters:
     ///   - request: URLRequest object.
-    ///   - method: String containing the METHOD description (i.e.GET, POST, PATCH, MERGE, DELETE, BULK, SYNC or MERGESYNC).
-    ///   - properties: properties containing the resource information.
+    ///   - method: String that contains the METHOD description, such as GET, POST, PATCH, MERGE, DELETE, BULK, SYNC or MERGESYNC.
+    ///   - properties: Properties that contain the resource information.
     func setMethod(request: inout URLRequest, method: String, properties: [String]?) {
         self.httpMethod = method
         if self.isGET() {
@@ -468,20 +468,20 @@ public class MaximoConnector {
 
     /// Load DocumentData.
     ///
-    /// - Parameter uri: Attachment's URI information.
-    /// - Returns: Data information or HTTP response code.
-    /// - Throws:
+    /// - Parameter uri: The URI information of the Attachment.
+    /// - Returns: Data information or an HTTP response code.
+    /// - Throws:Exception
     public func getAttachmentData(uri: String) throws -> Data {
         return try self.getAttachmentData(uri: uri, headers: nil)
     }
 
-    /// Retrieve the attachment metada based on resource's URI and headers information.
+    /// Retrieve the attachment metadata based on the resource URI and headers information.
     ///
     /// - Parameters:
-    ///   - uri: Resource's URI information.
-    ///   - headers: Resource's header information.
+    ///   - uri: Resource URI information.
+    ///   - headers: Resource header information.
     /// - Returns: Data information or HTTP response code.
-    /// - Throws:
+    /// - Throws: Exception.
     public func getAttachmentData(uri: String, headers: [String: Any]?) throws -> Data {
         if !isValid() {
             throw OslcError.invalidConnectorInstance
@@ -546,9 +546,9 @@ public class MaximoConnector {
 
     /// Handle with the GET HTTP method.
     ///
-    /// - Parameter uri: Resource's URI.
-    /// - Returns: JSON containing the information or an HTTP response code.
-    /// - Throws:
+    /// - Parameter uri: Resource URI.
+    /// - Returns: JSON that contains the information or an HTTP response code.
+    /// - Throws: Exception.
     public func get(uri: String) throws -> [String: Any] {
         return try self.get(uri: uri, headers: nil)
     }
@@ -556,10 +556,10 @@ public class MaximoConnector {
     /// Handle with the GET HTTP method.
     ///
     /// - Parameters:
-    ///   - uri: Resource's URI information.
+    ///   - uri: Resource URI information.
     ///   - headers: Resource header information.
-    /// - Returns: JSON containing the information or an HTTP response code.
-    /// - Throws:
+    /// - Returns: JSON that contains the information or an HTTP response code.
+    /// - Throws: Exception.
     public func get(uri: String, headers: [String: Any]?) throws -> [String: Any] {
         if !isValid() {
             throw OslcError.invalidConnectorInstance
@@ -630,9 +630,9 @@ public class MaximoConnector {
     
     /// Fetch Group By data.
     ///
-    /// - Parameter uri: Resource/Attachment's URI information.
-    /// - Returns: JSON containing the information grouped by URI or an HTTP response code.
-    /// - Throws:
+    /// - Parameter uri: The URI information for the Resource or Attachment.
+    /// - Returns: JSON that contains the information grouped by URI or an HTTP response code.
+    /// - Throws:Exception.
     public func groupBy(uri: String) throws -> [Any] {
         return try self.groupBy(uri: uri, headers: nil)
     }
@@ -640,10 +640,10 @@ public class MaximoConnector {
     /// Fetch Group By data.
     ///
     /// - Parameters:
-    ///   - uri: Resource's URI information.
-    ///   - headers: headers information.
-    /// - Returns: JSON containing the information grouped by URI or an HTTP response code.
-    /// - Throws:
+    ///   - uri: Resource URI information.
+    ///   - headers: Header information.
+    /// - Returns: JSON that contains the information grouped by URI or an HTTP response code.
+    /// - Throws: Exception.
     public func groupBy(uri: String, headers: [String: Any]?) throws -> [Any] {
         if !isValid() {
             throw OslcError.invalidConnectorInstance
@@ -714,11 +714,11 @@ public class MaximoConnector {
     /// Create new Resource.
     ///
     /// - Parameters:
-    ///   - uri: Resource's URI information.
-    ///   - jo: Resource's JSON data information.
-    ///   - properties: Resource's properties information.
-    /// - Returns: JSON containing the information or an HTTP response code.
-    /// - Throws:
+    ///   - uri: Resource URI information.
+    ///   - jo: Resource JSON data information.
+    ///   - properties: Resource property information.
+    /// - Returns: JSON that contains the information or an HTTP response code.
+    /// - Throws: Exception
     public func create(uri: String, jo: [String: Any], properties: [String]?) throws -> [String: Any] {
         return try self.create(uri: uri, jo: jo, headers: nil, properties: properties);
     }
@@ -726,12 +726,12 @@ public class MaximoConnector {
     /// Create a new Resource.
     ///
     /// - Parameters:
-    ///   - uri: Resource's URI information.
-    ///   - jo: Resource's JSON data information.
-    ///   - headers: Header's information.
-    ///   - properties: Resource's properties information.
-    /// - Returns: JSON containing the information or an HTTP response code
-    /// - Throws:
+    ///   - uri: Resource URI information.
+    ///   - jo: Resource JSON data information.
+    ///   - headers: Header information.
+    ///   - properties: Resource properties information.
+    /// - Returns: JSON that contains the information or an HTTP response code
+    /// - Throws: Exception.
     public func create(uri: String, jo: [String: Any], headers: [String: Any]?, properties: [String]?) throws -> [String: Any] {
         if !isValid() {
             throw OslcError.invalidConnectorInstance
@@ -824,13 +824,13 @@ public class MaximoConnector {
     /// Create new attachment.
     ///
     /// - Parameters:
-    ///   - uri: Attachement URI's information.
+    ///   - uri: Attachment URI information.
     ///   - data: Attachment data.
-    ///   - name: Attachment's name.
-    ///   - description: Attachement's description.
-    ///   - meta: Attachment's meta data information.
-    /// - Returns: JSON containing the information or an HTTP response code.
-    /// - Throws:
+    ///   - name: Attachment name.
+    ///   - description: Attachment description.
+    ///   - meta: Attachment metadata information.
+    /// - Returns: JSON that contains the information or an HTTP response code.
+    /// - Throws:Exception.
     public func createAttachment(uri: String, data: Data, name: String, description: String, meta: String) throws -> [String: Any] {
         return try self.createAttachment(uri: uri, data: data, name: name, description: description, meta: meta, headers: nil)
     }
@@ -838,14 +838,14 @@ public class MaximoConnector {
     /// Create new attachment.
     ///
     /// - Parameters:
-    ///   - uri: Resource's URI
-    ///   - data: Attachment's data.
-    ///   - name: Attachment's name.
-    ///   - description: Attachment's description.
-    ///   - meta: Attachment's meta data.
-    ///   - headers: Attachment's headers.
-    /// - Returns: JSON containing the information or an HTTP response code.
-    /// - Throws:
+    ///   - uri: Resource URI
+    ///   - data: Attachment data.
+    ///   - name: Attachment name.
+    ///   - description: Attachment description.
+    ///   - meta: Attachment metadata.
+    ///   - headers: Attachment headers.
+    /// - Returns: JSON that contains the information or an HTTP response code.
+    /// - Throws: Exception.
     public func createAttachment(uri: String, data: Data, name: String, description: String, meta: String, headers: [String: Any]?) throws -> [String: Any]
     {
         if !isValid() {
@@ -921,25 +921,25 @@ public class MaximoConnector {
         return json
     }
 
-    /// Handle with BULK HTTP's method.
+    /// Handle with BULK HTTP method.
     ///
     /// - Parameters:
-    ///   - uri: Resource's URI information.
-    ///   - ja: AnyObject containing the resource's information.
-    /// - Returns: AnyObject containing the information or an HTTP response code.
-    /// - Throws:
+    ///   - uri: Resource URI information.
+    ///   - ja: AnyObject that contains the resource information.
+    /// - Returns: AnyObject that contains the information or an HTTP response code.
+    /// - Throws:Exception.
     public func bulk(uri: String, ja: [Any]) throws -> [Any] {
         return try bulk(uri: uri, ja: ja, headers: nil)
     }
 
-    /// Handle with BULK HTTP's method.
+    /// Handle with BULK HTTP method.
     ///
     /// - Parameters:
-    ///   - uri: Resource's URI information.
-    ///   - ja: AnyObject containing the resource's information.
-    ///   - headers: Resource header's information.
-    /// - Returns: AnyObject containing the information or an HTTP response code.
-    /// - Throws:
+    ///   - uri: Resource URI information.
+    ///   - ja: AnyObject that contains the resource information.
+    ///   - headers: Resource header information.
+    /// - Returns: AnyObject that contains the information or an HTTP response code.
+    /// - Throws:Exception.
     public func bulk(uri: String, ja: [Any], headers: [String: Any]?) throws -> [Any] {
         if !isValid() {
             throw OslcError.invalidConnectorInstance
@@ -1018,11 +1018,11 @@ public class MaximoConnector {
     /// Update Resource.
     ///
     /// - Parameters:
-    ///   - uri: Resource's URI information.
-    ///   - jo: JSON schema containing resource's information.
-    ///   - properties: Resource's properties information.
-    /// - Returns: JSON containing the information or an HTTP response code.
-    /// - Throws:
+    ///   - uri: Resource URI information.
+    ///   - jo: JSON schema that contains the resource information.
+    ///   - properties: Resource properties information.
+    /// - Returns: JSON that contains the information or an HTTP response code.
+    /// - Throws: Exception.
     public func update(uri: String, jo: [String: Any], properties: [String]?) throws -> [String: Any] {
         return try self.update(uri: uri, jo: jo, headers: nil, properties: properties);
     }
@@ -1030,12 +1030,12 @@ public class MaximoConnector {
     /// Update the Resource.
     ///
     /// - Parameters:
-    ///   - uri: Resource's URI information.
-    ///   - jo: JSON schema containing resource's information.
-    ///   - headers: Resource's header information.
-    ///   - properties: Resource's properties information.
-    /// - Returns: JSON containing the information or an HTTP response code.
-    /// - Throws:
+    ///   - uri: Resource URI information.
+    ///   - jo: JSON schema that contains the resource information.
+    ///   - headers: Resource header information.
+    ///   - properties: Resource properties information.
+    /// - Returns: JSON that contains the information or an HTTP response code.
+    /// - Throws: Exception.
     public func update(uri: String, jo: [String: Any], headers: [String: Any]?, properties: [String]?) throws -> [String: Any] {
         if !isValid() {
             throw OslcError.invalidConnectorInstance
@@ -1115,27 +1115,27 @@ public class MaximoConnector {
         return json
     }
     
-    /// Handle MERGE HTTP's method.
+    /// Handle MERGE HTTP method.
     ///
     /// - Parameters:
-    ///   - uri: Resource's URI information.
-    ///   - jo: JSON schema containing resource's information.
-    ///   - properties: properties containing the resource's information.
-    /// - Returns: JSON containing the information or an HTTP response code.
-    /// - Throws:
+    ///   - uri: Resource URI information.
+    ///   - jo: JSON schema that contains resource information.
+    ///   - properties: Properties that contain the resource information.
+    /// - Returns: JSON that contains the information or an HTTP response code.
+    /// - Throws: Exception.
     public func merge(uri: String, jo: [String: Any], properties: [String]?) throws -> [String: Any] {
         return try self.merge(uri: uri, jo: jo, headers: nil, properties: properties);
     }
     
-    /// Handle MERGE HTTP's method.
+    /// Handle MERGE HTTP method.
     ///
     /// - Parameters:
-    ///   - uri: Resource's URI information.
-    ///   - jo: JSON schema containing resource's information.
-    ///   - headers: Header's information.
-    ///   - properties: properties containing the resource's information.
-    /// - Returns: JSON containing the information or an HTTP response code.
-    /// - Throws:
+    ///   - uri: Resource URI information.
+    ///   - jo: JSON schema that contains the resource information.
+    ///   - headers: Header information.
+    ///   - properties: Properties that contain the resource information.
+    /// - Returns: JSON that contains the information or an HTTP response code.
+    /// - Throws: Exception.
     public func merge(uri: String, jo: [String: Any], headers: [String: Any]?, properties: [String]?) throws -> [String: Any] {
         if !isValid() {
             throw OslcError.invalidConnectorInstance
@@ -1210,27 +1210,27 @@ public class MaximoConnector {
         return json
     }
     
-    /// Handle MERGESYNC HTTP's method.
+    /// Handle MERGESYNC HTTP method.
     ///
     /// - Parameters:
-    ///   - uri: Resource's URI information.
-    ///   - jo: JSON schema containing resource's information.
-    ///   - properties: properties containing the resource's information.
-    /// - Returns: JSON containing the information or an HTTP response code.
-    /// - Throws:
+    ///   - uri: Resource URI information.
+    ///   - jo: JSON schema that contains the resource information.
+    ///   - properties: Properties that contain the resource information.
+    /// - Returns: JSON that contains the information or an HTTP response code.
+    /// - Throws: Exception.
     public func mergeSync(uri: String, jo: [String: Any], properties: [String]?) throws -> [String: Any] {
         return try self.merge(uri: uri, jo: jo, headers: nil, properties: properties);
     }
 
-    /// Handle MERGESYNC HTTP's method.
+    /// Handle MERGESYNC HTTP method.
     ///
     /// - Parameters:
-    ///   - uri: Resource's URI information.
-    ///   - jo: JSON schema containing resource's information.
-    ///   - headers: Header's information.
-    ///   - properties: properties containing the resource's information.
-    /// - Returns: JSON containing the information or an HTTP response code.
-    /// - Throws:
+    ///   - uri: Resource URI information.
+    ///   - jo: JSON schema that contains the resource information.
+    ///   - headers: Header information.
+    ///   - properties: Properties that contain the resource information.
+    /// - Returns: JSON that contains the information or an HTTP response code.
+    /// - Throws: Exception.
     public func mergeSync(uri: String, jo: [String: Any], headers: [String: Any]?, properties: [String]?) throws -> [String: Any] {
         if !isValid() {
             throw OslcError.invalidConnectorInstance
@@ -1250,7 +1250,7 @@ public class MaximoConnector {
             requestURI = uri.replacingOccurrences(of: currentHost, with: publicHost)
         }
         
-        // Converting JSON object to Data.
+        // Convert a JSON object to Data.
         let postData : Data = try JSONSerialization.data(withJSONObject: jo, options: [])
         let semaphore = DispatchSemaphore(value: 0)
         let httpURL = URL(string: requestURI)
@@ -1305,27 +1305,27 @@ public class MaximoConnector {
         return json
     }
 
-    /// Handle SYNC HTTP's method.
+    /// Handle SYNC HTTP method.
     ///
     /// - Parameters:
-    ///   - uri: Resource's URI information.
-    ///   - jo: JSON schema containing resource's information.
-    ///   - properties: properties containing the resource's information.
-    /// - Returns: JSON containing the information or an HTTP response code.
-    /// - Throws:
+    ///   - uri: Resource URI information.
+    ///   - jo: JSON schema that contains the resource information.
+    ///   - properties: Properties that contain the resource information.
+    /// - Returns: JSON that contains the information or an HTTP response code.
+    /// - Throws: Exception.
     public func sync(uri: String, jo: [String: Any], properties: [String]?) throws -> [String: Any] {
         return try self.merge(uri: uri, jo: jo, headers: nil, properties: properties);
     }
     
-    /// Handle MERGESYNC HTTP's method.
+    /// Handle MERGESYNC HTTP method.
     ///
     /// - Parameters:
-    ///   - uri: Resource's URI information
-    ///   - jo: JSON schema containing resource's information.
-    ///   - headers: Header's information.
-    ///   - properties: properties containing the resource's information.
-    /// - Returns: JSON containing the information or an HTTP response code.
-    /// - Throws:
+    ///   - uri: Resource URI information
+    ///   - jo: JSON schema that contains the resource information.
+    ///   - headers: Header information.
+    ///   - properties: Properties that contain the resource information.
+    /// - Returns: JSON that contains the information or an HTTP response code.
+    /// - Throws: Exception.
     public func sync(uri: String, jo: [String: Any], headers: [String: Any]?, properties: [String]?) throws -> [String: Any] {
         if !isValid() {
             throw OslcError.invalidConnectorInstance
@@ -1412,8 +1412,8 @@ public class MaximoConnector {
    
     /// Delete a Resource or an Attachment.
     ///
-    /// - Parameter uri: Resource/Attachment's URI information to be deleted.
-    /// - Throws:
+    /// - Parameter uri: The URI information for the Resource or Attachment to delete.
+    /// - Throws: Exception.
     public func delete(uri: String) throws {
         try delete(uri: uri, headers: nil)
     }
@@ -1421,9 +1421,9 @@ public class MaximoConnector {
     /// Delete a Resource or an Attachment.
     ///
     /// - Parameters:
-    ///   - uri: Resource/Attachment's URI information to be deleted.
-    ///   - headers: Resource/Attachment's headers information to be deleted.
-    /// - Throws:
+    ///   - uri: The URI information for the Resource or Attachment to delete.
+    ///   - headers: Resource or Attachment header information to delete.
+    /// - Throws: Exception.
     public func delete(uri: String, headers: [String: Any]?) throws {
         if !isValid() {
             throw OslcError.invalidConnectorInstance
@@ -1497,25 +1497,25 @@ public class MaximoConnector {
 
     /// Delete a Resource.
     ///
-    /// - Parameter uri: Resource's URI information to be deleted.
-    /// - Throws:
+    /// - Parameter uri: Resource URI information to delete.
+    /// - Throws: Exception.
     public func deleteResource(uri: String) throws {
         try self.delete(uri: uri)
     }
     
     /// Delete an Attachment.
     ///
-    /// - Parameter uri: Attachment's URI information to be deleted.
-    /// - Throws: <#throws value description#>
+    /// - Parameter uri: Attachment URI information to delete.
+    /// - Throws: Exception.
     public func deleteAttachment(uri: String) throws {
         try self.delete(uri: uri)
     }
 
-    /// Set headers for a Resource ro an Attchament.
+    /// Set headers for a Resource or an Attachment.
     ///
     /// - Parameters:
     ///   - request: URLRequest object.
-    ///   - headers: header's information.
+    ///   - headers: Header information.
     func setHeaders(request: inout URLRequest, headers: [String: Any]) {
         for (key, value) in headers {
             let valueAsString = Util.stringValue(value: value)
@@ -1523,9 +1523,9 @@ public class MaximoConnector {
         }
     }
 
-    /// Set Cookies for a Resource or an Attchament.
+    /// Set Cookies for a Resource or an Attachment.
     ///
-    /// - Parameter url: Resource/Attachment's URL information.
+    /// - Parameter url: Resource or Attachment URL information.
     func setCookiesForSession(url: URL) {
         HTTPCookieStorage.shared.setCookies(cookies, for: url, mainDocumentURL: url)
     }
@@ -1538,9 +1538,9 @@ public class MaximoConnector {
         return lastResponseCode
     }
 
-    /// Disconnect from Maximo Server.
+    /// Disconnect from the Maximo server.
     ///
-    /// - Throws:
+    /// - Throws: Exception.
     public func disconnect() throws {
         var logout = self.options.getPublicURI() + "/logout"
         if self.getOptions().isMultiTenancy() {

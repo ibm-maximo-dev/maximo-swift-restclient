@@ -16,7 +16,7 @@ public class QuerySelect {
     /// Run the select clause.
     ///
     /// - Parameter selectClause: Clause to be fetch
-    /// - Returns: <#return value description#>
+    /// - Returns: String buffer containing a Select clause parameters.
     public func select(selectClause: [String]) -> String
     {
         var strb = String();
@@ -45,7 +45,7 @@ public class QuerySelect {
         return strb
     }
     
-    /// Converte saved queries into the query's map to a string.
+    /// Convert saved queries into the query's map to a string.
     ///
     /// - Parameters:
     ///   - strb: String buffer to increment the query
@@ -72,12 +72,12 @@ public class QuerySelect {
         }
     }
 
-    /// Tokenize ta query map.
+    /// Tokenize the query map.
     ///
     /// - Parameters:
     ///   - tokens: Token's delimiters.
     ///   - index: Map index.
-    ///   - selectMap: Map containing saved queries.
+    ///   - selectMap: Map that contains the saved queries.
     func handleTokens(tokens : [Substring], index: Int, selectMap: inout [String: Any])
     {
         if tokens.count < index+1 {
