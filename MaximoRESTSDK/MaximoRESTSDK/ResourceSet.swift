@@ -539,7 +539,7 @@ public class ResourceSet {
     /// - Parameters:
     ///   - name: Name of the saved query.
     ///   - paramValues: Arbitrary parameter values.
-    /// - Returns:
+    /// - Returns: Exception.
     public func savedQuery(name: String, paramValues: [String: Any]) -> ResourceSet {
         self.savedQuery = SavedQuery(name: name, map: paramValues).savedQueryClause()
         return self
