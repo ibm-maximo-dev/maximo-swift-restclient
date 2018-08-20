@@ -48,7 +48,7 @@ public class Options {
     /// Fuction to set the host address as an option.
     ///
     /// - Parameter host: IP or DNS address of Maximo's service
-    /// - Returns: void return
+    /// - Returns: Options object wihtin a new host information set.
     public func host(host: String) -> Options
     {
         self.host = host
@@ -58,7 +58,7 @@ public class Options {
     
     /// Fuction to set Maximo rest service id. (it is hardcoded to 'maxrest')
     ///
-    /// - Returns: void return.
+    /// - Returns: Options object with appContext param set to maxrest.
     public func maxrest() -> Options
     {
         appContext = "maxrest"
@@ -68,7 +68,7 @@ public class Options {
     ///  Function to set application context.
     ///
     /// - Parameter context: context of this application (i.e. maximo)
-    /// - Returns: void return
+    /// - Returns: Options object within a new appContext value set.
     public func appContext(context: String) -> Options
     {
         appContext = context
@@ -78,7 +78,7 @@ public class Options {
     /// Context operation for this API.
     ///
     /// - Parameter apiContext: api context (i.e. oslc)
-    /// - Returns: void return
+    /// - Returns: Options object within the apiContext param set.
     public func apiContext(apiContext: String) -> Options
     {
         self.apiContext = apiContext
@@ -87,7 +87,7 @@ public class Options {
     
     /// Enables secure HTTP.
     ///
-    /// - Returns: void return.
+    /// - Returns: Options object set with ssl param set to <b>TURE</b>.
     public func https() -> Options
     {
         self.ssl = true
@@ -96,7 +96,7 @@ public class Options {
     
     /// Disable secure HTTP.
     ///
-    /// - Returns: void return.
+    /// - Returns: Options object wihtin the ssl parata set to <b>FALSE</b>
     public func http() -> Options
     {
         self.ssl = false
@@ -106,7 +106,7 @@ public class Options {
     /// Define the service port
     ///
     /// - Parameter port: service destination port
-    /// - Returns: void return.
+    /// - Returns: Options object within the port param set.
     public func port(port: Int) -> Options
     {
         self.port = port
@@ -116,7 +116,7 @@ public class Options {
     /// Define the authentication mode.
     ///
     /// - Parameter authMode: authentication mode (i.e. maxAuth)
-    /// - Returns: void return.
+    /// - Returns: Option object with authMode param set.
     public func auth(authMode: String) -> Options
     {
         self.authMode = authMode
@@ -126,7 +126,7 @@ public class Options {
     /// Enables/Disable Maximo Tenant mode.
     ///
     /// - Parameter mtMode: TRUE to enable and FALSE to disble.
-    /// - Returns: void return.
+    /// - Returns: Option object within mt param set.
     public func mt(mtMode: Bool) -> Options
     {
         self.mt = mtMode
@@ -136,7 +136,7 @@ public class Options {
     /// Define the user credentials.
     ///
     /// - Parameter user: user name.
-    /// - Returns: void return.
+    /// - Returns: Options object with user param set.
     public func user(user: String) -> Options
     {
         self.user = user
@@ -146,7 +146,7 @@ public class Options {
     /// Define the password credentials.
     ///
     /// - Parameter password: password
-    /// - Returns: void return.
+    /// - Returns: Options object with password param set.
     public func password(password: String) -> Options
     {
         self.password = password
@@ -156,7 +156,7 @@ public class Options {
     /// Determine the app URI
     ///
     /// - Parameter appURI: URI of application
-    /// - Returns: void return.
+    /// - Returns: Options object with the appURI param set.
     public func AppURI(appURI: String) -> Options
     {
         self.appURI = appURI
@@ -166,7 +166,7 @@ public class Options {
     /// Enables lean
     ///
     /// - Parameter lean: TRUE to enable and FALSE to disble.
-    /// - Returns: void return.
+    /// - Returns: Options object with the lean param set.
     public func lean(lean: Bool) -> Options
     {
         self.lean = lean
@@ -176,7 +176,7 @@ public class Options {
     /// Set the tenant code.
     ///
     /// - Parameter tenantCode: tenant code
-    /// - Returns: void return.
+    /// - Returns: Options object with the tenantCode param set.
     public func tenantCode(tenantCode: String) -> Options
     {
         self.tenantcode = tenantCode

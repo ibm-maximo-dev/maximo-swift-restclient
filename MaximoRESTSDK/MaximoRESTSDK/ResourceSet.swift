@@ -204,7 +204,7 @@ public class ResourceSet {
 
     /// Get ResourceSet data in JSON
     ///
-    /// - Returns: <#return value description#>
+    /// - Returns: String with a JSON Object representing the ResourceSet.
     public func toJSON() -> [String: Any]? {
         return self.jsonObject
     }
@@ -212,8 +212,8 @@ public class ResourceSet {
 
     /// Get ResourceSet data in JSON bytes
     ///
-    /// - Returns: <#return value description#>
-    /// - Throws: <#throws value description#>
+    /// - Returns: Data object with a JSON object encoded.
+    /// - Throws: Exception
     public func toJSONBytes() throws -> Data {
 /*        let data = try JSONEncoder().encode(self.jsonObject)
         return data
@@ -273,10 +273,10 @@ public class ResourceSet {
         return self
     }
     
-    /// Set page size.
+    /// Set page size for the ResourceSet object.
     ///
     /// - Parameter pageSize: Page size in int.
-    /// - Returns: Reference to the page size.
+    /// - Returns: ResourceSet configured with a new page size.
     public func pageSize(pageSize: Int) -> ResourceSet {
         self.pageSize = pageSize
         return self
@@ -314,8 +314,8 @@ public class ResourceSet {
    
     /// Fetching the data for the ResourceSet
     ///
-    /// - Returns: Data of the ResourceSet.
-    /// - Throws:
+    /// - Returns: Data of ResourceSet.
+    /// - Throws: Exception.
     public func fetch() throws -> ResourceSet {
         _ = try self.fetch(options: nil)
         return self
@@ -325,7 +325,7 @@ public class ResourceSet {
     ///
     /// - Parameter additionalParams: Additional parameters.
     /// - Returns: Reference to the additional parameters.
-    /// - Throws:
+    /// - Throws: Exception.
     public func fetchWithAddtionalParams(additionalParams: [String: Any]) throws -> ResourceSet {
         return try self.fetchWithAddtionalHeadersAndParams(additionalParams: additionalParams, additionalHeaders: nil);
     }
@@ -334,7 +334,7 @@ public class ResourceSet {
     ///
     /// - Parameter additionalHeaders: Additional headers.
     /// - Returns: Reference to the data fetch with additional parameters.
-    /// - Throws:
+    /// - Throws: Exception.
     public func fetchWithAddtionalHeaders(additionalHeaders: [String: Any]) throws -> ResourceSet {
         return try self.fetchWithAddtionalHeadersAndParams(additionalParams: nil, additionalHeaders: additionalHeaders);
     }
@@ -345,8 +345,8 @@ public class ResourceSet {
     /// - Parameters:
     ///   - additionalParams: Additional parameters.
     ///   - additionalHeaders: Additional headers.
-    /// - Returns: Reference to data fetch with additional parameters and headers.
-    /// - Throws:
+    /// - Returns: Reference to date fetch with Additional params and headers.
+    /// - Throws: Exception.
     public func fetchWithAddtionalHeadersAndParams(additionalParams: [String: Any]?, additionalHeaders: [String: Any]?) throws -> ResourceSet {
         _ = try self.buildURI()
         var strb = String()
@@ -382,8 +382,8 @@ public class ResourceSet {
     /// Fetching the data for a ResourceSet with arbitrary parameters.
     ///
     /// - Parameter options: Additional parameters.
-    /// - Returns: Reference to the data that was fetched.
-    /// - Throws:
+    /// - Returns: Reference to the data fetched.
+    /// - Throws: Exception.
     public func fetch(options: [String: Any]?) throws -> ResourceSet {
         _ = try self.buildURI();
         self.jsonObject = try self.mc?.get(uri: self.appURI!)
@@ -399,7 +399,7 @@ public class ResourceSet {
     /// Go to nextPage
     ///
     /// - Returns: Reference to the next page.
-    /// - Throws:
+    /// - Throws: Exception.
     public func nextPage() throws -> ResourceSet {
         if self.hasNextPage()
         {
@@ -439,9 +439,9 @@ public class ResourceSet {
         return self;
     }
 
-    /// Has next page?
+    /// Check if the JSON response information has a next page
     ///
-    /// - Returns: Reference to the next page.
+    /// - Returns: boole <b>TRUE</b> if there is a next page or <b>FALSE<b/>, there is no other page info.
     public func hasNextPage() -> Bool {
         if self.jsonObject!["responseInfo"] != nil
         {
@@ -456,10 +456,10 @@ public class ResourceSet {
         return false;
     }
 
-    /// Go back to previous page
+    /// Get the ResourceSet object to the previews page.
     ///
-    /// - Returns: Reference to the previous page.
-    /// - Throws:
+    /// - Returns: Return a ResourceSet object within the previews page information inside.
+    /// - Throws: Exception.
     public func previousPage() throws -> ResourceSet {
         if self.jsonObject!["responseInfo"] != nil
         {
@@ -509,7 +509,7 @@ public class ResourceSet {
     /// Load the current data
     ///
     /// - Returns: Reference to the current data.
-    /// - Throws:
+    /// - Throws: Exception.
     public func load() throws -> ResourceSet {
         if (isLoaded) {
             return self
@@ -527,7 +527,7 @@ public class ResourceSet {
     /// Reload ResourceSet.
     ///
     /// - Returns: Reference to reloaded resource set.
-    /// - Throws:
+    /// - Throws: Exception.
     public func reload() throws -> ResourceSet {
         isLoaded = false
         _ = try load()
@@ -557,7 +557,7 @@ public class ResourceSet {
     
     /// URI Builder
     ///
-    /// - Returns: Built-in URI.
+    /// - Returns: ResourceSet object.
     /// - Throws: slcException.invalidURL Invalid URL.
     func buildURI() throws -> ResourceSet {
         var strb = String()
@@ -624,7 +624,7 @@ public class ResourceSet {
     ///   - uri: Resource URI's information.
     ///   - properties: Resource arbitrary properties.
     /// - Returns: Reference to a fetched Resource object.
-    /// - Throws:
+    /// - Throws: Exception.
     public func fetchMember(uri: String, properties: [String]?) throws -> Resource {
         var strb : String = String(uri)
         if properties != nil && properties!.count > 0 {
@@ -648,7 +648,7 @@ public class ResourceSet {
     ///
     /// - Parameter index: Parameter index.
     /// - Returns: Reference to the Resource object.
-    /// - Throws:
+    /// - Throws: Exception.
     public func member(index: Int) throws -> Resource? {
         if !isLoaded {
             _ = try load()
@@ -667,7 +667,7 @@ public class ResourceSet {
     ///   - jo: JSON object format in an Any swift object.
     ///   - properties: Arbitrary properties array.
     /// - Returns: Reference to the Resource object.
-    /// - Throws: <#throws value description#>
+    /// - Throws: Exception.
     public func create(jo: [String: Any], properties: [String]) throws -> Resource {
         if self.osURI == nil {
             _ = try self.buildURI()
@@ -686,7 +686,7 @@ public class ResourceSet {
     ///   - properties: Arbitrary properties array.
     ///   - headers: Resource header information.
     /// - Returns: Reference to the Resource object.
-    /// - Throws:
+    /// - Throws: Exception.
     public func create(jo: [String: Any], headers: [String: Any], properties: [String]) throws -> Resource {
         if self.osURI == nil {
             _ = try self.buildURI()
@@ -704,7 +704,7 @@ public class ResourceSet {
     ///   - jo: JSON Object format in a Any swift object.
     ///   - properties: Arbitrary properties array.
     /// - Returns: Reference to the Resource object.
-    /// - Throws:
+    /// - Throws: Exception.
     public func sync(jo: [String: Any], properties: [String]) throws -> Resource {
         if self.osURI == nil {
             _ = try self.buildURI()
@@ -723,7 +723,7 @@ public class ResourceSet {
     ///   - properties: Arbitrary properties array.
     ///   - headers: Resource header information.
     /// - Returns: Reference to the Resource object.
-    /// - Throws:
+    /// - Throws: Exception.
     public func sync(jo: [String: Any], headers: [String: Any], properties: [String]) throws -> Resource {
         if self.osURI == nil {
             _ = try self.buildURI()
@@ -741,7 +741,7 @@ public class ResourceSet {
     ///   - jo: JSON object format in an Any swift object.
     ///   - properties: Arbitrary properties array.
     /// - Returns: Reference to the Resource object.
-    /// - Throws:
+    /// - Throws: Exception
     public func mergeSync(jo: [String: Any], properties: [String]) throws -> Resource {
         if self.osURI == nil {
             _ = try self.buildURI()
@@ -760,7 +760,7 @@ public class ResourceSet {
     ///   - properties: Arbitrary properties array.
     ///   - headers: Resource header information.
     /// - Returns: Reference to the Resource object.
-    /// - Throws:
+    /// - Throws: Exception.
     public func mergeSync(jo: [String: Any], headers: [String: Any], properties: [String]) throws -> Resource {
         if self.osURI == nil {
             _ = try self.buildURI()
@@ -781,8 +781,8 @@ public class ResourceSet {
 
     /// Count the total number of Resources by calling the RESTful API
     ///
-    /// - Returns: <#return value description#>
-    /// - Throws: <#throws value description#>
+    /// - Returns: Int value with total count.
+    /// - Throws: Exception.
     public func totalCount() throws -> Int {
         if !isLoaded {
             _ = try load()
@@ -813,9 +813,9 @@ public class ResourceSet {
     ///     <li> When fromServer=true, it calls the totalCount API.</li>
     ///     <li> When fromServer=false, it calls the RESTful API. </li>
     /// </ul>
-    /// - Parameter fromServer: Boolean value to setup the count process.
-    /// - Returns: Number of objects based on the count process.
-    /// - Throws:
+    /// - Parameter fromServer: Boolean to setup the count process.
+    /// - Returns: Amount of objects based on the count process.
+    /// - Throws: Exception.
     public func totalCount(fromServer: Bool) throws -> Int {
         if !fromServer {
             return try self.totalCount()
@@ -845,8 +845,8 @@ public class ResourceSet {
     
     /// Get current number of Resource by calling the RESTful API
     ///
-    /// - Returns: Size of the Resource set.
-    /// - Throws:
+    /// - Returns: Size of Resource set.
+    /// - Throws: Exception.
     public func count() throws -> Int {
         if !isLoaded {
             _ = try load()
@@ -871,8 +871,8 @@ public class ResourceSet {
 
     /// Group by aggregation
     ///
-    /// - Returns: Aggregation object.
-    /// - Throws:
+    /// - Returns: Aggregation Object.
+    /// - Throws: Exception.
     public func groupBy() throws -> Aggregation {
         return Aggregation(mc: self.mc!, uri: try self.buildURI().appURI!)
     }

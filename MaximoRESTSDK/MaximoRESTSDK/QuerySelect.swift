@@ -16,7 +16,7 @@ public class QuerySelect {
     /// Run the select clause.
     ///
     /// - Parameter selectClause: Clause to be fetch
-    /// - Returns: <#return value description#>
+    /// - Returns: String buffer containing a Select clause parameters.
     public func select(selectClause: [String]) -> String
     {
         var strb = String();
