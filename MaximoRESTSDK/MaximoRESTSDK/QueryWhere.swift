@@ -21,7 +21,7 @@ public class QueryWhere {
     /// Where clause function.
     ///
     /// - Parameter name: Where query name.
-    /// - Returns: current key.
+    /// - Returns: Current key.
     public func _where (name: String) -> QueryWhere
     {
         currentKey = name
@@ -65,7 +65,7 @@ public class QueryWhere {
     
     /// Retrieve the current key.
     ///
-    /// - Returns: current key.
+    /// - Returns: Current key.
     public func getCurrentKey() -> String
     {
         if currentKey.contains(".")
@@ -78,7 +78,7 @@ public class QueryWhere {
     
     /// Set query tokens.
     ///
-    /// - Parameter s: String to be tokeninze.
+    /// - Parameter s: String to be tokeninzed.
     public func setQueryToken(s: String)
     {
         var currMap = self.getCurrentMap()
@@ -92,7 +92,7 @@ public class QueryWhere {
 
     /// Equal to statement handler.
     ///
-    /// - Parameter value: Any object containing the value to be compared.
+    /// - Parameter value: Any object that contains the value to compare.
     /// - Returns: QueryWhere object with equals to set.
     public func equalTo(value: Any) -> QueryWhere
     {
@@ -124,7 +124,7 @@ public class QueryWhere {
 
     /// Like statement handler.
     ///
-    /// - Parameter value: value to be scanned.
+    /// - Parameter value: Value to scan.
     /// - Returns: QueryWhere object with like statement added.
     public func like(value: String) -> QueryWhere
     {
@@ -133,20 +133,20 @@ public class QueryWhere {
         return self
     }
     
-    /// Grater than statement handler.
+    /// Greater than statement handler.
     ///
     /// - Parameter value: Value.
-    /// - Returns: QueryWhere object with gt statement added.
+    /// - Returns: QueryWhere object with <code>grater then statement</code> added.
     public func gt(value: Any) -> QueryWhere
     {
         let s = Util.stringValue(value: value)
         self.setQueryToken(s: ">" + s)
         return self
     }
-    /// Grater than or equals to statement handler.
+    /// Greater than or equal to statement handler.
     ///
     /// - Parameter value: Value.
-    /// - Returns: QueryWhere object gte statement added.
+    /// - Returns: QueryWhere object <code>grater then or equals to</code> statement added.
     public func gte(value: Any) -> QueryWhere
     {
         let s = Util.stringValue(value: value)
@@ -156,7 +156,7 @@ public class QueryWhere {
     /// Less than statement handler.
     ///
     /// - Parameter value: Value.
-    /// - Returns: QueryWhere object with lt statement added.
+    /// - Returns: QueryWhere object with <code>less then</code> statement added.
     public func lt(value: Any) -> QueryWhere
     {
         let s = Util.stringValue(value: value)
@@ -164,10 +164,10 @@ public class QueryWhere {
         return self
     }
     
-    /// Less than or equals to statement handler.
+    /// Less than or equal to statement handler.
     ///
     /// - Parameter value: Value.
-    /// - Returns: QueryWhere object with lte statement added.
+    /// - Returns: QueryWhere object with <code>less the or equals to</code> statement added.
     public func lte(value: Any) -> QueryWhere
     {
         let s = Util.stringValue(value: value)
@@ -177,7 +177,7 @@ public class QueryWhere {
     /// IN statement handler.
     ///
     /// - Parameter value: Value.
-    /// - Returns: QueryWhere object with _in statement added.
+    /// - Returns: QueryWhere object with <code>_in</code> statement added.
     public func _in(values: [Any]) -> QueryWhere
     {
         var strb = String()
@@ -195,7 +195,7 @@ public class QueryWhere {
     
     /// Build where clause.
     ///
-    /// - Returns: String buffer containing the where clause.
+    /// - Returns: String buffer that contains the where clause.
     public func whereClause() -> String
     {
         var cnt : Int = 0
