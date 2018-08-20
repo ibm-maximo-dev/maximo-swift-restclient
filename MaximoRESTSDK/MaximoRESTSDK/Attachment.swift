@@ -140,16 +140,17 @@ public class Attachment {
         isUploaded = true;
     }
 
-    /**
-     * var att = Attachment().maximoConnector(mc: params)
-     * @param mc
-     */
+    
+    /// Set the Maximo connector object
+    ///
+    /// - Parameter mc: MaximoConnector object
+    /// - Returns: Attachment object with the MaximoConnector object set.
     public func maximoConnector(mc: MaximoConnector) -> Attachment {
         self.mc = mc;
         return self;
     }
     
-    /// Object name
+    /// Set the Attachment name
     ///
     /// - Parameter name: String that contains the object name
     /// - Returns: updated name.
@@ -158,10 +159,10 @@ public class Attachment {
         return self;
     }
     
-    /// Object description
+    /// Set the Attachment description.
     ///
     /// - Parameter description: String description
-    /// - Returns: description updated
+    /// - Returns: Attachment object with the description set.
     public func description(description: String) -> Attachment {
         self.description = description;
         return self;
@@ -187,16 +188,16 @@ public class Attachment {
     /// Set/Update www URI
     ///
     /// - Parameter uri: String informing the www URI
-    /// - Returns: www URI updated.
+    /// - Returns: Attachment with the URI updated.
     public func wwwURI(uri: String) ->Attachment {
         self.uri = uri;
         return self;
     }
     
-    /// Data object
+    /// Set the Data object
     ///
     /// - Parameter data: New Data object
-    /// - Returns: updated Data object.
+    /// - Returns: Attachment with data object set.
     public func data(data: Data) -> Attachment {
         self.data = data;
         return self;
@@ -226,7 +227,7 @@ public class Attachment {
     /// Convert data to doc
     ///
     /// - Returns: data loaded.
-    /// - Throws:
+    /// - Throws: Exception.
     public func toDoc() throws -> Data {
         if !isUploaded {
             return self.data!;
@@ -244,11 +245,11 @@ public class Attachment {
         return self.uri;
     }
 
-    /**
-     * Get attachment data in JSON
-     *
-     * @throws
-     */
+    
+    /// Get Attachment data in JSON
+    ///
+    /// - Returns: String object within a JSON structure.
+    /// - Throws: Exception.
     public func toDocMeta() throws -> [String: Any] {
         if !isMetaLoaded {
             try loadMeta();
@@ -256,11 +257,11 @@ public class Attachment {
         return self.jo;
     }
 
-    /**
-     * Get attachment data in JSONBytes
-     *
-     * @throws
-     */
+    
+    /// Get Attachment data in JSON
+    ///
+    /// - Returns: Data object with JSON's data encoded.
+    /// - Throws: Exception.
     public func toDocMetaBytes() throws -> Data {
         if !isMetaLoaded {
             try loadMeta()
@@ -276,16 +277,16 @@ public class Attachment {
    
     /// Load attachment data
     ///
-    /// - Throws: <#throws value description#>
+    /// - Throws: Exception.
     public func load() throws {
         try self.load(headers: nil)
     }
     
-    /**
-     * load attachment data with headers
-     * @param headers
-     * @throws OslcError.attachmentAlreadyLoaded
-     */
+    
+    /// Load attachment data with headers
+    ///
+    /// - Parameter headers: <#headers description#>
+    /// - Throws: Exception
     public func load(headers: [String: Any]?) throws {
         if isLoaded {
             // The attachment has been loaded, please call reload for refreshing
@@ -305,11 +306,9 @@ public class Attachment {
         return self;
     }
     
-    /**
-     * load attachment metadata
-     *
-     * @throws OslcError.attachmentAlreadyLoaded
-     */
+    /// Load attachment meta data
+    ///
+    /// - Throws: Exception
     public func loadMeta() throws {
         try self.loadMeta(headers: nil);
     }
@@ -317,7 +316,7 @@ public class Attachment {
     /// Load metadata
     ///
     /// - Parameter headers: metadata with headers parameters.
-    /// - Throws: <#throws value description#>
+    /// - Throws: Exception.
     public func loadMeta(headers: [String: Any]?) throws {
         if isMetaLoaded {
             // The attachment was loaded. Call reloadMeta to refresh.
@@ -360,8 +359,8 @@ public class Attachment {
     }
     /// Reload metadata
     ///
-    /// - Returns: updated metadata.
-    /// - Throws: <#throws value description#>
+    /// - Returns: Attachment object within an updated metadata.
+    /// - Throws: Exception.
     public func reloadMeta() throws -> Attachment {
         isMetaLoaded = false;
         try loadMeta();
@@ -370,8 +369,8 @@ public class Attachment {
     
     /// Fetch metadata to a JSON document.
     ///
-    /// - Returns: <#return value description#>
-    /// - Throws: <#throws value description#>
+    /// - Returns: String with an JSON data.
+    /// - Throws: Exception.
     public func fetchDocMeta() throws -> [String: Any] {
         isMetaLoaded = false;
         try loadMeta();
@@ -379,8 +378,8 @@ public class Attachment {
     }
 
     /**
-     * Delete the attachment
-     * @throws
+     * Delete the attachment object
+     * @throws Exception
      */
     public func delete() throws {
         try self.mc.delete(uri: self.uri);
