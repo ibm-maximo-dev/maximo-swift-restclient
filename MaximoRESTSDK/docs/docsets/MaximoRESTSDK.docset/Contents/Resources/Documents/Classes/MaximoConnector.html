@@ -88,11 +88,11 @@
 
                 </div>
               </div>
-            <p>{@code MaximoConnector} is a Connector between Oslc Client and Maximo Server.
- It provides the authentication setting, connect, basic requests and disconnect for Server.</p>
+            <p>{@code MaximoConnector} is a Connector between the OSLC client and the Maximo server.
+ It provides the authentication setting, connection, basic requests, and disconnection for the server.</p>
 
-<p><p>This object can be created by {@code MaximoConnector} with {@code Options}.
- The following code shows how to initial {@code MaximoConnector} using {@code MaximoConnector} and {@code Options}Constructor</p>
+<p><p>This object can be created by the {@code MaximoConnector} with {@code Options}.
+ The following code shows how to initialize the {@code MaximoConnector} by using {@code MaximoConnector} and the {@code Options} Constructor:</p>
  <pre>
  <code>
  var mc = MaximoConnector(options: new Options().user(user: userName)
@@ -102,7 +102,7 @@
  </pre></p>
 
 <p><p>
- The following examples demonstrate how to build a new {@code MaximoConnector}</p>
+ The following examples demonstrate how to build a new {@code MaximoConnector}:</p>
  <pre>
  <code>
  var op = new Options()
@@ -113,7 +113,7 @@
  </pre></p>
 
 <p><p>
- The following examples demonstrate how to set authentication, method, cookie for session to {@code MaximoConnector}</p>
+ The following examples demonstrate how to set authentication, method, and cookie for the session to {@code MaximoConnector}:</p>
  <pre>
  <code>
  mc.setAuth(uri: uri)
@@ -123,7 +123,7 @@
  </pre></p>
 
 <p><p>
- The following examples show how to connect, get, create, update, merge, delete and disconnect to Maximo Server by {@code MaximoConnector}.
+ The following examples show how to connect, get, create, update, merge, delete, and disconnect from the Maximo server by {@code MaximoConnector}:
  The properties can be empty</p>
  <pre>
  <code>
@@ -144,7 +144,7 @@
  </pre></p>
 
 <p><p>
- The following examples  show how to get {@code ResourceSet} or {@code Resource} or {@code Attachment} by {@code MaximoConnector}</p>
+ The following examples show how to get a {@code ResourceSet} or {@code Resource} or {@code Attachment} by {@code MaximoConnector}:</p>
  <pre><code>
  var rs = mc.resourceSet(osName: osName)
  var rs = mc.resourceSet(url: url)
@@ -169,7 +169,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Init this object using a base configuration.</p>
+                        <p>Init this object by using a base configuration.</p>
 
                       </div>
                       <div class="declaration">
@@ -323,7 +323,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Get options for Maximo Connector object.</p>
+                        <p>Get options for the Maximo Connector object.</p>
 
                       </div>
                       <div class="declaration">
@@ -354,7 +354,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Returns a Resource set object.</p>
+                        <p>Return a ResourceSet object.</p>
 
                       </div>
                       <div class="declaration">
@@ -385,7 +385,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Return a ResourceSet based on it&rsquo;s name.</p>
+                        <p>Return a ResourceSet object based on its name.</p>
 
                       </div>
                       <div class="declaration">
@@ -466,7 +466,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Fetch a resource based on a URI and properties information.</p>
+                        <p>Fetch a resource based on a URI and property information.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
     Exception.
@@ -494,7 +494,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Resource&rsquo;s URI information.</p>
+                                  <p>Resource URI information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -506,7 +506,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Properties containing a resource information.</p>
+                                  <p>Properties that contain resource information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -533,7 +533,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Returns a AttachmentSet object based on application&rsquo;s URI and properties.</p>
+                        <p>Return an AttachmentSet object based on the application URI and properties.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
     Exception.
@@ -561,7 +561,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Attachment&rsquo;s URI information.</p>
+                                  <p>Attachment URI information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -573,7 +573,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Properties containing a attachment&rsquo;s information.</p>
+                                  <p>Properties that contains the attachment information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -600,11 +600,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Returns a AttachementSet object based on application&rsquo;s URI and properties containing a meta data information.</p>
+                        <p>Return an AttachementSet object based on application URI and properties that contain metadata information.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    Exception.
-
+    
 </div>
 
                       </div>
@@ -628,7 +627,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Attachment&rsquo;s URI information.</p>
+                                  <p>Attachment URI information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -637,7 +636,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>String object.</p>
+                        <p>AttachmentSet object.</p>
                       </div>
                     </section>
                   </div>
@@ -655,7 +654,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Check if the HTTP method used is <b>GET</b>.</p>
+                        <p>Check if the HTTP method that is used is <b>GET</b>.</p>
 
                       </div>
                       <div class="declaration">
@@ -668,7 +667,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.</p>
+                        <p>Boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.</p>
                       </div>
                     </section>
                   </div>
@@ -686,7 +685,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Check if the HTTP method used is <b>POST</b>.</p>
+                        <p>Check if the HTTP method that is used is <b>POST</b>.</p>
 
                       </div>
                       <div class="declaration">
@@ -699,7 +698,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.</p>
+                        <p>Boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.</p>
                       </div>
                     </section>
                   </div>
@@ -717,7 +716,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Check if the HTTP method used is <b>PATCH</b>.</p>
+                        <p>Check if the HTTP method that is used is <b>PATCH</b>.</p>
 
                       </div>
                       <div class="declaration">
@@ -730,7 +729,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.</p>
+                        <p>Boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.</p>
                       </div>
                     </section>
                   </div>
@@ -748,7 +747,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Check if the HTTP method used is <b>MERGE</b>.</p>
+                        <p>Check if the HTTP method that is used is <b>MERGE</b>.</p>
 
                       </div>
                       <div class="declaration">
@@ -761,7 +760,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.</p>
+                        <p>Boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.</p>
                       </div>
                     </section>
                   </div>
@@ -779,7 +778,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Check if the HTTP method used is <b>DELETE</b>.</p>
+                        <p>Check if the HTTP method that is used is <b>DELETE</b>.</p>
 
                       </div>
                       <div class="declaration">
@@ -792,7 +791,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.</p>
+                        <p>Boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.</p>
                       </div>
                     </section>
                   </div>
@@ -810,7 +809,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Check if the HTTP method used is <b>BULK</b>.</p>
+                        <p>Check if the HTTP method that is used is <b>BULK</b>.</p>
 
                       </div>
                       <div class="declaration">
@@ -823,7 +822,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.</p>
+                        <p>Boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.</p>
                       </div>
                     </section>
                   </div>
@@ -841,7 +840,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Check if the HTTP method used is <b>SYNC</b>.</p>
+                        <p>Check if the HTTP method that is used is <b>SYNC</b>.</p>
 
                       </div>
                       <div class="declaration">
@@ -854,7 +853,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.</p>
+                        <p>Boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.</p>
                       </div>
                     </section>
                   </div>
@@ -872,7 +871,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Check if the HTTP method used is <b>MERGESYNC</b>.</p>
+                        <p>Check if the HTTP method that is used is <b>MERGESYNC</b>.</p>
 
                       </div>
                       <div class="declaration">
@@ -885,7 +884,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.</p>
+                        <p>Boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.</p>
                       </div>
                     </section>
                   </div>
@@ -916,7 +915,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.</p>
+                        <p>Boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.</p>
                       </div>
                     </section>
                   </div>
@@ -947,7 +946,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.</p>
+                        <p>Boolean value: <b>TRUE</b> means <i>yes</i>, <b>FALSE</b> means <i>no</i>.</p>
                       </div>
                     </section>
                   </div>
@@ -997,7 +996,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Connect to Maximo Server with a Proxy.</p>
+                        <p>Connect to the Maximo server with a proxy.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
     Exception.
@@ -1051,7 +1050,7 @@
                         <p>Load DocumentData.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    Exception.
+    Throws:Exception
 
 </div>
 
@@ -1076,7 +1075,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Attachment&rsquo;s URI information.</p>
+                                  <p>The URI information of the Attachment.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1085,7 +1084,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Data information or HTTP response code.</p>
+                        <p>Data information or an HTTP response code.</p>
                       </div>
                     </section>
                   </div>
@@ -1103,7 +1102,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Retrieve the attachment metada based on resource&rsquo;s URI and headers information.</p>
+                        <p>Retrieve the attachment metadata based on the resource URI and headers information.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
     Exception.
@@ -1131,7 +1130,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Resource&rsquo;s URI information.</p>
+                                  <p>Resource URI information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1143,7 +1142,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Resource&rsquo;s header information.</p>
+                                  <p>Resource header information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1198,7 +1197,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Resource&rsquo;s URI.</p>
+                                  <p>Resource URI.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1207,7 +1206,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>JSON containing the information or an HTTP response code.</p>
+                        <p>JSON that contains the information or an HTTP response code.</p>
                       </div>
                     </section>
                   </div>
@@ -1253,7 +1252,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Resource&rsquo;s URI information.</p>
+                                  <p>Resource URI information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1274,7 +1273,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>JSON containing the information or an HTTP response code.</p>
+                        <p>JSON that contains the information or an HTTP response code.</p>
                       </div>
                     </section>
                   </div>
@@ -1295,7 +1294,7 @@
                         <p>Fetch Group By data.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    Exception.
+    Throws:Exception.
 
 </div>
 
@@ -1320,7 +1319,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Resource/Attachment&rsquo;s URI information.</p>
+                                  <p>The URI information for the Resource or Attachment.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1329,7 +1328,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>JSON containing the information grouped by URI or an HTTP response code.</p>
+                        <p>JSON that contains the information grouped by URI or an HTTP response code.</p>
                       </div>
                     </section>
                   </div>
@@ -1375,7 +1374,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Resource&rsquo;s URI information.</p>
+                                  <p>Resource URI information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1387,7 +1386,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>headers information.</p>
+                                  <p>Header information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1396,7 +1395,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>JSON containing the information grouped by URI or an HTTP response code.</p>
+                        <p>JSON that contains the information grouped by URI or an HTTP response code.</p>
                       </div>
                     </section>
                   </div>
@@ -1417,7 +1416,7 @@
                         <p>Create new Resource.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    Exception.
+    Exception
 
 </div>
 
@@ -1442,7 +1441,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Resource&rsquo;s URI information.</p>
+                                  <p>Resource URI information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1454,7 +1453,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Resource&rsquo;s JSON data information.</p>
+                                  <p>Resource JSON data information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1466,7 +1465,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Resource&rsquo;s properties information.</p>
+                                  <p>Resource property information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1475,7 +1474,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>JSON containing the information or an HTTP response code.</p>
+                        <p>JSON that contains the information or an HTTP response code.</p>
                       </div>
                     </section>
                   </div>
@@ -1521,7 +1520,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Resource&rsquo;s URI information.</p>
+                                  <p>Resource URI information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1533,7 +1532,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Resource&rsquo;s JSON data information.</p>
+                                  <p>Resource JSON data information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1545,7 +1544,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Header&rsquo;s information.</p>
+                                  <p>Header information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1557,7 +1556,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Resource&rsquo;s properties information.</p>
+                                  <p>Resource properties information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1566,7 +1565,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>JSON containing the information or an HTTP response code</p>
+                        <p>JSON that contains the information or an HTTP response code</p>
                       </div>
                     </section>
                   </div>
@@ -1587,7 +1586,7 @@
                         <p>Create new attachment.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    Exception.
+    Throws:Exception.
 
 </div>
 
@@ -1612,7 +1611,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Attachment URI&rsquo;s information.</p>
+                                  <p>Attachment URI information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1636,7 +1635,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Attachment&rsquo;s name.</p>
+                                  <p>Attachment name.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1648,7 +1647,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Attachment&rsquo;s description.</p>
+                                  <p>Attachment description.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1660,7 +1659,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Attachment&rsquo;s meta data information.</p>
+                                  <p>Attachment metadata information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1669,7 +1668,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>JSON containing the information or an HTTP response code.</p>
+                        <p>JSON that contains the information or an HTTP response code.</p>
                       </div>
                     </section>
                   </div>
@@ -1715,7 +1714,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Resource&rsquo;s URI</p>
+                                  <p>Resource URI</p>
                                 </div>
                               </td>
                             </tr>
@@ -1727,7 +1726,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Attachment&rsquo;s data.</p>
+                                  <p>Attachment data.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1739,7 +1738,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Attachment&rsquo;s name.</p>
+                                  <p>Attachment name.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1751,7 +1750,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Attachment&rsquo;s description.</p>
+                                  <p>Attachment description.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1763,7 +1762,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Attachment&rsquo;s meta data.</p>
+                                  <p>Attachment metadata.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1775,7 +1774,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Attachment&rsquo;s headers.</p>
+                                  <p>Attachment headers.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1784,7 +1783,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>JSON containing the information or an HTTP response code.</p>
+                        <p>JSON that contains the information or an HTTP response code.</p>
                       </div>
                     </section>
                   </div>
@@ -1802,10 +1801,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Handle with BULK HTTP&rsquo;s method.</p>
+                        <p>Handle with BULK HTTP method.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    Exception.
+    Throws:Exception.
 
 </div>
 
@@ -1830,7 +1829,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Resource&rsquo;s URI information.</p>
+                                  <p>Resource URI information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1842,7 +1841,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>AnyObject containing the resource&rsquo;s information.</p>
+                                  <p>AnyObject that contains the resource information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1851,7 +1850,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>AnyObject containing the information or an HTTP response code.</p>
+                        <p>AnyObject that contains the information or an HTTP response code.</p>
                       </div>
                     </section>
                   </div>
@@ -1869,10 +1868,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Handle with BULK HTTP&rsquo;s method.</p>
+                        <p>Handle with BULK HTTP method.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    Exception.
+    Throws:Exception.
 
 </div>
 
@@ -1897,7 +1896,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Resource&rsquo;s URI information.</p>
+                                  <p>Resource URI information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1909,7 +1908,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>AnyObject containing the resource&rsquo;s information.</p>
+                                  <p>AnyObject that contains the resource information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1921,7 +1920,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Resource header&rsquo;s information.</p>
+                                  <p>Resource header information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1930,7 +1929,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>AnyObject containing the information or an HTTP response code.</p>
+                        <p>AnyObject that contains the information or an HTTP response code.</p>
                       </div>
                     </section>
                   </div>
@@ -1976,7 +1975,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Resource&rsquo;s URI information.</p>
+                                  <p>Resource URI information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1988,7 +1987,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>JSON schema containing resource&rsquo;s information.</p>
+                                  <p>JSON schema that contains the resource information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2000,7 +1999,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Resource&rsquo;s properties information.</p>
+                                  <p>Resource properties information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2009,7 +2008,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>JSON containing the information or an HTTP response code.</p>
+                        <p>JSON that contains the information or an HTTP response code.</p>
                       </div>
                     </section>
                   </div>
@@ -2055,7 +2054,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Resource&rsquo;s URI information.</p>
+                                  <p>Resource URI information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2067,7 +2066,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>JSON schema containing resource&rsquo;s information.</p>
+                                  <p>JSON schema that contains the resource information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2079,7 +2078,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Resource&rsquo;s header information.</p>
+                                  <p>Resource header information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2091,7 +2090,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Resource&rsquo;s properties information.</p>
+                                  <p>Resource properties information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2100,7 +2099,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>JSON containing the information or an HTTP response code.</p>
+                        <p>JSON that contains the information or an HTTP response code.</p>
                       </div>
                     </section>
                   </div>
@@ -2118,7 +2117,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Handle MERGE HTTP&rsquo;s method.</p>
+                        <p>Handle MERGE HTTP method.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
     Exception.
@@ -2146,7 +2145,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Resource&rsquo;s URI information.</p>
+                                  <p>Resource URI information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2158,7 +2157,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>JSON schema containing resource&rsquo;s information.</p>
+                                  <p>JSON schema that contains resource information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2170,7 +2169,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>properties containing the resource&rsquo;s information.</p>
+                                  <p>Properties that contain the resource information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2179,7 +2178,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>JSON containing the information or an HTTP response code.</p>
+                        <p>JSON that contains the information or an HTTP response code.</p>
                       </div>
                     </section>
                   </div>
@@ -2197,7 +2196,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Handle MERGE HTTP&rsquo;s method.</p>
+                        <p>Handle MERGE HTTP method.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
     Exception.
@@ -2225,7 +2224,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Resource&rsquo;s URI information.</p>
+                                  <p>Resource URI information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2237,7 +2236,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>JSON schema containing resource&rsquo;s information.</p>
+                                  <p>JSON schema that contains the resource information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2249,7 +2248,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Header&rsquo;s information.</p>
+                                  <p>Header information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2261,7 +2260,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>properties containing the resource&rsquo;s information.</p>
+                                  <p>Properties that contain the resource information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2270,7 +2269,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>JSON containing the information or an HTTP response code.</p>
+                        <p>JSON that contains the information or an HTTP response code.</p>
                       </div>
                     </section>
                   </div>
@@ -2288,7 +2287,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Handle MERGESYNC HTTP&rsquo;s method.</p>
+                        <p>Handle MERGESYNC HTTP method.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
     Exception.
@@ -2316,7 +2315,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Resource&rsquo;s URI information.</p>
+                                  <p>Resource URI information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2328,7 +2327,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>JSON schema containing resource&rsquo;s information.</p>
+                                  <p>JSON schema that contains the resource information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2340,7 +2339,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>properties containing the resource&rsquo;s information.</p>
+                                  <p>Properties that contain the resource information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2349,7 +2348,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>JSON containing the information or an HTTP response code.</p>
+                        <p>JSON that contains the information or an HTTP response code.</p>
                       </div>
                     </section>
                   </div>
@@ -2367,7 +2366,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Handle MERGESYNC HTTP&rsquo;s method.</p>
+                        <p>Handle MERGESYNC HTTP method.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
     Exception.
@@ -2395,7 +2394,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Resource&rsquo;s URI information.</p>
+                                  <p>Resource URI information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2407,7 +2406,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>JSON schema containing resource&rsquo;s information.</p>
+                                  <p>JSON schema that contains the resource information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2419,7 +2418,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Header&rsquo;s information.</p>
+                                  <p>Header information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2431,7 +2430,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>properties containing the resource&rsquo;s information.</p>
+                                  <p>Properties that contain the resource information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2440,7 +2439,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>JSON containing the information or an HTTP response code.</p>
+                        <p>JSON that contains the information or an HTTP response code.</p>
                       </div>
                     </section>
                   </div>
@@ -2458,7 +2457,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Handle SYNC HTTP&rsquo;s method.</p>
+                        <p>Handle SYNC HTTP method.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
     Exception.
@@ -2486,7 +2485,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Resource&rsquo;s URI information.</p>
+                                  <p>Resource URI information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2498,7 +2497,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>JSON schema containing resource&rsquo;s information.</p>
+                                  <p>JSON schema that contains the resource information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2510,7 +2509,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>properties containing the resource&rsquo;s information.</p>
+                                  <p>Properties that contain the resource information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2519,7 +2518,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>JSON containing the information or an HTTP response code.</p>
+                        <p>JSON that contains the information or an HTTP response code.</p>
                       </div>
                     </section>
                   </div>
@@ -2537,7 +2536,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Handle MERGESYNC HTTP&rsquo;s method.</p>
+                        <p>Handle MERGESYNC HTTP method.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
     Exception.
@@ -2565,7 +2564,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Resource&rsquo;s URI information</p>
+                                  <p>Resource URI information</p>
                                 </div>
                               </td>
                             </tr>
@@ -2577,7 +2576,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>JSON schema containing resource&rsquo;s information.</p>
+                                  <p>JSON schema that contains the resource information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2589,7 +2588,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Header&rsquo;s information.</p>
+                                  <p>Header information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2601,7 +2600,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>properties containing the resource&rsquo;s information.</p>
+                                  <p>Properties that contain the resource information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2610,7 +2609,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>JSON containing the information or an HTTP response code.</p>
+                        <p>JSON that contains the information or an HTTP response code.</p>
                       </div>
                     </section>
                   </div>
@@ -2656,7 +2655,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Resource/Attachment&rsquo;s URI information to be deleted.</p>
+                                  <p>The URI information for the Resource or Attachment to delete.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2707,7 +2706,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Resource/Attachment&rsquo;s URI information to be deleted.</p>
+                                  <p>The URI information for the Resource or Attachment to delete.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2719,7 +2718,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Resource/Attachment&rsquo;s headers information to be deleted.</p>
+                                  <p>Resource or Attachment header information to delete.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2770,7 +2769,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Resource&rsquo;s URI information to be deleted.</p>
+                                  <p>Resource URI information to delete.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2796,7 +2795,7 @@
                         <p>Delete an Attachment.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    Exception. &lt;#throws value description#&gt;
+    Exception.
 
 </div>
 
@@ -2821,7 +2820,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Attachment&rsquo;s URI information to be deleted.</p>
+                                  <p>Attachment URI information to delete.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2875,7 +2874,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Disconnect from Maximo Server.</p>
+                        <p>Disconnect from the Maximo server.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
     Exception.
@@ -2899,7 +2898,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://github.ibm.com/maximo-ohio/maximo-swift-restclient" target="_blank" rel="external">Silvino Neto</a>. All rights reserved. (Last updated: 2018-08-17)</p>
+          <p>&copy; 2018 <a class="link" href="https://github.ibm.com/maximo-ohio/maximo-swift-restclient" target="_blank" rel="external">Silvino Neto</a>. All rights reserved. (Last updated: 2018-08-20)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

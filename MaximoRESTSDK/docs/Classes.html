@@ -133,11 +133,11 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>{@code Attachment} implement the operations on attachment from Resource.
- It provides the data, meta data, uri and so on.</p>
+                        <p>{@code Attachment} implements the operations on the attachment from a Resource.
+ It provides the data, metadata, URI and so on.</p>
 
 <p><p>This object can be created by {@code AttachmentSet}.
- The following code shows how to create {@code Attachment} using {@code AttachmentSet} Constructor
+ The following code shows how to create {@code Attachment} by using the {@code AttachmentSet} Constructor:
  </p>
  <pre>
  <code>
@@ -147,7 +147,7 @@
  </pre></p>
 
 <p><p>
- The following examples demonstrate how to build a new {@code Attachment}</p>
+ The following examples demonstrate how to build a new {@code Attachment}:</p>
  <pre>
  <code>
  var att = Attachment()
@@ -157,7 +157,7 @@
  </pre></p>
 
 <p><p>
- The following examples demonstrate how to set maximoconnector, name, description, data, meta data, wwwURI to {@code Attachment}</p>
+ The following examples demonstrate how to set the maximoconnector, name, description, data, metadata, wwwURI for the {@code Attachment}:</p>
  <pre>
  <code>
  att.maximoConnector(mc: maximoconnector).name(name: filename).description(description: description)
@@ -166,7 +166,7 @@
  </pre></p>
 
 <p><p>
- The following examples show how to load and reload data</p>
+ The following examples show how to load and reload data:</p>
  <pre>
  <code>
  att.load()
@@ -175,7 +175,7 @@
  </pre></p>
 
 <p><p>
- The following examples show how to get information from {@code Attachment}
+ The following examples show how to get information from the {@code Attachment}:
  For file data:</p>
  <pre>
  <code>
@@ -188,7 +188,7 @@
  </pre></p>
 
 <p><p>
- For file meta data:</p>
+ For file metadata:</p>
  <pre>
  <code>
  var jo : [String: Any] = att.toDocMeta()
@@ -196,7 +196,7 @@
  </code>
  </pre></p>
 
-<p><p>The following example shows how to delete the {@code Attachment}
+<p><p>The following example shows how to delete the {@code Attachment}:
  <pre>
  <code>
  att.delete() //if the attachment is deleted as ats.att.detele(), please reload attachmentset after.
@@ -233,11 +233,11 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>{@code AttachmenSet} implement the operations on attachmentset from Resource.
- It provides the set of Attachment.</p>
+                        <p>{@code AttachmenSet} implement the operations on the AttachmentSet from a Resource.
+ It provides the set for the attachment.</p>
 
 <p><p>This object can be created by {@code AttachmentSet}.
- The following code shows how to create {@code AttachmentSet} using {@code AttachmentSet} Constructor
+ The following code shows how to create {@code AttachmentSet} by using the {@code AttachmentSet} constructor:
  </p>
  <pre>
  <code>
@@ -247,7 +247,7 @@
  </pre></p>
 
 <p><p>
- The following examples demonstrate how to build a new {@code AttachmentSet}</p>
+ The following examples demonstrate how to build a new {@code AttachmentSet}:</p>
  <pre>
  <code>
  var ats = AttachmentSet()
@@ -257,7 +257,7 @@
  </pre></p>
 
 <p><p>
- The following examples demonstrate how to set uri and jsonobject to {@code Attachment}</p>
+ The following examples demonstrate how to set the uri and jsonobject for the {@code Attachment}:</p>
  <pre>
  <code>
  ats.href(href: uri)
@@ -266,7 +266,7 @@
  </pre></p>
 
 <p><p>
- The following examples show how to load and reload data</p>
+ The following examples show how to load and reload data:</p>
  <pre>
  <code>
  att.load()
@@ -275,7 +275,7 @@
  </pre></p>
 
 <p><p>
- The following examples show how to get AttachmentSet data from {@code AttachmentSet}</p>
+ The following examples show how to get AttachmentSet data from the {@code AttachmentSet}:</p>
  <pre>
  <code>
  var jo : [String: Any] = att.toJSON()
@@ -285,7 +285,7 @@
  </pre></p>
 
 <p><p>
- The following examples show how to create, get and delete {@code Attachment} from{@code AttachmentSet}</p>
+ The following examples show how to create, get, and delete {@code Attachment} from the {@code AttachmentSet}:</p>
  <pre>
  <code>
  var att = ats.create(att: Attachment())
@@ -297,7 +297,7 @@
  </code>
  </pre></p>
 
-<p><p>The following example shows how to get the this page size from {@code AttachmentSet}</p>
+<p><p>The following example shows how to get the this page size from the {@code AttachmentSet}:</p>
  <pre>
  <code>
  var currentPageSize : Int = ats.thisPageSize()
@@ -334,7 +334,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Bulk processo</p>
+                        <p>Bulk processor</p>
 
                         <a href="Classes/BulkProcessor.html" class="slightly-smaller">See more</a>
                       </div>
@@ -366,11 +366,11 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>{@code MaximoConnector} is a Connector between Oslc Client and Maximo Server.
- It provides the authentication setting, connect, basic requests and disconnect for Server.</p>
+                        <p>{@code MaximoConnector} is a Connector between the OSLC client and the Maximo server.
+ It provides the authentication setting, connection, basic requests, and disconnection for the server.</p>
 
-<p><p>This object can be created by {@code MaximoConnector} with {@code Options}.
- The following code shows how to initial {@code MaximoConnector} using {@code MaximoConnector} and {@code Options}Constructor</p>
+<p><p>This object can be created by the {@code MaximoConnector} with {@code Options}.
+ The following code shows how to initialize the {@code MaximoConnector} by using {@code MaximoConnector} and the {@code Options} Constructor:</p>
  <pre>
  <code>
  var mc = MaximoConnector(options: new Options().user(user: userName)
@@ -380,7 +380,7 @@
  </pre></p>
 
 <p><p>
- The following examples demonstrate how to build a new {@code MaximoConnector}</p>
+ The following examples demonstrate how to build a new {@code MaximoConnector}:</p>
  <pre>
  <code>
  var op = new Options()
@@ -391,7 +391,7 @@
  </pre></p>
 
 <p><p>
- The following examples demonstrate how to set authentication, method, cookie for session to {@code MaximoConnector}</p>
+ The following examples demonstrate how to set authentication, method, and cookie for the session to {@code MaximoConnector}:</p>
  <pre>
  <code>
  mc.setAuth(uri: uri)
@@ -401,7 +401,7 @@
  </pre></p>
 
 <p><p>
- The following examples show how to connect, get, create, update, merge, delete and disconnect to Maximo Server by {@code MaximoConnector}.
+ The following examples show how to connect, get, create, update, merge, delete, and disconnect from the Maximo server by {@code MaximoConnector}:
  The properties can be empty</p>
  <pre>
  <code>
@@ -422,7 +422,7 @@
  </pre></p>
 
 <p><p>
- The following examples  show how to get {@code ResourceSet} or {@code Resource} or {@code Attachment} by {@code MaximoConnector}</p>
+ The following examples show how to get a {@code ResourceSet} or {@code Resource} or {@code Attachment} by {@code MaximoConnector}:</p>
  <pre><code>
  var rs = mc.resourceSet(osName: osName)
  var rs = mc.resourceSet(url: url)
@@ -463,7 +463,7 @@
                         <p>{@code Options} is served for {@code MaximoConnector}.</p>
 
 <p><p>
- The following code shows how to initial {@code MaximoConnector} using {@code MaximoConnector} and {@code Options}Constructor</p>
+ The following code shows how to initialize the {@code MaximoConnector} by using the {@code MaximoConnector} and {@code Options} Constructor:</p>
  <pre>
  <code>
  var mc : MaximoConnector = MaximoConnector(options: Options().user(user: userName)
@@ -566,12 +566,12 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>{@code Resource} implement the operations on Resource.
- It provides the data, uri, attachment and so on.</p>
+                        <p>{@code Resource} implement the operations on a Resource.
+ It provides the data, URI, attachment, and so on.</p>
 
-<p><p>This object can be created by {@code ResourceSet} or {@code MaximoConnector}.
- The following code shows how to create {@code Resource} using {@code ResourceSet}
- or using the {@code MaximoConnector}
+<p><p>This object can be created by the {@code ResourceSet} or {@code MaximoConnector}.
+ The following code shows how to create {@code Resource} by using the {@code ResourceSet}
+ or by using the {@code MaximoConnector}:
  </p>
  <pre>
  <code>
@@ -582,7 +582,7 @@
  </pre></p>
 
 <p><p>
- The following examples demonstrate how to build a new {@code Resource}</p>
+ The following examples demonstrate how to build a new {@code Resource}:</p>
  <pre>
  <code>
  var re = Resource()
@@ -594,7 +594,7 @@
  </pre></p>
 
 <p><p>
- The following examples demonstrate how to set uri and maximoConnector to {@code Resource}</p>
+ The following examples demonstrate how to set the URI and MaximoConnector to the {@code Resource}:</p>
  <pre>
  <code>
  re.uri(href: URI).maximoConnector(mc: maximoConnector)
@@ -602,7 +602,7 @@
  </pre></p>
 
 <p><p>
- The following examples show how to load and reload data</p>
+ The following examples show how to load and reload data:</p>
  <pre>
  <code>
  re.load()
@@ -611,7 +611,7 @@
  </pre></p>
 
 <p><p>
- The following examples show how to get information from {@code Resource}</p>
+ The following examples show how to get information from the {@code Resource}:</p>
  <pre>
  <code>
  var jo : [String: Any] = re.toJSON()
@@ -619,7 +619,7 @@
  </code>
  </pre></p>
 
-<p><p>The following examples show how to update, merge and delete the {&amp;code Resource}</p>
+<p><p>The following examples show how to update, merge, and delete the {&amp;code Resource}:</p>
  <pre>
  <code>
  re.update(jo: jsonObject, properties: properties)
@@ -629,7 +629,7 @@
  </code>
  </pre></p>
 
-<p><p>The following example show how to get attachmentSet, relatedResource and how to invoke action by {@code Resource}</p>
+<p><p>The following example show how to get the AttachmentSet, relatedResource, and how to invoke action by the {@code Resource}:</p>
  <pre><code>
  var ats = re.attachmentSet(doclinkAttrName: doclinkAttrName, relName: relName)
  var relationRe = re.relatedResource(attrName: attrName)
@@ -666,12 +666,12 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>{@code ResourceSet} implement the operations on {@code ResourceSet}. It
- provides the set of Resource.</p>
+                        <p>{@code ResourceSet} implement the operations on the {@code ResourceSet}. It
+ provides the set of the Resource.</p>
 
 <p><p>
- This object can be created by {@code MaximoConnector}. The following code
- shows how to create {@code MaximoConnector}
+ This object can be created by the {@code MaximoConnector}. The following code
+ shows how to create a {@code MaximoConnector}:
  </p></p>
 
 <p><pre>
@@ -682,7 +682,7 @@
  </pre></p>
 
 <p><p>
- The following examples demonstrate how to build a new {@code ResourceSet}
+ The following examples demonstrate how to build a new {@code ResourceSet}:
  </p></p>
 
 <p><pre>
@@ -695,8 +695,8 @@
  </pre></p>
 
 <p><p>
- The following examples show how to set {@code ResourceSet} data from
- {@code ResourceSet}
+ The following examples show how to set {@code ResourceSet} data from the
+ {@code ResourceSet}:
  </p></p>
 
 <p><pre>
@@ -708,8 +708,8 @@
  </pre></p>
 
 <p><p>
- The following examples show how to fetch, load, reload, go to next page, go
- back to previous page, get savedQuery for {@code ResourceSet} data
+ The following examples show how to fetch, load, reload, go to the next page, go
+ back to the previous page, and get a savedQuery for the {@code ResourceSet} data:
  </p></p>
 
 <p><pre>
@@ -725,8 +725,8 @@
  </pre></p>
 
 <p><p>
- The following examples show how to get {@code ResourceSet} data from
- {@code ResourceSet}
+ The following examples show how to get {@code ResourceSet} data from the
+ {@code ResourceSet}:
  </p></p>
 
 <p><pre>
@@ -737,8 +737,8 @@
  </pre></p>
 
 <p><p>
- The following examples show how to create, get and delete {@code Resource}
- from {@code ResourceSet}
+ The following examples show how to create, get, and delete the {@code Resource}
+ from the {@code ResourceSet}:
  </p></p>
 
 <p><pre>
@@ -750,8 +750,8 @@
  </pre></p>
 
 <p><p>
- The following example shows how to get the this page size from
- {@code ResourceSet}
+ The following example shows how to get the page size from the
+ {@code ResourceSet}:
  </p></p>
 
 <p><pre>
@@ -851,7 +851,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://github.ibm.com/maximo-ohio/maximo-swift-restclient" target="_blank" rel="external">Silvino Neto</a>. All rights reserved. (Last updated: 2018-08-17)</p>
+          <p>&copy; 2018 <a class="link" href="https://github.ibm.com/maximo-ohio/maximo-swift-restclient" target="_blank" rel="external">Silvino Neto</a>. All rights reserved. (Last updated: 2018-08-20)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

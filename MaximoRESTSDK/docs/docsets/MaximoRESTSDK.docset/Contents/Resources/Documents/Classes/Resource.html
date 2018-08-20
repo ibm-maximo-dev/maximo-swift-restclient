@@ -88,12 +88,12 @@
 
                 </div>
               </div>
-            <p>{@code Resource} implement the operations on Resource.
- It provides the data, uri, attachment and so on.</p>
+            <p>{@code Resource} implement the operations on a Resource.
+ It provides the data, URI, attachment, and so on.</p>
 
-<p><p>This object can be created by {@code ResourceSet} or {@code MaximoConnector}.
- The following code shows how to create {@code Resource} using {@code ResourceSet}
- or using the {@code MaximoConnector}
+<p><p>This object can be created by the {@code ResourceSet} or {@code MaximoConnector}.
+ The following code shows how to create {@code Resource} by using the {@code ResourceSet}
+ or by using the {@code MaximoConnector}:
  </p>
  <pre>
  <code>
@@ -104,7 +104,7 @@
  </pre></p>
 
 <p><p>
- The following examples demonstrate how to build a new {@code Resource}</p>
+ The following examples demonstrate how to build a new {@code Resource}:</p>
  <pre>
  <code>
  var re = Resource()
@@ -116,7 +116,7 @@
  </pre></p>
 
 <p><p>
- The following examples demonstrate how to set uri and maximoConnector to {@code Resource}</p>
+ The following examples demonstrate how to set the URI and MaximoConnector to the {@code Resource}:</p>
  <pre>
  <code>
  re.uri(href: URI).maximoConnector(mc: maximoConnector)
@@ -124,7 +124,7 @@
  </pre></p>
 
 <p><p>
- The following examples show how to load and reload data</p>
+ The following examples show how to load and reload data:</p>
  <pre>
  <code>
  re.load()
@@ -133,7 +133,7 @@
  </pre></p>
 
 <p><p>
- The following examples show how to get information from {@code Resource}</p>
+ The following examples show how to get information from the {@code Resource}:</p>
  <pre>
  <code>
  var jo : [String: Any] = re.toJSON()
@@ -141,7 +141,7 @@
  </code>
  </pre></p>
 
-<p><p>The following examples show how to update, merge and delete the {&amp;code Resource}</p>
+<p><p>The following examples show how to update, merge, and delete the {&amp;code Resource}:</p>
  <pre>
  <code>
  re.update(jo: jsonObject, properties: properties)
@@ -151,7 +151,7 @@
  </code>
  </pre></p>
 
-<p><p>The following example show how to get attachmentSet, relatedResource and how to invoke action by {@code Resource}</p>
+<p><p>The following example show how to get the AttachmentSet, relatedResource, and how to invoke action by the {@code Resource}:</p>
  <pre><code>
  var ats = re.attachmentSet(doclinkAttrName: doclinkAttrName, relName: relName)
  var relationRe = re.relatedResource(attrName: attrName)
@@ -175,7 +175,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Init object based on a JSON schema.</p>
+                        <p>Initialize object based on a JSON schema.</p>
 
                       </div>
                       <div class="declaration">
@@ -221,7 +221,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Convenience initializer considering an Any object carrying on a JSON object and a Maximo Connector object.</p>
+                        <p>Convenience initializer that considers an Any object carrying on a JSON object and a Maximo Connector object.</p>
 
                       </div>
                       <div class="declaration">
@@ -279,7 +279,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Initializer based on a URI&rsquo;s information and a explicit JSON Object.</p>
+                        <p>Initialize based on a URI&rsquo;s information and an explicit JSON Object.</p>
 
                       </div>
                       <div class="declaration">
@@ -325,7 +325,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Convenience initializer based on a Resource&rsquo;s URI information and a Maximo Connector object.</p>
+                        <p>Convenience initializer that is based on the Resource URI information and a Maximo Connector object.</p>
 
                       </div>
                       <div class="declaration">
@@ -383,7 +383,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Set the Resource&rsquo;s URI information.</p>
+                        <p>Set the Resource URI information.</p>
 
                       </div>
                       <div class="declaration">
@@ -393,29 +393,6 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">uri</span><span class="p">(</span><span class="nv">href</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Resource</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>href</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Resource&rsquo;s URI information.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>Resource object with href param updated.</p>
                       </div>
                     </section>
                   </div>
@@ -444,29 +421,6 @@
 
                         </div>
                       </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>mc</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>MaximoConnector object.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>Resource object with a MaximoConnector object set.</p>
-                      </div>
                     </section>
                   </div>
                 </li>
@@ -483,7 +437,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Get current URI</p>
+                        <p>Get the current URI</p>
 
                       </div>
                       <div class="declaration">
@@ -550,7 +504,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Get Resource data in JSON Bytes.</p>
+                        <p>Get Resource data in JSON bytes.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
     Exception.
@@ -623,11 +577,6 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Load current data with properties as a parameter.</p>
-<div class="aside aside-throws">
-    <p class="aside-title">Throws</p>
-    Exception.
-
-</div>
 
                       </div>
                       <div class="declaration">
@@ -637,29 +586,6 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">load</span><span class="p">(</span><span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">])</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Resource</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>properties</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>header&rsquo;s properties.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>Resource object  with properties in header set.</p>
                       </div>
                     </section>
                   </div>
@@ -678,11 +604,6 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Load current data with properties as a parameter an additional params.</p>
-<div class="aside aside-throws">
-    <p class="aside-title">Throws</p>
-    Exception.
-
-</div>
 
                       </div>
                       <div class="declaration">
@@ -709,24 +630,8 @@
                                 </div>
                               </td>
                             </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>properties</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>header&rsquo;s properties.</p>
-                                </div>
-                              </td>
-                            </tr>
                           </tbody>
                         </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>Resource object with properties in header and additional params.</p>
                       </div>
                     </section>
                   </div>
@@ -772,7 +677,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Additional header&rsquo;s information.</p>
+                                  <p>Additional header information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -851,7 +756,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Additional header&rsquo;s information.</p>
+                                  <p>Additional header information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -927,11 +832,6 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Reload data fetching with properties.</p>
-<div class="aside aside-throws">
-    <p class="aside-title">Throws</p>
-    Exception.
-
-</div>
 
                       </div>
                       <div class="declaration">
@@ -941,29 +841,6 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">reload</span><span class="p">(</span><span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">])</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Resource</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>properties</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>To be reloaded resource&rsquo;s properties.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>Resource object reloaded with properties params.</p>
                       </div>
                     </section>
                   </div>
@@ -982,11 +859,6 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Update the Resource</p>
-<div class="aside aside-throws">
-    <p class="aside-title">Throws</p>
-    Exception.
-
-</div>
 
                       </div>
                       <div class="declaration">
@@ -1013,24 +885,8 @@
                                 </div>
                               </td>
                             </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>properties</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Resource&rsquo;s properties.</p>
-                                </div>
-                              </td>
-                            </tr>
                           </tbody>
                         </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>Reference to updated resource object.</p>
                       </div>
                     </section>
                   </div>
@@ -1049,11 +905,6 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Update the Resource with additional headers.</p>
-<div class="aside aside-throws">
-    <p class="aside-title">Throws</p>
-    Exception.
-
-</div>
 
                       </div>
                       <div class="declaration">
@@ -1080,36 +931,8 @@
                                 </div>
                               </td>
                             </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>headers</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>additional header&rsquo;s information.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>properties</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>resource&rsquo;s properties.</p>
-                                </div>
-                              </td>
-                            </tr>
                           </tbody>
                         </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>Reference to updated resource object.</p>
                       </div>
                     </section>
                   </div>
@@ -1128,11 +951,6 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Merge data</p>
-<div class="aside aside-throws">
-    <p class="aside-title">Throws</p>
-    Exception.
-
-</div>
 
                       </div>
                       <div class="declaration">
@@ -1142,41 +960,6 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">merge</span><span class="p">(</span><span class="nv">jo</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">])</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Resource</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>jo</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>JSON data to merged to a resource.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>properties</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Properties to be merged to a resource.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>Reference to a merged resource object.</p>
                       </div>
                     </section>
                   </div>
@@ -1211,49 +994,6 @@
                         </div>
                       </div>
                       <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>jo</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>JSON data to merged to a resource.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>headers</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Additional headers.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>properties</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Properties to be merged to a resource object.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
                         <h4>Return Value</h4>
                         <p>Reference to a resource merged with additional headers.</p>
                       </div>
@@ -1273,8 +1013,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Load the attachment set for resource
-<b>Note:</b> there has to be a relation between them</p>
+                        <p>Load the Attachment Set for a resource
+<b>Note:</b> There must be a relation between them.</p>
 
                       </div>
                       <div class="declaration">
@@ -1336,7 +1076,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Get an Attachment Set within all attachments related to the resource.</p>
+                        <p>Get an Attachment Set within all attachments that are related to the resource.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
     Exception. OsclError: Invalid Relation..
@@ -1427,7 +1167,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Invoke Action</p>
+                        <p>Invoke action</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
     Exception.
@@ -1494,12 +1234,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Invoke Action fetching the resource through properties.</p>
-<div class="aside aside-throws">
-    <p class="aside-title">Throws</p>
-    Exception.
-
-</div>
+                        <p>Invoke action that fetches the resource through properties.</p>
 
                       </div>
                       <div class="declaration">
@@ -1538,24 +1273,8 @@
                                 </div>
                               </td>
                             </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>properties</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Action&rsquo;s properties.</p>
-                                </div>
-                              </td>
-                            </tr>
                           </tbody>
                         </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>Reference to a resource object.</p>
                       </div>
                     </section>
                   </div>
@@ -1573,7 +1292,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Delete a resource based on it&rsquo;s URI.</p>
+                        <p>Delete a resource based on its URI.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
     Exception. &lt;#throws value description#&gt;
@@ -1605,7 +1324,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Support pre-load resource.</p>
+                        <p>Support preload resource.</p>
 
                       </div>
                       <div class="declaration">
@@ -1643,7 +1362,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://github.ibm.com/maximo-ohio/maximo-swift-restclient" target="_blank" rel="external">Silvino Neto</a>. All rights reserved. (Last updated: 2018-08-17)</p>
+          <p>&copy; 2018 <a class="link" href="https://github.ibm.com/maximo-ohio/maximo-swift-restclient" target="_blank" rel="external">Silvino Neto</a>. All rights reserved. (Last updated: 2018-08-20)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
