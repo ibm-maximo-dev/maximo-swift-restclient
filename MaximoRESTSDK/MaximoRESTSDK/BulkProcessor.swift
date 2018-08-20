@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// Bulk processo
+/// Bulk processor
 public class BulkProcessor {
   
     /// Bulk array
