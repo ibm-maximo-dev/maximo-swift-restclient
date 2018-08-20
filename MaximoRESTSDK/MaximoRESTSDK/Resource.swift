@@ -10,12 +10,12 @@ import Foundation
 
 /**
  *
- * {@code Resource} implement the operations on Resource.
- * It provides the data, uri, attachment and so on.
+ * {@code Resource} implement the operations on a Resource.
+ * It provides the data, URI, attachment, and so on.
  *
- * <p>This object can be created by {@code ResourceSet} or {@code MaximoConnector}.
- * The following code shows how to create {@code Resource} using {@code ResourceSet}
- * or using the {@code MaximoConnector}
+ * <p>This object can be created by the {@code ResourceSet} or {@code MaximoConnector}.
+ * The following code shows how to create {@code Resource} by using the {@code ResourceSet}
+ * or by using the {@code MaximoConnector}:
  * </p>
  * <pre>
  * <code>
@@ -26,7 +26,7 @@ import Foundation
  * </pre>
  *
  * <p>
- * The following examples demonstrate how to build a new {@code Resource}</p>
+ * The following examples demonstrate how to build a new {@code Resource}:</p>
  * <pre>
  * <code>
  * var re = Resource()
@@ -38,7 +38,7 @@ import Foundation
  * </pre>
  *
  * <p>
- * The following examples demonstrate how to set uri and maximoConnector to {@code Resource}</p>
+ * The following examples demonstrate how to set the URI and MaximoConnector to the {@code Resource}:</p>
  * <pre>
  * <code>
  * re.uri(href: URI).maximoConnector(mc: maximoConnector)
@@ -46,7 +46,7 @@ import Foundation
  * </pre>
  *
  * <p>
- * The following examples show how to load and reload data</p>
+ * The following examples show how to load and reload data:</p>
  * <pre>
  * <code>
  * re.load()
@@ -55,7 +55,7 @@ import Foundation
  * </pre>
  *
  * <p>
- * The following examples show how to get information from {@code Resource}</p>
+ * The following examples show how to get information from the {@code Resource}:</p>
  * <pre>
  * <code>
  * var jo : [String: Any] = re.toJSON()
@@ -63,7 +63,7 @@ import Foundation
  * </code>
  * </pre>
  *
- * <p>The following examples show how to update, merge and delete the {&code Resource}</p>
+ * <p>The following examples show how to update, merge, and delete the {&code Resource}:</p>
  * <pre>
  * <code>
  * re.update(jo: jsonObject, properties: properties)
@@ -73,7 +73,7 @@ import Foundation
  * </code>
  * </pre>
  *
- * <p>The following example show how to get attachmentSet, relatedResource and how to invoke action by {@code Resource}</p>
+ * <p>The following example show how to get the AttachmentSet, relatedResource, and how to invoke action by the {@code Resource}:</p>
  * <pre><code>
  * var ats = re.attachmentSet(doclinkAttrName: doclinkAttrName, relName: relName)
  * var relationRe = re.relatedResource(attrName: attrName)
@@ -82,16 +82,16 @@ import Foundation
  */
 public class Resource {
 
-    /// Resource's URL.
+    /// Resource URL.
     var href : String
     /// JSON Object with resource information.
     var jsonObject : [String: Any]
-    /// Maximo Connector Object
+    /// Maximo Connector object
     var mc : MaximoConnector
     /// Booelan to identify if the object is loaded.
     var isLoaded : Bool = false
 
-    /// Init object based on a JSON schema.
+    /// Initialize object based on a JSON schema.
     ///
     /// - Parameter jo: JSON schema.
     public init(jo : [String: Any]) {
@@ -110,7 +110,7 @@ public class Resource {
         }
     }
 
-    /// Convenience initializer considering an Any object carrying on a JSON object and a Maximo Connector object.
+    /// Convenience initializer that considers an Any object carrying on a JSON object and a Maximo Connector object.
     ///
     /// - Parameters:
     ///   - jo: JSON scheme to initialize this object.
@@ -120,7 +120,7 @@ public class Resource {
         self.mc = mc
     }
 
-    /// Initializer based on a URI's information and a explicit JSON Object.
+    /// Initialize based on a URI's information and an explicit JSON Object.
     ///
     /// - Parameter href: Resource URI's Information.
     public init(href: String) {
@@ -129,7 +129,7 @@ public class Resource {
         self.mc = MaximoConnector()
     }
 
-    /// Convenience initializer based on a Resource's URI information and a Maximo Connector object.
+    /// Convenience initializer that is based on the Resource URI information and a Maximo Connector object.
     ///
     /// - Parameters:
     ///   - href: <#href description#>
@@ -139,10 +139,15 @@ public class Resource {
         self.mc = mc
     }
 
-    /// Set the Resource's URI information.
+    /// Set the Resource URI information.
     ///
+<<<<<<< HEAD
+    /// - Parameter href: Resource URI information.
+    /// - Returns: Reference to updated href property.
+=======
     /// - Parameter href: Resource's URI information.
     /// - Returns: Resource object with href param updated.
+>>>>>>> master
     public func uri(href: String) -> Resource {
         self.href = href
         return self
@@ -150,14 +155,19 @@ public class Resource {
     
     /// Set the Maximo Connector object
     ///
+<<<<<<< HEAD
+    /// - Parameter mc: Maximo Connector object.
+    /// - Returns: Reference to Maximo Connector object.
+=======
     /// - Parameter mc: MaximoConnector object.
     /// - Returns: Resource object with a MaximoConnector object set.
+>>>>>>> master
     public func maximoConnector(mc: MaximoConnector) -> Resource {
         self.mc = mc
         return self
     }
 
-    /// Get current URI
+    /// Get the current URI
     ///
     /// - Returns: Reference to a String within URI's information.
     public func getURI() -> String {
@@ -177,7 +187,7 @@ public class Resource {
     }
 
     
-    /// Get Resource data in JSON Bytes.
+    /// Get Resource data in JSON bytes.
     ///
     /// - Returns: Data object referencing a JSON bytes.
     /// - Throws: Exception.
@@ -200,9 +210,15 @@ public class Resource {
     
     /// Load current data with properties as a parameter.
     ///
+<<<<<<< HEAD
+    /// - Parameter properties: Header properties.
+    /// - Returns: Reference to current data with properties in header
+    /// - Throws:
+=======
     /// - Parameter properties: header's properties.
     /// - Returns: Resource object  with properties in header set.
     /// - Throws: Exception.
+>>>>>>> master
     public func load(properties: [String]) throws -> Resource {
         return try self.loadWithAdditionalParamsAndHeaders(params: nil, headers: nil, properties: properties)
     }
@@ -211,9 +227,15 @@ public class Resource {
     ///
     /// - Parameters:
     ///   - params: Data params.
+<<<<<<< HEAD
+    ///   - properties: Header properties.
+    /// - Returns: Reference to current data with properties in header and additional params.
+    /// - Throws:
+=======
     ///   - properties: header's properties.
     /// - Returns: Resource object with properties in header and additional params.
     /// - Throws: Exception.
+>>>>>>> master
     public func loadWithAdditionalParams(params: [String: Any]?, properties: [String]?) throws -> Resource {
         return try self.loadWithAdditionalParamsAndHeaders(params: params, headers: nil, properties: properties)
     }
@@ -221,7 +243,7 @@ public class Resource {
     /// Load current data with properties as a parameter an additional headers.
     ///
     /// - Parameters:
-    ///   - headers: Additional header's information.
+    ///   - headers: Additional header information.
     ///   - properties: Properties information.
     /// - Returns: Resource object with current data with additional headers.
     /// - Throws: Exception.
@@ -233,7 +255,7 @@ public class Resource {
     ///
     /// - Parameters:
     ///   - params: Additional params.
-    ///   - headers: Additional header's information.
+    ///   - headers: Additional header information.
     ///   - properties: Properties information.
     /// - Returns: Resource object with current data with additional headers and params.
     /// - Throws: Exception.
@@ -294,9 +316,15 @@ public class Resource {
     
     /// Reload data fetching with properties.
     ///
+<<<<<<< HEAD
+    /// - Parameter properties: The properties of the reloaded resource.
+    /// - Returns: Reference to reloaded resource.
+    /// - Throws:
+=======
     /// - Parameter properties: To be reloaded resource's properties.
     /// - Returns: Resource object reloaded with properties params.
     /// - Throws: Exception.
+>>>>>>> master
     public func reload(properties: [String]) throws -> Resource {
         self.isLoaded = false
         _ = try load(properties: properties)
@@ -308,9 +336,15 @@ public class Resource {
     ///
     /// - Parameters:
     ///   - jo: JSON data fetch to update the specific resource.
+<<<<<<< HEAD
+    ///   - properties: Resource properties.
+    /// - Returns: Reference to updated resource.
+    /// - Throws:
+=======
     ///   - properties: Resource's properties.
     /// - Returns: Reference to updated resource object.
     /// - Throws: Exception.
+>>>>>>> master
     public func update(jo: [String: Any], properties: [String]) throws -> Resource
     {
         return try self.update(jo: jo, headers: nil, properties: properties)
@@ -320,10 +354,17 @@ public class Resource {
     ///
     /// - Parameters:
     ///   - jo: JSON data within the resource information.
+<<<<<<< HEAD
+    ///   - headers: Additional header information.
+    ///   - properties: Properties of the resource.
+    /// - Returns: Reference to updated resource.
+    /// - Throws: <#throws value description#>
+=======
     ///   - headers: additional header's information.
     ///   - properties: resource's properties.
     /// - Returns: Reference to updated resource object.
     /// - Throws: Exception.
+>>>>>>> master
     public func update(jo: [String: Any], headers: [String: Any]?, properties: [String]?) throws -> Resource
     {
         if self.href.isEmpty {
@@ -346,10 +387,17 @@ public class Resource {
     /// Merge data
     ///
     /// - Parameters:
+<<<<<<< HEAD
+    ///   - jo: JSON data to merge to a resource.
+    ///   - properties: Properties to merge to a resource.
+    /// - Returns: Reference to a merged resource.
+    /// - Throws: <#throws value description#>
+=======
     ///   - jo: JSON data to merged to a resource.
     ///   - properties: Properties to be merged to a resource.
     /// - Returns: Reference to a merged resource object.
     /// - Throws: Exception.
+>>>>>>> master
     public func merge(jo: [String: Any], properties: [String]) throws -> Resource
     {
         return try self.merge(jo: jo, headers: nil, properties: properties);
@@ -358,9 +406,13 @@ public class Resource {
     /// Merge data to a resource with additional headers.
     ///
     /// - Parameters:
-    ///   - jo: JSON data to merged to a resource.
+    ///   - jo: JSON data to merge to a resource.
     ///   - headers: Additional headers.
+<<<<<<< HEAD
+    ///   - properties: Properties to merge to a resource.
+=======
     ///   - properties: Properties to be merged to a resource object.
+>>>>>>> master
     /// - Returns: Reference to a resource merged with additional headers.
     /// - Throws: Exception.
     public func merge(jo: [String: Any], headers: [String: Any]?, properties: [String]?) throws -> Resource
@@ -382,8 +434,8 @@ public class Resource {
         return self;
     }
 
-    /// Load the attachment set for resource
-    /// <b>Note:</b> there has to be a relation between them
+    /// Load the Attachment Set for a resource
+    /// <b>Note:</b> There must be a relation between them.
     ///
     /// - Parameters:
     ///   - doclinkAttrName: String with attribute name.
@@ -415,7 +467,7 @@ public class Resource {
         return AttachmentSet(href: str, mc: self.mc);
     }
     
-    /// Get an Attachment Set within all attachments related to the resource.
+    /// Get an Attachment Set within all attachments that are related to the resource.
     ///
     /// - Returns: Reference to an AttachmentSet object.
     /// - Throws: Exception. OsclError: Invalid Relation..
@@ -467,7 +519,7 @@ public class Resource {
         return try self.mc.resourceSet().fetchMember(uri: url, properties: nil)
     }
 
-    /// Invoke Action
+    /// Invoke action
     ///
     /// - Parameters:
     ///   - actionName: Action name.
@@ -481,27 +533,33 @@ public class Resource {
     }
     
     
-    /// Invoke Action fetching the resource through properties.
+    /// Invoke action that fetches the resource through properties.
     ///
     /// - Parameters:
     ///   - actionName: Action name.
     ///   - jo: JSON within action information.
+<<<<<<< HEAD
+    ///   - properties: The properties of the action.
+    /// - Returns: Reference to the action.
+    /// - Throws:
+=======
     ///   - properties: Action's properties.
     /// - Returns: Reference to a resource object.
     /// - Throws: Exception.
+>>>>>>> master
     public func invokeAction(actionName: String, jo: [String: Any], properties: [String]) throws -> Resource {
         self.jsonObject = try self.mc.update(uri: self.href + (self.href.contains("?") ? "" : "?") + "&action=" + actionName, jo: jo, properties: properties)
         return self;
     }
     
-    /// Delete a resource based on it's URI.
+    /// Delete a resource based on its URI.
     ///
     /// - Throws: Exception. <#throws value description#>
     public func delete() throws {
         try self.mc.delete(uri: self.href);
     }
 
-    /// Support pre-load resource.
+    /// Support preload resource.
     ///
     /// - Parameter isLoaded: boolean representing if the resource is loaded.
     public func setLoaded(isLoaded: Bool) {
