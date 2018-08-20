@@ -13,7 +13,7 @@ import Foundation
  * {@code Options} is served for {@code MaximoConnector}.
  *
  * <p>
- * The following code shows how to initial {@code MaximoConnector} using {@code MaximoConnector} and {@code Options}Constructor</p>
+ * The following code shows how to initialize the {@code MaximoConnector} by using the {@code MaximoConnector} and {@code Options} Constructor:</p>
  * <pre>
  * <code>
  * var mc : MaximoConnector = MaximoConnector(options: Options().user(user: userName)
@@ -45,9 +45,9 @@ public class Options {
     public init() {
     }
     
-    /// Fuction to set the host address as an option.
+    /// Function to set the host address as an option.
     ///
-    /// - Parameter host: IP or DNS address of Maximo's service
+    /// - Parameter host: IP or DNS address of the Maximo service
     /// - Returns: void return
     public func host(host: String) -> Options
     {
@@ -56,9 +56,9 @@ public class Options {
     }
 
     
-    /// Fuction to set Maximo rest service id. (it is hardcoded to 'maxrest')
+    /// Function to set Maximo REST service ID, which is hardcoded to 'maxrest'
     ///
-    /// - Returns: void return.
+    /// - Returns: Options object with appContext param set to maxrest.
     public func maxrest() -> Options
     {
         appContext = "maxrest"
@@ -67,8 +67,8 @@ public class Options {
 
     ///  Function to set application context.
     ///
-    /// - Parameter context: context of this application (i.e. maximo)
-    /// - Returns: void return
+    /// - Parameter context: context of this application 
+    /// - Returns: Options object within a new appContext value set.
     public func appContext(context: String) -> Options
     {
         appContext = context
@@ -78,16 +78,16 @@ public class Options {
     /// Context operation for this API.
     ///
     /// - Parameter apiContext: api context (i.e. oslc)
-    /// - Returns: void return
+    /// - Returns: Options object within the apiContext param set.
     public func apiContext(apiContext: String) -> Options
     {
         self.apiContext = apiContext
         return self
     }
     
-    /// Enables secure HTTP.
+    /// Enable secure HTTP.
     ///
-    /// - Returns: void return.
+    /// - Returns: Options object set with ssl param set to <b>TURE</b>.
     public func https() -> Options
     {
         self.ssl = true
@@ -96,7 +96,7 @@ public class Options {
     
     /// Disable secure HTTP.
     ///
-    /// - Returns: void return.
+    /// - Returns: Options object wihtin the ssl parata set to <b>FALSE</b>
     public func http() -> Options
     {
         self.ssl = false
@@ -106,7 +106,7 @@ public class Options {
     /// Define the service port
     ///
     /// - Parameter port: service destination port
-    /// - Returns: void return.
+    /// - Returns: Options object within the port param set.
     public func port(port: Int) -> Options
     {
         self.port = port
@@ -116,17 +116,17 @@ public class Options {
     /// Define the authentication mode.
     ///
     /// - Parameter authMode: authentication mode (i.e. maxAuth)
-    /// - Returns: void return.
+    /// - Returns: Option object with authMode param set.
     public func auth(authMode: String) -> Options
     {
         self.authMode = authMode
         return self
     }
     
-    /// Enables/Disable Maximo Tenant mode.
+    /// Enable or disable Maximo tenant mode.
     ///
     /// - Parameter mtMode: TRUE to enable and FALSE to disble.
-    /// - Returns: void return.
+    /// - Returns: Option object within mt param set.
     public func mt(mtMode: Bool) -> Options
     {
         self.mt = mtMode
@@ -136,7 +136,7 @@ public class Options {
     /// Define the user credentials.
     ///
     /// - Parameter user: user name.
-    /// - Returns: void return.
+    /// - Returns: Options object with user param set.
     public func user(user: String) -> Options
     {
         self.user = user
@@ -146,27 +146,27 @@ public class Options {
     /// Define the password credentials.
     ///
     /// - Parameter password: password
-    /// - Returns: void return.
+    /// - Returns: Options object with password param set.
     public func password(password: String) -> Options
     {
         self.password = password
         return self
     }
     
-    /// Determine the app URI
+    /// Determine the application URI
     ///
     /// - Parameter appURI: URI of application
-    /// - Returns: void return.
+    /// - Returns: Options object with the appURI param set.
     public func AppURI(appURI: String) -> Options
     {
         self.appURI = appURI
         return self
     }
     
-    /// Enables lean
+    /// Enable lean
     ///
     /// - Parameter lean: TRUE to enable and FALSE to disble.
-    /// - Returns: void return.
+    /// - Returns: Options object with the lean param set.
     public func lean(lean: Bool) -> Options
     {
         self.lean = lean
@@ -176,16 +176,16 @@ public class Options {
     /// Set the tenant code.
     ///
     /// - Parameter tenantCode: tenant code
-    /// - Returns: void return.
+    /// - Returns: Options object with the tenantCode param set.
     public func tenantCode(tenantCode: String) -> Options
     {
         self.tenantcode = tenantCode
         return self
     }
     
-    /// Returns the passaword
+    /// Returns the password
     ///
-    /// - Returns: String with the passworld
+    /// - Returns: String that contains the password
     public func getPassword() -> String?
     {
         return self.password
@@ -193,37 +193,37 @@ public class Options {
     
     /// Returns the user name
     ///
-    /// - Returns: String with user name
+    /// - Returns: String that contains the user name
     public func getUser() -> String?
     {
         return self.user
     }
     
-    /// Check if this app is using the basic authentication
+    /// Check whether this application is using the basic authentication
     ///
-    /// - Returns: boolean value <b>TRUE</b> for yes, <b>FALSE</b> to no
+    /// - Returns: boolean value <b>TRUE</b> for yes, <b>FALSE</b> for no
     public func isBasicAuth() -> Bool
     {
         return self.authMode == AUTH_BASIC
     }
     
-    /// Returns if this app is using a form authentication
+    /// Returns whether this application is using a form authentication
     ///
-    /// - Returns: boolean value <b>TRUE</b> for yes, <b>FALSE</b> to no
+    /// - Returns: boolean value <b>TRUE</b> for yes, <b>FALSE</b> for no
     public func isFormAuth() -> Bool
     {
         return self.authMode == AUTH_FORM
     }
     
-    /// Returns if this application is using a Maximo Authentication formula.
+    /// Returns whether this application is using a Maximo Authentication formula.
     ///
-    /// - Returns: boolean value <b>TRUE</b> for yes, <b>FALSE</b> to no
+    /// - Returns: boolean value <b>TRUE</b> for yes, <b>FALSE</b> for no
     public func isMaxAuth() -> Bool
     {
         return self.authMode == AUTH_MAXAUTH
     }
     
-    /// Returns if this app is desgined to attend a MultiTenancy.
+    /// Returns whether this application is desgined to support multitenancy.
     ///
     /// - Returns: boolean value <b>TRUE</b> for yes, <b>FALSE</b> to no
     public func isMultiTenancy() -> Bool
@@ -231,15 +231,15 @@ public class Options {
         return self.mt
     }
     
-    /// Returns if this application is a Lean application
+    /// Returns whether this application is a Lean application
     ///
-    /// - Returns: boolean value <b>TRUE</b> for yes, <b>FALSE</b> to no
+    /// - Returns: boolean value <b>TRUE</b> for yes, <b>FALSE</b> for no
     public func isLean() -> Bool
     {
         return self.lean
     }
     
-    /// Returns a string conatining the IP/DNS of the application host.
+    /// Returns a string that contains the IP or DNS of the application host.
     ///
     /// - Returns: String
     public func getHost() -> String
@@ -247,7 +247,7 @@ public class Options {
         return self.host!
     }
     
-    /// Returns the logical port where the service was configured to operating
+    /// Returns the logical port where the service was configured to operate
     ///
     /// - Returns: Integer value
     public func getPort() -> Int
@@ -258,17 +258,17 @@ public class Options {
         return self.port!
     }
     
-    /// Return the Tenant code
+    /// Return the tenant code
     ///
-    /// - Returns: String containing Tenant's code.
+    /// - Returns: String that contains the tenant code.
     public func getTenantCode() -> String
     {
         return self.tenantcode
     }
 
-    /// Get app URI
+    /// Get application URI
     ///
-    /// - Returns: String URL containing the app location.
+    /// - Returns: String URL that contains the application location.
     public func getAppURI() -> String
     {
         if appURI != nil {
@@ -320,7 +320,7 @@ public class Options {
 
     /// Get public URI
     ///
-    /// - Returns: String containing the public URI
+    /// - Returns: String that contains the public URI
     public func getPublicURI() -> String
     {
         if publicURI != nil {
