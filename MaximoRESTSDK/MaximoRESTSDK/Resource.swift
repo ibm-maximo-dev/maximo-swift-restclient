@@ -141,13 +141,8 @@ public class Resource {
 
     /// Set the Resource URI information.
     ///
-<<<<<<< HEAD
     /// - Parameter href: Resource URI information.
     /// - Returns: Reference to updated href property.
-=======
-    /// - Parameter href: Resource's URI information.
-    /// - Returns: Resource object with href param updated.
->>>>>>> master
     public func uri(href: String) -> Resource {
         self.href = href
         return self
@@ -155,13 +150,8 @@ public class Resource {
     
     /// Set the Maximo Connector object
     ///
-<<<<<<< HEAD
     /// - Parameter mc: Maximo Connector object.
     /// - Returns: Reference to Maximo Connector object.
-=======
-    /// - Parameter mc: MaximoConnector object.
-    /// - Returns: Resource object with a MaximoConnector object set.
->>>>>>> master
     public func maximoConnector(mc: MaximoConnector) -> Resource {
         self.mc = mc
         return self
@@ -210,15 +200,9 @@ public class Resource {
     
     /// Load current data with properties as a parameter.
     ///
-<<<<<<< HEAD
     /// - Parameter properties: Header properties.
     /// - Returns: Reference to current data with properties in header
-    /// - Throws:
-=======
-    /// - Parameter properties: header's properties.
-    /// - Returns: Resource object  with properties in header set.
     /// - Throws: Exception.
->>>>>>> master
     public func load(properties: [String]) throws -> Resource {
         return try self.loadWithAdditionalParamsAndHeaders(params: nil, headers: nil, properties: properties)
     }
@@ -227,15 +211,9 @@ public class Resource {
     ///
     /// - Parameters:
     ///   - params: Data params.
-<<<<<<< HEAD
     ///   - properties: Header properties.
     /// - Returns: Reference to current data with properties in header and additional params.
-    /// - Throws:
-=======
-    ///   - properties: header's properties.
-    /// - Returns: Resource object with properties in header and additional params.
     /// - Throws: Exception.
->>>>>>> master
     public func loadWithAdditionalParams(params: [String: Any]?, properties: [String]?) throws -> Resource {
         return try self.loadWithAdditionalParamsAndHeaders(params: params, headers: nil, properties: properties)
     }
@@ -316,15 +294,9 @@ public class Resource {
     
     /// Reload data fetching with properties.
     ///
-<<<<<<< HEAD
     /// - Parameter properties: The properties of the reloaded resource.
     /// - Returns: Reference to reloaded resource.
-    /// - Throws:
-=======
-    /// - Parameter properties: To be reloaded resource's properties.
-    /// - Returns: Resource object reloaded with properties params.
     /// - Throws: Exception.
->>>>>>> master
     public func reload(properties: [String]) throws -> Resource {
         self.isLoaded = false
         _ = try load(properties: properties)
@@ -336,15 +308,9 @@ public class Resource {
     ///
     /// - Parameters:
     ///   - jo: JSON data fetch to update the specific resource.
-<<<<<<< HEAD
     ///   - properties: Resource properties.
     /// - Returns: Reference to updated resource.
-    /// - Throws:
-=======
-    ///   - properties: Resource's properties.
-    /// - Returns: Reference to updated resource object.
     /// - Throws: Exception.
->>>>>>> master
     public func update(jo: [String: Any], properties: [String]) throws -> Resource
     {
         return try self.update(jo: jo, headers: nil, properties: properties)
@@ -354,17 +320,10 @@ public class Resource {
     ///
     /// - Parameters:
     ///   - jo: JSON data within the resource information.
-<<<<<<< HEAD
     ///   - headers: Additional header information.
     ///   - properties: Properties of the resource.
     /// - Returns: Reference to updated resource.
-    /// - Throws: <#throws value description#>
-=======
-    ///   - headers: additional header's information.
-    ///   - properties: resource's properties.
-    /// - Returns: Reference to updated resource object.
     /// - Throws: Exception.
->>>>>>> master
     public func update(jo: [String: Any], headers: [String: Any]?, properties: [String]?) throws -> Resource
     {
         if self.href.isEmpty {
@@ -387,17 +346,10 @@ public class Resource {
     /// Merge data
     ///
     /// - Parameters:
-<<<<<<< HEAD
     ///   - jo: JSON data to merge to a resource.
     ///   - properties: Properties to merge to a resource.
     /// - Returns: Reference to a merged resource.
-    /// - Throws: <#throws value description#>
-=======
-    ///   - jo: JSON data to merged to a resource.
-    ///   - properties: Properties to be merged to a resource.
-    /// - Returns: Reference to a merged resource object.
     /// - Throws: Exception.
->>>>>>> master
     public func merge(jo: [String: Any], properties: [String]) throws -> Resource
     {
         return try self.merge(jo: jo, headers: nil, properties: properties);
@@ -408,11 +360,7 @@ public class Resource {
     /// - Parameters:
     ///   - jo: JSON data to merge to a resource.
     ///   - headers: Additional headers.
-<<<<<<< HEAD
     ///   - properties: Properties to merge to a resource.
-=======
-    ///   - properties: Properties to be merged to a resource object.
->>>>>>> master
     /// - Returns: Reference to a resource merged with additional headers.
     /// - Throws: Exception.
     public func merge(jo: [String: Any], headers: [String: Any]?, properties: [String]?) throws -> Resource
@@ -538,15 +486,9 @@ public class Resource {
     /// - Parameters:
     ///   - actionName: Action name.
     ///   - jo: JSON within action information.
-<<<<<<< HEAD
     ///   - properties: The properties of the action.
     /// - Returns: Reference to the action.
-    /// - Throws:
-=======
-    ///   - properties: Action's properties.
-    /// - Returns: Reference to a resource object.
     /// - Throws: Exception.
->>>>>>> master
     public func invokeAction(actionName: String, jo: [String: Any], properties: [String]) throws -> Resource {
         self.jsonObject = try self.mc.update(uri: self.href + (self.href.contains("?") ? "" : "?") + "&action=" + actionName, jo: jo, properties: properties)
         return self;
