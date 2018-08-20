@@ -1,0 +1,2329 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>ResourceSet Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/ResourceSet" class="dashAnchor"></a>
+    <a title="ResourceSet Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">MaximoRESTSDK Docs</a> (93% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">MaximoRESTSDK Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        ResourceSet Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/Aggregation.html">Aggregation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Attachment.html">Attachment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/AttachmentSet.html">AttachmentSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BulkProcessor.html">BulkProcessor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MaximoConnector.html">MaximoConnector</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Options.html">Options</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/QuerySelect.html">QuerySelect</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/QueryWhere.html">QueryWhere</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Resource.html">Resource</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ResourceSet.html">ResourceSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SavedQuery.html">SavedQuery</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Util.html">Util</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/OslcError.html">OslcError</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>ResourceSet</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">ResourceSet</span></code></pre>
+
+                </div>
+              </div>
+            <p>{@code ResourceSet} implement the operations on {@code ResourceSet}. It
+ provides the set of Resource.</p>
+
+<p><p>
+ This object can be created by {@code MaximoConnector}. The following code
+ shows how to create {@code MaximoConnector}
+ </p></p>
+
+<p><pre>
+ <code>
+ var rs = mc.resourceSet(osName: osName)
+ var rs = mc.resourceSet(url: URL)
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples demonstrate how to build a new {@code ResourceSet}
+ </p></p>
+
+<p><pre>
+ <code>
+ var rs = ResourceSet(osName: osName)
+ var rs = ResourceSet(mc: maximoConnector)
+ var rs = ResourceSet(osName: osName, mc: maximoConnector)
+ var rs = ResourceSet(url: URL, mc: maximoConnector)
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples show how to set {@code ResourceSet} data from
+ {@code ResourceSet}
+ </p></p>
+
+<p><pre>
+ <code>
+ rs._where(whereClause: queryWhere).select(selectClause: querySelect).hasTerms(terms: terms).pageSize(pageSize: pageSize)
+ rs.paging(type: true)
+ rs.stablePaging(type: true)
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples show how to fetch, load, reload, go to next page, go
+ back to previous page, get savedQuery for {@code ResourceSet} data
+ </p></p>
+
+<p><pre>
+ <code>
+ rs.fetch(options: mapOptions)
+ rs.load()
+ rs.reload()
+ rs.nextPage()
+ rs.previousPage()
+ rs.savedQuery(qsaved: savedQuery)
+ rs.savedQuery(name: name, paramValues: paramValues)
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples show how to get {@code ResourceSet} data from
+ {@code ResourceSet}
+ </p></p>
+
+<p><pre>
+ <code>
+ var jo : [String: Any] = rs.toJSON()
+ var jodata : Data = rs.toJSONBytes()
+ </code>
+ </pre></p>
+
+<p><p>
+ The following examples show how to create, get and delete {@code Resource}
+ from {@code ResourceSet}
+ </p></p>
+
+<p><pre>
+ <code>
+ var rs = fetchMember(uri: uri, properties: properties)
+ var rs = member(index: index)
+ var rs = create(jo: jsonObject, properties: properties)
+ </code>
+ </pre></p>
+
+<p><p>
+ The following example shows how to get the this page size from
+ {@code ResourceSet}
+ </p></p>
+
+<p><pre>
+ <code>
+ var count : Int = rs.count()
+ var totalCount : Int = rs.totalCount()
+ var totalCount : Int = rs.totalCount(fromServer: true)
+ </code>
+ </pre></p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetCACSS6osName_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(osName:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetCACSS6osName_tcfc">init(osName:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initialize object.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">osName</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>osName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Oslc Name.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetCAcA0A9ConnectorC2mc_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(mc:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetCAcA0A9ConnectorC2mc_tcfc">init(mc:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initialize object</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">mc</span><span class="p">:</span> <span class="kt"><a href="../Classes/MaximoConnector.html">MaximoConnector</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>mc</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Maximo Connector.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetCACSSSg6osName_AA0A9ConnectorC2mctcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(osName:mc:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetCACSSSg6osName_AA0A9ConnectorC2mctcfc">init(osName:mc:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initialize object</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">osName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">mc</span><span class="p">:</span> <span class="kt"><a href="../Classes/MaximoConnector.html">MaximoConnector</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>osName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Oslc Name</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>mc</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Maximo Connector.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetCACSS9publicURI_AA0A9ConnectorC2mctcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(publicURI:mc:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetCACSS9publicURI_AA0A9ConnectorC2mctcfc">init(publicURI:mc:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initialize object</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">publicURI</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">mc</span><span class="p">:</span> <span class="kt"><a href="../Classes/MaximoConnector.html">MaximoConnector</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>publicURI</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>public URI&rsquo;s information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>mc</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Maximo Connector object.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC9getAppURISSSgyF"></a>
+                    <a name="//apple_ref/swift/Method/getAppURI()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC9getAppURISSSgyF">getAppURI()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get current URI</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getAppURI</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Reference to the current application&rsquo;s URI.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC12getPublicURISSSgyF"></a>
+                    <a name="//apple_ref/swift/Method/getPublicURI()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC12getPublicURISSSgyF">getPublicURI()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get public URI information.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getPublicURI</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Reference to the public URI information.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC8getOsURISSSgyF"></a>
+                    <a name="//apple_ref/swift/Method/getOsURI()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC8getOsURISSSgyF">getOsURI()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get Oslc URI&rsquo;s information.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getOsURI</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Reference to the Oslc URI&rsquo;s information.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC6toJSONs10DictionaryVySSypGSgyF"></a>
+                    <a name="//apple_ref/swift/Method/toJSON()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC6toJSONs10DictionaryVySSypGSgyF">toJSON()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get ResourceSet data in JSON</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">toJSON</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>String with a JSON Object representing the ResourceSet.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC11toJSONBytes10Foundation4DataVyKF"></a>
+                    <a name="//apple_ref/swift/Method/toJSONBytes()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC11toJSONBytes10Foundation4DataVyKF">toJSONBytes()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get ResourceSet data in JSONBytes</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    Exception
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">toJSONBytes</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Data</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Data object with a JSON object encoded.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC6_whereACSS0E6Clause_tF"></a>
+                    <a name="//apple_ref/swift/Method/_where(whereClause:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC6_whereACSS0E6Clause_tF">_where(whereClause:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set whereClause</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">_where</span><span class="p">(</span><span class="nv">whereClause</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ResourceSet</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>whereClause</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>String carrying on the where clause.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Reference to the updated where clause.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC6_whereAcA10QueryWhereCAD_tF"></a>
+                    <a name="//apple_ref/swift/Method/_where(_where:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC6_whereAcA10QueryWhereCAD_tF">_where(_where:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set where clause bases on an QueryWhere object..</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">_where</span><span class="p">(</span><span class="nv">_where</span><span class="p">:</span> <span class="kt"><a href="../Classes/QueryWhere.html">QueryWhere</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ResourceSet</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Reference to the QueryWhere object within the where clause.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC16searchAttributesACSaySSG10attributes_tF"></a>
+                    <a name="//apple_ref/swift/Method/searchAttributes(attributes:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC16searchAttributesACSaySSG10attributes_tF">searchAttributes(attributes:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set attributes.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">searchAttributes</span><span class="p">(</span><span class="nv">attributes</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">ResourceSet</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>attributes</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>String array of attributes.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Reference to updated array of attributes.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC8hasTermsACSaySSG5terms_tF"></a>
+                    <a name="//apple_ref/swift/Method/hasTerms(terms:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC8hasTermsACSaySSG5terms_tF">hasTerms(terms:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Check if this Resource Set has such terms.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">hasTerms</span><span class="p">(</span><span class="nv">terms</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">ResourceSet</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>terms</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>String array of terms.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Returns <b>TRUE</b> if such terms are present.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC6selectACSaySSG0E6Clause_tF"></a>
+                    <a name="//apple_ref/swift/Method/select(selectClause:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC6selectACSaySSG0E6Clause_tF">select(selectClause:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set selectc clause.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">select</span><span class="p">(</span><span class="nv">selectClause</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">ResourceSet</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>selectClause</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>String array carrying on select statements.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Reference to the String array updated within select statements.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC8pageSizeACSiAD_tF"></a>
+                    <a name="//apple_ref/swift/Method/pageSize(pageSize:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC8pageSizeACSiAD_tF">pageSize(pageSize:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set page size for the ResourceSet object.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">pageSize</span><span class="p">(</span><span class="nv">pageSize</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ResourceSet</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pageSize</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Page size in int.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>ResourceSet configured with a new page size.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC6pagingACSb4type_tF"></a>
+                    <a name="//apple_ref/swift/Method/paging(type:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC6pagingACSb4type_tF">paging(type:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Check paging.
+&lt;&gt;bNote:</b> &amp;oslc.paging=true - if paging is false - do not add the query parameter</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">paging</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ResourceSet</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>type</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Query parameters.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Return <b>TRUE</b> - When paging, If <b>FALSE</b> - Do not add the query parameter.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC12stablePagingACSb4type_tF"></a>
+                    <a name="//apple_ref/swift/Method/stablePaging(type:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC12stablePagingACSb4type_tF">stablePaging(type:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set stable paging.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">stablePaging</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ResourceSet</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>type</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Boolean value.<b>TRUE</b> - if yes, <b>FALSE</b> if not.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><b>TRUE</b> - if yes, <b>FALSE</b> if not.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC7orderByACSaySSG0eF10Properties_tF"></a>
+                    <a name="//apple_ref/swift/Method/orderBy(orderByProperties:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC7orderByACSaySSG0eF10Properties_tF">orderBy(orderByProperties:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set order by clause.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">orderBy</span><span class="p">(</span><span class="nv">orderByProperties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">ResourceSet</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>orderByProperties</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>String array with order by properties.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Reference to the order by properties array.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC5fetchACyKF"></a>
+                    <a name="//apple_ref/swift/Method/fetch()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC5fetchACyKF">fetch()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Fetching the data for ResourceSet</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    Exception.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">fetch</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">ResourceSet</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Data of ResourceSet.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC24fetchWithAddtionalParamsACs10DictionaryVySSypG010additionalH0_tKF"></a>
+                    <a name="//apple_ref/swift/Method/fetchWithAddtionalParams(additionalParams:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC24fetchWithAddtionalParamsACs10DictionaryVySSypG010additionalH0_tKF">fetchWithAddtionalParams(additionalParams:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Fetching the data for ResourceSet with arbitrary parameters</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    Exception.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">fetchWithAddtionalParams</span><span class="p">(</span><span class="nv">additionalParams</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">])</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">ResourceSet</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>additionalParams</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Additional Parameters.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Reference to the additional parameters.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC25fetchWithAddtionalHeadersACs10DictionaryVySSypG010additionalH0_tKF"></a>
+                    <a name="//apple_ref/swift/Method/fetchWithAddtionalHeaders(additionalHeaders:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC25fetchWithAddtionalHeadersACs10DictionaryVySSypG010additionalH0_tKF">fetchWithAddtionalHeaders(additionalHeaders:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Fetching the data for ResourceSet with arbitrary headers</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    Exception.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">fetchWithAddtionalHeaders</span><span class="p">(</span><span class="nv">additionalHeaders</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">])</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">ResourceSet</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>additionalHeaders</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Additional headers.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Reference to the data fetch with additional parameters.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC34fetchWithAddtionalHeadersAndParamsACs10DictionaryVySSypGSg010additionalJ0_AH0lH0tKF"></a>
+                    <a name="//apple_ref/swift/Method/fetchWithAddtionalHeadersAndParams(additionalParams:additionalHeaders:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC34fetchWithAddtionalHeadersAndParamsACs10DictionaryVySSypGSg010additionalJ0_AH0lH0tKF">fetchWithAddtionalHeadersAndParams(additionalParams:additionalHeaders:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Fetching the data for ResourceSet with arbitrary parameters and headers</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    Exception.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">fetchWithAddtionalHeadersAndParams</span><span class="p">(</span><span class="nv">additionalParams</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]?,</span> <span class="nv">additionalHeaders</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]?)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">ResourceSet</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>additionalParams</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Additional params.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>additionalHeaders</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Additional headers.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Reference to date fetch with Additional params and headers.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC5fetchACs10DictionaryVySSypGSg7options_tKF"></a>
+                    <a name="//apple_ref/swift/Method/fetch(options:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC5fetchACs10DictionaryVySSypGSg7options_tKF">fetch(options:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Fetching the data for ResourceSet with arbitrary parameters.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    Exception.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">fetch</span><span class="p">(</span><span class="nv">options</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]?)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">ResourceSet</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>options</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Additional parameters.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Reference to the data fetched.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC8nextPageACyKF"></a>
+                    <a name="//apple_ref/swift/Method/nextPage()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC8nextPageACyKF">nextPage()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Go to nextPage</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    Exception.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">nextPage</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">ResourceSet</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Reference to the next page.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC11hasNextPageSbyF"></a>
+                    <a name="//apple_ref/swift/Method/hasNextPage()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC11hasNextPageSbyF">hasNextPage()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Check if the JSON response information has a next page</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">hasNextPage</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>boole <b>TRUE</b> if there is a next page or <b>FALSE<b/>, there is no other page info.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC12previousPageACyKF"></a>
+                    <a name="//apple_ref/swift/Method/previousPage()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC12previousPageACyKF">previousPage()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get the ResourceSet object to the previews page.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    Exception.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">previousPage</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">ResourceSet</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Return a ResourceSet object within the previews page information inside.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC4loadACyKF"></a>
+                    <a name="//apple_ref/swift/Method/load()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC4loadACyKF">load()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Load the current data</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    Exception.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">load</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">ResourceSet</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Reference to the current data.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC6reloadACyKF"></a>
+                    <a name="//apple_ref/swift/Method/reload()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC6reloadACyKF">reload()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Reload ResourceSet.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    Exception.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">reload</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">ResourceSet</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Reference to reloaded resource set.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC10savedQueryACSS4name_s10DictionaryVySSypG11paramValuestF"></a>
+                    <a name="//apple_ref/swift/Method/savedQuery(name:paramValues:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC10savedQueryACSS4name_s10DictionaryVySSypG11paramValuestF">savedQuery(name:paramValues:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Obtains a Saved Query.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">savedQuery</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">paramValues</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">ResourceSet</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Saved query&rsquo;s name.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>paramValues</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Arbitrary param values.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p></p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC10savedQueryAcA05SavedF0C6qsaved_tF"></a>
+                    <a name="//apple_ref/swift/Method/savedQuery(qsaved:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC10savedQueryAcA05SavedF0C6qsaved_tF">savedQuery(qsaved:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Obtains a Saved Query.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">savedQuery</span><span class="p">(</span><span class="nv">qsaved</span><span class="p">:</span> <span class="kt"><a href="../Classes/SavedQuery.html">SavedQuery</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ResourceSet</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>qsaved</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Saved query description</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Reference to the saved query.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC11fetchMemberAA0C0CSS3uri_SaySSGSg10propertiestKF"></a>
+                    <a name="//apple_ref/swift/Method/fetchMember(uri:properties:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC11fetchMemberAA0C0CSS3uri_SaySSGSg10propertiestKF">fetchMember(uri:properties:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Fetch a Resource.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    Exception.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">fetchMember</span><span class="p">(</span><span class="nv">uri</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Resource.html">Resource</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uri</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource URI&rsquo;s information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>properties</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource arbitrary properties.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Reference to a fetched Resource object.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC6memberAA0C0CSgSi5index_tKF"></a>
+                    <a name="//apple_ref/swift/Method/member(index:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC6memberAA0C0CSgSi5index_tKF">member(index:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get the member (i.e. Resource object) in ResourceSet</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    Exception.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">member</span><span class="p">(</span><span class="nv">index</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Resource.html">Resource</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>index</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Parameter index.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Reference to the Resource object.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC6createAA0C0Cs10DictionaryVySSypG2jo_SaySSG10propertiestKF"></a>
+                    <a name="//apple_ref/swift/Method/create(jo:properties:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC6createAA0C0Cs10DictionaryVySSypG2jo_SaySSG10propertiestKF">create(jo:properties:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a new Resource with the properties in header</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    Exception.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">create</span><span class="p">(</span><span class="nv">jo</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">])</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Resource.html">Resource</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>jo</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>JSON Object format in a Any swift object.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>properties</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Arbitrary properties array.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Reference to the Resource object.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC6createAA0C0Cs10DictionaryVySSypG2jo_AI7headersSaySSG10propertiestKF"></a>
+                    <a name="//apple_ref/swift/Method/create(jo:headers:properties:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC6createAA0C0Cs10DictionaryVySSypG2jo_AI7headersSaySSG10propertiestKF">create(jo:headers:properties:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a new Resource with the properties in header</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    Exception.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">create</span><span class="p">(</span><span class="nv">jo</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">])</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Resource.html">Resource</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>jo</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>JSON Object format in a Any swift object.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>properties</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Arbitrary properties array.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource&rsquo;s header information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Reference to the Resource object.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC4syncAA0C0Cs10DictionaryVySSypG2jo_SaySSG10propertiestKF"></a>
+                    <a name="//apple_ref/swift/Method/sync(jo:properties:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC4syncAA0C0Cs10DictionaryVySSypG2jo_SaySSG10propertiestKF">sync(jo:properties:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sync a Resource.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    Exception.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">sync</span><span class="p">(</span><span class="nv">jo</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">])</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Resource.html">Resource</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>jo</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>JSON Object format in a Any swift object.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>properties</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Arbitrary properties array.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Reference to the Resource object.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC4syncAA0C0Cs10DictionaryVySSypG2jo_AI7headersSaySSG10propertiestKF"></a>
+                    <a name="//apple_ref/swift/Method/sync(jo:headers:properties:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC4syncAA0C0Cs10DictionaryVySSypG2jo_AI7headersSaySSG10propertiestKF">sync(jo:headers:properties:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sync a Resource based on a header information.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    Exception.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">sync</span><span class="p">(</span><span class="nv">jo</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">])</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Resource.html">Resource</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>jo</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>JSON Object format in a Any swift object.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>properties</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Arbitrary properties array.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource&rsquo;s header information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Reference to the Resource object.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC9mergeSyncAA0C0Cs10DictionaryVySSypG2jo_SaySSG10propertiestKF"></a>
+                    <a name="//apple_ref/swift/Method/mergeSync(jo:properties:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC9mergeSyncAA0C0Cs10DictionaryVySSypG2jo_SaySSG10propertiestKF">mergeSync(jo:properties:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Merge and Sync a Resource</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    Exception
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">mergeSync</span><span class="p">(</span><span class="nv">jo</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">])</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Resource.html">Resource</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>jo</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>JSON Object format in a Any swift object.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>properties</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Arbitrary properties array.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Reference to the Resource object.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC9mergeSyncAA0C0Cs10DictionaryVySSypG2jo_AI7headersSaySSG10propertiestKF"></a>
+                    <a name="//apple_ref/swift/Method/mergeSync(jo:headers:properties:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC9mergeSyncAA0C0Cs10DictionaryVySSypG2jo_AI7headersSaySSG10propertiestKF">mergeSync(jo:headers:properties:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Merge and Sync a Resource object using a header information in additional.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    Exception.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">mergeSync</span><span class="p">(</span><span class="nv">jo</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">properties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">])</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Resource.html">Resource</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>jo</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>JSON Object format in a Any swift object.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>properties</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Arbitrary properties array.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resource&rsquo;s header information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Reference to the Resource object.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC18configuredPageSizeSiyF"></a>
+                    <a name="//apple_ref/swift/Method/configuredPageSize()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC18configuredPageSizeSiyF">configuredPageSize()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Configure page siz.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">configuredPageSize</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Reference to the configured pagesize.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC10totalCountSiyKF"></a>
+                    <a name="//apple_ref/swift/Method/totalCount()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC10totalCountSiyKF">totalCount()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Count the total number of Resources by calling RESTful API</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    Exception.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">totalCount</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Int value with total count.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC10totalCountSiSb10fromServer_tKF"></a>
+                    <a name="//apple_ref/swift/Method/totalCount(fromServer:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC10totalCountSiSb10fromServer_tKF">totalCount(fromServer:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Count the total number of Resources.</p>
+
+<ul>
+    <li> When fromServer=true, it calls the totalCount API.</li>
+    <li> When fromServer=false, it calls the RESTful API. </li>
+</ul>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    Exception.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">totalCount</span><span class="p">(</span><span class="nv">fromServer</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Amount of objects based on the count process.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC5countSiyKF"></a>
+                    <a name="//apple_ref/swift/Method/count()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC5countSiyKF">count()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get current number of Resource by calling RESTful API</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    Exception.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">count</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Size of Resource set.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC4bulkAA13BulkProcessorCyF"></a>
+                    <a name="//apple_ref/swift/Method/bulk()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC4bulkAA13BulkProcessorCyF">bulk()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set Bulk Processor.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">bulk</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/BulkProcessor.html">BulkProcessor</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>BulkProcessor object.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13MaximoRESTSDK11ResourceSetC7groupByAA11AggregationCyKF"></a>
+                    <a name="//apple_ref/swift/Method/groupBy()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13MaximoRESTSDK11ResourceSetC7groupByAA11AggregationCyKF">groupBy()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Group by Aggregation</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    Exception.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">groupBy</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Aggregation.html">Aggregation</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Aggregation Object.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="https://github.ibm.com/maximo-ohio/maximo-swift-restclient" target="_blank" rel="external">Silvino Neto</a>. All rights reserved. (Last updated: 2018-08-17)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
