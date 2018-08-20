@@ -31,7 +31,7 @@ public class BulkProcessor {
     /// Create object.
     ///
     /// - Parameter jo: JSON's array of information.
-    /// - Returns: self.
+    /// - Returns: BulkProcessor new object.
     public func create(jo: [String: Any]) -> BulkProcessor {
         let obj : [String: Any] = ["_data": jo]
         bulkArray.append(obj)
@@ -44,7 +44,7 @@ public class BulkProcessor {
     ///   - jo: JSON Array
     ///   - uri: URI's information.
     ///   - properties: String array of properties.
-    /// - Returns: self
+    /// - Returns: BulkProcessor object updated.
     public func update(jo: [String: Any], uri: String, properties: [String]) -> BulkProcessor {
         var objb : [String: Any] = ["_data": jo]
         self.addMeta(objb: &objb, method: "PATCH", uri: uri, properties: properties)
@@ -57,7 +57,7 @@ public class BulkProcessor {
     ///   - jo: JSON Array
     ///   - uri: URI's information.
     ///   - properties: String array of properties.
-    /// - Returns: self
+    /// - Returns: BulkProcessor object merged.
     public func merge(jo: [String: Any], uri: String, properties: [String]) -> BulkProcessor {
         var objb : [String: Any] = ["_data": jo]
         self.addMeta(objb: &objb, method: "MERGE", uri: uri, properties: properties)
@@ -67,7 +67,7 @@ public class BulkProcessor {
     /// delete an element (i.e. Resource or Attachment)
     ///
     /// - Parameter uri: Resource/Attachment URI's information.
-    /// - Returns: self.
+    /// - Returns: BulkProcessor deleted.
     public func delete(uri: String) -> BulkProcessor {
         var objb : [String: Any] = [:]
         self.addMeta(objb: &objb, method: "DELETE", uri: uri, properties: nil)
@@ -102,7 +102,7 @@ public class BulkProcessor {
     /// Process Bulk
     ///
     /// - Returns: bulk processed through Maximo Connector.
-    /// - Throws: <#throws value description#>
+    /// - Throws: Exception. 
     public func processBulk() throws -> [Any] {
         return try self.mc.bulk(uri: self.uri, ja: self.bulkArray)
     }
