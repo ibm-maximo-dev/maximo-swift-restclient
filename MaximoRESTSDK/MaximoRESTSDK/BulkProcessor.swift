@@ -31,7 +31,7 @@ public class BulkProcessor {
     /// Create object.
     ///
     /// - Parameter jo: JSON's array of information.
-    /// - Returns: BulkProcessor new object.
+    /// - Returns: BulkProcessor with the new object added
     public func create(jo: [String: Any]) -> BulkProcessor {
         let obj : [String: Any] = ["_data": jo]
         bulkArray.append(obj)
@@ -101,7 +101,7 @@ public class BulkProcessor {
     
     /// Process Bulk
     ///
-    /// - Returns: bulk processed through Maximo Connector.
+    /// - Returns: contents of the bulk processed through Maximo Connector.
     /// - Throws: Exception. 
     public func processBulk() throws -> [Any] {
         return try self.mc.bulk(uri: self.uri, ja: self.bulkArray)
@@ -110,7 +110,7 @@ public class BulkProcessor {
     /// Properties Builder.
     ///
     /// - Parameter properties: String array of properties.
-    /// - Returns: Properties built.
+    /// - Returns: Properties built or a nil.
     func propertiesBuilder(properties: [String]?) -> String? {
         var propStrb = String()
         if properties == nil {

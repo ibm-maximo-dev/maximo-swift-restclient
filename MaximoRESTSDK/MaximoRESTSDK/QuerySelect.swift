@@ -16,7 +16,7 @@ public class QuerySelect {
     /// Run the select clause.
     ///
     /// - Parameter selectClause: Clause to be fetch
-    /// - Returns: String buffer containing a Select clause parameters.
+    /// - Returns: String containing a Select clause parameters.
     public func select(selectClause: [String]) -> String
     {
         var strb = String();
@@ -48,7 +48,7 @@ public class QuerySelect {
     /// Convert saved queries into the query's map to a string.
     ///
     /// - Parameters:
-    ///   - strb: String buffer to increment the query
+    ///   - strb: String to increment the query
     ///   - map: Query's map.
     func map2String(strb: inout String, map: [String: Any])
     {

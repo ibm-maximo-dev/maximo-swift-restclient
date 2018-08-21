@@ -37,7 +37,7 @@ public class Aggregation {
     /// Group by
     ///
     /// - Parameter attributes: Attribute descripttion.
-    /// - Returns: Aggregation object wiht an gbColsList param updated.
+    /// - Returns: Aggregation object with updated columns list
     public func groupByOn(attributes: [String]) -> Aggregation {
         for attribute in attributes {
             self.gbColsList.append(attribute)
@@ -197,8 +197,8 @@ public class Aggregation {
 
     /// Process group by
     ///
-    /// - Returns: Group by result
-    /// - Throws: Aggregation object updated.
+    /// - Returns: Contents of this Aggregation object updated and grouped by
+    /// - Throws: Exception
     public func processGroupBy() throws -> [Any] {
         if !self.uri.contains("?") {
             self.uri.append("?")

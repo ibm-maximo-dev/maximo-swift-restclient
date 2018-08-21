@@ -11,7 +11,7 @@ import Foundation
 /// Operates the where clause.
 public class QueryWhere {
     
-    /// String buffer to handle the where clause statements.
+    /// String to handle the where clause statements.
     var strbWhere : String = String()
     /// Map to store the where clause statements.
     var map : [String: Any] = [:]
@@ -21,7 +21,7 @@ public class QueryWhere {
     /// Where clause function.
     ///
     /// - Parameter name: Where query name.
-    /// - Returns: Current key.
+    /// - Returns: the current QueryWhere object.
     public func _where (name: String) -> QueryWhere
     {
         currentKey = name
@@ -65,7 +65,7 @@ public class QueryWhere {
     
     /// Retrieve the current key.
     ///
-    /// - Returns: Current key.
+    /// - Returns: String containing the current key.
     public func getCurrentKey() -> String
     {
         if currentKey.contains(".")
@@ -195,7 +195,7 @@ public class QueryWhere {
     
     /// Build where clause.
     ///
-    /// - Returns: String buffer that contains the where clause.
+    /// - Returns: String that contains the where clause.
     public func whereClause() -> String
     {
         var cnt : Int = 0
