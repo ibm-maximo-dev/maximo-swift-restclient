@@ -23,7 +23,7 @@ public class Util {
     /// Return the type inside the string.
     ///
     /// - Parameter value: Any object to handle.
-    /// - Returns: Type of the information inside parameter.
+    /// - Returns: Type of the information that is inside the parameter.
     public class func stringValue(value: Any) -> String {
         let date = value as? Date
         let intNumber = value as? Int
@@ -55,8 +55,8 @@ public class Util {
 
     /// URL encoder.
     ///
-    /// - Parameter value: String that contains the URL's information.
-    /// - Returns: Escaped string within the URL's information.
+    /// - Parameter value: String that contains the URL information.
+    /// - Returns: Escaped string within the URL information.
     public class func urlEncode(value: String) -> String {
         let escapedString = value.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
         return escapedString!
@@ -64,8 +64,8 @@ public class Util {
     
     /// URL enconder Base64.
     ///
-    /// - Parameter value: String that contains the URL's information to encode into a Base64 enconding type.
-    /// - Returns: URL's string Base64 encoded.
+    /// - Parameter value: String that contains the URL information to encode into a Base64 encoding type.
+    /// - Returns: URL string Base64 encoded.
     public class func encodeBase64(value: String) -> String {
         let utf8String = value.data(using: String.Encoding.utf8)
         let base64Encoded = utf8String?.base64EncodedString()
