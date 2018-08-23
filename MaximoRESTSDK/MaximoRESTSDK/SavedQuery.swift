@@ -26,7 +26,7 @@ public class SavedQuery {
     ///
     /// - Parameters:
     ///   - name: Query name.
-    ///   - map: map with query commands.
+    ///   - map: Map with query commands.
     public init(name: String, map: [String: Any]) {
         self.name = name
         self.map = map
@@ -34,8 +34,8 @@ public class SavedQuery {
     
     /// Set query name.
     ///
-    /// - Parameter name: String within the query name.
-    /// - Returns: SavedQuery object within name updated.
+    /// - Parameter name: String with the query name.
+    /// - Returns: SavedQuery object with the name updated.
     public func name(name: String) -> SavedQuery{
         self.name = name;
         return self;
