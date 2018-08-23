@@ -197,7 +197,7 @@ public class Aggregation {
 
     /// Process group by
     ///
-    /// - Returns: Contents of this Aggregation object updated and grouped by
+    /// - Returns: Updated and grouped contents of this Aggregation object
     /// - Throws: Exception
     public func processGroupBy() throws -> [Any] {
         if !self.uri.contains("?") {

@@ -248,7 +248,7 @@ public class Attachment {
     
     /// Get Attachment data in JSON
     ///
-    /// - Returns: String object within a JSON structure.
+    /// - Returns: Metadata of the Attachment object in JSON format
     /// - Throws: Exception.
     public func toDocMeta() throws -> [String: Any] {
         if !isMetaLoaded {
@@ -260,7 +260,7 @@ public class Attachment {
     
     /// Get Attachment data in JSON
     ///
-    /// - Returns: Data object that is encoded with JSON data.
+    /// - Returns: Metadata of the Attachment object as bytes.
     /// - Throws: Exception.
     public func toDocMetaBytes() throws -> Data {
         if !isMetaLoaded {
@@ -285,7 +285,7 @@ public class Attachment {
     
     /// Load attachment data with headers
     ///
-    /// - Parameter headers: <#headers description#>
+    /// - Parameter headers: headers to the Attachment object
     /// - Throws: Exception
     public func load(headers: [String: Any]?) throws {
         if isLoaded {

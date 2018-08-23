@@ -44,7 +44,7 @@ public class SavedQuery {
     /// Query parameters.
     ///
     /// - Parameter params: Any object that contains the query parameters.
-    /// - Returns: SavedQuery object within query parameters.
+    /// - Returns: SavedQuery object with query parameters.
     public func params(params: [String: Any]) -> SavedQuery {
         self.map = params
         return self
