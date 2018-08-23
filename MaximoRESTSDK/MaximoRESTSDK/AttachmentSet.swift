@@ -34,7 +34,7 @@ import Foundation
  * </pre>
  *
  * <p>
- * The following examples demonstrate how to set the uri and jsonobject for the {@code Attachment}:</p>
+ * The following examples demonstrate how to set the uri and JSON object for the {@code Attachment}:</p>
  * <pre>
  * <code>
  * ats.href(href: uri)
@@ -74,7 +74,7 @@ import Foundation
  * </code>
  * </pre>
  *
- * <p>The following example shows how to get the this page size from the {@code AttachmentSet}:</p>
+ * <p>The following example shows how to get the page size from the {@code AttachmentSet}:</p>
  * <pre>
  * <code>
  * var currentPageSize : Int = ats.thisPageSize()
@@ -176,7 +176,7 @@ public class AttachmentSet {
     /// Set a JSON Object.
     ///
     /// - Parameter jo: JSON Object.
-    /// - Returns: AttachmentSet with the passed in data updated
+    /// - Returns: AttachmentSet with the passed-in data updated
     public func JsonObject(jo: [String: Any]) -> AttachmentSet {
         self.jo = jo
         if self.jo["rdfs:member"] != nil {
@@ -192,15 +192,15 @@ public class AttachmentSet {
         return self
     }
 
-    /// Load the data for the attachment set
+    /// Load the data for the AttachmentSet
     ///
-    /// - Returns: Reference to the Attachment See
+    /// - Returns: Reference to the AttachmentSet
     /// - Throws: Error
     public func load() throws -> AttachmentSet {
         return try self.load(headers: nil)
     }
     
-    /// Load the data for the attachment set
+    /// Load the data for the AttachmentSet
     ///
     /// - Parameter headers: Header of the attachment.
     /// - Returns: Reference to the data.
@@ -249,7 +249,7 @@ public class AttachmentSet {
     /// - Parameters:
     ///   - relation: Relationship information.
     ///   - att: Attachment.
-    /// - Returns: URI of attachment related to a resource.
+    /// - Returns: URI of the attachment that is related to a resource.
     /// - Throws: Error
     public func create(relation: String, att: Attachment) throws -> Attachment {
         if !self.href.contains(relation.lowercased()) || !self.href.contains(relation.uppercased()) {
@@ -266,7 +266,7 @@ public class AttachmentSet {
     /// - Parameters:
     ///   - relation: String with details of the attachment relationship.
     ///   - att: Attachment object.
-    ///   - headers: Header's information.
+    ///   - headers: Header information.
     /// - Returns: New attachment object.
     /// - Throws: Error
     public func create(relation: String, att: Attachment, headers: [String: Any]?) throws -> Attachment {
@@ -285,7 +285,7 @@ public class AttachmentSet {
         return Attachment(jo: obj, mc: self.mc)
     }
 
-    /// Get the member of the attachment set
+    /// Get the member of the AttachmentSet
     ///
     /// - Parameter index: Int value that represents the index of an attachment in the AttachmentSet.
     /// - Returns: Attachment reference.
@@ -301,7 +301,7 @@ public class AttachmentSet {
         return Attachment(jo: obj, mc: self.mc);
     }
     
-    /// Get the member of attachment set
+    /// Get the member of AttachmentSet
     ///
     /// - Parameter id: ID value that represents the ID of an attachment in the AttachmentSet map.
     /// - Returns: Attachment object.
@@ -327,9 +327,9 @@ public class AttachmentSet {
         return Attachment(jo: obj!, mc: self.mc);
     }
 
-    /// Delete an attachment based on a object index.
+    /// Delete an attachment based on an object index.
     ///
-    /// - Parameter index: Attachment's index.
+    /// - Parameter index: Attachment index.
     /// - Returns: Attachment set reloaded without the deleted object.
     /// - Throws: Error
     public func delete(index: Int) throws -> AttachmentSet {
@@ -337,9 +337,9 @@ public class AttachmentSet {
         return try reload()
     }
     
-    /// Delete an attachment based on a object index.
+    /// Delete an attachment based on an object index.
     ///
-    /// - Parameter ID: Attachment's ID.
+    /// - Parameter ID: Attachment ID.
     /// - Returns: Attachment set reloaded without the deleted object.
     /// - Throws: Error
     public func delete(id: String) throws -> AttachmentSet {
@@ -349,7 +349,7 @@ public class AttachmentSet {
 
     /// Return this page size.
     ///
-    /// - Returns: Int value represent the page size
+    /// - Returns: Int value that represents the page size
     /// - Throws: Error
     public func thisPageSize() throws -> Int
     {
@@ -365,7 +365,7 @@ public class AttachmentSet {
         return size
     }
 
-    /// Fetch member through the URI information and arbitrary array of properties.
+    /// Fetch member by using the URI information and arbitrary array of properties.
     ///
     /// - Parameters:
     ///   - uri: URI Information.
@@ -376,7 +376,7 @@ public class AttachmentSet {
         return try self.fetchMember(uri: uri, headers: nil, properties: properties)
     }
 
-    /// Fetch member through the URI information and arbitrary array of properties and additional header information.
+    /// Fetch member by using the URI information and arbitrary array of properties and additional header information.
     ///
     /// - Parameters:
     ///   - uri: uri: URI Information.
