@@ -11,7 +11,7 @@ import Foundation
 /**
  *
  * {@code Attachment} implements the operations on the attachment from a Resource.
- * It provides the data, metadata, URI and so on.
+ * It provides the data, metadata, URI, and so on.
  *
  * <p>This object can be created by {@code AttachmentSet}.
  * The following code shows how to create {@code Attachment} by using the {@code AttachmentSet} Constructor:
@@ -34,7 +34,7 @@ import Foundation
  * </pre>
  *
  * <p>
- * The following examples demonstrate how to set the maximoconnector, name, description, data, metadata, wwwURI for the {@code Attachment}:</p>
+ * The following examples demonstrate how to set the maximoconnector, name, description, data, metadata, and wwwURI for the {@code Attachment}:</p>
  * <pre>
  * <code>
  * att.maximoConnector(mc: maximoconnector).name(name: filename).description(description: description)
@@ -94,7 +94,7 @@ public class Attachment {
     var isMetaLoaded: Bool = false
     var jo: [String: Any]
 
-    /// Ini this class
+    /// Init this class
     public init() {
         jo = [:]
         self.uri = String()
@@ -113,7 +113,7 @@ public class Attachment {
         jo = [:]
     }
 
-    /// Init this class based on JSON object and a Maximo Connector Object
+    /// Init this class based on JSON object and a Maximo Connector object
     ///
     /// - Parameters:
     ///   - jo: JSON schema
@@ -141,10 +141,10 @@ public class Attachment {
     }
 
     
-    /// Set the Maximo connector object
+    /// Set the Maximo Connector object
     ///
-    /// - Parameter mc: MaximoConnector object
-    /// - Returns: Attachment object with the MaximoConnector object set.
+    /// - Parameter mc: Maximo Connector object
+    /// - Returns: Attachment object with the Maximo Connector object set.
     public func maximoConnector(mc: MaximoConnector) -> Attachment {
         self.mc = mc;
         return self;
@@ -153,7 +153,7 @@ public class Attachment {
     /// Set the Attachment name
     ///
     /// - Parameter name: String that contains the object name
-    /// - Returns: updated name.
+    /// - Returns: Updated name.
     public func name(name: String) -> Attachment {
         self.name = name;
         return self;
@@ -168,7 +168,7 @@ public class Attachment {
         return self;
     }
     
-    /// metadata structure.
+    /// Metadata structure.
     ///
     /// - Parameters:
     ///   - type: Type
@@ -185,10 +185,10 @@ public class Attachment {
         return self;
     }
 
-    /// Set/Update www URI
+    /// Set and update www URI
     ///
     /// - Parameter uri: String informing the www URI
-    /// - Returns: Attachment with the URI updated.
+    /// - Returns: Attachment with the updated URI.
     public func wwwURI(uri: String) ->Attachment {
         self.uri = uri;
         return self;
@@ -212,21 +212,21 @@ public class Attachment {
     
     /// Returns description.
     ///
-    /// - Returns: String that contains the object's description.
+    /// - Returns: String that contains the description of the object.
     public func getDescription() -> String {
         return self.description!;
     }
     
     /// Returns metadata.
     ///
-    /// - Returns: metadata object.
+    /// - Returns: Metadata object.
     public func getMeta() -> String{
         return self.meta!;
     }
 
     /// Convert data to doc
     ///
-    /// - Returns: data loaded.
+    /// - Returns: Data loaded.
     /// - Throws: Exception.
     public func toDoc() throws -> Data {
         if !isUploaded {
@@ -260,7 +260,7 @@ public class Attachment {
     
     /// Get Attachment data in JSON
     ///
-    /// - Returns: Data object with JSON's data encoded.
+    /// - Returns: Data object that is encoded with JSON data.
     /// - Throws: Exception.
     public func toDocMetaBytes() throws -> Data {
         if !isMetaLoaded {
@@ -306,7 +306,7 @@ public class Attachment {
         return self;
     }
     
-    /// Load attachment meta data
+    /// Load attachment metadata
     ///
     /// - Throws: Exception
     public func loadMeta() throws {
@@ -315,7 +315,7 @@ public class Attachment {
 
     /// Load metadata
     ///
-    /// - Parameter headers: metadata with headers parameters.
+    /// - Parameter headers: Metadata with headers parameters.
     /// - Throws: Exception.
     public func loadMeta(headers: [String: Any]?) throws {
         if isMetaLoaded {
@@ -369,7 +369,7 @@ public class Attachment {
     
     /// Fetch metadata to a JSON document.
     ///
-    /// - Returns: String with an JSON data.
+    /// - Returns: String with JSON data.
     /// - Throws: Exception.
     public func fetchDocMeta() throws -> [String: Any] {
         isMetaLoaded = false;
