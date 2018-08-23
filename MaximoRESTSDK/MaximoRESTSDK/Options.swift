@@ -58,7 +58,7 @@ public class Options {
     
     /// Function to set Maximo REST service ID, which is hardcoded to 'maxrest'
     ///
-    /// - Returns: Options object with appContext param set to maxrest.
+    /// - Returns: Options object with the appContext parameter set to maxrest.
     public func maxrest() -> Options
     {
         appContext = "maxrest"
@@ -67,8 +67,8 @@ public class Options {
 
     ///  Function to set application context.
     ///
-    /// - Parameter context: context of this application 
-    /// - Returns: Options object within a new appContext value set.
+    /// - Parameter context: Context of this application 
+    /// - Returns: Options object with a new appContext value set.
     public func appContext(context: String) -> Options
     {
         appContext = context
@@ -77,8 +77,8 @@ public class Options {
     
     /// Context operation for this API.
     ///
-    /// - Parameter apiContext: api context (i.e. oslc)
-    /// - Returns: Options object within the apiContext param set.
+    /// - Parameter apiContext: API context, such as oslc
+    /// - Returns: Options object with the apiContext parameter set.
     public func apiContext(apiContext: String) -> Options
     {
         self.apiContext = apiContext
@@ -87,7 +87,7 @@ public class Options {
     
     /// Enable secure HTTP.
     ///
-    /// - Returns: Options object set with ssl param set to <b>TURE</b>.
+    /// - Returns: Options object set with ssl parameter set to <b>TURE</b>.
     public func https() -> Options
     {
         self.ssl = true
@@ -96,7 +96,7 @@ public class Options {
     
     /// Disable secure HTTP.
     ///
-    /// - Returns: Options object wihtin the ssl parata set to <b>FALSE</b>
+    /// - Returns: Options object with the ssl parameter set to <b>FALSE</b>
     public func http() -> Options
     {
         self.ssl = false
@@ -105,8 +105,8 @@ public class Options {
     
     /// Define the service port
     ///
-    /// - Parameter port: service destination port
-    /// - Returns: Options object within the port param set.
+    /// - Parameter port: Service destination port
+    /// - Returns: Options object with the port parameter set.
     public func port(port: Int) -> Options
     {
         self.port = port
@@ -115,8 +115,8 @@ public class Options {
     
     /// Define the authentication mode.
     ///
-    /// - Parameter authMode: authentication mode (i.e. maxAuth)
-    /// - Returns: Option object with authMode param set.
+    /// - Parameter authMode: Authentication mode, such as maxAuth
+    /// - Returns: Option object with the authMode parameter set.
     public func auth(authMode: String) -> Options
     {
         self.authMode = authMode
@@ -126,7 +126,7 @@ public class Options {
     /// Enable or disable Maximo tenant mode.
     ///
     /// - Parameter mtMode: TRUE to enable and FALSE to disble.
-    /// - Returns: Option object within mt param set.
+    /// - Returns: Option object with the mt parameter set.
     public func mt(mtMode: Bool) -> Options
     {
         self.mt = mtMode
@@ -136,7 +136,7 @@ public class Options {
     /// Define the user credentials.
     ///
     /// - Parameter user: user name.
-    /// - Returns: Options object with user param set.
+    /// - Returns: Options object with the user parameter set.
     public func user(user: String) -> Options
     {
         self.user = user
@@ -146,7 +146,7 @@ public class Options {
     /// Define the password credentials.
     ///
     /// - Parameter password: password
-    /// - Returns: Options object with password param set.
+    /// - Returns: Options object with the password parameter set.
     public func password(password: String) -> Options
     {
         self.password = password
@@ -156,7 +156,7 @@ public class Options {
     /// Determine the application URI
     ///
     /// - Parameter appURI: URI of application
-    /// - Returns: Options object with the appURI param set.
+    /// - Returns: Options object with the appURI parameter set.
     public func AppURI(appURI: String) -> Options
     {
         self.appURI = appURI
@@ -166,7 +166,7 @@ public class Options {
     /// Enable lean
     ///
     /// - Parameter lean: TRUE to enable and FALSE to disble.
-    /// - Returns: Options object with the lean param set.
+    /// - Returns: Options object with the lean parameter set.
     public func lean(lean: Bool) -> Options
     {
         self.lean = lean
@@ -176,7 +176,7 @@ public class Options {
     /// Set the tenant code.
     ///
     /// - Parameter tenantCode: tenant code
-    /// - Returns: Options object with the tenantCode param set.
+    /// - Returns: Options object with the tenantCode parameter set.
     public func tenantCode(tenantCode: String) -> Options
     {
         self.tenantcode = tenantCode
@@ -209,7 +209,7 @@ public class Options {
     
     /// Returns whether this application is using a form authentication
     ///
-    /// - Returns: boolean value <b>TRUE</b> for yes, <b>FALSE</b> for no
+    /// - Returns: Boolean value <b>TRUE</b> for yes, <b>FALSE</b> for no
     public func isFormAuth() -> Bool
     {
         return self.authMode == AUTH_FORM
@@ -217,7 +217,7 @@ public class Options {
     
     /// Returns whether this application is using a Maximo Authentication formula.
     ///
-    /// - Returns: boolean value <b>TRUE</b> for yes, <b>FALSE</b> for no
+    /// - Returns: Boolean value <b>TRUE</b> for yes, <b>FALSE</b> for no
     public func isMaxAuth() -> Bool
     {
         return self.authMode == AUTH_MAXAUTH
@@ -225,7 +225,7 @@ public class Options {
     
     /// Returns whether this application is desgined to support multitenancy.
     ///
-    /// - Returns: boolean value <b>TRUE</b> for yes, <b>FALSE</b> to no
+    /// - Returns: Boolean value <b>TRUE</b> for yes, <b>FALSE</b> to no
     public func isMultiTenancy() -> Bool
     {
         return self.mt
@@ -233,7 +233,7 @@ public class Options {
     
     /// Returns whether this application is a Lean application
     ///
-    /// - Returns: boolean value <b>TRUE</b> for yes, <b>FALSE</b> for no
+    /// - Returns: Boolean value <b>TRUE</b> for yes, <b>FALSE</b> for no
     public func isLean() -> Bool
     {
         return self.lean
