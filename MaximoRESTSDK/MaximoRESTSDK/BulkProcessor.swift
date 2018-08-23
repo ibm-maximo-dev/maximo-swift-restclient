@@ -30,7 +30,7 @@ public class BulkProcessor {
 
     /// Create object.
     ///
-    /// - Parameter jo: JSON's array of information.
+    /// - Parameter jo: JSON array of information.
     /// - Returns: BulkProcessor with the new object added
     public func create(jo: [String: Any]) -> BulkProcessor {
         let obj : [String: Any] = ["_data": jo]
@@ -38,13 +38,13 @@ public class BulkProcessor {
         return self
     }
 
-    /// Update meta data.
+    /// Update metadata.
     ///
     /// - Parameters:
     ///   - jo: JSON Array
-    ///   - uri: URI's information.
+    ///   - uri: URI information.
     ///   - properties: String array of properties.
-    /// - Returns: BulkProcessor object updated.
+    /// - Returns: Updated BulkProcessor object.
     public func update(jo: [String: Any], uri: String, properties: [String]) -> BulkProcessor {
         var objb : [String: Any] = ["_data": jo]
         self.addMeta(objb: &objb, method: "PATCH", uri: uri, properties: properties)
@@ -55,18 +55,18 @@ public class BulkProcessor {
     ///
     /// - Parameters:
     ///   - jo: JSON Array
-    ///   - uri: URI's information.
+    ///   - uri: URI information.
     ///   - properties: String array of properties.
-    /// - Returns: BulkProcessor object merged.
+    /// - Returns: Merged BulkProcessor object.
     public func merge(jo: [String: Any], uri: String, properties: [String]) -> BulkProcessor {
         var objb : [String: Any] = ["_data": jo]
         self.addMeta(objb: &objb, method: "MERGE", uri: uri, properties: properties)
         return self
     }
 
-    /// delete an element (i.e. Resource or Attachment)
+    /// Delete an element (i.e. Resource or Attachment)
     ///
-    /// - Parameter uri: Resource/Attachment URI's information.
+    /// - Parameter uri: Resource/Attachment URI information.
     /// - Returns: BulkProcessor deleted.
     public func delete(uri: String) -> BulkProcessor {
         var objb : [String: Any] = [:]
@@ -79,7 +79,7 @@ public class BulkProcessor {
     /// - Parameters:
     ///   - objb: Object Any
     ///   - method: HTTP Method description.
-    ///   - uri: URI's information.
+    ///   - uri: URI information.
     ///   - properties: String array of properties.
     func addMeta(objb: inout [String: Any], method: String?, uri: String?, properties: [String]?) {
         var metaObj : [String: Any] = [:]
@@ -101,7 +101,7 @@ public class BulkProcessor {
     
     /// Process Bulk
     ///
-    /// - Returns: contents of the bulk processed through Maximo Connector.
+    /// - Returns: Contents of the bulk processed through Maximo Connector.
     /// - Throws: Exception. 
     public func processBulk() throws -> [Any] {
         return try self.mc.bulk(uri: self.uri, ja: self.bulkArray)
