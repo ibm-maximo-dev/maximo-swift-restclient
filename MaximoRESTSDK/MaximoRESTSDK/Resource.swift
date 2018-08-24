@@ -10,7 +10,7 @@ import Foundation
 
 /**
  *
- * {@code Resource} implement the operations on a Resource.
+ * {@code Resource} implements the operations on a Resource.
  * It provides the data, URI, attachment, and so on.
  *
  * <p>This object can be created by the {@code ResourceSet} or {@code MaximoConnector}.
@@ -38,7 +38,7 @@ import Foundation
  * </pre>
  *
  * <p>
- * The following examples demonstrate how to set the URI and MaximoConnector to the {@code Resource}:</p>
+ * The following examples demonstrate how to set the URI and Maximo Connector to the {@code Resource}:</p>
  * <pre>
  * <code>
  * re.uri(href: URI).maximoConnector(mc: maximoConnector)
@@ -73,7 +73,7 @@ import Foundation
  * </code>
  * </pre>
  *
- * <p>The following example show how to get the AttachmentSet, relatedResource, and how to invoke action by the {@code Resource}:</p>
+ * <p>The following example shows how to get the AttachmentSet, relatedResource, and how to invoke action by the {@code Resource}:</p>
  * <pre><code>
  * var ats = re.attachmentSet(doclinkAttrName: doclinkAttrName, relName: relName)
  * var relationRe = re.relatedResource(attrName: attrName)
@@ -122,7 +122,7 @@ public class Resource {
 
     /// Initialize based on a URI's information and an explicit JSON Object.
     ///
-    /// - Parameter href: Resource URI's Information.
+    /// - Parameter href: Resource URI information.
     public init(href: String) {
         self.href = href
         self.jsonObject = [:]
@@ -179,7 +179,7 @@ public class Resource {
     
     /// Get Resource data in JSON bytes.
     ///
-    /// - Returns: Data object referencing a JSON bytes.
+    /// - Returns: Data object that references JSON bytes.
     /// - Throws: Exception.
     public func toJSONBytes() throws -> Data {
         if !isLoaded {
@@ -201,7 +201,7 @@ public class Resource {
     /// Load current data with properties as a parameter.
     ///
     /// - Parameter properties: Header properties.
-    /// - Returns: Reference to current data with properties in header
+    /// - Returns: Reference to current data with properties in header.
     /// - Throws: Exception.
     public func load(properties: [String]) throws -> Resource {
         return try self.loadWithAdditionalParamsAndHeaders(params: nil, headers: nil, properties: properties)
@@ -295,7 +295,7 @@ public class Resource {
     /// Reload data fetching with properties.
     ///
     /// - Parameter properties: The properties of the reloaded resource.
-    /// - Returns: Reference to reloaded resource.
+    /// - Returns: Reference to the reloaded resource.
     /// - Throws: Exception.
     public func reload(properties: [String]) throws -> Resource {
         self.isLoaded = false
@@ -304,7 +304,7 @@ public class Resource {
     }
     
     
-    /// Update the Resource
+    /// Update the Resource.
     ///
     /// - Parameters:
     ///   - jo: JSON data fetch to update the specific resource.
@@ -343,7 +343,7 @@ public class Resource {
         return self
     }
     
-    /// Merge data
+    /// Merge data.
     ///
     /// - Parameters:
     ///   - jo: JSON data to merge to a resource.
@@ -382,7 +382,7 @@ public class Resource {
         return self;
     }
 
-    /// Load the Attachment Set for a resource
+    /// Load the AttachmentSet for a resource
     /// <b>Note:</b> There must be a relation between them.
     ///
     /// - Parameters:
@@ -415,10 +415,10 @@ public class Resource {
         return AttachmentSet(href: str, mc: self.mc);
     }
     
-    /// Get an Attachment Set within all attachments that are related to the resource.
+    /// Get an AttachmentSet with all attachments that are related to the resource.
     ///
     /// - Returns: Reference to an AttachmentSet object.
-    /// - Throws: Exception. OsclError: Invalid Relation..
+    /// - Throws: Exception. OsclError: Invalid Relation.
     public func attachmentSet() throws -> AttachmentSet {
         var str : String = String()
         if self.jsonObject["doclinks"] != nil {
@@ -437,7 +437,7 @@ public class Resource {
         return AttachmentSet(href: str, mc: self.mc)
     }
     
-    /// Get related resource through an attribute name.
+    /// Get related resource by using an attribute name.
     ///
     /// - Parameter attrName: Attribute name.
     /// - Returns: Reference to the resource object.
@@ -467,7 +467,7 @@ public class Resource {
         return try self.mc.resourceSet().fetchMember(uri: url, properties: nil)
     }
 
-    /// Invoke action
+    /// Invoke action.
     ///
     /// - Parameters:
     ///   - actionName: Action name.
@@ -481,7 +481,7 @@ public class Resource {
     }
     
     
-    /// Invoke action that fetches the resource through properties.
+    /// Invoke action that fetches the resource by using properties.
     ///
     /// - Parameters:
     ///   - actionName: Action name.
