@@ -21,14 +21,14 @@ public class QueryWhere {
     /// Where clause function.
     ///
     /// - Parameter name: Where query name.
-    /// - Returns: the current QueryWhere object.
+    /// - Returns: The current QueryWhere object.
     public func _where (name: String) -> QueryWhere
     {
         currentKey = name
         return self
     }
     
-    /// Handle with AND statement.
+    /// Handle by using an AND statement.
     ///
     /// - Parameter name: Where clause name.
     /// - Returns: QueryWhere object within an updated where clause.
@@ -65,7 +65,7 @@ public class QueryWhere {
     
     /// Retrieve the current key.
     ///
-    /// - Returns: String containing the current key.
+    /// - Returns: String that contains the current key.
     public func getCurrentKey() -> String
     {
         if currentKey.contains(".")
@@ -136,7 +136,7 @@ public class QueryWhere {
     /// Greater than statement handler.
     ///
     /// - Parameter value: Value.
-    /// - Returns: QueryWhere object with <code>grater then statement</code> added.
+    /// - Returns: QueryWhere object with <code>greater than statement</code> added.
     public func gt(value: Any) -> QueryWhere
     {
         let s = Util.stringValue(value: value)
@@ -146,7 +146,7 @@ public class QueryWhere {
     /// Greater than or equal to statement handler.
     ///
     /// - Parameter value: Value.
-    /// - Returns: QueryWhere object <code>grater then or equals to</code> statement added.
+    /// - Returns: QueryWhere object <code>greater than or equals to</code> statement added.
     public func gte(value: Any) -> QueryWhere
     {
         let s = Util.stringValue(value: value)
@@ -156,7 +156,7 @@ public class QueryWhere {
     /// Less than statement handler.
     ///
     /// - Parameter value: Value.
-    /// - Returns: QueryWhere object with <code>less then</code> statement added.
+    /// - Returns: QueryWhere object with <code>less than</code> statement added.
     public func lt(value: Any) -> QueryWhere
     {
         let s = Util.stringValue(value: value)
@@ -167,7 +167,7 @@ public class QueryWhere {
     /// Less than or equal to statement handler.
     ///
     /// - Parameter value: Value.
-    /// - Returns: QueryWhere object with <code>less the or equals to</code> statement added.
+    /// - Returns: QueryWhere object with <code>less than or equal to</code> statement added.
     public func lte(value: Any) -> QueryWhere
     {
         let s = Util.stringValue(value: value)
