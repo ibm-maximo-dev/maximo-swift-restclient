@@ -110,13 +110,13 @@ public class ResourceSet {
     
     /// Page Size.
     var pageSize : Int = -1
-    /// OS Name.
+    /// Object structure Name.
     var osName : String?
     /// Where clause.
     var whereClause : String?
     /// Select clause.
     var selectClause : String?
-    /// OS URI.
+    /// Object structure URI.
     var osURI : String?
     /// Public URI.
     var publicURI : String?
@@ -225,7 +225,7 @@ public class ResourceSet {
     /// Set the where clause
     ///
     /// - Parameter whereClause: String that carries on the where clause.
-    /// - Returns: Reference to the updated where clause.
+    /// - Returns: ResourceSet object with the updated where clause.
     public func _where(whereClause: String) -> ResourceSet {
         self.whereClause = whereClause
         return self
@@ -234,7 +234,7 @@ public class ResourceSet {
     /// Set the where clause based on an QueryWhere object.
     ///
     /// - Parameter _where: QueryWhere object.
-    /// - Returns: Reference to the QueryWhere object within the where clause.
+    /// - Returns: ResourceSet object with the updated where clause.
     public func _where(_where: QueryWhere) -> ResourceSet {
         self.whereClause = _where.whereClause()
         return self
@@ -243,7 +243,7 @@ public class ResourceSet {
     /// Set attributes.
     ///
     /// - Parameter attributes: String array of attributes.
-    /// - Returns: Reference to the updated array of attributes.
+    /// - Returns: ResourceSet with updated search attributes.
     public func searchAttributes(attributes: [String]) -> ResourceSet {
         self.searchAttributes = String()
         for attribute in attributes {
@@ -267,7 +267,7 @@ public class ResourceSet {
     /// Set selectc clause.
     ///
     /// - Parameter selectClause: String array carrying on select statements.
-    /// - Returns: Reference to the String array updated within select statements.
+    /// - Returns: ResourceSet with updated select statements.
     public func select(selectClause: [String]) -> ResourceSet {
         self.selectClause = QuerySelect().select(selectClause: selectClause)
         return self
@@ -282,10 +282,10 @@ public class ResourceSet {
         return self
     }
     
-    /// Check paging.
+    /// Set paging to <b>true</b> or <b>false</b>
     /// <>bNote:</b> &oslc.paging=true - If paging is false, do not add the query parameter.
-    /// - Parameter type: Query parameters.
-    /// - Returns: Return <b>TRUE</b> - When paging, if &oslc.paging is set to <b>false</b>, do not add the query parameter.
+    /// - Parameter type: paging value, <b>TRUE</b> or <b>false</b>.
+    /// - Returns: ResourceSet with paging set to  the speceified value
     public func paging(type: Bool) -> ResourceSet {
         self.paging = type
         return self
@@ -294,7 +294,7 @@ public class ResourceSet {
     /// Set stable paging.
     ///
     /// - Parameter type: Boolean value. <b>TRUE</b> if yes, <b>FALSE</b> if not.
-    /// - Returns:<b>TRUE</b> - if yes, <b>FALSE</b> if not.
+    /// - Returns:ResourceSet with stable paging set to  the speceified value
     public func stablePaging(type: Bool) -> ResourceSet {
         self.stablePaging = type
         return self
@@ -303,7 +303,7 @@ public class ResourceSet {
     /// Set order by clause.
     ///
     /// - Parameter orderByProperties: String array with order by properties.
-    /// - Returns: Reference to the order by properties array.
+    /// - Returns: ResourceSet with updated orderBy property.
     public func orderBy(orderByProperties: [String]) -> ResourceSet {
         for property in orderByProperties {
             self.orderBy.append(property)
@@ -314,7 +314,7 @@ public class ResourceSet {
    
     /// Fetch the data for the ResourceSet.
     ///
-    /// - Returns: Data of ResourceSet.
+    /// - Returns: ResourceSet.
     /// - Throws: Exception.
     public func fetch() throws -> ResourceSet {
         _ = try self.fetch(options: nil)
@@ -324,7 +324,7 @@ public class ResourceSet {
     /// Fetch the data for a ResourceSet with arbitrary parameters.
     ///
     /// - Parameter additionalParams: Additional parameters.
-    /// - Returns: Reference to the additional parameters.
+    /// - Returns: ResourceSet with specified parameters.
     /// - Throws: Exception.
     public func fetchWithAddtionalParams(additionalParams: [String: Any]) throws -> ResourceSet {
         return try self.fetchWithAddtionalHeadersAndParams(additionalParams: additionalParams, additionalHeaders: nil);
@@ -333,7 +333,7 @@ public class ResourceSet {
     /// Fetch the data for a ResourceSet with arbitrary headers.
     ///
     /// - Parameter additionalHeaders: Additional headers.
-    /// - Returns: Reference to the data fetch with additional parameters.
+    /// - Returns: ResourceSet with specified headers.
     /// - Throws: Exception.
     public func fetchWithAddtionalHeaders(additionalHeaders: [String: Any]) throws -> ResourceSet {
         return try self.fetchWithAddtionalHeadersAndParams(additionalParams: nil, additionalHeaders: additionalHeaders);
@@ -345,7 +345,7 @@ public class ResourceSet {
     /// - Parameters:
     ///   - additionalParams: Additional parameters.
     ///   - additionalHeaders: Additional headers.
-    /// - Returns: Reference to date fetch with additional parameters and headers.
+    /// - Returns: ResourceSet with specified parameters and headers.
     /// - Throws: Exception.
     public func fetchWithAddtionalHeadersAndParams(additionalParams: [String: Any]?, additionalHeaders: [String: Any]?) throws -> ResourceSet {
         _ = try self.buildURI()
@@ -398,7 +398,7 @@ public class ResourceSet {
 
     /// Go to nextPage
     ///
-    /// - Returns: Reference to the next page.
+    /// - Returns: ResourceSet containing resources from next page operation.
     /// - Throws: Exception.
     public func nextPage() throws -> ResourceSet {
         if self.hasNextPage()
@@ -753,7 +753,7 @@ public class ResourceSet {
         // use the maximo connector to connect to oslc server and then load data from it
     }
 
-    /// Merge and sync a Resource object using additional header information.
+    /// Merge and sync a Resource object using additional headers and properties information.
     ///
     /// - Parameters:
     ///   - jo: JSON object format in an Any swift object.

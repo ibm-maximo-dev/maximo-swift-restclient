@@ -31,7 +31,7 @@ public class QueryWhere {
     /// Handle by using an AND statement.
     ///
     /// - Parameter name: Where clause name.
-    /// - Returns: QueryWhere object within an updated where clause.
+    /// - Returns: QueryWhere object with an updated where clause.
     public func and(name: String) -> QueryWhere
     {
         if name.contains(".")
@@ -63,7 +63,7 @@ public class QueryWhere {
         return map
     }
     
-    /// Retrieve the current key.
+    /// Get the current key.
     ///
     /// - Returns: String that contains the current key.
     public func getCurrentKey() -> String
@@ -90,10 +90,10 @@ public class QueryWhere {
         currMap[currKey] = s
     }
 
-    /// Equal to statement handler.
+    /// Set the value to '=' operator
     ///
     /// - Parameter value: Any object that contains the value to compare.
-    /// - Returns: QueryWhere object with equals to set.
+    /// - Returns: QueryWhere object with '=' operator (equals) set to the specified 'value'
     public func equalTo(value: Any) -> QueryWhere
     {
         let s = Util.stringValue(value: value)
@@ -104,7 +104,7 @@ public class QueryWhere {
     /// Starts with statement handler.
     ///
     /// - Parameter value: Value.
-    /// - Returns: QueryWhere object with starts with test set.
+    /// - Returns: QueryWhere object to determine if the search begins with the specified value
     public func startsWith(value: String) -> QueryWhere
     {
         let  s = Util.stringValue(value: value + "%")
@@ -114,7 +114,7 @@ public class QueryWhere {
     
     /// Ends with statement handler.
     /// - Parameter value: Value.
-    /// - Returns: QueryWhere object with endsWith test set .
+    /// - Returns: QueryWhere object to determine if the search end with the specified value
     public func endsWith(value: String) -> QueryWhere
     {
         let s = Util.stringValue(value: "%" + value)

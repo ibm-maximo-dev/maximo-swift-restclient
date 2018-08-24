@@ -110,7 +110,7 @@ public class Resource {
         }
     }
 
-    /// Convenience initializer that considers an Any object carrying on a JSON object and a Maximo Connector object.
+    /// Initialize object based on a JSON schema and a Maximo Connector object.
     ///
     /// - Parameters:
     ///   - jo: JSON scheme to initialize this object.
@@ -159,7 +159,7 @@ public class Resource {
 
     /// Get the current URI
     ///
-    /// - Returns: Reference to a String within URI's information.
+    /// - Returns: URI String
     public func getURI() -> String {
         return self.href
     }
@@ -198,7 +198,7 @@ public class Resource {
         return try self.loadWithAdditionalParamsAndHeaders(params: nil, headers: nil, properties: nil)
     }
     
-    /// Load current data with properties as a parameter.
+    /// Load current data with additional properties.
     ///
     /// - Parameter properties: Header properties.
     /// - Returns: Reference to current data with properties in header.
@@ -207,7 +207,7 @@ public class Resource {
         return try self.loadWithAdditionalParamsAndHeaders(params: nil, headers: nil, properties: properties)
     }
     
-    /// Load current data with properties as a parameter an additional params.
+    /// Load current data with additional parameters.
     ///
     /// - Parameters:
     ///   - params: Data params.
@@ -218,7 +218,7 @@ public class Resource {
         return try self.loadWithAdditionalParamsAndHeaders(params: params, headers: nil, properties: properties)
     }
     
-    /// Load current data with properties as a parameter an additional headers.
+    /// Load current data with additional headers and properties
     ///
     /// - Parameters:
     ///   - headers: Additional header information.
@@ -319,7 +319,7 @@ public class Resource {
     /// Update the Resource with additional headers.
     ///
     /// - Parameters:
-    ///   - jo: JSON data within the resource information.
+    ///   - jo: JSON data containing the resource information.
     ///   - headers: Additional header information.
     ///   - properties: Properties of the resource.
     /// - Returns: Reference to updated resource.
@@ -471,7 +471,7 @@ public class Resource {
     ///
     /// - Parameters:
     ///   - actionName: Action name.
-    ///   - jo: JSON within action information.
+    ///   - jo: JSON with action information.
     /// - Returns: Reference to a resource object.
     /// - Throws: Exception.
     public func invokeAction(actionName: String, jo: [String: Any]) throws -> Resource {
@@ -485,7 +485,7 @@ public class Resource {
     ///
     /// - Parameters:
     ///   - actionName: Action name.
-    ///   - jo: JSON within action information.
+    ///   - jo: JSON with action information.
     ///   - properties: The properties of the action.
     /// - Returns: Reference to the action.
     /// - Throws: Exception.

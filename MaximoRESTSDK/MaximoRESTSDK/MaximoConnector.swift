@@ -408,7 +408,7 @@ public class MaximoConnector {
         return nil
     }
     
-    /// Define the HTTP method to use based.
+    /// Set the HTTP method such as GET, POST, PATCH, MERGE, DELETE, BULK, SYNC or MERGESYNC.
     ///
     /// - Parameters:
     ///   - request: URLRequest object.
