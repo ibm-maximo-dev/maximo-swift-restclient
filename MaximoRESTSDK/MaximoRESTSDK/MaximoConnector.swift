@@ -45,7 +45,7 @@ import Foundation
  *
  * <p>
  * The following examples show how to connect, get, create, update, merge, delete, and disconnect from the Maximo server by {@code MaximoConnector}:
- * The properties can be empty</p>
+ * The properties can be empty.</p>
  * <pre>
  * <code>
  * mc.connect()
@@ -65,7 +65,7 @@ import Foundation
  * </pre>
  *
  * <p>
- * The following examples show how to get a {@code ResourceSet} or {@code Resource} or {@code Attachment} by {@code MaximoConnector}:</p>
+ * The following examples show how to get a {@code ResourceSet} or {@code Resource} or {@code Attachment} by using {@code MaximoConnector}:</p>
  * <pre><code>
  * var rs = mc.resourceSet(osName: osName)
  * var rs = mc.resourceSet(url: url)
@@ -92,21 +92,21 @@ public class MaximoConnector {
     
     var httpMethod : String = "GET";// by default it is get
     
-    /// Init this object by using a base configuration.
+    /// Initialize this object by using a base configuration.
     public init() {
         self.options = Options()
     }
 
-    /// Init this object with connector options.
+    /// Initialize this object with connector options.
     ///
-    /// - Parameter options: Maximo connector options.
+    /// - Parameter options: Maximo Connector options.
     public init(options: Options) {
         self.options = options
     }
 
     /// Returns the current URI.
     ///
-    /// - Returns: curretn URI information.
+    /// - Returns: Current URI information.
     public func getCurrentURI() -> String {
         return self.options.getPublicURI()
     }
@@ -114,7 +114,7 @@ public class MaximoConnector {
     /// Set the options.
     ///
     /// - Parameter op: Options object.
-    /// - Returns: updated MaximoCoonector object.
+    /// - Returns: updated Maximo Connector object.
     public func options(op: Options) -> MaximoConnector {
         self.options = op
         return self
@@ -136,15 +136,15 @@ public class MaximoConnector {
 
     /// Return a ResourceSet object based on its name.
     ///
-    /// - Parameter String containing osName.
-    /// - Returns: a ResourceSet object.
+    /// - Parameter String that contains the osName.
+    /// - Returns: A ResourceSet object.
     public func resourceSet(osName: String) -> ResourceSet {
         return ResourceSet(osName: osName, mc: self)
     }
 
     /// Set the URL information to the ResourceSet object.
     ///
-    /// - Parameter url: String containing the URL.
+    /// - Parameter url: String that contains the URL.
     /// - Returns: ResourceSet object.
     public func resourceSet(url: String) -> ResourceSet {
         var strs = url.split(separator: "/")
@@ -262,7 +262,7 @@ public class MaximoConnector {
         return self.options.isLean()
     }
 
-    /// Connect to Maximo Server.
+    /// Connect to the Maximo server.
     ///
     /// - Throws: Exception.
     public func connect() throws {
@@ -751,7 +751,7 @@ public class MaximoConnector {
             requestURI = uri.replacingOccurrences(of: currentHost, with: publicHost)
         }
 
-        // Converting JSON object to Data
+        // Convert JSON object to Data
         let postData : Data = try JSONSerialization.data(withJSONObject: jo, options: [])
         let semaphore = DispatchSemaphore(value: 0)
         let httpURL = URL(string: requestURI)
@@ -959,7 +959,7 @@ public class MaximoConnector {
             requestURI = uri.replacingOccurrences(of: currentHost, with: publicHost)
         }
         
-        // Converting JSON object to Data
+        // Convert JSON object to Data
         let postData : Data = try JSONSerialization.data(withJSONObject: ja, options: [])
         let semaphore = DispatchSemaphore(value: 0)
         let httpURL = URL(string: requestURI)
@@ -1055,7 +1055,7 @@ public class MaximoConnector {
             requestURI = uri.replacingOccurrences(of: currentHost, with: publicHost)
         }
         
-        // Converting JSON object to Data
+        // Convert JSON object to Data
         let postData : Data = try JSONSerialization.data(withJSONObject: jo, options: [])
         let semaphore = DispatchSemaphore(value: 0)
         let httpURL = URL(string: requestURI)
@@ -1155,7 +1155,7 @@ public class MaximoConnector {
             requestURI = uri.replacingOccurrences(of: currentHost, with: publicHost)
         }
         
-        // Converting JSON object to Data
+        // Convert JSON object to Data
         let postData : Data = try JSONSerialization.data(withJSONObject: jo, options: [])
         let semaphore = DispatchSemaphore(value: 0)
         let httpURL = URL(string: requestURI)
@@ -1320,7 +1320,7 @@ public class MaximoConnector {
     /// Handle MERGESYNC HTTP method.
     ///
     /// - Parameters:
-    ///   - uri: Resource URI information
+    ///   - uri: Resource URI information.
     ///   - jo: JSON schema that contains the resource information.
     ///   - headers: Header information.
     ///   - properties: Properties that contain the resource information.
@@ -1345,7 +1345,7 @@ public class MaximoConnector {
             requestURI = uri.replacingOccurrences(of: currentHost, with: publicHost)
         }
         
-        // Converting JSON object to Data.
+        // Convert JSON object to Data.
         let postData : Data = try JSONSerialization.data(withJSONObject: jo, options: [])
         let semaphore = DispatchSemaphore(value: 0)
         let httpURL = URL(string: requestURI)
